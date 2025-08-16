@@ -1,0 +1,42 @@
+[
+    {
+        "model": "core.datastatus",
+        "pk": 1,
+        "fields": {
+            "name": "Unknown",
+            "description": "The status of the data is unknown."
+        }
+    },
+    {
+        "model": "core.datastatus",
+        "pk": 2,
+        "fields": {
+            "name": "Expected",
+            "description": "The data is expected but not yet received."
+        }
+    },
+    {
+        "model": "core.datastatus",
+        "pk": 3,
+        "fields": {
+            "name": "Received",
+            "description": "The data has been received."
+        }
+    },
+    {
+        "model": "core.datastatus",
+        "pk": 4,
+        "fields": {
+            "name": "Processing",
+            "description": "The data is currently being processed."
+        }
+    },
+    {
+        "model": "core.datastatus",
+        "pk": 5,
+        "fields": {
+            "name": "Processed",
+            "description": "The data has been processed."
+        }
+    }
+]

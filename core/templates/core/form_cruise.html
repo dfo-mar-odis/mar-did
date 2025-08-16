@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_cruise">
+    {% crispy cruise_form %}
+    </form>
+{% endblock %}
