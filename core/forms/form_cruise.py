@@ -25,7 +25,6 @@ class CruiseForm(forms.ModelForm):
     )
     chief_scientists = forms.ModelMultipleChoiceField(
         queryset=models.Contacts.objects.none(),
-        widget=forms.HiddenInput(),
         label="Chief Scientists"
     )
 
@@ -48,18 +47,8 @@ class CruiseForm(forms.ModelForm):
 
         return chief_scientists
 
-    def clean_chief_scientists_select(self):
-        chief_scientists = self.cleaned_data.get('chief_scientists')
-
-        # Example validation: Ensure at least one chief scientist is selected
-        if not chief_scientists or not chief_scientists.exists():
-            raise forms.ValidationError(_("At least one chief scientist must be selected."))
-
-        # Additional processing or validation logic can go here
-
-        return chief_scientists
-
     def __init__(self, *args, **kwargs):
+
         super(CruiseForm, self).__init__(*args, **kwargs)
 
         scientists = None
@@ -73,6 +62,7 @@ class CruiseForm(forms.ModelForm):
         chief_scientist_role = models.ContactRoles.objects.filter(name__iexact='chief scientist').first()
         if chief_scientist_role:
             self.fields['chief_scientists_select'].queryset = models.Contacts.objects.filter(roles=chief_scientist_role)
+            self.fields['chief_scientists'].queryset = models.Contacts.objects.filter(roles=chief_scientist_role)
 
         btn_add_attrs = {
             'hx-target': "#div_id_cheif_scientists",
@@ -114,7 +104,7 @@ class CruiseForm(forms.ModelForm):
                 ),
             ),
             Row(
-                Hidden('chief_scientists', [int(id) for id in scientists] if scientists else None),
+                Field('chief_scientists', wrapper_class="d-none"),
                 HTML(scientists_list),
                 id='div_id_cheif_scientists',
             ),
@@ -159,9 +149,22 @@ def add_chief_scientist(request):
     if new_scientist_id in existing:
         return HttpResponse()
 
+    soup = BeautifulSoup()
+
     new_pill = get_scientists_bullet(new_scientist_id)
 
-    return HttpResponse(new_pill)
+    existing_ids = [int(pk) for pk in existing if pk.isdigit()]
+    form = CruiseForm(initial={'chief_scientists': existing_ids})
+    crispy = render_crispy_form(form)
+    form_soup = BeautifulSoup(crispy, 'html.parser')
+    scientist_select = form_soup.find(id="id_chief_scientists")
+    scientist_select.attrs['hx-swap'] = 'outerHTML'
+    scientist_select.attrs['hx-swap-oob'] = 'true'
+
+    soup.append(scientist_select)
+    soup.append(BeautifulSoup(new_pill, 'html.parser'))
+
+    return HttpResponse(soup)
 
 
 def remove_chief_scientist(request):
@@ -172,6 +175,7 @@ def add_cruise(request):
     form = CruiseForm(request.POST)
 
     if form.is_valid():
+        form.save()
         crispy = render_crispy_form(form)
         return HttpResponse(crispy)
 
