@@ -101,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Auth settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -129,3 +130,61 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+FORMATTERS = (
+    {
+        "simple": {
+            "format": "{levelname} {asctime:s} {module} {filename} {lineno:d} {funcName} {message}",
+            "style": "{"
+        },
+        "verbose": {
+            "format": "{levelname} {asctime:s} {threadName} {thread:d} {module} {filename} {lineno:d} {name} "
+                      "{funcName} {process:d} {message}",
+            "style": "{"
+        },
+    },
+)
+
+HANDLERS = {
+    "console": {
+        "class": "logging.StreamHandler",
+        "formatter": "simple",
+    },
+    "error_handler": {
+        "class": "concurrent_log_handler.ConcurrentRotatingFileHandler",
+        "filename": f"{BASE_DIR}/logs/error.log",
+        "mode": "a",
+        "encoding": "utf-8",
+        "formatter": "verbose",
+        "backupCount": 5,
+        "maxBytes": 1024 * 1024 * 2  # 2 MB
+    }
+}
+
+LOGGERS = (
+    {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "django.request": {
+            "handlers": ['error_handler'],
+            "level": "ERROR",
+            "propagate": True,
+        },
+        "mardid": {
+            "handlers": ["console", "error_handler"],
+            "level": "DEBUG",
+            "propagate": True
+        },
+    },
+)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": FORMATTERS[0],
+    "handlers": HANDLERS,
+    "loggers": LOGGERS[0],
+}

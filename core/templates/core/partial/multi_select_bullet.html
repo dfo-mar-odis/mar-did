@@ -1,5 +1,5 @@
 {% load i18n %}
-<span class="col-auto mt-2" id="span_id_{{ input_name }}_{{ value_id }}">
+<span class="col-auto ms-2 alert alert-secondary" id="span_id_{{ input_name }}_{{ value_id }}">
     <input type="hidden" name="{{ input_name }}" value="{{ value_id }}">
     <button type="button" class="btn btn-sm btn-danger me-2" title="{% trans 'Remove' %}"
             hx-post="{{ post_url }}"

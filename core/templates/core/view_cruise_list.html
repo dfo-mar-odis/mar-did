@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <table id="table_id_cruise_list" hx-get="{% url 'core:list_cruises' %}" hx-trigger="load, update_cruise_list from:body">
+
+    </table>
+{% endblock %}
