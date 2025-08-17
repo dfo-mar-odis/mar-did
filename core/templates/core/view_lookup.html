@@ -2,7 +2,10 @@
 
 
 {% block content %}
-<div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+<form id="form_area" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+</form>
+<div class="table-responsive" style="max-height: 400px; overflow-y: auto;" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 <table id="table_id_lookup_list" hx-swap="outerHTML" hx-get="{{ table_update_url }}" hx-trigger="load, update_table from:body" >
 
 </table>

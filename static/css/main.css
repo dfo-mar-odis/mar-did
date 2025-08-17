@@ -1,0 +1,8 @@
+/* static/css/main.css */
+body {
+    background-color: #b9bcbf; !important /* Light gray background */
+}
+
+.dropdown-menu {
+    z-index: 1050; !important /* Higher z-index for dropdowns */
+}

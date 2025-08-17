@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% load user_tags %}
 
 {% block content %}
-<div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+<div class="table-responsive" style="max-height: 400px; overflow-y: auto;"
+{% if user.is_authenticated and user|is_maintainer %} hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' {% endif %}>
 {% include 'core/partial/table_cruise.html' %}
 </div>
 {% endblock %}

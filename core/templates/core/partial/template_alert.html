@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<div id="{{ alert_id }}" class="alert alert-{{ alert_type }}">
+    <div class="row">
+        <div class="col">{{ message }}</div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-sm btn-outline-dark" title="{% trans 'Remove Alert' %}"
+                    hx-target="#{{ alert_id }}" hx-swap="delete" hx-get="">
+                <span class="bi bi-x"></span>
+            </button>
+        </div>
+    </div>
+</div>

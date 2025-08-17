@@ -1,5 +1,6 @@
-from django.utils.translation import gettext as _
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
 
 
 class Programs(models.Model):
@@ -9,10 +10,15 @@ class Programs(models.Model):
 
 class GeographicRegions(models.Model):
     name = models.CharField(_('Name'), max_length=100, unique=True)
-    description = models.CharField(_('Description'), max_length=255)
+    description = models.CharField(_('Description'), blank=True, null=True, max_length=255)
 
     def __str__(self):
         return f'{self.name}'
+
+    def delete(self, *args, **kwargs):
+        if self.locations.exists():  # Check if related Cruises exist
+            raise ValidationError(_("This region is in use and cannot be deleted."))
+        super().delete(*args, **kwargs)
 
 
 class Cruises(models.Model):
@@ -44,6 +50,8 @@ class DataStatus(models.Model):
 
 class Instruments(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=20, unique=True)
+    serial_number = models.CharField(verbose_name=_("Serial Number"), max_length=255, blank=True, null=True,
+                                     help_text=_("Serial number of an instrument if it exists"))
     description = models.CharField(verbose_name=_("Description"), max_length=255)
 
 

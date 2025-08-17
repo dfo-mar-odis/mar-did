@@ -179,11 +179,13 @@ class CruiseForm(forms.ModelForm):
         self.helper.layout = Layout(
             Row(
                 Column(Field('name'), css_class='form-control-sm'),
-                Column(Field('descriptor'), css_class='form-control-sm'),
             ),
             Row(
-                Column(Field('start_date'), css_class='form-control-sm'),
-                Column(Field('end_date'), css_class='form-control-sm'),
+                Column(Field('descriptor', placeholder=_("optional, if known")), css_class='form-control-sm'),
+            ),
+            Row(
+                Column(Field('start_date'), css_class='col-auto form-control-sm'),
+                Column(Field('end_date'), css_class='col-auto form-control-sm'),
             ),
             Row(
                 Column(

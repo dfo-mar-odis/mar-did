@@ -10,8 +10,8 @@ from django_pandas.io import read_frame
 from django.views.generic.base import TemplateView
 from django.template.loader import render_to_string
 
-from .forms import form_cruise
-from . import models
+from core.forms import form_cruise
+from core import models
 
 logger = logging.getLogger('mardid')
 
@@ -21,6 +21,7 @@ class CruiseListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Cruise List'
+        context['container'] = 'container-fluid'
         return context
 
 
@@ -78,6 +79,20 @@ def list_cruises(request):
                 update_btn.attrs['href'] = reverse_lazy('core:update_cruise_view', args=[int(id)])
                 update_btn.attrs['title'] = _('Update cruise')
                 span.attrs['class'] = "bi bi-pencil-square"
+
+                if request.user.groups.filter(name__iexact="MarDID Maintainer").exists():
+                    row_id = f"tr_id_cruise_{id}"
+                    tr.attrs['id'] = row_id
+                    first_th.append(del_btn := df_soup.new_tag('a'))
+                    del_btn.append(span := df_soup.new_tag("span"))
+                    del_btn.attrs['class'] = "btn btn-sm btn-danger ms-2"
+                    del_btn.attrs['title'] = _('Delete cruise')
+                    del_btn.attrs['hx-confirm'] = _("Are you sure you want to delete this curise?")
+                    del_btn.attrs['hx-post'] = reverse_lazy('core:delete_cruise', args=[int(id)])
+                    del_btn.attrs['hx-target'] = f"#{row_id}"
+                    del_btn.attrs['hx-swap'] = "delete"
+                    span.attrs['class'] = "bi bi-x-square"
+
             else:
                 first_th.decompose()
 
@@ -95,6 +110,7 @@ def list_cruises(request):
     table.attrs['id'] = 'table_id_cruise_list'
 
     t_head = table.find('thead')
+    t_head.attrs['class'] = 'sticky-top bg-white'
 
     if (tr:=t_head.find('tr')) and (tr:=tr.find_next('tr')):
         # remove the second table row from the t-head
@@ -117,9 +133,20 @@ def list_cruises(request):
     return HttpResponse(df_soup)
 
 
+def delete_cruise(request, pk):
+
+    cruise = models.Cruises.objects.get(pk=pk)
+    cruise.delete()
+
+    response = HttpResponse()
+    response['HX-Trigger'] = "update_cruise_list"
+    return response
+
+
 urlpatterns = [
-    path('', CruiseListView.as_view(), name='home'),
+    path('', CruiseListView.as_view(), name='cruise_view'),
     path('cruise/list', list_cruises, name='list_cruises'),
+    path('cruise/delete/<int:pk>', delete_cruise, name='delete_cruise')
 ]
 
 urlpatterns += form_cruise.urlpatterns

@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load user_tags %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -9,18 +10,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/"><i class="bi bi-house-door me-1"></i>{% trans 'Home' %}</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="lookupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-house me-1"></i>{% trans 'Views' %}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
+                        <li><a class="dropdown-item" href="{% url 'core:cruise_view' %}">{% trans 'Cruises' %}</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and user|is_maintainer %}
                         <a class="nav-link dropdown-toggle" href="#" id="lookupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-search me-1"></i>{% trans 'Lookup Tables' %}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
                             <li><a class="dropdown-item" href="/admin/auth/user/">{% trans 'Contacts' %}</a></li>
                             <li><a class="dropdown-item" href="/admin/auth/group/">{% trans 'Contact Roles' %}</a></li>
-                            <li><a class="dropdown-item" href="">{% trans 'Form 3' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_geo_regions' %}">{% trans 'Geographic Regions' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_instruments' %}">{% trans 'Instruments' %}</a></li>
                         </ul>
                     {% endif %}
                 </li>
