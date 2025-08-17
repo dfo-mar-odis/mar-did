@@ -12,6 +12,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/"><i class="bi bi-house-door me-1"></i>{% trans 'Home' %}</a>
                 </li>
+                <li class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle" href="#" id="lookupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-search me-1"></i>{% trans 'Lookup Tables' %}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
+                            <li><a class="dropdown-item" href="{% url 'core:contact_view' %}">{% trans 'Contacts' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:contact_role_view' %}">{% trans 'Contact Roles' %}</a></li>
+                            <li><a class="dropdown-item" href="">{% trans 'Form 3' %}</a></li>
+                        </ul>
+                    {% endif %}
+                </li>
             </ul>
             <div class="d-flex">
                 {% if user.is_authenticated %}

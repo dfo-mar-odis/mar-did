@@ -62,7 +62,7 @@ def list_cruises(request):
     # Pandas has the ability to render dataframes as HTML and it's super fast, but the default table looks awful.
     # Use BeautifulSoup for html manipulation to post process the HTML table Pandas created
     table_html = df.to_html()
-    df_soup = BeautifulSoup(f'<div class="table-responsive" style="max-height: 400px; overflow-y: auto;">{table_html}</div>', 'html.parser')
+    df_soup = BeautifulSoup(f'{table_html}', 'html.parser')
 
     trs = df_soup.find('tbody').findAll('tr', recursive=False)
     for tr in trs:
@@ -83,6 +83,12 @@ def list_cruises(request):
         return HttpResponse(trs)
 
     table = df_soup.find("table")
+    table.attrs['class'] = 'table table-striped table-sm'
+    table.attrs['hx-get'] = request.path
+    table.attrs['hx-trigger'] = 'update_cruise_list from:body'
+    table.attrs['hx-swap'] = 'outerHTML'
+    table.attrs['id'] = 'table_id_cruise_list'
+
     t_head = table.find('thead')
     # remove the second table row from the t-head
     t_head.find('tr').find_next("tr").decompose()
@@ -100,10 +106,6 @@ def list_cruises(request):
 
     for th in t_head.find_all('th'):
         th.attrs['class'] = 'text-start'
-
-    table.attrs['id'] = "table_id_cruise_list"
-    table.attrs['class'] = 'table table-striped table-sm'
-    table.attrs['hx-swap-oob'] = 'true'
 
     return HttpResponse(df_soup)
 

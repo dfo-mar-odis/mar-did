@@ -4,7 +4,7 @@ from django import forms
 from django.urls import path, reverse_lazy
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin

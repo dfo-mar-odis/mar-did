@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+<table id="table_id_lookup_list" hx-swap="outerHTML" hx-get="{{ table_update_url }}" hx-trigger="load, update_table from:body" >
+
+</table>
+</div>
+{% endblock %}
