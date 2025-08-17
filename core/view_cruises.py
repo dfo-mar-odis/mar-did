@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 from django.http import HttpResponse
 from django_pandas.io import read_frame
 from django.views.generic.base import TemplateView
+from django.template.loader import render_to_string
 
 from .forms import form_cruise
 from . import models
@@ -43,44 +44,48 @@ def list_cruises(request):
     table_headers = [h[1] for h in headers]
 
     queryset = models.Cruises.objects.prefetch_related('chief_scientists', 'locations')
-    querset_list = []
+    queryset_list = []
     for cruise in queryset:
-        querset_list.append({
+        queryset_list.append({
             'id': cruise.id,
             'name': cruise.name,
             'descriptor': cruise.descriptor,
             'start_date': cruise.start_date,
             'end_date': cruise.end_date,
-            'chief_scientists': ', '.join(str(scientist) for scientist in cruise.chief_scientists.all()),
+            'chief_scientists': ', '.join(f'{scientist.last_name}, {scientist.first_name}' for scientist in cruise.chief_scientists.all().order_by('last_name', 'first_name')),
             'locations': ', '.join(str(location) for location in cruise.locations.all()),
         })
 
-    df = pd.DataFrame(querset_list)
-    df.set_index('id', inplace=True)
-    df.columns = table_headers
+    if queryset_list:
+        df = pd.DataFrame(queryset_list)
+        df.set_index('id', inplace=True)
+        df.columns = table_headers
 
-    # Pandas has the ability to render dataframes as HTML and it's super fast, but the default table looks awful.
-    # Use BeautifulSoup for html manipulation to post process the HTML table Pandas created
-    table_html = df.to_html()
-    df_soup = BeautifulSoup(f'{table_html}', 'html.parser')
+        # Pandas has the ability to render dataframes as HTML and it's super fast, but the default table looks awful.
+        # Use BeautifulSoup for html manipulation to post process the HTML table Pandas created
+        table_html = df.to_html()
+        df_soup = BeautifulSoup(f'{table_html}', 'html.parser')
 
-    trs = df_soup.find('tbody').findAll('tr', recursive=False)
-    for tr in trs:
-        first_th = tr.find('th')
-        if request.user.is_authenticated:
-            id = int(first_th.string)
-            first_th.string = ""
-            first_th.append(update_btn:=df_soup.new_tag('a'))
-            update_btn.append(span := df_soup.new_tag("span"))
-            update_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
-            update_btn.attrs['href'] = reverse_lazy('core:update_cruise_view', args=[int(id)])
-            update_btn.attrs['title'] = _('Update cruise')
-            span.attrs['class'] = "bi bi-pencil-square"
-        else:
-            first_th.decompose()
+        trs = df_soup.find('tbody').findAll('tr', recursive=False)
+        for tr in trs:
+            first_th = tr.find('th')
+            if request.user.is_authenticated:
+                id = int(first_th.string)
+                first_th.string = ""
+                first_th.append(update_btn:=df_soup.new_tag('a'))
+                update_btn.append(span := df_soup.new_tag("span"))
+                update_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
+                update_btn.attrs['href'] = reverse_lazy('core:update_cruise_view', args=[int(id)])
+                update_btn.attrs['title'] = _('Update cruise')
+                span.attrs['class'] = "bi bi-pencil-square"
+            else:
+                first_th.decompose()
 
-    if page > 0:
-        return HttpResponse(trs)
+        if page > 0:
+            return HttpResponse(trs)
+    else:
+        table_html = render_to_string('core/partial/table_cruise.html')
+        df_soup = BeautifulSoup(table_html, 'html.parser')
 
     table = df_soup.find("table")
     table.attrs['class'] = 'table table-striped table-sm'
@@ -90,8 +95,10 @@ def list_cruises(request):
     table.attrs['id'] = 'table_id_cruise_list'
 
     t_head = table.find('thead')
-    # remove the second table row from the t-head
-    t_head.find('tr').find_next("tr").decompose()
+
+    if (tr:=t_head.find('tr')) and (tr:=tr.find_next('tr')):
+        # remove the second table row from the t-head
+        t_head.find('tr').find_next("tr").decompose()
 
     th = t_head.find('th')
     if request.user.is_authenticated:

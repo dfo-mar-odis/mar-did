@@ -1,12 +1,16 @@
 from bs4 import BeautifulSoup
 
 from django import forms
+from django.db.models import Value
+from django.db.models.functions import Concat
+from django.http.request import QueryDict
 from django.urls import path, reverse_lazy
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.http.response import HttpResponse
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -24,13 +28,13 @@ logger = logging.getLogger('mardid')
 
 class CruiseForm(forms.ModelForm):
     chief_scientists_select = forms.ModelChoiceField(
-        queryset=models.Contacts.objects.none(),
+        queryset=User.objects.none(),
         label="Select Chief Scientist",
         required=False,
         widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     chief_scientists = forms.ModelMultipleChoiceField(
-        queryset=models.Contacts.objects.none(),
+        queryset=User.objects.none(),
         label="Chief Scientists"
     )
     locations_select = forms.ModelChoiceField(
@@ -52,7 +56,8 @@ class CruiseForm(forms.ModelForm):
             'end_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
         }
 
-    def clean_chief_scientists(self):
+    def clean_chief_scientists_field(self):
+        chief_scientists_select = self.cleaned_data.get('chief_scientists_select')
         chief_scientists = self.cleaned_data.get('chief_scientists')
 
         # Example validation: Ensure at least one chief scientist is selected
@@ -64,7 +69,8 @@ class CruiseForm(forms.ModelForm):
 
         return chief_scientists
 
-    def clean_locations(self):
+    def clean_locations_field(self):
+        locations_select = self.cleaned_data.get('locations_select')
         locations = self.cleaned_data.get('locations')
 
         # Example validation: Ensure at least one chief scientist is selected
@@ -75,6 +81,18 @@ class CruiseForm(forms.ModelForm):
         # Additional processing or validation logic can go here
 
         return locations
+
+    def clean_chief_scientists_select(self):
+        return self.clean_chief_scientists_field()
+
+    def clean_chief_scientists(self):
+        return self.clean_chief_scientists_field()
+
+    def clean_locations_select(self):
+        return self.clean_locations_field()
+
+    def clean_locations(self):
+        return self.clean_locations_field()
 
     def init_scientists(self):
         scientists_list = ""
@@ -87,17 +105,23 @@ class CruiseForm(forms.ModelForm):
         for scientist_id in scientists:
             scientists_list += get_scientists_bullet(scientist_id)
 
-        # Filter chief scientists to only include contacts with the "chief scientists" role
-        chief_scientist_role = models.ContactRoles.objects.filter(name__iexact='chief scientist').first()
-        if chief_scientist_role:
-            self.fields['chief_scientists_select'].queryset = models.Contacts.objects.filter(roles=chief_scientist_role)
-            self.fields['chief_scientists'].queryset = models.Contacts.objects.filter(roles=chief_scientist_role)
+        # Filter chief scientists to only include contacts with the "chief scientist" role
+        chief_scientist_group = Group.objects.filter(name__iexact='chief scientist').first()
+        if chief_scientist_group:
+            users = User.objects.filter(groups=chief_scientist_group).annotate(
+                full_name=Concat('last_name', Value(', '), 'first_name')
+            ).order_by('last_name', 'first_name')
+            self.fields['chief_scientists_select'].queryset = users
+            self.fields['chief_scientists_select'].label_from_instance = lambda user: user.full_name
+
+            self.fields['chief_scientists'].queryset = users
 
         return scientists_list
 
     def init_locations(self):
         locations_list = ""
         locations = [loc.id for loc in self.instance.locations.all()] if self.instance.pk else []
+
         if not locations:
             if self.data and 'locations_bullet' in self.data:
                 locations = self.data.getlist('locations_bullet')
@@ -111,7 +135,6 @@ class CruiseForm(forms.ModelForm):
         return locations_list
 
     def __init__(self, *args, **kwargs):
-
         super(CruiseForm, self).__init__(*args, **kwargs)
 
         scientists_list = self.init_scientists()
@@ -207,12 +230,12 @@ class CreateCruise(LoginRequiredMixin, TemplateView):
 
 
 def get_scientists_bullet(contact_id):
-    scientist = models.Contacts.objects.get(pk=contact_id)
+    scientist = User.objects.get(pk=contact_id)
 
     context = {
         'input_name': 'chief_scientists_bullet',
         'value_id': scientist.pk,
-        'value_label': str(scientist),
+        'value_label': f"{scientist.last_name}, {scientist.first_name}",
         'post_url': reverse_lazy('core:remove_chief_scientist', args=[scientist.pk]),
     }
     return render_to_string('core/partial/multi_select_bullet.html', context=context)
@@ -318,39 +341,30 @@ def remove_location(request, location_id):
     return HttpResponse(soup)
 
 
-def add_cruise(request):
-    form = CruiseForm(request.POST)
-
-    if form.is_valid():
-        try:
-            cruise = form.save()
-            response = HttpResponse()
-            response['HX-Redirect'] = reverse_lazy('core:update_cruise_view', args=[cruise.id])
-            return response
-        except Exception as ex:
-            logger.error("Failed to save the cruise form.")
-            logger.exception(ex)
-            form.add_error(None,
-                           _("An unexpected error occurred while saving the form. Please contact the system administrator."))
-            crispy = render_crispy_form(form)
-            return HttpResponse(crispy)
-
-    crispy = render_crispy_form(form)
-    soup = BeautifulSoup(crispy, 'html.parser')
-    return HttpResponse(soup)
-
-
 @login_required
 def update_cruise(request, **kwargs):
     if not request.user.is_authenticated:
-        return redirect(reverse_lazy('login'))  # Redirect to the login page if not authenticated
+        return redirect(reverse_lazy('login'))
+
+    # Create a mutable copy of the POST data
+    post_data = request.POST.copy()
+
+    # If locations_select has a value but locations is empty, add the selection to locations
+    if 'locations_select' in post_data and post_data.get('locations_select') and not post_data.getlist('locations'):
+        location_id = post_data.get('locations_select')
+        post_data.setlist('locations', [location_id])
+
+    # If locations_select has a value but locations is empty, add the selection to locations
+    if 'chief_scientists_select' in post_data and post_data.get('chief_scientists_select') and not post_data.getlist('chief_scientists'):
+        location_id = post_data.get('chief_scientists_select')
+        post_data.setlist('chief_scientists', [location_id])
 
     if 'cruise_id' in kwargs:
         cruise_id = int(kwargs.get('cruise_id'))
         cruise = models.Cruises.objects.get(pk=cruise_id)
-        form = CruiseForm(request.POST, instance=cruise)
+        form = CruiseForm(post_data, instance=cruise)
     else:
-        form = CruiseForm(request.POST)
+        form = CruiseForm(post_data)
 
     if form.is_valid():
         try:
@@ -361,8 +375,7 @@ def update_cruise(request, **kwargs):
         except Exception as ex:
             logger.error("Failed to save the cruise form.")
             logger.exception(ex)
-            form.add_error(None,
-                           _("An unexpected error occurred while saving the form. Please contact the system administrator."))
+            form.add_error(None, _("An unexpected error occurred while saving the form."))
             crispy = render_crispy_form(form)
             return HttpResponse(crispy)
 
@@ -374,7 +387,7 @@ def update_cruise(request, **kwargs):
 urlpatterns = [
     path('cruise/new', CreateCruise.as_view(), name='new_cruise_view'),
     path('cruise/<int:cruise_id>', CreateCruise.as_view(), name='update_cruise_view'),
-    path('cruise/add-cruise', add_cruise, name='add_cruise'),
+    path('cruise/add-cruise', update_cruise, name='add_cruise'),
     path('cruise/update/<int:cruise_id>', update_cruise, name='update_cruise'),
     path('cruise/add-chief-scientist', add_chief_scientist, name='add_chief_scientist'),
     path('cruise/remove-chief-scientist/<int:scientist_id>', remove_chief_scientist, name='remove_chief_scientist'),

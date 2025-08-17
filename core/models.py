@@ -2,25 +2,6 @@ from django.utils.translation import gettext as _
 from django.db import models
 
 
-class ContactRoles(models.Model):
-    name = models.CharField(_('Name'), max_length=50, unique=True)
-    description = models.CharField(_('Description'), max_length=255)
-
-    def __str__(self):
-        return self.name
-
-class Contacts(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    roles = models.ManyToManyField(ContactRoles, verbose_name=_('Roles'), blank=True, related_name='contacts')
-
-    class Meta:
-        unique_together = ('first_name', 'last_name')
-        ordering = ['last_name', 'first_name']
-
-    def __str__(self):
-        return f'{self.last_name}, {self.first_name}'
-
 class Programs(models.Model):
     name = models.CharField(_("Program name"), max_length=100, unique=True)
     description = models.TextField(_("Program description"))
@@ -39,7 +20,7 @@ class Cruises(models.Model):
     start_date = models.DateField(verbose_name=_("Start date"))
     end_date = models.DateField(verbose_name=_("End date"))
     descriptor = models.CharField(verbose_name=_("Descriptor"), max_length=20, blank=True, null=True, help_text=_("MEDS assigned description of the cruise e.g '18QL25002'"))
-    chief_scientists = models.ManyToManyField(Contacts, verbose_name=_("Chief scientists"), blank=True, related_name='chief_scientists')
+    chief_scientists = models.ManyToManyField('auth.User', verbose_name=_("Chief Scientists"), related_name='chief_scientists')
     locations = models.ManyToManyField(GeographicRegions, verbose_name=_("Locations"), blank=True, related_name='locations')
 
     def __str__(self):

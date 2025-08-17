@@ -21,17 +21,6 @@ class ContactRoleView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class ContactView(LoginRequiredMixin, TemplateView):
-    template_name = 'core/view_lookup.html'
-    login_url = reverse_lazy('login')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['table_update_url'] = reverse_lazy('core:contact_table_list')
-
-        return context
-
-
 def prep_table(request, dataframe, model):
     table_html = dataframe.to_html()
     df_soup = BeautifulSoup(f'{table_html}', 'html.parser')
@@ -78,6 +67,8 @@ def prep_table(request, dataframe, model):
     return df_soup
 
 
+# keeping this as an example of how to use the prep_table. We'll be using Django's built-in
+# user/group management system, but there will be other lookups we want to manage.
 def list_contact_roles(request):
 
     queryset = models.ContactRoles.objects.all()
@@ -90,31 +81,7 @@ def list_contact_roles(request):
     df_soup = prep_table(request, df, models.ContactRoles)
     return HttpResponse(df_soup)
 
-
-def list_contacts(request):
-
-    queryset = models.Contacts.objects.all()
-    queryset_list = []
-    for contact in queryset:
-        queryset_list.append({
-            'id': contact.id,
-            'last_name': contact.last_name,
-            'first_name': contact.first_name,
-            'roles': ", ".join([str(role) for role in contact.roles.all()])
-        })
-
-    df = pd.DataFrame(queryset_list)
-    df.set_index('id', inplace=True)
-    df.columns = [_("Last Name"), _("First Name"), _("Roles")]
-
-    df_soup = prep_table(request, df, models.Contacts)
-    return HttpResponse(df_soup)
-
-
 urlpatterns = [
-    path('lookup/contact', ContactView.as_view(), name='contact_view'),
     path('lookup/contact-role', ContactRoleView.as_view(), name='contact_role_view'),
-
-    path('lookup/contact/table/list', list_contacts, name="contact_table_list"),
     path('lookup/contact-role/table/list', list_contact_roles, name="contact_role_table_list")
 ]
