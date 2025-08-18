@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
 
 from django import forms
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.http.response import HttpResponseForbidden
 from django.template.loader import render_to_string
 from django.urls import path, reverse_lazy
 from django.views.generic import TemplateView
@@ -80,8 +83,15 @@ def list_data(request, cruise_id):
     soup = BeautifulSoup(html, 'html.parser')
     return HttpResponse(soup.find('table'))
 
-
 def get_data_form(request, cruise_id):
+    # Check if user belongs to MarDID Maintainer group
+    if not request.user.groups.filter(name__iexact__in=['Chief Scientist', 'MarDID Maintainer']).exists():
+        next_page = reverse_lazy('core:data_view', args=[cruise_id])
+        login_url = f"{reverse_lazy('login')}?next={next_page}"
+        response = HttpResponse()
+        response['HX-Redirect'] = login_url
+        return response
+
     cruise = models.Cruises.objects.get(pk=cruise_id)
     form = ExpectedDataForm(cruise=cruise)
     html = render_crispy_form(form)
@@ -90,6 +100,14 @@ def get_data_form(request, cruise_id):
 
 
 def update_cruise_data(request, cruise_id):
+    # Check if user belongs to MarDID Maintainer group
+    if not request.user.groups.filter(name__iexact__in=['Chief Scientist', 'MarDID Maintainer']).exists():
+        next_page = reverse_lazy('core:data_view', args=[cruise_id])
+        login_url = f"{reverse_lazy('login')}?next={next_page}"
+        response = HttpResponse()
+        response['HX-Redirect'] = login_url
+        return response
+
     cruise = models.Cruises.objects.get(pk=cruise_id)
 
     form = ExpectedDataForm(request.POST, cruise=cruise)
@@ -101,6 +119,7 @@ def update_cruise_data(request, cruise_id):
 
     html = render_crispy_form(form)
     return HttpResponse(html)
+
 
 urlpatterns = [
   path('data/<int:pk>', DataListView.as_view(), name='data_view'),

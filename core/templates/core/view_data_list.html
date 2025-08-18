@@ -11,7 +11,11 @@
 <table id="table_id_cruise_list" class="table table-striped table-sm" hx-get="{% url 'core:list_data' object.pk %}" hx-trigger="update_list from:body">
     <thead class="sticky-top bg-white">
         <tr>
-            <th><a class="btn btn-sm btn-outline-dark" title="{% trans 'Add Expected Data' %}" hx-swap="outerHTMl" hx-target="#form_area" hx-get="{% url 'core:get_expected_data_form' object.pk %}" ><span class="bi bi-plus-square"></span></a></th>
+            <th>
+                {% if user.is_authenticated %}
+                <a class="btn btn-sm btn-outline-dark" title="{% trans 'Add Expected Data' %}" hx-swap="outerHTMl" hx-target="#form_area" hx-get="{% url 'core:get_expected_data_form' object.pk %}" ><span class="bi bi-plus-square"></span></a>
+                {% endif %}
+            </th>
             <th>{% trans 'Data Type' %}</th>
             <th>{% trans 'status' %}</th>
             <th>{% trans 'file' %}</th>
