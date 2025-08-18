@@ -42,10 +42,16 @@ class DataTypes(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=20, unique=True)
     description = models.CharField(verbose_name=_("Description"), max_length=255)
 
+    def __str__(self):
+        return f'{self.name} - {self.description}'
+
 
 class DataStatus(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=20, unique=True)
     description = models.CharField(verbose_name=_("Description"), max_length=255)
+
+    def __str__(self):
+        return f'{self.name} - {self.description}'
 
 
 class Instruments(models.Model):
@@ -54,6 +60,8 @@ class Instruments(models.Model):
                                      help_text=_("Serial number of an instrument if it exists"))
     description = models.CharField(verbose_name=_("Description"), max_length=255)
 
+    def __str__(self):
+        return self.name + (f" - {self.description}" if self.description else "" ) + (f" - {self.serial_number}" if self.serial_number else "" )
 
 class MooredInstruments(models.Model):
     descriptor = models.CharField(verbose_name=_("Name"), max_length=20, unique=True,
@@ -62,9 +70,9 @@ class MooredInstruments(models.Model):
 
 
 class Data(models.Model):
-    cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE)
-    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT)
+    cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name="mission_data")
+    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="mission_data")
     legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255)
     file = models.FileField(verbose_name=_("File"))
-    instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='instruments')
-    status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT)
+    instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='mission_data')
+    status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="mission_data")

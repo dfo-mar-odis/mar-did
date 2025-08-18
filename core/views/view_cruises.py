@@ -6,11 +6,10 @@ from bs4 import BeautifulSoup
 from django.urls import path, reverse_lazy
 from django.utils.translation import gettext as _
 from django.http import HttpResponse
-from django_pandas.io import read_frame
 from django.views.generic.base import TemplateView
 from django.template.loader import render_to_string
 
-from core.forms import form_cruise
+from core.views.forms import form_cruise
 from core import models
 
 logger = logging.getLogger('mardid')
@@ -70,9 +69,16 @@ def list_cruises(request):
         trs = df_soup.find('tbody').findAll('tr', recursive=False)
         for tr in trs:
             first_th = tr.find('th')
+            id = int(first_th.string)
+            first_th.string = ""
+            first_th.append(data_btn := df_soup.new_tag('a'))
+            data_btn.append(span := df_soup.new_tag("span"))
+            data_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
+            data_btn.attrs['href'] = reverse_lazy('core:data_view', args=[int(id)])
+            data_btn.attrs['title'] = _('Cruise Data')
+            span.attrs['class'] = "bi bi-bar-chart"
+
             if request.user.is_authenticated:
-                id = int(first_th.string)
-                first_th.string = ""
                 first_th.append(update_btn:=df_soup.new_tag('a'))
                 update_btn.append(span := df_soup.new_tag("span"))
                 update_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
@@ -92,9 +98,6 @@ def list_cruises(request):
                     del_btn.attrs['hx-target'] = f"#{row_id}"
                     del_btn.attrs['hx-swap'] = "delete"
                     span.attrs['class'] = "bi bi-x-square"
-
-            else:
-                first_th.decompose()
 
         if page > 0:
             return HttpResponse(trs)
@@ -124,8 +127,6 @@ def list_cruises(request):
         add_btn.attrs['title'] = _('Add a new cruise')
         add_btn.append(span:= df_soup.new_tag("span"))
         span.attrs['class'] = "bi bi-plus-square"
-    else:
-        th.decompose()
 
     for th in t_head.find_all('th'):
         th.attrs['class'] = 'text-start'

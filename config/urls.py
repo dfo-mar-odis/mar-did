@@ -32,7 +32,7 @@ if settings.DEBUG:
 
 urlpatterns += i18n_patterns(
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='core:home'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='core:cruise_view'), name='logout'),
     path('', include('core.urls')),
     prefix_default_language=True  # Set to False if you don't want prefix for default language
 )

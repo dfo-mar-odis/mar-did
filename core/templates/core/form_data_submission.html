@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <span class="mb-2 h4">{{ cruise.name }} - {{ cruise.descriptor }}</span>
+    <form id="form_id_cruise" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' enctype="multipart/form-data">
+        {% crispy data_form %}
+    </form>
+{% endblock %}
+
