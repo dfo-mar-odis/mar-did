@@ -3,8 +3,14 @@
 
 {% block content %}
     <span class="mb-2 h4">{{ cruise.name }} - {{ cruise.descriptor }}</span>
-    <form id="form_id_cruise" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' enctype="multipart/form-data">
+    <form id="form_id_data" enctype="multipart/form-data"
+          hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+          hx-encoding="multipart/form-data">
+
         {% crispy data_form %}
+        <button type="button" hx-target="#form_id_data" hx-post="{% url 'core:submit_data' data_id %}" class="btn btn-primary">
+            <span class="bi bi-check-square"></span>
+        </button>
     </form>
 {% endblock %}
 

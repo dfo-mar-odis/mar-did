@@ -72,7 +72,14 @@ class MooredInstruments(models.Model):
 class Data(models.Model):
     cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name="mission_data")
     data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="mission_data")
-    legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255)
-    file = models.FileField(verbose_name=_("File"))
+    legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True)
     instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='mission_data')
     status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="mission_data")
+
+
+class Datafile(models.Model):
+    data = models.ForeignKey(Data, on_delete=models.CASCADE, related_name='data_files')
+    file = models.FileField(verbose_name=_("File"))
+
+    def __str__(self):
+        return self.file.name
