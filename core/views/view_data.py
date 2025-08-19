@@ -85,7 +85,7 @@ def list_data(request, cruise_id):
 
 def get_data_form(request, cruise_id):
     # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name__iexact__in=['Chief Scientist', 'MarDID Maintainer']).exists():
+    if not request.user.groups.filter(name__in=['Chief Scientist', 'MarDID Maintainer']).exists():
         next_page = reverse_lazy('core:data_view', args=[cruise_id])
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         response = HttpResponse()
@@ -101,7 +101,7 @@ def get_data_form(request, cruise_id):
 
 def update_cruise_data(request, cruise_id):
     # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name__iexact__in=['Chief Scientist', 'MarDID Maintainer']).exists():
+    if not request.user.groups.filter(name__in=['Chief Scientist', 'MarDID Maintainer']).exists():
         next_page = reverse_lazy('core:data_view', args=[cruise_id])
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         response = HttpResponse()
