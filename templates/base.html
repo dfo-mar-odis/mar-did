@@ -19,12 +19,13 @@
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 </head>
 <body>
+    <a class="visually-hidden-focusable" href="#content">Skip to main content</a>
     {% block navbar %}
     {% include 'navbar.html' %}
     {% endblock %}
 
     <!-- Main Content -->
-    <div class="{% if container %}{{ container }}{% else %}container{% endif %} mt-4">
+    <main id="content" class="{% if container %}{{ container }}{% else %}container{% endif %} mt-4">
         <span id="span_id_alerts"></span>
 
         {% block content %}
@@ -51,7 +52,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     {% endblock %}
 
     <!-- Bootstrap JS Bundle -->

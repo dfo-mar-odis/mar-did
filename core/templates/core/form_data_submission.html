@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block content %}
     <span class="mb-2 h4">{{ dataset.cruise.name }} - {{ dataset.cruise.descriptor }}</span>
-    {% if data_form %}
-    <form id="form_id_data" enctype="multipart/form-data"
+    {% if user.is_authenticated and data_form %}
+    <form id="form_id_data" class="mb-2" enctype="multipart/form-data"
           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
           hx-encoding="multipart/form-data">
 
@@ -20,14 +21,27 @@
         </button>
     </form>
     {% endif %}
-    <div id="div_id_file_list" hx-get="{% url 'core:update_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
-        <ul>
-        {% for file in dataset.data_files.all %}
-            <li id="li_id_file_list_item_{{file.pk}}">
-            {{ file.file_name }}
-            </li>
-        {% endfor %}
-        </ul>
+    <div id="div_id_file_list" class="table-responsive" style="max-height: 400px; overflow-y: auto;" hx-get="{% url 'core:update_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
+        <table class="table table-sm table-striped">
+            <thead>
+            <tr>
+                <th>{% trans 'File Name' %}</th>
+                <th>{% trans 'File Location' %}</th>
+                <th>{% trans 'Submitted By' %}</th>
+                <th>{% trans 'Submitted Date' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for file in dataset.data_files.all %}
+                <tr>
+                    <td>{{ file.file_name }}</td>
+                    <td>{{ file.file }}</td>
+                    <td>{{ file.submitted_by }}</td>
+                    <td>{{ file.submitted_date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
 

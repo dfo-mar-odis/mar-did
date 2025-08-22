@@ -1,4 +1,6 @@
 import os
+import copy
+
 from datetime import datetime
 from bs4 import BeautifulSoup
 
@@ -144,7 +146,7 @@ def submit_data(request, data_id):
                 soup_return = BeautifulSoup('', 'html.parser')
                 form = soup.find('form', id='form_id_data')
 
-                submit_button = soup.find('button', id="btn_id_form_submit")
+                submit_button = soup.find('button', id="btn_id_form_submit").extract()
                 submit_button.attrs['hx-swap-oob'] = 'true'
 
                 submit = submit_button.find('span')
@@ -155,7 +157,7 @@ def submit_data(request, data_id):
                 # so we'll put the input in a div, that will delete itself right after it's loaded in the DOM
                 # Next time the user clicks the submit button it'll be like they were submitting for the first time
                 submit.append(input_div:=soup.new_tag("div", attrs={'class': 'd-none'}))
-                input_div.attrs['hx-get'] = ""
+                input_div.attrs['hx-get'] = reverse_lazy('core:clear')
                 input_div.attrs['hx-swap'] = 'delete'
                 input_div.attrs['hx-trigger'] = 'load'
 
@@ -195,5 +197,6 @@ def list_files(request, data_id):
 urlpatterns = [
     path('data_submission/<int:data_id>', DataSubmissionView.as_view(), name='data_submission_view'),
     path('data_submission/<int:data_id>/submit', submit_data, name='submit_data'),
-    path('data_submission/<int:data_id>/list', list_files, name='update_file_list')
+    path('data_submission/<int:data_id>/list', list_files, name='update_file_list'),
+    path('clear/', HttpResponse, name='clear')
 ]

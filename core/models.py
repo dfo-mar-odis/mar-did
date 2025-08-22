@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
@@ -92,6 +93,7 @@ class DataFiles(models.Model):
     file_name = models.CharField(verbose_name=_("File Name"), max_length=100)
     file = models.FileField(verbose_name=_("File"))
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT)
+    submitted_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.file.name
