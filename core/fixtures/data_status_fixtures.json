@@ -1,7 +1,6 @@
 [
     {
         "model": "core.datastatus",
-        "pk": 1,
         "fields": {
             "name": "Unknown",
             "description": "The status of the data is unknown."
@@ -9,7 +8,6 @@
     },
     {
         "model": "core.datastatus",
-        "pk": 2,
         "fields": {
             "name": "Expected",
             "description": "The data is expected but not yet received."
@@ -17,15 +15,20 @@
     },
     {
         "model": "core.datastatus",
-        "pk": 3,
         "fields": {
-            "name": "Received",
-            "description": "The data has been received."
+            "name": "Submitted",
+            "description": "Some data has been submitted. Follow up with the data provider and if all the data has been provided, mark it as received"
         }
     },
     {
         "model": "core.datastatus",
-        "pk": 4,
+        "fields": {
+            "name": "Received",
+            "description": "The data has been received and is ready to be processed."
+        }
+    },
+    {
+        "model": "core.datastatus",
         "fields": {
             "name": "Processing",
             "description": "The data is currently being processed."
@@ -33,10 +36,23 @@
     },
     {
         "model": "core.datastatus",
-        "pk": 5,
         "fields": {
             "name": "Processed",
-            "description": "The data has been processed."
+            "description": "The data has been processed, and is ready for biochem loading"
+        }
+    },
+    {
+        "model": "core.datastatus",
+        "fields": {
+            "name": "Loading",
+            "description": "The data has been processed, and is ready for biochem validation and loading"
+        }
+    },
+    {
+        "model": "core.datastatus",
+        "fields": {
+            "name": "Loaded",
+            "description": "The data has been loaded to Biochem."
         }
     }
 ]

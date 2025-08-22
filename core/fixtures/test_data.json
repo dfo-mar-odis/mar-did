@@ -1,45 +1,5 @@
 [
 {
-    "model": "core.geographicregions",
-    "pk": 2,
-    "fields": {
-        "name": "Labrador Sea",
-        "description": ""
-    }
-},
-{
-    "model": "core.geographicregions",
-    "pk": 3,
-    "fields": {
-        "name": "Bay of Fundy",
-        "description": ""
-    }
-},
-{
-    "model": "core.geographicregions",
-    "pk": 5,
-    "fields": {
-        "name": "Danger Bay",
-        "description": null
-    }
-},
-{
-    "model": "core.geographicregions",
-    "pk": 8,
-    "fields": {
-        "name": "Gulf of Maine",
-        "description": "Not Maine, but it's gulf"
-    }
-},
-{
-    "model": "core.geographicregions",
-    "pk": 11,
-    "fields": {
-        "name": "Scotian Shelf",
-        "description": "Somewhere off Nova Scotia"
-    }
-},
-{
     "model": "core.cruises",
     "pk": 1,
     "fields": {

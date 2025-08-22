@@ -3,6 +3,13 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
 
+class GroupProfiles(models.Model):
+    group = models.OneToOneField('auth.Group', on_delete=models.CASCADE, related_name='profile')
+    description = models.TextField(_("Description"), blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.group.name} - {self.description or _('No description')}"
+
 class Programs(models.Model):
     name = models.CharField(_("Program name"), max_length=100, unique=True)
     description = models.TextField(_("Program description"))
@@ -69,17 +76,22 @@ class MooredInstruments(models.Model):
     instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='moored_instruments')
 
 
-class Data(models.Model):
+class Dataset(models.Model):
     cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name="mission_data")
     data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="mission_data")
     legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True)
     instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='mission_data')
     status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="mission_data")
 
+    def __str__(self):
+        return f'{self.data_type} : {self.status}'
 
-class Datafile(models.Model):
-    data = models.ForeignKey(Data, on_delete=models.CASCADE, related_name='data_files')
+
+class DataFiles(models.Model):
+    data = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='data_files')
+    file_name = models.CharField(verbose_name=_("File Name"), max_length=100)
     file = models.FileField(verbose_name=_("File"))
+    submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.file.name

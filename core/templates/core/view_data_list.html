@@ -17,17 +17,17 @@
                 {% endif %}
             </th>
             <th>{% trans 'Data Type' %}</th>
-            <th>{% trans 'status' %}</th>
-            <th>{% trans 'file' %}</th>
+            <th>{% trans 'Status' %}</th>
+            <th>{% trans 'File Count' %}</th>
         </tr>
     </thead>
     <tbody>
     {% for data in object.mission_data.all %}
     <tr>
-        <td><a class="btn btn-sm btn-outline-dark" href="{% url 'core:data_submission_view' data.pk %}"><span class="bi bi-plus-square"></span></a></td>
+        <td><a class="btn btn-sm btn-outline-dark" href="{% url 'core:data_submission_view' data.pk %}" title="{% trans 'View and update associated files' %}"><span class="bi bi-eye"></span></a></td>
         <td>{{ data.data_type }}</td>
         <td>{{ data.status }}</td>
-        <td>{{ data.file }}</td>
+        <td>{{ data.data_files.count }}</td>
     </tr>
     {% endfor %}
     </tbody>

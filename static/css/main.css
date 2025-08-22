@@ -6,3 +6,10 @@ body {
 .dropdown-menu {
     z-index: 1050; !important /* Higher z-index for dropdowns */
 }
+
+.fill-card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10rem; /* Adjust size as needed */
+}

@@ -22,7 +22,7 @@ from core.views.forms import form_data_submission
 class ExpectedDataForm(forms.ModelForm):
     class Meta:
         fields = ["cruise", "data_type", "status"]
-        model = models.Data
+        model = models.Dataset
 
     def __init__(self, *args, cruise, **kwargs):
         super().__init__(*args, **kwargs)

@@ -81,7 +81,7 @@ def list_cruises(request):
             if request.user.is_authenticated:
                 first_th.append(update_btn:=df_soup.new_tag('a'))
                 update_btn.append(span := df_soup.new_tag("span"))
-                update_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
+                update_btn.attrs['class'] = "btn btn-sm btn-dark ms-2"
                 update_btn.attrs['href'] = reverse_lazy('core:update_cruise_view', args=[int(id)])
                 update_btn.attrs['title'] = _('Update cruise')
                 span.attrs['class'] = "bi bi-pencil-square"
@@ -145,7 +145,7 @@ def delete_cruise(request, pk):
 
 
 urlpatterns = [
-    path('', CruiseListView.as_view(), name='cruise_view'),
+    path('cruise', CruiseListView.as_view(), name='cruise_view'),
     path('cruise/list', list_cruises, name='list_cruises'),
     path('cruise/delete/<int:pk>', delete_cruise, name='delete_cruise')
 ]

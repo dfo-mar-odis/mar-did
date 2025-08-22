@@ -2,15 +2,32 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <span class="mb-2 h4">{{ cruise.name }} - {{ cruise.descriptor }}</span>
+    <span class="mb-2 h4">{{ dataset.cruise.name }} - {{ dataset.cruise.descriptor }}</span>
+    {% if data_form %}
     <form id="form_id_data" enctype="multipart/form-data"
           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
           hx-encoding="multipart/form-data">
 
         {% crispy data_form %}
-        <button type="button" hx-target="#form_id_data" hx-post="{% url 'core:submit_data' data_id %}" class="btn btn-primary">
+        <div id="div_id_files" class="mb-3">
+            <label for="id_files" class="form-label">
+                Upload Files
+            </label>
+            <div><input type="file" name="files" class="form-control" multiple="" id="id_files"> </div>
+        </div>
+        <button id="btn_id_form_submit" type="button" hx-swap="none" hx-post="{% url 'core:submit_data' dataset.id %}" class="btn btn-primary">
             <span class="bi bi-check-square"></span>
         </button>
     </form>
+    {% endif %}
+    <div id="div_id_file_list" hx-get="{% url 'core:update_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
+        <ul>
+        {% for file in dataset.data_files.all %}
+            <li id="li_id_file_list_item_{{file.pk}}">
+            {{ file.file_name }}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
 

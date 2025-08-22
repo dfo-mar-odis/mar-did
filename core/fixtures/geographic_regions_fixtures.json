@@ -3,32 +3,259 @@
     "model": "core.geographicregions",
     "pk": 1,
     "fields": {
-        "name": "Scotian Shelf",
-        "description": ""
+        "name": "Banqereau Bank"
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 2,
     "fields": {
-        "name": "Labrador Sea",
-        "description": ""
+        "name": "Barrow Strait"
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 3,
     "fields": {
-        "name": "Bay of Fundy",
-        "description": ""
+        "name": "Bay of Fundy"
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 4,
     "fields": {
-        "name": "Emerald Banks",
-        "description": ""
+        "name": "Bras d’Or Lakes"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 5,
+    "fields": {
+        "name": "Brown’s Bank"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 6,
+    "fields": {
+        "name": "Cabot Strait"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 7,
+    "fields": {
+        "name": "Chaleur Bay"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 8,
+    "fields": {
+        "name": "Chedabucto Bay"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 9,
+    "fields": {
+        "name": "Continental Slope"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 10,
+    "fields": {
+        "name": "Davis Strait"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 11,
+    "fields": {
+        "name": "Emerald Bank"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 12,
+    "fields": {
+        "name": "Emerald Basin"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 13,
+    "fields": {
+        "name": "Flemish Bank"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 14,
+    "fields": {
+        "name": "Flemish Cap"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 15,
+    "fields": {
+        "name": "Flemish Pass"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 16,
+    "fields": {
+        "name": "Georges Bank"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 17,
+    "fields": {
+        "name": "Grand Banks"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 18,
+    "fields": {
+        "name": "Gulf of Maine"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 19,
+    "fields": {
+        "name": "Hudson Bay"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 20,
+    "fields": {
+        "name": "LaHave Bank"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 21,
+    "fields": {
+        "name": "Labrador Shelf"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 22,
+    "fields": {
+        "name": "Laurentian Fan"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 23,
+    "fields": {
+        "name": "Laurentian Trough"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 24,
+    "fields": {
+        "name": "Magdalen Shelf"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 25,
+    "fields": {
+        "name": "Northumberland Strait"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 26,
+    "fields": {
+        "name": "Orphan Basin"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 27,
+    "fields": {
+        "name": "Orphan Knoll"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 28,
+    "fields": {
+        "name": "Sable Island"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 29,
+    "fields": {
+        "name": "Scotian Shelf"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 30,
+    "fields": {
+        "name": "Shediac Valley"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 31,
+    "fields": {
+        "name": "St. Anne’s Bank"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 32,
+    "fields": {
+        "name": "St. Lawrence Estuary"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 33,
+    "fields": {
+        "name": "Sydney Bight"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 34,
+    "fields": {
+        "name": "The Gulf of St. Lawrence"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 35,
+    "fields": {
+        "name": "The Gully"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 36,
+    "fields": {
+        "name": "West Bank"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 37,
+    "fields": {
+        "name": "Whycocomagh Bay"
     }
 }
 ]
