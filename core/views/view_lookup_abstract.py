@@ -76,7 +76,7 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     table_url = None
 
     def test_func(self):
-        return self.request.user.groups.filter(name='MarDID Maintainer').exists()
+        return self.request.user.groups.filter(name='MarDID Maintainers').exists()
 
     def get_table_url(self):
         return self.table_url
@@ -181,7 +181,7 @@ def get_lookup_form(model_form, **kwargs):
 @login_required(login_url=reverse_lazy('login'))
 def update_lookup(request, model_form, **kwargs):
     # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name='MarDID Maintainer').exists():
+    if not request.user.groups.filter(name='MarDID Maintainers').exists():
         return HttpResponseForbidden(_("You must be a MarDID Maintainer to perform this action."))
 
     if 'pk' in kwargs:
@@ -203,7 +203,7 @@ def update_lookup(request, model_form, **kwargs):
 @login_required(login_url=reverse_lazy('login'))
 def delete_element(request, pk, lookup_model):
     # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name='MarDID Maintainer').exists():
+    if not request.user.groups.filter(name='MarDID Maintainers').exists():
         return HttpResponseForbidden(_("You must be a MarDID Maintainer to perform this action."))
 
     try:

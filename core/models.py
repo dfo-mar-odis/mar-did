@@ -35,6 +35,7 @@ class Cruises(models.Model):
     end_date = models.DateField(verbose_name=_("End date"))
     descriptor = models.CharField(verbose_name=_("Descriptor"), max_length=20, blank=True, null=True, help_text=_("MEDS assigned description of the cruise e.g '18QL25002'"))
     chief_scientists = models.ManyToManyField('auth.User', verbose_name=_("Chief Scientists"), related_name='chief_scientists')
+    data_managers = models.ManyToManyField('auth.User', verbose_name=_("Data Managers"), related_name='data_managers')
     locations = models.ManyToManyField(GeographicRegions, verbose_name=_("Locations"), blank=True, related_name='locations')
 
     def __str__(self):

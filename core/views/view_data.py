@@ -19,6 +19,17 @@ from core import models
 from core.views.forms import form_data_submission
 
 
+class DataListView(TemplateView):
+    template_name = "core/view_data_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Data List'
+        context['object'] = models.Cruises.objects.get(pk=self.kwargs['pk'])
+        context['container'] = 'container-fluid'
+        return context
+
+
 class ExpectedDataForm(forms.ModelForm):
     class Meta:
         fields = ["cruise", "data_type", "status"]
@@ -37,11 +48,11 @@ class ExpectedDataForm(forms.ModelForm):
         submit_url = reverse_lazy('core:update_expected_data', args=[cruise.pk])
         btn_submit_attrs = {
             'title': _("Submit"),
-            'hx-target': "#form_area",
+            'hx-target': "#form_cruise_data_form_area",
             'hx-post': submit_url
         }
 
-        btn_submit = StrictButton('<span class="bi bi-check-square"></span>',
+        btn_submit = StrictButton('<span class="bi bi-plus-square"></span>',
                                   css_class='btn btn-sm btn-primary mb-1',
                                   **btn_submit_attrs)
 
@@ -66,26 +77,23 @@ class ExpectedDataForm(forms.ModelForm):
         )
 
 
-class DataListView(TemplateView):
-    template_name = "core/view_data_list.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Data List'
-        context['object'] = models.Cruises.objects.get(pk=self.kwargs['pk'])
-        context['container'] = 'container-fluid'
-        return context
-
-
 def list_data(request, cruise_id):
     cruise = models.Cruises.objects.get(pk=cruise_id)
     html = render_to_string('core/view_data_list.html', context={'object': cruise})
     soup = BeautifulSoup(html, 'html.parser')
     return HttpResponse(soup.find('table'))
 
+
+def authenticated(request):
+    # Check if user belongs to MarDID Maintainers or Chief Scientists groups
+    if request.user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
+        return True
+
+    return False
+
+
 def get_data_form(request, cruise_id):
-    # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name__in=['Chief Scientist', 'MarDID Maintainer']).exists():
+    if not authenticated(request):
         next_page = reverse_lazy('core:data_view', args=[cruise_id])
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         response = HttpResponse()
@@ -100,13 +108,12 @@ def get_data_form(request, cruise_id):
 
 
 def update_cruise_data(request, cruise_id):
-    # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name__in=['Chief Scientist', 'MarDID Maintainer']).exists():
-        next_page = reverse_lazy('core:data_view', args=[cruise_id])
+    if not authenticated(request):
+        next_page = request.path
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         response = HttpResponse()
         response['HX-Redirect'] = login_url
-        return response
+        return HttpResponse(response)
 
     cruise = models.Cruises.objects.get(pk=cruise_id)
 
@@ -121,9 +128,23 @@ def update_cruise_data(request, cruise_id):
     return HttpResponse(html)
 
 
+def remove_expected(request, data_id):
+    if not authenticated(request):
+        next_page = request.path
+        login_url = f"{reverse_lazy('login')}?next={next_page}"
+        response = HttpResponse()
+        response['HX-Redirect'] = login_url
+        return HttpResponse(response)
+
+    data = models.Dataset.objects.get(pk=data_id)
+    data.delete()
+
+    return HttpResponse()
+
 urlpatterns = [
   path('data/<int:pk>', DataListView.as_view(), name='data_view'),
   path('data/<int:cruise_id>/list', list_data, name='list_data'),
   path('data/<int:cruise_id>/update_list', update_cruise_data, name='update_expected_data'),
-  path('data/<int:cruise_id>/add_expected', get_data_form, name='get_expected_data_form')
+  path('data/<int:cruise_id>/add_expected', get_data_form, name='get_expected_data_form'),
+  path('data/remove/<int:data_id>', remove_expected, name='remove_data')
 ] + form_data_submission.urlpatterns

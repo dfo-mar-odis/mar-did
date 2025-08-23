@@ -4,34 +4,5 @@
 {% block content %}
 <span class="mb-2 h4">{{ object.name }} - {{ object.descriptor }}</span>
 
-<form id="form_area" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-
-</form>
-<div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-<table id="table_id_cruise_list" class="table table-striped table-sm" hx-get="{% url 'core:list_data' object.pk %}" hx-trigger="update_list from:body">
-    <thead class="sticky-top bg-white">
-        <tr>
-            <th>
-                {% if user.is_authenticated %}
-                <a class="btn btn-sm btn-outline-dark" title="{% trans 'Add Expected Data' %}" hx-swap="outerHTMl" hx-target="#form_area" hx-get="{% url 'core:get_expected_data_form' object.pk %}" ><span class="bi bi-plus-square"></span></a>
-                {% endif %}
-            </th>
-            <th>{% trans 'Data Type' %}</th>
-            <th>{% trans 'Status' %}</th>
-            <th>{% trans 'File Count' %}</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for data in object.mission_data.all %}
-    <tr>
-        <td><a class="btn btn-sm btn-outline-dark" href="{% url 'core:data_submission_view' data.pk %}" title="{% trans 'View and update associated files' %}"><span class="bi bi-eye"></span></a></td>
-        <td>{{ data.data_type }}</td>
-        <td>{{ data.status }}</td>
-        <td>{{ data.data_files.count }}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-
-</table>
-</div>
+{% include 'core/partial/table_data_list.html' with cruise=object%}
 {% endblock %}

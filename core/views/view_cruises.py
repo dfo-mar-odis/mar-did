@@ -86,7 +86,7 @@ def list_cruises(request):
                 update_btn.attrs['title'] = _('Update cruise')
                 span.attrs['class'] = "bi bi-pencil-square"
 
-                if request.user.groups.filter(name__iexact="MarDID Maintainer").exists():
+                if request.user.groups.filter(name__iexact="MarDID Maintainers").exists():
                     row_id = f"tr_id_cruise_{id}"
                     tr.attrs['id'] = row_id
                     first_th.append(del_btn := df_soup.new_tag('a'))

@@ -25,12 +25,15 @@ import logging
 logger = logging.getLogger('mardid')
 
 
-class MultipleFileInput(forms.ClearableFileInput):
-    allow_multiple_selected = True
+class DataSubmissionView(TemplateView):
+    template_name = 'core/form_data_submission.html'
 
-    def get_context(self, name, value, attrs):
-        context = super().get_context(name, value, attrs)
-        context['widget']['attrs']['multiple'] = True
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        data_object = models.Dataset.objects.get(pk=self.kwargs['data_id'])
+        context['data_form'] = DataSubmissionForm(data_object=data_object)
+        context['dataset'] = data_object
+        context['title'] = _("Cruise") + " " + str(data_object.cruise) + " " + _("Data Submission")
         return context
 
 
@@ -43,7 +46,12 @@ class DataSubmissionForm(forms.ModelForm):
     def __init__(self, *args, data_object, files=None, **kwargs):
         self.files = files
         super().__init__(*args, files=files, **kwargs)
-        status = models.DataStatus.objects.get(name__iexact='submitted')
+
+        if not self.instance.pk:
+            status = models.DataStatus.objects.get(name__iexact='expected')
+        else:
+            status = self.instance.status
+
         self.initial['cruise'] = data_object.cruise
         self.initial['data_type'] = data_object.data_type
         self.initial['status'] = status
@@ -55,18 +63,6 @@ class DataSubmissionForm(forms.ModelForm):
         # Add a file upload field for multiple files
         self.helper = FormHelper()
         self.helper.form_tag = False
-
-
-class DataSubmissionView(TemplateView):
-    template_name = 'core/form_data_submission.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        data_object = models.Dataset.objects.get(pk=self.kwargs['data_id'])
-        context['data_form'] = DataSubmissionForm(data_object=data_object)
-        context['dataset'] = data_object
-        context['title'] = _("Cruise") + " " + str(data_object.cruise) + " " + _("Data Submission")
-        return context
 
 
 def save_files_to_media(files):
@@ -118,7 +114,7 @@ def save_files(user, data, files, override=False):
         )
 
 
-def submit_data(request, data_id):
+def submit_data(request, data_id, notify):
     data_object = models.Dataset.objects.get(pk=data_id)
 
     form = DataSubmissionForm(
@@ -167,26 +163,31 @@ def submit_data(request, data_id):
                 input.attrs['type'] = 'hidden'
                 input.attrs['name'] = 'override'
                 input.attrs['value'] = 'override'
-                input.attrs['hx-post'] = submit_button.attrs['hx-post']
+                input.attrs['hx-post'] = request.path
                 input.attrs['hx-confirm'] = _("These files already exist, are you sure you wish to override them?")
                 input.attrs['hx-trigger'] = 'load'
 
                 soup_return.append(submit_button)
                 return HttpResponse(soup_return)
 
-        group = auth_models.Group.objects.get(name__iexact='MarDID Maintainer')
+        group = auth_models.Group.objects.get(name__iexact='MarDID Maintainers')
         users = auth_models.User.objects.filter(groups=group)
-        send_mail(
-            "Mar-DID Files Added",
-            f"This is a test email. Files have been added to a cruise {data.cruise}",
-            "Do.Not.Reply@mar-did.dfo-mpo.gc.ca",
-            [user.email for user in users]
-        )
+        if notify:
+            data.status = models.DataStatus.objects.get(name__iexact='submitted')
+            data.save()
 
-        form = soup.find('form', id='form_id_data')
-        form.attrs['hx-swap-oob'] = 'true'
-        response = HttpResponse(form)
-        response['HX-Trigger'] = 'update_file_list'
+            notifiers = [user.email for user in users]
+            notifiers += [user.email for user in data.cruise.data_managers.all()]
+            notifiers += [user.email for user in data.cruise.chief_scientists.all()]
+            send_mail(
+                _("Cruise update: Files added"),
+                f"{data.data_type.name} " + _("Files have been submitted to a crise") + f" [{data.cruise}]",
+                "Do.Not.Reply@mar-did.dfo-mpo.gc.ca",
+                notifiers
+            )
+
+        response = HttpResponse()
+        response['HX-Redirect'] = reverse_lazy('core:data_submission_view', args=[data.pk])
         return response
 
     logger.error(form.errors)
@@ -207,7 +208,7 @@ def list_files(request, data_id):
 
 urlpatterns = [
     path('data_submission/<int:data_id>', DataSubmissionView.as_view(), name='data_submission_view'),
-    path('data_submission/<int:data_id>/submit', submit_data, name='submit_data'),
+    path('data_submission/<int:data_id>/<int:notify>', submit_data, name='submit_data'),
     path('data_submission/<int:data_id>/list', list_files, name='update_file_list'),
     path('clear/', HttpResponse, name='clear')
 ]

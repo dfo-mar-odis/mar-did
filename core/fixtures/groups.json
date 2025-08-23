@@ -3,7 +3,7 @@
     "model": "auth.group",
     "pk": 1,
     "fields": {
-        "name": "Chief Scientist",
+        "name": "Chief Scientists",
         "permissions": []
     }
 },
@@ -11,7 +11,7 @@
     "model": "auth.group",
     "pk": 2,
     "fields": {
-        "name": "MarDID Maintainer",
+        "name": "MarDID Maintainers",
         "permissions": []
     }
 },
@@ -19,7 +19,7 @@
     "model": "auth.group",
     "pk": 3,
     "fields": {
-        "name": "Data Manager",
+        "name": "Data Managers",
         "permissions": []
     }
 },
@@ -27,7 +27,15 @@
     "model": "auth.group",
     "pk": 4,
     "fields": {
-        "name": "Data Technician",
+        "name": "Data Technicians",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "pk": 5,
+    "fields": {
+        "name": "Datashop Processors",
         "permissions": []
     }
 },
@@ -36,7 +44,7 @@
     "pk": 1,
     "fields": {
         "group": 1,
-        "description": "Person responsible for a project, mission, cruise, and data."
+        "description": "Person responsible for a project, mission, cruise, and data and should receive notifications when updates to a project, mission, cruise or data occur"
     }
 },
 {
@@ -60,7 +68,15 @@
     "pk": 4,
     "fields": {
         "group": 4,
-        "description": "Data Technicians process data in the lab after a cruise is over and will be responsible for submitting data processed on a mission."
+        "description": "Data Technicians process samples and will be responsible for submitting data for further processing and quality control on a mission."
+    }
+},
+{
+    "model": "core.groupprofiles",
+    "pk": 5,
+    "fields": {
+        "group": 5,
+        "description": "Datashop processors are responsible for secondary processing and loading data to Biochem and will be notified when data is submitted."
     }
 }
 ]
