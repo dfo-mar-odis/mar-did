@@ -11,9 +11,16 @@ class GroupProfiles(models.Model):
     def __str__(self):
         return f"{self.group.name} - {self.description or _('No description')}"
 
+
 class Programs(models.Model):
     name = models.CharField(_("Program name"), max_length=100, unique=True)
     description = models.TextField(_("Program description"))
+
+    def __str__(self):
+        return f'{self.name} - {self.description}'
+
+    class Meta:
+        ordering = ['name']
 
 
 class GeographicRegions(models.Model):
@@ -28,6 +35,9 @@ class GeographicRegions(models.Model):
             raise ValidationError(_("This region is in use and cannot be deleted."))
         super().delete(*args, **kwargs)
 
+    class Meta:
+        ordering = ['name']
+
 
 class Cruises(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=20, help_text=_("The name of the cruise e.g 'CAR2025002'"))
@@ -37,14 +47,10 @@ class Cruises(models.Model):
     chief_scientists = models.ManyToManyField('auth.User', verbose_name=_("Chief Scientists"), related_name='chief_scientists')
     data_managers = models.ManyToManyField('auth.User', verbose_name=_("Data Managers"), related_name='data_managers')
     locations = models.ManyToManyField(GeographicRegions, verbose_name=_("Locations"), blank=True, related_name='locations')
+    programs = models.ManyToManyField(Programs, verbose_name=_("programs"), related_name='programs')
 
     def __str__(self):
         return f'{self.name} - {self.descriptor}'
-
-
-class Missions(models.Model):
-    program = models.ForeignKey(Programs, on_delete=models.CASCADE, related_name='missions')
-    cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name='missions')
 
 
 class DataTypes(models.Model):
@@ -53,6 +59,9 @@ class DataTypes(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.description}'
+
+    class Meta:
+        ordering = ['name']
 
 
 class DataStatus(models.Model):
@@ -72,6 +81,10 @@ class Instruments(models.Model):
     def __str__(self):
         return self.name + (f" - {self.description}" if self.description else "" ) + (f" - {self.serial_number}" if self.serial_number else "" )
 
+    class Meta:
+        ordering = ['name', 'serial_number']
+
+
 class MooredInstruments(models.Model):
     descriptor = models.CharField(verbose_name=_("Name"), max_length=20, unique=True,
                                   help_text=_("Serial Number or name given to the moored instrument"))
@@ -82,7 +95,7 @@ class Dataset(models.Model):
     cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name="mission_data")
     data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="mission_data")
     legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True)
-    instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='mission_data')
+    instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='instruments')
     status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="mission_data")
 
     def __str__(self):

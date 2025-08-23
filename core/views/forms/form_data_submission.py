@@ -52,6 +52,7 @@ class DataSubmissionForm(forms.ModelForm):
         else:
             status = self.instance.status
 
+        self.initial['instruments'] = data_object.instruments.all()
         self.initial['cruise'] = data_object.cruise
         self.initial['data_type'] = data_object.data_type
         self.initial['status'] = status

@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
 from django import forms
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -31,12 +32,23 @@ class DataListView(TemplateView):
 
 
 class ExpectedDataForm(forms.ModelForm):
+
+    data_type_filter = forms.CharField(label=_("Filter Data Types"), required=False)
+
     class Meta:
         fields = ["cruise", "data_type", "status"]
         model = models.Dataset
 
     def __init__(self, *args, cruise, **kwargs):
+        filter = None
+        if 'data_type_filter' in kwargs:
+            filter = kwargs.pop('data_type_filter')
+
         super().__init__(*args, **kwargs)
+
+        if filter:
+            query = Q(name__icontains=filter) | Q(description__icontains=filter)
+            self.fields['data_type'].choices = [(obj.pk, f"{obj}") for obj in models.DataTypes.objects.filter(query)]
 
         status = models.DataStatus.objects.get(name__iexact='Expected')
         self.fields['cruise'].initial = cruise
@@ -45,17 +57,25 @@ class ExpectedDataForm(forms.ModelForm):
         self.fields['cruise'].widget = forms.HiddenInput()
         self.fields['status'].widget = forms.HiddenInput()
 
-        submit_url = reverse_lazy('core:update_expected_data', args=[cruise.pk])
-        btn_submit_attrs = {
-            'title': _("Submit"),
-            'hx-target': "#form_cruise_data_form_area",
-            'hx-post': submit_url
+        btn_submit = None
+        if cruise:
+            submit_url = reverse_lazy('core:update_expected_data', args=[cruise.pk])
+            btn_submit_attrs = {
+                'title': _("Submit"),
+                'hx-target': "#form_cruise_data_form_area",
+                'hx-post': submit_url
+            }
+
+            btn_submit = StrictButton('<span class="bi bi-plus-square"></span>',
+                                      css_class='btn btn-sm btn-primary mb-1',
+                                      **btn_submit_attrs)
+
+        data_type_filter_attrs = {
+            'hx-get': reverse_lazy('core:filter_data_types'),
+            'hx-target': '#div_id_data_type',
+            'hx-swap': 'innerHTML',
+            'hx-trigger': 'keyup delay:1s'
         }
-
-        btn_submit = StrictButton('<span class="bi bi-plus-square"></span>',
-                                  css_class='btn btn-sm btn-primary mb-1',
-                                  **btn_submit_attrs)
-
         self.helper = FormHelper()
         self.helper.form_tag = False
 
@@ -66,10 +86,15 @@ class ExpectedDataForm(forms.ModelForm):
                     Field('status'),
                     Row(
                         Column(
+                            Field('data_type_filter', **data_type_filter_attrs)
+                        )
+                    ),
+                    Row(
+                        Column(
                             Field('data_type')
                         )
                     ),
-                    btn_submit,
+                    btn_submit if btn_submit else None,
                     css_class="card-body"
                 ),
                 css_class="card mb-2"
@@ -79,14 +104,14 @@ class ExpectedDataForm(forms.ModelForm):
 
 def list_data(request, cruise_id):
     cruise = models.Cruises.objects.get(pk=cruise_id)
-    html = render_to_string('core/view_data_list.html', context={'object': cruise})
+    html = render_to_string('core/view_data_list.html', context={'object': cruise, 'user': request.user})
     soup = BeautifulSoup(html, 'html.parser')
     return HttpResponse(soup.find('table'))
 
 
 def authenticated(request):
     # Check if user belongs to MarDID Maintainers or Chief Scientists groups
-    if request.user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
+    if request.user.groups.filter(name__in=['Chief Scientists', 'Data Technicians', 'MarDID Maintainers']).exists():
         return True
 
     return False
@@ -141,10 +166,22 @@ def remove_expected(request, data_id):
 
     return HttpResponse()
 
+
+def filter_data_types(request):
+    filter = request.GET.get('data_type_filter', None)
+
+    form = ExpectedDataForm(cruise=None, data_type_filter=filter)
+    crispy = render_crispy_form(form)
+    soup = BeautifulSoup(crispy, 'html.parser')
+
+    return HttpResponse(soup.find(id='div_id_data_type'))
+
+
 urlpatterns = [
   path('data/<int:pk>', DataListView.as_view(), name='data_view'),
   path('data/<int:cruise_id>/list', list_data, name='list_data'),
   path('data/<int:cruise_id>/update_list', update_cruise_data, name='update_expected_data'),
   path('data/<int:cruise_id>/add_expected', get_data_form, name='get_expected_data_form'),
-  path('data/remove/<int:data_id>', remove_expected, name='remove_data')
+  path('data/remove/<int:data_id>', remove_expected, name='remove_data'),
+  path('data/filter_data_types', filter_data_types, name='filter_data_types')
 ] + form_data_submission.urlpatterns

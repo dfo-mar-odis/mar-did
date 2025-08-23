@@ -78,7 +78,7 @@ def list_cruises(request):
             data_btn.attrs['title'] = _('Cruise Data')
             span.attrs['class'] = "bi bi-bar-chart"
 
-            if request.user.is_authenticated:
+            if request.user.groups.filter(name__in=["Chief Scientists", "MarDID Maintainers"]):
                 first_th.append(update_btn:=df_soup.new_tag('a'))
                 update_btn.append(span := df_soup.new_tag("span"))
                 update_btn.attrs['class'] = "btn btn-sm btn-dark ms-2"

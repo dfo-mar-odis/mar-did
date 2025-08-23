@@ -27,7 +27,7 @@
                 hx-post="{% url 'core:submit_data' dataset.id 1 %}" class="btn btn-primary"
                 title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
 
-{% trans 'Mark a dataset completed to send notifications to stakeholders that data is ready for processing and/or loading' %}">
+{% trans 'Mark a dataset submitted to send notifications to stakeholders that data is ready for processing and/or loading' %}">
             <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark Submitted' %}
         </button>
     </form>
@@ -47,7 +47,7 @@
                 <tr>
                     <td>{{ file.file_name }}</td>
                     <td>{{ file.file }}</td>
-                    <td>{{ file.submitted_by }}</td>
+                    <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
                     <td>{{ file.submitted_date }}</td>
                 </tr>
             {% endfor %}

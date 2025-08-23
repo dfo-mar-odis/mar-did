@@ -1,8 +1,6 @@
 from bs4 import BeautifulSoup
 
 from django import forms
-from django.db.models import Value
-from django.db.models.functions import Concat
 from django.urls import path, reverse_lazy
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -22,8 +20,6 @@ from core import models
 
 import logging
 
-from core.models import GeographicRegions
-
 logger = logging.getLogger('mardid')
 
 
@@ -32,6 +28,12 @@ logger = logging.getLogger('mardid')
 class CreateCruise(LoginRequiredMixin, TemplateView):
     template_name = 'core/form_cruise.html'
     login_url = reverse_lazy('login')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
+            return redirect(reverse_lazy('login'))
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -46,6 +48,16 @@ class CreateCruise(LoginRequiredMixin, TemplateView):
 
 
 class CruiseForm(forms.ModelForm):
+    programs_select = forms.ModelChoiceField(
+        queryset=models.Programs.objects.none(),
+        label="Select a program",
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
+    )
+    programs = forms.ModelMultipleChoiceField(
+        queryset=models.Programs.objects.none(),
+        label="Programs"
+    )
     chief_scientists_select = forms.ModelChoiceField(
         queryset=User.objects.none(),
         label="Select Chief Scientist",
@@ -136,10 +148,29 @@ class CruiseForm(forms.ModelForm):
 
         return cleaned_locations
 
-    def clean_chief_scientists_select(self):
-        return self.clean_chief_scientists_field()
+    def clean_programs_field(self):
+        programs_select = self.data.get('programs_select')
+        programs = self.data.getlist('programs_bullet')
+
+        keys = [int(program) for program in programs]
+        if programs_select:
+            keys.append(int(programs_select))
+
+        cleaned_programs = models.Programs.objects.filter(pk__in=keys)
+
+        # Example validation: Ensure at least one chief scientist is selected
+        if not cleaned_programs.exists():
+            self.add_error(None, _("At least one program must be added."))  # Non-field error
+            self.fields['programs_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
+
+        # Additional processing or validation logic can go here
+
+        return cleaned_programs
 
     def clean_chief_scientists(self):
+        return self.clean_chief_scientists_field()
+
+    def clean_chief_scientists_select(self):
         return self.clean_chief_scientists_field()
 
     def clean_locations_select(self):
@@ -147,6 +178,12 @@ class CruiseForm(forms.ModelForm):
 
     def clean_locations(self):
         return self.clean_locations_field()
+
+    def clean_programs_select(self):
+        return self.clean_programs_field()
+
+    def clean_programs(self):
+        return self.clean_programs_field()
 
     def clean(self):
         cleaned_data = super().clean()
@@ -187,17 +224,18 @@ class CruiseForm(forms.ModelForm):
 
     def init_contact_list(self, prefix, group):
         _list = ""
-
+        contacts = []
         if self.instance.pk:
             contact_list = getattr(self.instance, prefix)
             contacts = [con.id for con in contact_list.all()] if self.instance.pk else []
 
-            if not contacts:
-                if self.data and f'{prefix}_bullet' in self.data:
-                    contacts = self.data.getlist(f'{prefix}_bullet')
+        if not contacts:
+            if self.data and f'{prefix}_bullet' in self.data:
+                contacts = self.data.getlist(f'{prefix}_bullet')
 
+        if contacts:
             for contact_id in contacts:
-                _list += get_contact_bullet(contact_id, prefix, 'core:remove_from_list')
+                _list += get_contact_bullet(contact_id, User, prefix, 'core:remove_from_list')
 
         # Filter chief scientists to only include contacts with the "chief scientist" role
         _group = Group.objects.filter(name__iexact=group).first()
@@ -210,22 +248,23 @@ class CruiseForm(forms.ModelForm):
 
         return self.get_list_container(prefix, _list)
 
-    def init_locations(self):
-        prefix = 'locations'
+    def init_lookup(self, prefix, model):
         _list = ""
+        lookups = []
 
         if self.instance.pk:
-            locations = [loc.id for loc in self.instance.locations.all()] if self.instance.pk else []
+            lookup_list = getattr(self.instance, prefix)
+            lookups = [lu.id for lu in lookup_list.all()] if self.instance.pk else []
 
-            if not locations:
-                if self.data and 'locations_bullet' in self.data:
-                    locations = self.data.getlist('locations_bullet')
+        if not lookups:
+            if self.data and f'{prefix}_bullet' in self.data:
+                lookups = self.data.getlist(f'{prefix}_bullet')
 
-            for location_id in locations:
-                _list += get_location_bullet(location_id, 'locations', 'core:remove_from_list')
+        for lu_id in lookups:
+            _list += get_lookup_bullet(lu_id, model, prefix, 'core:remove_from_list')
 
-        self.fields['locations_select'].queryset = models.GeographicRegions.objects.all()
-        self.fields['locations'].queryset = models.GeographicRegions.objects.all()
+        self.fields[f'{prefix}_select'].queryset = model.objects.all()
+        self.fields[prefix].queryset = model.objects.all()
 
         return self.get_list_container(prefix, _list)
 
@@ -235,7 +274,8 @@ class CruiseForm(forms.ModelForm):
 
         scientists_container = self.init_contact_list('chief_scientists', 'chief scientists')
         data_manager_container = self.init_contact_list('data_managers', 'data managers')
-        locations_container = self.init_locations()
+        locations_container = self.init_lookup('locations', models.GeographicRegions)
+        programs_container = self.init_lookup('programs', models.Programs)
 
         submit_url = (reverse_lazy('core:update_cruise', args=[self.instance.pk])
                       if self.instance.pk else
@@ -272,7 +312,10 @@ class CruiseForm(forms.ModelForm):
                 Column(scientists_container),
                 Column(data_manager_container),
             ),
-            locations_container,
+            Row(
+                Column(programs_container),
+                Column(locations_container),
+            ),
             btn_submit
         )
 
@@ -320,8 +363,8 @@ def update_cruise(request, **kwargs):
     return HttpResponse(soup)
 
 
-def get_contact_bullet(contact_id, prefix, post_remove_url_alias):
-    contact = User.objects.get(pk=contact_id)
+def get_contact_bullet(contact_id, lookup_model, prefix, post_remove_url_alias):
+    contact = lookup_model.objects.get(pk=contact_id)
 
     context = {
         'input_name': f'{prefix}_bullet',
@@ -332,14 +375,14 @@ def get_contact_bullet(contact_id, prefix, post_remove_url_alias):
     return render_to_string('core/partial/multi_select_bullet.html', context=context)
 
 
-def get_location_bullet(location_id, prefix, post_remove_url_alias):
-    location = GeographicRegions.objects.get(pk=location_id)
+def get_lookup_bullet(id, lookup_model, prefix, post_remove_url_alias):
+    lookup_obj = lookup_model.objects.get(pk=id)
 
     context = {
         'input_name': f'{prefix}_bullet',
-        'value_id': location.pk,
-        'value_label': f"{location.name}",
-        'post_url': reverse_lazy(post_remove_url_alias, args=[prefix, location.pk]),
+        'value_id': lookup_obj.pk,
+        'value_label': f"{lookup_obj.name}",
+        'post_url': reverse_lazy(post_remove_url_alias, args=[prefix, lookup_obj.pk]),
     }
     return render_to_string('core/partial/multi_select_bullet.html', context=context)
 
@@ -365,10 +408,15 @@ def add_to_list(request, prefix):
     soup = BeautifulSoup()
 
     get_bullet_func = get_contact_bullet
+    lookup_model = User
     if prefix == 'locations':
-        get_bullet_func = get_location_bullet
+        get_bullet_func = get_lookup_bullet
+        lookup_model = models.GeographicRegions
+    elif prefix == 'programs':
+        get_bullet_func = get_lookup_bullet
+        lookup_model = models.Programs
 
-    new_pill = get_bullet_func(new_id, prefix, 'core:remove_from_list')
+    new_pill = get_bullet_func(new_id, lookup_model, prefix, 'core:remove_from_list')
 
     existing_ids = [int(pk) for pk in existing if pk.isdigit()]
     existing_ids.append(int(new_id))
