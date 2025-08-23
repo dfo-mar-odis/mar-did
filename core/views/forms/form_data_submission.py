@@ -5,6 +5,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 from django import forms
+from django.contrib.auth import models as auth_models
 from django.urls import path, reverse_lazy
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -12,6 +13,7 @@ from django.http.response import HttpResponse
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
 from django.conf import settings
+from django.core.mail import send_mail
 from django.core.files.storage import FileSystemStorage
 
 from crispy_forms.helper import FormHelper
@@ -171,6 +173,15 @@ def submit_data(request, data_id):
 
                 soup_return.append(submit_button)
                 return HttpResponse(soup_return)
+
+        group = auth_models.Group.objects.get(name__iexact='MarDID Maintainer')
+        users = auth_models.User.objects.filter(groups=group)
+        send_mail(
+            "Mar-DID Files Added",
+            f"This is a test email. Files have been added to a cruise {data.cruise}",
+            "Do.Not.Reply@mar-did.dfo-mpo.gc.ca",
+            [user.email for user in users]
+        )
 
         form = soup.find('form', id='form_id_data')
         form.attrs['hx-swap-oob'] = 'true'
