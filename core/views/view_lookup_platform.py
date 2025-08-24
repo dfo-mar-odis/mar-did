@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+
 from django.urls import path
 from django.http import HttpResponse
 from django_pandas.io import read_frame
@@ -10,12 +12,12 @@ from core.views import view_lookup_abstract
 
 # If copy and pasting this module as a template, change the lookup model to match
 # the model of the simple look up class being extended
-lookup_model = models.Instruments
+lookup_model = models.Platforms
 
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
-name_key = 'instruments'
-columns = ['name', 'serial_number', 'description']
+name_key = 'platforms'
+columns = ['name', 'ship_code']
 
 ###### DO NOT CHANGE THESE #############
 name_get_form = f'lookup_form_{name_key}'
@@ -39,6 +41,7 @@ def list_lookup(request):
 
     df = read_frame(queryset_list)
     df.set_index('id', inplace=True)
+    df = df[[col for col in columns if col in df.columns]]
     df.columns = labels
 
     form_url_alias = f"core:{name_get_form}"
@@ -49,7 +52,18 @@ def list_lookup(request):
 
 def get_form(request, **kwargs):
     form = view_lookup_abstract.get_lookup_form(model_form, **kwargs)
-    return HttpResponse(render_crispy_form(form))
+    html = render_crispy_form(form)
+
+    link_label = _("ICES")
+    message = _('To search for a ship code see : ')
+    soup = BeautifulSoup(html, 'html.parser')
+    soup.append(alert:=soup.new_tag("div", attrs={'class': 'alert alert-info'}))
+    alert.string = message
+    alert.append(link:=soup.new_tag('a', attrs={'class': 'btn btn-sm btn-outline-dark ms-2', 'href': "https://vocab.ices.dk/"}))
+    link.string = link_label
+    link.append(soup.new_tag('span', attrs={'class': 'bi bi-globe ms-2'}))
+
+    return HttpResponse(soup)
 
 
 def update_lookup(request, **kwargs):

@@ -34,6 +34,7 @@ def list_cruises(request):
     headers = [
         ('name', _("Name")),
         ('descriptor', _("Descriptor")),
+        ('platform', _("Platform")),
         ('start_date', _("Start Date")),
         ('end_date', _("End Date")),
         ('chief_scientists', _("Chief Scientists")),
@@ -50,6 +51,7 @@ def list_cruises(request):
             'id': cruise.id,
             'name': cruise.name,
             'descriptor': cruise.descriptor,
+            'platform': cruise.platform,
             'start_date': cruise.start_date,
             'end_date': cruise.end_date,
             'chief_scientists': ', '.join(f'{scientist.last_name}, {scientist.first_name}' for scientist in cruise.chief_scientists.all().order_by('last_name', 'first_name')),
@@ -137,9 +139,23 @@ def list_cruises(request):
     return HttpResponse(df_soup)
 
 
-def delete_cruise(request, pk):
+def authenticated(request):
+    # Check if user belongs to MarDID Maintainers or Chief Scientists groups
+    if request.user.groups.filter(name__in=['MarDID Maintainers']).exists():
+        return True
 
-    cruise = models.Cruises.objects.get(pk=pk)
+    return False
+
+
+def delete_cruise(request, cruise_id):
+    if not authenticated(request):
+        next_page = reverse_lazy('core:data_view', args=[cruise_id])
+        login_url = f"{reverse_lazy('login')}?next={next_page}"
+        response = HttpResponse()
+        response['HX-Redirect'] = login_url
+        return response
+
+    cruise = models.Cruises.objects.get(pk=cruise_id)
     cruise.delete()
 
     response = HttpResponse()
@@ -150,7 +166,7 @@ def delete_cruise(request, pk):
 urlpatterns = [
     path('cruise', CruiseListView.as_view(), name='cruise_view'),
     path('cruise/list', list_cruises, name='list_cruises'),
-    path('cruise/delete/<int:pk>', delete_cruise, name='delete_cruise')
+    path('cruise/delete/<int:cruise_id>', delete_cruise, name='delete_cruise')
 ]
 
 urlpatterns += form_cruise.urlpatterns

@@ -15,6 +15,7 @@ lookup_model = models.GeographicRegions
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
 name_key = 'geo_regions'
+columns = ['name', 'description']
 
 ###### DO NOT CHANGE THESE #############
 name_get_form = f'lookup_form_{name_key}'
@@ -24,6 +25,9 @@ name_update_lookup = f'update_lookup_{name_key}'
 name_delete_element = f'lookup_delete_{name_key}'
 
 model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key)
+
+field_lookup = {field.name: field for field in lookup_model._meta.fields if field.name in columns}
+labels = [(field_lookup[col_name].verbose_name if field_lookup[col_name].verbose_name else col_name) for col_name in columns]
 ########################################
 
 # The list function may have to be updated if the model doesn't fit the standard
@@ -31,11 +35,11 @@ model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model
 def list_lookup(request):
 
     queryset = lookup_model.objects.all().order_by('name')
-    queryset_list = queryset.values_list('id', 'name', 'description')
+    queryset_list = queryset.values_list('id', *columns)
 
     df = read_frame(queryset_list)
     df.set_index('id', inplace=True)
-    df.columns = [_("Name"), _("Description")]
+    df.columns = labels
 
     form_url_alias = f"core:{name_get_form}"
     delete_url_alias = f"core:{name_delete_element}"

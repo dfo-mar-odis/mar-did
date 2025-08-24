@@ -298,6 +298,7 @@ class CruiseForm(forms.ModelForm):
         Row(
                     Column(Field('name'), css_class='form-control-sm'),
                     Column(Field('descriptor', placeholder=_("optional, if known")), css_class='form-control-sm'),
+                    Column(Field('platform'), css_class='form-select-sm'),
                 ),
                 css_class="card card-body mb-2 border border-dark bg-light"
             ),

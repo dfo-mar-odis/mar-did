@@ -126,8 +126,10 @@ def prep_table(request, dataframe, form_url, delete_url):
 
     table_head = table.find('thead')
     table_head.attrs['class'] = 'sticky-top bg-white'
-    table_head.find('tr').find_next('tr').decompose()
-    for th in table_head.find('tr').find_all('th'):
+    first_row = table_head.find('tr')
+    first_row.find_next('tr').decompose()
+    first_row.find('th').attrs['width'] = '8%'  # 4% for each button to be added
+    for th in first_row.find_all('th'):
         th.attrs['class'] = 'text-start'
 
     table_body = table.find('tbody')
