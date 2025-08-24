@@ -3,9 +3,7 @@ from bs4 import BeautifulSoup
 from django import forms
 from django.db.models import Q
 from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.http.response import HttpResponseForbidden
 from django.template.loader import render_to_string
 from django.urls import path, reverse_lazy
 from django.views.generic import TemplateView

@@ -73,9 +73,9 @@ class DataStatus(models.Model):
 
 
 class Instruments(models.Model):
-    name = models.CharField(verbose_name=_("Name"), max_length=20, unique=True)
+    name = models.CharField(verbose_name=_("Name"), max_length=20)
     serial_number = models.CharField(verbose_name=_("Serial Number"), max_length=255, blank=True, null=True,
-                                     help_text=_("Serial number of an instrument if it exists"))
+                                     help_text=_("Serial number of an instrument if it exists"), unique=True)
     description = models.CharField(verbose_name=_("Description"), max_length=255)
 
     def __str__(self):

@@ -3,7 +3,7 @@
 <table id="table_id_cruise_list" hx-swap="outerHTML" hx-get="{% url 'core:list_cruises' %}" hx-trigger="load, update_cruise_list from:body">
     <thead>
         <tr>
-            <th>{# id/button column #}</th>
+            <th width="2%">{# id/button column #}</th>
             <th>{% trans 'Name' %}</th>
             <th>{% trans 'Descriptor' %}</th>
             <th>{% trans 'Start Date' %}</th>

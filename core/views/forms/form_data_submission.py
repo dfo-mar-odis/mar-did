@@ -171,15 +171,16 @@ def submit_data(request, data_id, notify):
                 soup_return.append(submit_button)
                 return HttpResponse(soup_return)
 
-        group = auth_models.Group.objects.get(name__iexact='MarDID Maintainers')
-        users = auth_models.User.objects.filter(groups=group)
         if notify:
             data.status = models.DataStatus.objects.get(name__iexact='submitted')
             data.save()
 
-            notifiers = [user.email for user in users]
-            notifiers += [user.email for user in data.cruise.data_managers.all()]
-            notifiers += [user.email for user in data.cruise.chief_scientists.all()]
+            group = auth_models.Group.objects.get(name__iexact='Datashop Processors')
+            users = auth_models.User.objects.filter(groups=group)
+
+            notifiers = {user.email for user in users}
+            notifiers.update(user.email for user in data.cruise.data_managers.all())
+            notifiers.update(user.email for user in data.cruise.chief_scientists.all())
             send_mail(
                 _("Cruise update: Files added"),
                 f"{data.data_type.name} " + _("Files have been submitted to a crise") + f" [{data.cruise}]",

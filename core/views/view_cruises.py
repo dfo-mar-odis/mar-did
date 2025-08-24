@@ -69,6 +69,7 @@ def list_cruises(request):
         trs = df_soup.find('tbody').findAll('tr', recursive=False)
         for tr in trs:
             first_th = tr.find('th')
+            first_th.attrs['width'] = "2%"
             id = int(first_th.string)
             first_th.string = ""
             first_th.append(data_btn := df_soup.new_tag('a'))
@@ -79,6 +80,7 @@ def list_cruises(request):
             span.attrs['class'] = "bi bi-bar-chart"
 
             if request.user.groups.filter(name__in=["Chief Scientists", "MarDID Maintainers"]):
+                first_th.attrs['width'] = "5%"
                 first_th.append(update_btn:=df_soup.new_tag('a'))
                 update_btn.append(span := df_soup.new_tag("span"))
                 update_btn.attrs['class'] = "btn btn-sm btn-dark ms-2"
@@ -87,6 +89,7 @@ def list_cruises(request):
                 span.attrs['class'] = "bi bi-pencil-square"
 
                 if request.user.groups.filter(name__iexact="MarDID Maintainers").exists():
+                    first_th.attrs['width'] = "8%"
                     row_id = f"tr_id_cruise_{id}"
                     tr.attrs['id'] = row_id
                     first_th.append(del_btn := df_soup.new_tag('a'))
