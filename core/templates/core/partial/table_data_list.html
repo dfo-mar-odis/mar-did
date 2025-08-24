@@ -23,7 +23,7 @@
     <tr id="tr_id_cruise_data_{{data.pk}}">
         <th style="white-space: nowrap;">
             <a class="btn btn-sm btn-outline-dark" href="{% url 'core:data_submission_view' data.pk %}" title="{% trans 'View and update associated files' %}"><span class="bi bi-eye"></span></a>
-            {% if data.data_files.count <= 0 %}
+            {% if user.is_authenticated and data.data_files.count <= 0 %}
                 <a class="btn btn-sm btn-danger ms-2" hx-confirm="{% trans 'Are you sure?' %}" hx-target="#tr_id_cruise_data_{{data.pk}}" hx-post="{% url 'core:remove_data' data.pk %}" title="{% trans 'Remove data type from Cruise' %}"><span class="bi bi-dash-square"></span></a>
             {% endif %}
         </th>
