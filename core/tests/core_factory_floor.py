@@ -92,7 +92,7 @@ class CruiseFactory(factory.django.DjangoModelFactory):
         if extracted:
             self.datasets.set(extracted)
         else:
-            self.data.set(DatasetFactory.create_batch(size=Faker().random_int(min=5, max=10), cruise=self))
+            self.datasets.set(DatasetFactory.create_batch(size=Faker().random_int(min=5, max=10), cruise=self))
 
 
 class DatasetFactory(factory.django.DjangoModelFactory):

@@ -80,8 +80,8 @@ class ContactForm(forms.ModelForm):
                         Column(Field('groups'))
                     ),
                     Row(
+                        Column(btn_submit if btn_submit else None, css_class='col-auto'),
                         Column(btn_clear if btn_clear else None, css_class='col-auto'),
-                        Column(btn_submit if btn_submit else None, css_class='col-auto')
                     ),
                     css_class="card-body"
                 ),
@@ -142,7 +142,7 @@ def update_contact(request, **kwargs):
 
     if form.is_valid():
         form.save()
-        response = HttpResponse()
+        response = HttpResponse(render_crispy_form(form))
         response['HX-Trigger'] = 'update_list'
         return response
 

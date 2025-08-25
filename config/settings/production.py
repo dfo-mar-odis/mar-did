@@ -13,3 +13,15 @@ AUTHENTICATION_BACKENDS = (
 INSTALLED_APPS += [
     'azure_auth',
 ]
+
+oracledb.init_oracle_client(lib_dir=env('ORACLE_INSTANT_CLIENT_PATH'))
+DATABASES = {
+    'default': {
+        'ENGINE': env('DATABASE_BACKEND'),
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASS'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT')
+    }
+}

@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 
 
 class Platforms(models.Model):
-    name = models.CharField(verbose_name=_("Name"), max_length=50, unique=True)
+    name = models.CharField(verbose_name=_("Name"), max_length=200, unique=True)
     ship_code = models.CharField(verbose_name=_("Ship Code"), max_length=4, null=True, help_text=_("ICES (https://vocab.ices.dk/) code consists of 2 character country code and a 2 character ship code for every unique vessel."))
 
     def __str__(self):

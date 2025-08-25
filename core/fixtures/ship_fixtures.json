@@ -1,0 +1,1530 @@
+[
+{
+    "model": "core.platforms",
+    "pk": 426,
+    "fields": {
+        "name": "ALERT (UK)",
+        "ship_code": "74AL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 427,
+    "fields": {
+        "name": "ANTON DOHRN (GER)",
+        "ship_code": "06AD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 428,
+    "fields": {
+        "name": "ANTON DOHRN (GER) ",
+        "ship_code": "06DA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 429,
+    "fields": {
+        "name": "DANA (A choice)",
+        "ship_code": "26DA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 430,
+    "fields": {
+        "name": "DANA (1 choice)",
+        "ship_code": "26D1"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 431,
+    "fields": {
+        "name": "DANA (2 choice)",
+        "ship_code": "26D2"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 432,
+    "fields": {
+        "name": "DANA (3 choice)",
+        "ship_code": "26D3"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 433,
+    "fields": {
+        "name": "DANA (4 choice)",
+        "ship_code": "26D4"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 434,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 2)",
+        "ship_code": "74DI"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 435,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 1) - current 2023",
+        "ship_code": "74EQ"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 436,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 4)",
+        "ship_code": "74E3"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 437,
+    "fields": {
+        "name": "ENDEAVOR (US) (Choice 2)",
+        "ship_code": "33EN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 438,
+    "fields": {
+        "name": "EXPLORER (UK)",
+        "ship_code": "74EX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 439,
+    "fields": {
+        "name": "EXPLORER (BAHAMAS)",
+        "ship_code": "BHAB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 440,
+    "fields": {
+        "name": "FREDERICK G CREED (Call Sign: CB6099) OBSOLETE",
+        "ship_code": "18FC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 441,
+    "fields": {
+        "name": "ICE ISLAND (US) (Choice 2)",
+        "ship_code": "314K"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 442,
+    "fields": {
+        "name": "LANCE (NORWAY)",
+        "ship_code": "58LA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 443,
+    "fields": {
+        "name": "LANCE (JAPAN)",
+        "ship_code": "49L2"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 444,
+    "fields": {
+        "name": "POLAR CIRCLE (NORWAY)",
+        "ship_code": "58PC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 445,
+    "fields": {
+        "name": "WESTPORT (US)",
+        "ship_code": "32Y9"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 446,
+    "fields": {
+        "name": "A H CHEVARIE (NO ICES CODE)",
+        "ship_code": "AHC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 447,
+    "fields": {
+        "name": "A T CAMERON",
+        "ship_code": "ATC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 448,
+    "fields": {
+        "name": "ACADIA",
+        "ship_code": "ACD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 449,
+    "fields": {
+        "name": "ALFRED NEEDLER",
+        "ship_code": "NED"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 450,
+    "fields": {
+        "name": "ANN HARVEY (18AV OR 18AH)",
+        "ship_code": "AHV"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 451,
+    "fields": {
+        "name": "AQUARIEL (NO ICES CODE)",
+        "ship_code": "AQU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 452,
+    "fields": {
+        "name": "ARCADIE (NO ICES CODE)",
+        "ship_code": "ARC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 453,
+    "fields": {
+        "name": "BAFFIN CSS",
+        "ship_code": "BAF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 454,
+    "fields": {
+        "name": "BICKERTON (NO ICES CODE)",
+        "ship_code": "BIK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 455,
+    "fields": {
+        "name": "BIO CRUISE DATA (NO ICES CODE)",
+        "ship_code": "BCD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 456,
+    "fields": {
+        "name": "CAPE LIGHT (NO ICES CODE)",
+        "ship_code": "CLT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 457,
+    "fields": {
+        "name": "CLARKS HARBOUR (NO ICES CODE)",
+        "ship_code": "CHB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 458,
+    "fields": {
+        "name": "COURTNEY BAY (NO ICES CODE)",
+        "ship_code": "CBY"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 459,
+    "fields": {
+        "name": "CUMELLA (NO ICES CODE)",
+        "ship_code": "CUM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 460,
+    "fields": {
+        "name": "CYGNUS",
+        "ship_code": "CYG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 461,
+    "fields": {
+        "name": "DAWSON",
+        "ship_code": "DAW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 462,
+    "fields": {
+        "name": "DES GROSEILLIERS",
+        "ship_code": "DGR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 463,
+    "fields": {
+        "name": "DOMINION VICTORY (NO ICES CODE)",
+        "ship_code": "VIC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 464,
+    "fields": {
+        "name": "E E PRINCE",
+        "ship_code": "PRN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 465,
+    "fields": {
+        "name": "EARL GREY",
+        "ship_code": "EGR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 466,
+    "fields": {
+        "name": "ECOSYSTEM PROGRAM (NO ICES CODE)",
+        "ship_code": "IEP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 467,
+    "fields": {
+        "name": "EDWARD CORNWALLIS (NO ICES CODE)",
+        "ship_code": "ECW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 468,
+    "fields": {
+        "name": "ERD PACKCAT (NO ICES CODE)",
+        "ship_code": "EPK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 469,
+    "fields": {
+        "name": "FRANK M WESTON",
+        "ship_code": "WES"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 470,
+    "fields": {
+        "name": "FUNDY SPRAY",
+        "ship_code": "FSP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 471,
+    "fields": {
+        "name": "GEOLOGICAL SURVEY OF CANADA (ATLANTIC) (NO ICES CODE)",
+        "ship_code": "GSC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 472,
+    "fields": {
+        "name": "HARENGUS",
+        "ship_code": "HAR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 473,
+    "fields": {
+        "name": "HENRY LARSEN",
+        "ship_code": "HL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 474,
+    "fields": {
+        "name": "HOWE POINT (NO ICES CODE)",
+        "ship_code": "HPT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 475,
+    "fields": {
+        "name": "HUDSON",
+        "ship_code": "HUD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 476,
+    "fields": {
+        "name": "IBMF BARGE (NO ICES CODE)",
+        "ship_code": "IBM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 477,
+    "fields": {
+        "name": "ISLES DE BARQUES (NO ICES CODE)",
+        "ship_code": "IDB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 478,
+    "fields": {
+        "name": "J J COWIE (NO ICES CODE)",
+        "ship_code": "JJC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 479,
+    "fields": {
+        "name": "J L HART",
+        "ship_code": "HRT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 480,
+    "fields": {
+        "name": "LADY HAMMOND",
+        "ship_code": "HAM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 481,
+    "fields": {
+        "name": "LOUIS S ST LAURENT",
+        "ship_code": "LSL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 482,
+    "fields": {
+        "name": "MARINE FISH DIVISION (NO ICES CODE)",
+        "ship_code": "MFD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 483,
+    "fields": {
+        "name": "MARTHA L BLACK",
+        "ship_code": "MLB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 484,
+    "fields": {
+        "name": "MATTHEW",
+        "ship_code": "MAT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 485,
+    "fields": {
+        "name": "NAVICULA",
+        "ship_code": "NAV"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 486,
+    "fields": {
+        "name": "NORTH BAR (NO ICES CODE)",
+        "ship_code": "NBR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 487,
+    "fields": {
+        "name": "OCEAN SCIENCES DIVISION (NO ICES CODE)",
+        "ship_code": "OSD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 488,
+    "fields": {
+        "name": "OPILIO",
+        "ship_code": "OPL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 489,
+    "fields": {
+        "name": "PANDALUS 3 (PANDALUS)",
+        "ship_code": "PAN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 490,
+    "fields": {
+        "name": "PARIZEAU CCGS",
+        "ship_code": "PAR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 491,
+    "fields": {
+        "name": "PARTRIDGE ISLAND (NO ICES CODE)",
+        "ship_code": "PIS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 492,
+    "fields": {
+        "name": "PROVO WALLIS",
+        "ship_code": "PRW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 493,
+    "fields": {
+        "name": "SACKVILLE",
+        "ship_code": "SCK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 494,
+    "fields": {
+        "name": "SAMBRO",
+        "ship_code": "SAM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 495,
+    "fields": {
+        "name": "SHIPPEGAN (NO ICES CODE)",
+        "ship_code": "SHP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 496,
+    "fields": {
+        "name": "SIR WILLIAM ALEXANDER",
+        "ship_code": "SWA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 497,
+    "fields": {
+        "name": "SOURIS (NO ICES CODE)",
+        "ship_code": "SOU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 498,
+    "fields": {
+        "name": "SPINDRIFT (NO ICES CODE)",
+        "ship_code": "SPN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 499,
+    "fields": {
+        "name": "SPRAY CCGS",
+        "ship_code": "SPR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 500,
+    "fields": {
+        "name": "TERRY FOX (NO ICES CODE)",
+        "ship_code": "TFX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 501,
+    "fields": {
+        "name": "VIGILANCE (UK)",
+        "ship_code": "VIG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 502,
+    "fields": {
+        "name": "WESTPORT (CANADA) (NO ICES CODE)",
+        "ship_code": "WEST"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 503,
+    "fields": {
+        "name": "WILFRED TEMPLEMAN",
+        "ship_code": "TEM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 504,
+    "fields": {
+        "name": "SIMON FRASER",
+        "ship_code": "SIMF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 505,
+    "fields": {
+        "name": "UNKNOWN",
+        "ship_code": "UNK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 506,
+    "fields": {
+        "name": "KAPUSKASING",
+        "ship_code": "18KP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 507,
+    "fields": {
+        "name": "A C D HOWE (NO ICES CODE)",
+        "ship_code": "HOWE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 508,
+    "fields": {
+        "name": "AKADEMIK KNIPOVICH",
+        "ship_code": "90KN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 509,
+    "fields": {
+        "name": "AEGIR",
+        "ship_code": "46AE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 510,
+    "fields": {
+        "name": "AKPATOK",
+        "ship_code": "18AA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 511,
+    "fields": {
+        "name": "ALERT (US)",
+        "ship_code": "319L"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 512,
+    "fields": {
+        "name": "AMBROSE FOOTE",
+        "ship_code": "18FO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 513,
+    "fields": {
+        "name": "ANDERSON",
+        "ship_code": "18ND"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 514,
+    "fields": {
+        "name": "ANTON DOHRN (US)",
+        "ship_code": "31AD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 515,
+    "fields": {
+        "name": "ARGUS (USSR)",
+        "ship_code": "90A3"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 516,
+    "fields": {
+        "name": "BAYFIELD",
+        "ship_code": "18BY"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 517,
+    "fields": {
+        "name": "BEDEQUE",
+        "ship_code": "18BQ"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 518,
+    "fields": {
+        "name": "BLUE THROAT",
+        "ship_code": "18BT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 519,
+    "fields": {
+        "name": "ANN BRENDA (NO ICES CODE)",
+        "ship_code": "BREN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 520,
+    "fields": {
+        "name": "BONNIE BRAE (NO ICES CODE)",
+        "ship_code": "BRAE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 521,
+    "fields": {
+        "name": "BRANDAL",
+        "ship_code": "18BR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 522,
+    "fields": {
+        "name": "RED HEAD C.S.L.",
+        "ship_code": "18RH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 523,
+    "fields": {
+        "name": "CANSO CONDOR",
+        "ship_code": "18CC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 524,
+    "fields": {
+        "name": "CANSO LIGHT",
+        "ship_code": "18CX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 525,
+    "fields": {
+        "name": "PRINCESS CGS",
+        "ship_code": "18PS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 526,
+    "fields": {
+        "name": "ALUMINUM BOAT (NO ICES CODE)",
+        "ship_code": "ALUM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 527,
+    "fields": {
+        "name": "BOSTON WHALER",
+        "ship_code": "18BW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 528,
+    "fields": {
+        "name": "MARY HICHINS CCG (NO ICES CODE)",
+        "ship_code": "HICH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 529,
+    "fields": {
+        "name": "SCAMP CDL (NO ICES CODE)",
+        "ship_code": "SCAM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 530,
+    "fields": {
+        "name": "VARIOUS CHARTERED VESSELS",
+        "ship_code": "1888"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 531,
+    "fields": {
+        "name": "CHEBUCTO",
+        "ship_code": "18CH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 532,
+    "fields": {
+        "name": "FREDERICK G CREED (Call Sign: CG3198) ",
+        "ship_code": "18FH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 533,
+    "fields": {
+        "name": "EIDER MS (US)",
+        "ship_code": "33ED"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 534,
+    "fields": {
+        "name": "EKLIPTIKA (USSR)",
+        "ship_code": "90EL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 535,
+    "fields": {
+        "name": "ENDEAVOR RV (US)",
+        "ship_code": "32EV"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 536,
+    "fields": {
+        "name": "ERNEST HOLT (UK)",
+        "ship_code": "74EH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 537,
+    "fields": {
+        "name": "EXPLORER (US)",
+        "ship_code": "31EX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 538,
+    "fields": {
+        "name": "FAIRMORSE",
+        "ship_code": "18FA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 539,
+    "fields": {
+        "name": "SMITH FCG",
+        "ship_code": "18SF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 540,
+    "fields": {
+        "name": "FISHING BOAT (CANADA) (NO ICES CODE)",
+        "ship_code": "FISH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 541,
+    "fields": {
+        "name": "FORT FRANCIS",
+        "ship_code": "18FF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 542,
+    "fields": {
+        "name": "FOTON (USSR)",
+        "ship_code": "906F"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 543,
+    "fields": {
+        "name": "GECO TRITON (PANAMA)",
+        "ship_code": "PAGT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 544,
+    "fields": {
+        "name": "GEOLOG FERSMAN (USSR)",
+        "ship_code": "19GG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 545,
+    "fields": {
+        "name": "GEORGE R PEARKES",
+        "ship_code": "18GP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 546,
+    "fields": {
+        "name": "GALWAY BLAZER CHARTER (NO ICES CODE)",
+        "ship_code": "GALW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 547,
+    "fields": {
+        "name": "GOSARS (NO ICES CODE)",
+        "ship_code": "GOSA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 548,
+    "fields": {
+        "name": "GULF STAR (NO ICES CODE)",
+        "ship_code": "GULF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 549,
+    "fields": {
+        "name": "HELICOPTER",
+        "ship_code": "18HE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 550,
+    "fields": {
+        "name": "IBIS (NO ICES CODE)",
+        "ship_code": "IBIS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 551,
+    "fields": {
+        "name": "ICE ISLAND (US) (Choice 1)",
+        "ship_code": "313T"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 552,
+    "fields": {
+        "name": "HUDSON BARGE (NO ICES CODE)",
+        "ship_code": "HUDB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 553,
+    "fields": {
+        "name": "JOHN A MACDONALD",
+        "ship_code": "18MC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 554,
+    "fields": {
+        "name": "LABRADOR",
+        "ship_code": "18LA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 555,
+    "fields": {
+        "name": "LACUNA",
+        "ship_code": "18LC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 556,
+    "fields": {
+        "name": "LADY MOOD",
+        "ship_code": "18LM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 557,
+    "fields": {
+        "name": "LANCE (USSR)",
+        "ship_code": "909N"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 558,
+    "fields": {
+        "name": "MALLOTUS",
+        "ship_code": "18MA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 559,
+    "fields": {
+        "name": "MARGARET AND ROBERT",
+        "ship_code": "18PG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 560,
+    "fields": {
+        "name": "MAXWELL",
+        "ship_code": "18MX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 561,
+    "fields": {
+        "name": "CALANUS II",
+        "ship_code": "18CN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 562,
+    "fields": {
+        "name": "PETREL V",
+        "ship_code": "18PT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 563,
+    "fields": {
+        "name": "NARWHAL",
+        "ship_code": "18NR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 564,
+    "fields": {
+        "name": "OCEANUS (US)",
+        "ship_code": "32OC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 565,
+    "fields": {
+        "name": "ODEN (SWEDEN)",
+        "ship_code": "77DN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 566,
+    "fields": {
+        "name": "POLAR CIRCLE (UK)",
+        "ship_code": "74P6"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 567,
+    "fields": {
+        "name": "POLARSTERN (GER)",
+        "ship_code": "06AQ"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 568,
+    "fields": {
+        "name": "PRINCE 1916-1923",
+        "ship_code": "18PN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 569,
+    "fields": {
+        "name": "QUADRA",
+        "ship_code": "18QA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 570,
+    "fields": {
+        "name": "QUEST",
+        "ship_code": "18QU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 571,
+    "fields": {
+        "name": "CHARLES DARWIN (UK)",
+        "ship_code": "74AB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 572,
+    "fields": {
+        "name": "KNORR (US)",
+        "ship_code": "316N"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 573,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 1)",
+        "ship_code": "74DS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 574,
+    "fields": {
+        "name": "SIGMA-T 2008",
+        "ship_code": "18SG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 575,
+    "fields": {
+        "name": "TUDLIK CSL",
+        "ship_code": "18TU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 576,
+    "fields": {
+        "name": "SONNE (GER)",
+        "ship_code": "06BE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 577,
+    "fields": {
+        "name": "TELEOST",
+        "ship_code": "TEL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 578,
+    "fields": {
+        "name": "THALASSA (FRANCE)",
+        "ship_code": "35HT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 579,
+    "fields": {
+        "name": "THERON",
+        "ship_code": "18TE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 580,
+    "fields": {
+        "name": "THETA",
+        "ship_code": "18TH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 581,
+    "fields": {
+        "name": "TOPSEDA (USSR)",
+        "ship_code": "90TP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 582,
+    "fields": {
+        "name": "TYDEMAN (NETHERLANDS)",
+        "ship_code": "64TM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 583,
+    "fields": {
+        "name": "TYRO (NETHERLANDS)",
+        "ship_code": "64TO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 584,
+    "fields": {
+        "name": "VIANDRA (USSR)",
+        "ship_code": "905C"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 585,
+    "fields": {
+        "name": "VILMA",
+        "ship_code": "18VL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 586,
+    "fields": {
+        "name": "VYKHMA (USSR)",
+        "ship_code": "906G"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 587,
+    "fields": {
+        "name": "WHIP THE WIND",
+        "ship_code": "18WW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 588,
+    "fields": {
+        "name": "ZODIAC LAUNCH (NO ICES CODE)",
+        "ship_code": "ZODI"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 589,
+    "fields": {
+        "name": "VIOLA M DAVIDSON CCGS",
+        "ship_code": "18AU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 590,
+    "fields": {
+        "name": "VLADYKOV",
+        "ship_code": "18VD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 591,
+    "fields": {
+        "name": "SANNA R/V",
+        "ship_code": "SAN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 592,
+    "fields": {
+        "name": "M PERLEY",
+        "ship_code": "18MU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 593,
+    "fields": {
+        "name": "PANDORA II (PANDORA)",
+        "ship_code": "18P2"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 594,
+    "fields": {
+        "name": "BELUGA II",
+        "ship_code": "18BP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 595,
+    "fields": {
+        "name": "PIERRE RADISSON CCGS",
+        "ship_code": "PRD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 596,
+    "fields": {
+        "name": "VARIOUS",
+        "ship_code": "18VA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 597,
+    "fields": {
+        "name": "CAP BRETON",
+        "ship_code": "18BO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 598,
+    "fields": {
+        "name": "CAP ROGER",
+        "ship_code": "18CG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 599,
+    "fields": {
+        "name": "AMUNDSEN",
+        "ship_code": "18DL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 600,
+    "fields": {
+        "name": "SIR WILFRED GRENFELL",
+        "ship_code": "18GN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 601,
+    "fields": {
+        "name": "FIXED STATIONS CANADA",
+        "ship_code": "18FX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 602,
+    "fields": {
+        "name": "J P TULLY",
+        "ship_code": "TULL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 603,
+    "fields": {
+        "name": "LEIM",
+        "ship_code": "18LO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 604,
+    "fields": {
+        "name": "SHAMOOK",
+        "ship_code": "18OK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 605,
+    "fields": {
+        "name": "SIR WILFRED LAURIER",
+        "ship_code": "18LU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 606,
+    "fields": {
+        "name": "TANU",
+        "ship_code": "TANU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 607,
+    "fields": {
+        "name": "VECTOR",
+        "ship_code": "18VT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 608,
+    "fields": {
+        "name": "W E RICKER",
+        "ship_code": "18RK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 609,
+    "fields": {
+        "name": "SIGMA T PRE2008",
+        "ship_code": "SIGM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 610,
+    "fields": {
+        "name": "HENRY BIGELOW",
+        "ship_code": "HB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 611,
+    "fields": {
+        "name": "RV ENDEAVOR (US)",
+        "ship_code": null
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 612,
+    "fields": {
+        "name": "CARTIER",
+        "ship_code": "18CR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 613,
+    "fields": {
+        "name": "ATLANTIS",
+        "ship_code": "32AT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 614,
+    "fields": {
+        "name": "SERVICE LEADER M/V",
+        "ship_code": "SL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 615,
+    "fields": {
+        "name": "CORIOLIS II RV",
+        "ship_code": "COR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 616,
+    "fields": {
+        "name": "VIKING BUOY",
+        "ship_code": "VIKB"
+    }
+}
+]
