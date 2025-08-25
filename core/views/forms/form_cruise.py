@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Row, Column, Field, HTML
-from crispy_forms.bootstrap import StrictButton
+from crispy_forms.bootstrap import StrictButton, FieldWithButtons
 from crispy_forms.utils import render_crispy_form
 
 from core import models
@@ -110,7 +110,7 @@ class CruiseForm(forms.ModelForm):
 
         # Example validation: Ensure at least one chief scientist is selected
         if not cleaned_chief_scientists.exists():
-            self.add_error(None, _("At least one chief scientist must be added."))  # Non-field error
+            self.add_error('chief_scientists_select', _("At least one chief scientist must be added."))  # Non-field error
             self.fields['chief_scientists_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
 
         # Additional processing or validation logic can go here
@@ -141,7 +141,7 @@ class CruiseForm(forms.ModelForm):
 
         # Example validation: Ensure at least one chief scientist is selected
         if not cleaned_locations.exists():
-            self.add_error(None, _("At least one geographic location must be added."))  # Non-field error
+            self.add_error('locations_select', _("At least one geographic location must be added."))  # Non-field error
             self.fields['locations_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
 
         # Additional processing or validation logic can go here
@@ -160,7 +160,7 @@ class CruiseForm(forms.ModelForm):
 
         # Example validation: Ensure at least one chief scientist is selected
         if not cleaned_programs.exists():
-            self.add_error(None, _("At least one program must be added."))  # Non-field error
+            self.add_error('programs_select', _("At least one program must be added."))  # Non-field error
             self.fields['programs_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
 
         # Additional processing or validation logic can go here
@@ -198,21 +198,20 @@ class CruiseForm(forms.ModelForm):
         }
 
         btn_add = StrictButton('<span class="bi bi-plus-square"></span>',
-                               css_class='btn btn-sm btn-primary mb-1',
+                               css_class='btn btn-sm btn-primary',
                                **btn_add_attrs)
 
         return btn_add
 
     def get_list_container(self, prefix, _list):
         btn_add = self.get_list_add_btn(prefix)
+        select_field = FieldWithButtons(
+            Field(f'{prefix}_select', css_class='form-select-sm'),
+            btn_add,
+            css_class='input-group-sm'
+        )
         component = Div(
-            Row(
-                Column(
-                    Field(f'{prefix}_select', wrapper_class='d-inline-block'),
-                    btn_add,
-                    css_class='form-control-sm'
-                ),
-            ),
+            select_field,
             Row(
                 Field(prefix, wrapper_class="d-none"),
                 HTML(_list),

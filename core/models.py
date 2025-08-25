@@ -33,6 +33,19 @@ class DataStatus(models.Model):
     def __str__(self):
         return f'{self.name} - {self.description}'
 
+    @property
+    def get_button_colour(self):
+        name = self.name.upper()
+        if name == 'EXPECTED':
+            return 'btn-warning'
+        elif name == 'LAB':
+            return 'btn-outline-danger'
+        elif name == 'SUBMITTED':
+            return 'btn-success'
+        elif name == 'RECEIVED':
+            return 'btn-outline-success'
+
+        return 'btn-outline-dark'
 
 class GroupProfiles(models.Model):
     group = models.OneToOneField('auth.Group', on_delete=models.CASCADE, related_name='profile')
@@ -131,6 +144,6 @@ class DataFileIssues(models.Model):
 
 
 class Processing(models.Model):
-    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing')
+    dataset = models.OneToOneField(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing')
     assigned_to = models.ForeignKey('auth.User', verbose_name=_("Assigned"), on_delete=models.PROTECT, related_name='processing')
     assigned_date = models.DateTimeField(auto_now=True)

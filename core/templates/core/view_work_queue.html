@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% include 'core/partial/form_filter_work_queue.html' %}
+<div class="table-responsive" style="max-height: 400px;">
+    {% include 'core/partial/table_work_queue.html' %}
+</div>
+{% endblock %}

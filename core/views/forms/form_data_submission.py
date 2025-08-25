@@ -172,21 +172,24 @@ def submit_data(request, data_id, notify):
                 return HttpResponse(soup_return)
 
         if notify:
-            data.status = models.DataStatus.objects.get(name__iexact='submitted')
-            data.save()
+            if int(notify) == 1:
+                data.status = models.DataStatus.objects.get(name__iexact='lab')
+                data.save()
+            elif int(notify) == 2:
+                data.status = models.DataStatus.objects.get(name__iexact='submitted')
+                data.save()
+                group = auth_models.Group.objects.get(name__iexact='Datashop Processors')
+                users = auth_models.User.objects.filter(groups=group)
 
-            group = auth_models.Group.objects.get(name__iexact='Datashop Processors')
-            users = auth_models.User.objects.filter(groups=group)
-
-            notifiers = {user.email for user in users}
-            notifiers.update(user.email for user in data.cruise.data_managers.all())
-            notifiers.update(user.email for user in data.cruise.chief_scientists.all())
-            send_mail(
-                _("Cruise update: Files added"),
-                f"{data.data_type.name} " + _("Files have been submitted to a crise") + f" [{data.cruise}]",
-                "Do.Not.Reply@mar-did.dfo-mpo.gc.ca",
-                notifiers
-            )
+                notifiers = {user.email for user in users}
+                notifiers.update(user.email for user in data.cruise.data_managers.all())
+                notifiers.update(user.email for user in data.cruise.chief_scientists.all())
+                send_mail(
+                    _("Cruise update: Files added"),
+                    f"{data.data_type.name} " + _("Files have been submitted to a crise") + f" [{data.cruise}]",
+                    "Do.Not.Reply@mar-did.dfo-mpo.gc.ca",
+                    notifiers
+                )
 
         response = HttpResponse()
         response['HX-Redirect'] = reverse_lazy('core:data_submission_view', args=[data.pk])

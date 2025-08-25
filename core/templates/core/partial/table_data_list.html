@@ -28,7 +28,7 @@
             {% endif %}
         </th>
         <td>{{ data.data_type }}</td>
-        <td><button class="btn btn-sm {% if data.status.name == "Expected" %}btn-warning{% elif data.status.name == "Submitted" %}btn-success{% else %}btn-outline-dark{% endif %}" title="{{data.status.description}}">{{data.status.pk}} : {{ data.status.name }}</button></td>
+        <td><button class="btn btn-sm {{data.status.get_button_colour}}" title="{{data.status.description}}">{{ data.status.name }}</button></td>
         <td>{{ data.data_files.count }}</td>
     </tr>
     {% endfor %}

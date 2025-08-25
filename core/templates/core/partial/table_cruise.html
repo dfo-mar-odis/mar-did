@@ -1,16 +1,27 @@
 {% load i18n %}
 
-<table id="table_id_cruise_list" hx-swap="outerHTML" hx-get="{% url 'core:list_cruises' %}" hx-trigger="load, update_cruise_list from:body">
+<table class="table table-striped table-sm" id="table_id_cruise_list" >
     <thead>
         <tr>
-            <th width="2%">{# id/button column #}</th>
-            <th>{% trans 'Name' %}</th>
-            <th>{% trans 'Descriptor' %}</th>
-            <th>{% trans 'Start Date' %}</th>
-            <th>{% trans 'End Date' %}</th>
-            <th>{% trans 'Chief Scientists' %}</th>
-            <th>{% trans 'Geographic Regions' %}</th>
+            <th class="text-start" width="2%">
+                {% if user.is_authenticated %}
+                <a class="btn btn-sm btn-outline-dark"
+                   href="{% url 'core:new_cruise_view' %}"
+                   title="{% trans 'Add a new cruise' %}">
+                    <span class="bi bi-plus-square"></span>
+                </a>
+                {% endif %}
+            </th>
+            <th class="text-start">{% trans 'Name' %}</th>
+            <th class="text-start">{% trans 'Descriptor' %}</th>
+            <th class="text-start">{% trans 'Projects' %}</th>
+            <th class="text-start">{% trans 'Start Date' %}</th>
+            <th class="text-start">{% trans 'End Date' %}</th>
+            <th class="text-start">{% trans 'Chief Scientists' %}</th>
+            <th class="text-start">{% trans 'Geographic Regions' %}</th>
         </tr>
     </thead>
+    <tbody>
 
+    </tbody>
 </table>

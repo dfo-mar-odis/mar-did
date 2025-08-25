@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <span class="mb-2 h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {% if dataset.status.name == 'Submitted' %}btn-success{% else %}btn-warning{% endif %}">{{ dataset.status.name }}</span></span>
+    <span class="mb-2 h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
     {% if user.is_authenticated and data_form %}
     <form id="form_id_data" class="mb-2" enctype="multipart/form-data"
           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
@@ -23,8 +23,15 @@
 {% trans 'Mark the dataset as expected if more datafiles are required' %}">
             <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark Expected' %}
         </button>
-        <button id="btn_id_form_submit_notifications" type="button" hx-swap="none"
+        <button id="btn_id_form_submit_lab" type="button" hx-swap="none"
                 hx-post="{% url 'core:submit_data' dataset.id 1 %}" class="btn btn-primary"
+                title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
+
+{% trans 'Mark a dataset as being with the lab for post cruise processing' %}">
+            <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark sent to Lab' %}
+        </button>
+        <button id="btn_id_form_submit_notifications" type="button" hx-swap="none"
+                hx-post="{% url 'core:submit_data' dataset.id 2 %}" class="btn btn-primary"
                 title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
 
 {% trans 'Mark a dataset submitted to send notifications to stakeholders that data is ready for processing and/or loading' %}">
