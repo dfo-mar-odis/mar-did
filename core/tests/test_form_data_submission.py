@@ -26,7 +26,7 @@ class TestDataSubmissionFunctions(TestCase):
         data.cruise.start_date.strftime.return_value = '2023'
         data.cruise.name = 'TestCruise'
         data.data_type.name = 'TestDataType'
-        data.data_files.filter.return_value.exists.return_value = False
+        data.files.filter.return_value.exists.return_value = False
 
         # Mock file input
         file_content = b'Test file content'
@@ -60,7 +60,7 @@ class TestDataSubmissionFunctions(TestCase):
         data.cruise.start_date.strftime.return_value = '2023'
         data.cruise.name = 'TestCruise'
         data.data_type.name = 'TestDataType'
-        data.data_files.filter.return_value.exists.return_value = True  # Simulate file already exists
+        data.files.filter.return_value.exists.return_value = True  # Simulate file already exists
 
         # Mock file input
         file_content = b'Test file content'
@@ -88,7 +88,7 @@ class TestDataSubmissionFunctions(TestCase):
         data.cruise.start_date.strftime.return_value = '2023'
         data.cruise.name = 'TestCruise'
         data.data_type.name = 'TestDataType'
-        data.data_files.filter = mock_filter
+        data.files.filter = mock_filter
 
         # Mock file input
         file_content = b'Updated file content'

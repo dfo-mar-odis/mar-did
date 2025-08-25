@@ -40,9 +40,20 @@ class ContactForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
 
+        btn_clear_attrs = {
+            'title': _("Submit"),
+            'hx-target': "#form_contacts_form_area",
+            'hx-post': reverse_lazy('core:get_contact_form')
+        }
+
+        btn_clear = StrictButton(f'<span class="bi bi-eraser me-2"></span>{_("Clear Form")}',
+                                  css_class='btn btn-sm btn-primary mb-1',
+                                  **btn_clear_attrs)
+
         submit_url = (reverse_lazy('core:update_contact', args=[self.instance.pk])
                       if self.instance.pk else
                       reverse_lazy('core:add_contact'))
+
         btn_submit_attrs = {
             'title': _("Submit"),
             'hx-target': "#form_contacts_form_area",
@@ -68,7 +79,10 @@ class ContactForm(forms.ModelForm):
                     Row(
                         Column(Field('groups'))
                     ),
-                    btn_submit if btn_submit else None,
+                    Row(
+                        Column(btn_clear if btn_clear else None, css_class='col-auto'),
+                        Column(btn_submit if btn_submit else None, css_class='col-auto')
+                    ),
                     css_class="card-body"
                 ),
                 css_class = "card mb-2"

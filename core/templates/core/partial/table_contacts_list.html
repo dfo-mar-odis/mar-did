@@ -1,7 +1,10 @@
 {% load i18n %}
 {% load user_tags %}
-<form id="form_contacts_form_area" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+{% if user.is_authenticated and user|is_maintainer %}
+<form id="form_contacts_form_area" hx-trigger="load" hx-get="{% url 'core:get_contact_form' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 </form>
+{% endif %}
 
 <form id="form_contacts_table_area" {% if user.is_authenticated %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'{% endif %}>
 <div class="table-responsive" style="max-height: 400px;">
@@ -9,11 +12,6 @@
     <thead class="sticky-top bg-white">
         <tr>
             <th width="2%" style="white-space: nowrap;">
-                {% if user.is_authenticated and user|is_maintainer %}
-                <a class="btn btn-sm btn-outline-dark" title="{% trans 'Add Contact' %}"
-                   hx-swap="outerHTMl" hx-target="#form_contacts_form_area"
-                   hx-get="{% url 'core:get_contact_form' %}" ><span class="bi bi-plus-square"></span></a>
-                {% endif %}
             </th>
             <th style="white-space: nowrap;">{% trans 'Name' %}</th>
             <th style="white-space: nowrap;">{% trans 'Groups' %}</th>

@@ -22,5 +22,7 @@ DATABASES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = "media/emails"  # change this to a proper location
+if EMAIL_BACKEND == "django.core.mail.backends.filebased.EmailBackend":
+    EMAIL_FILE_PATH = "media/emails"  # change this to a proper location
+else:
+    print("==================== USING LIVE EMAIL ==================")

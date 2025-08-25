@@ -22,6 +22,5 @@ for _, module_name, is_pkg in pkgutil.iter_modules([os.path.join('core', 'views'
             # Check if the module has urlpatterns
             if hasattr(module, 'urlpatterns'):
                 urlpatterns += module.urlpatterns
-                print(f"Added urlpatterns from {module_name}")
         except (ImportError, AttributeError) as e:
             print(f"Could not import urlpatterns from {module_name}: {e}")

@@ -64,7 +64,7 @@ class ExpectedDataForm(forms.ModelForm):
                 'hx-post': submit_url
             }
 
-            btn_submit = StrictButton('<span class="bi bi-plus-square"></span>',
+            btn_submit = StrictButton(f'<span class="bi bi-plus-square"> {_("Add")}</span>',
                                       css_class='btn btn-sm btn-primary mb-1',
                                       **btn_submit_attrs)
 
@@ -84,12 +84,12 @@ class ExpectedDataForm(forms.ModelForm):
                     Field('status'),
                     Row(
                         Column(
-                            Field('data_type_filter', **data_type_filter_attrs)
-                        )
-                    ),
-                    Row(
+                            Field('data_type_filter', **data_type_filter_attrs, css_class='form-control form-control-sm'),
+                            css_class='col-2',
+                        ),
                         Column(
-                            Field('data_type')
+                            Field('data_type', css_class='form-select form-select-sm'),
+                            css_class='col'
                         )
                     ),
                     btn_submit if btn_submit else None,
@@ -143,7 +143,7 @@ def update_cruise_data(request, cruise_id):
     form = ExpectedDataForm(request.POST, cruise=cruise)
     if form.is_valid():
         form.save()
-        response = HttpResponse()
+        response = HttpResponse(render_crispy_form(form))
         response['HX-Trigger'] = 'update_list'
         return response
 

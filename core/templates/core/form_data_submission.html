@@ -50,7 +50,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for file in dataset.data_files.all %}
+            {% for file in dataset.files.all %}
                 <tr>
                     <td>{{ file.file_name }}</td>
                     <td>{{ file.file }}</td>

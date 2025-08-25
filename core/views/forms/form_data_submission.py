@@ -87,7 +87,7 @@ def save_files(user, data, files, override=False):
     for file_ in files:
         file_path = os.path.join(target_directory, file_.name)
 
-        data_files = data.data_files.filter(file_name=file_.name)
+        data_files = data.files.filter(file_name=file_.name)
         datafile = None
         if data_files.exists():
             if not override:

@@ -117,18 +117,18 @@ class MooredInstruments(models.Model):
 
 
 class Dataset(models.Model):
-    cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name="mission_data")
-    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="mission_data")
+    cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name="datasets")
+    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets")
     legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True)
     instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='instruments')
-    status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="mission_data")
+    status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="datasets")
 
     def __str__(self):
         return f'{self.data_type} : {self.status}'
 
 
 class DataFiles(models.Model):
-    data = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='data_files')
+    data = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='files')
     file_name = models.CharField(verbose_name=_("File Name"), max_length=100)
     file = models.FileField(verbose_name=_("File"))
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT)
@@ -139,7 +139,7 @@ class DataFiles(models.Model):
 
 
 class DataFileIssues(models.Model):
-    datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE, related_name='data_issues')
+    datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE, related_name='issues')
     issue = models.TextField(verbose_name=_("Issue Description"))
 
 
