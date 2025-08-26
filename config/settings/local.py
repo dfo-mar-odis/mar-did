@@ -25,7 +25,7 @@ DATABASES = {
 
 # Media files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.getenv('MEDIA_DIR', BASE_DIR / 'media')
 
 if EMAIL_BACKEND == "django.core.mail.backends.filebased.EmailBackend":
     EMAIL_FILE_PATH = "media/emails"  # change this to a proper location
