@@ -1,0 +1,46 @@
+{% load i18n %}
+
+<table class="table table-striped table-sm" id="table_id_cruise_list" >
+    <thead>
+        <tr>
+            <th class="text-start" width="2%">
+                {% if user.is_authenticated %}
+                <a class="btn btn-sm btn-outline-dark"
+                   href="{% url 'core:new_cruise_view' %}"
+                   title="{% trans 'Add a new cruise' %}">
+                    <span class="bi bi-plus-square"></span>
+                </a>
+                {% endif %}
+            </th>
+            <th class="text-start">{% trans 'Name' %}</th>
+            <th class="text-start">{% trans 'Descriptor' %}</th>
+            <th class="text-start">{% trans 'Platform' %}</th>
+            <th class="text-start">{% trans 'Projects' %}</th>
+            <th class="text-start">{% trans 'Start Date' %}</th>
+            <th class="text-start">{% trans 'End Date' %}</th>
+            <th class="text-start">{% trans 'Chief Scientists' %}</th>
+            <th class="text-start">{% trans 'Geographic Regions' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cruise in cruises %}
+        <tr>
+            <th class="text-start" width="2%">{{ cruise.id }}</th>
+            <td class="text-start">{{ cruise.name }}</td>
+            <td class="text-start">{{ cruise.descriptor }}</td>
+            <td class="text-start">{{ cruise.platform }}</td>
+            <td class="text-start">{% for program in cruise.programs.all %}
+                <button type="button" class="btn btn-sm btn-outline-dark" title="{{project.description}}">{{program.name}}</button>
+                {% endfor %}</td>
+            <td class="text-start">{{ cruise.start_date }}</td>
+            <td class="text-start">{{ cruise.end_date }}</td>
+            <td class="text-start">{% for cs in cruise.chief_scientists.all %}
+                <button type="button" class="btn btn-sm btn-outline-dark">{{cs.last_name}}, {{cs.first_name}}</button>
+                {% endfor %}</td>
+            <td class="text-start">{% for location in cruise.locations.all %}
+                <button type="button" class="btn btn-sm btn-outline-dark">{{ location.name }}</button>
+                {% endfor %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

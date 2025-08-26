@@ -79,7 +79,7 @@ class CruiseFactory(factory.django.DjangoModelFactory):
         if extracted:
             self.programs.set(extracted)
         else:
-            programs = models.GeographicRegions.objects.all().order_by('?')
+            programs = models.Programs.objects.all().order_by('?')
             if programs and programs.exists():
                 self.programs.set(programs[:Faker().random_int(min=1, max=2)])
 

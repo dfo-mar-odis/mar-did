@@ -25,6 +25,7 @@ class DataListView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Data List'
         context['object'] = models.Cruises.objects.get(pk=self.kwargs['pk'])
+        context['data_form'] = ExpectedDataForm(cruise=context['object'])
         context['container'] = 'container-fluid'
         return context
 
@@ -72,7 +73,7 @@ class ExpectedDataForm(forms.ModelForm):
             'hx-get': reverse_lazy('core:filter_data_types'),
             'hx-target': '#div_id_data_type',
             'hx-swap': 'innerHTML',
-            'hx-trigger': 'keyup delay:1s'
+            'hx-trigger': 'keyup delay:250ms'
         }
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -102,7 +103,7 @@ class ExpectedDataForm(forms.ModelForm):
 
 def list_data(request, cruise_id):
     cruise = models.Cruises.objects.get(pk=cruise_id)
-    html = render_to_string('core/view_data_list.html', context={'object': cruise, 'user': request.user})
+    html = render_to_string('core/partials/table_data_list.html', context={'cruise': cruise, 'user': request.user})
     soup = BeautifulSoup(html, 'html.parser')
     return HttpResponse(soup.find('table'))
 

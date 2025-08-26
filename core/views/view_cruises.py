@@ -12,9 +12,8 @@ from django.template.loader import render_to_string
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Row, Column, Field
-from crispy_forms.bootstrap import StrictButton
 
-from urllib.parse import urlencode, parse_qs, urlsplit, urlunsplit
+from urllib.parse import urlencode, parse_qs
 
 from core.views.forms import form_cruise
 from core import models
@@ -58,18 +57,20 @@ class CruiseFilter(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        url = reverse_lazy('core:list_cruises')
-        target = '#table_id_cruise_list'
+        target = "#input_id_cruise_submit"
+        url = reverse_lazy('core:submit_cruise_filter_form')
 
         select_attrs = {
             'hx-get': url,
-            'hx-swap': 'none'
+            'hx-swap': 'outHTML',
+            'hx-target': target
         }
 
         text_attrs = {
             'hx-get': url,
-            'hx-swap': 'none',
-            'hx-trigger': 'keydown delay:1s'
+            'hx-swap': 'outerHTML',
+            'hx-trigger': 'keydown delay:1s',
+            'hx-target': target
         }
 
         self.helper = FormHelper()
@@ -85,11 +86,6 @@ class CruiseFilter(forms.Form):
 
 def list_cruises(request):
 
-    if request.method == 'GET' and 'submit' not in request.GET:
-        response = HttpResponse()
-        response['HX-Trigger'] = 'update_cruise_list'
-        return response
-
     page = int(request.GET.get('page', 0) or 0)
     page_limit = 25
     page_start = page_limit * page
@@ -97,21 +93,7 @@ def list_cruises(request):
 
     table_soup = BeautifulSoup('', 'html.parser')
 
-    headers = [
-        ('name', _("Name")),
-        ('descriptor', _("Descriptor")),
-        ('programs', _("Programs")),
-        ('platform', _("Platform")),
-        ('start_date', _("Start Date")),
-        ('end_date', _("End Date")),
-        ('chief_scientists', _("Chief Scientists")),
-        ('locations', _("Geographic Regions"))
-    ]
-
-    value_headers = ['id'] + [h[0] for h in headers]
-    table_headers = [h[1] for h in headers]
-
-    queryset = models.Cruises.objects.order_by('-start_date').prefetch_related('programs', 'chief_scientists', 'locations')
+    queryset = models.Cruises.objects.order_by('pk').prefetch_related('programs', 'chief_scientists', 'locations')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 
@@ -124,34 +106,21 @@ def list_cruises(request):
         queryset = queryset.filter(programs=program)
 
     queryset = queryset[page_start:page_end]
-    queryset_list = [{
-            'id': cruise.id,
-            'name': cruise.name,
-            'descriptor': cruise.descriptor,
-            'programs': ', '.join(f'{program.name}' for program in cruise.programs.all().order_by('name')),
-            'platform': cruise.platform,
-            'start_date': cruise.start_date,
-            'end_date': cruise.end_date,
-            'chief_scientists': ', '.join(f'{scientist.last_name}, {scientist.first_name}' for scientist in cruise.chief_scientists.all().order_by('last_name', 'first_name')),
-            'locations': ', '.join(str(location) for location in cruise.locations.all()),
-        } for cruise in queryset]
 
-    if not queryset_list:
+    if not queryset:
         if page <= 0:
-            html = render_to_string('core/partials/table_cruise.html')
+            html = render_to_string('core/partials/table_cruises.html')
             return HttpResponse(html)
         else:
             return HttpResponse()
 
-    df = pd.DataFrame(queryset_list)
-    df.set_index('id', inplace=True)
-    df.columns = table_headers
+    context = {
+        "cruises": queryset
+    }
+    html = render_to_string('core/partials/table_cruises.html', context)
 
-    # Pandas has the ability to render dataframes as HTML and it's super fast, but the default table looks awful.
-    # Use BeautifulSoup for html manipulation to post process the HTML table Pandas created
-    table_html = df.to_html()
-    df_soup = BeautifulSoup(f'{table_html}', 'html.parser')
-    tbody = df_soup.find('tbody')
+    table_soup = BeautifulSoup(html, "html.parser")
+    tbody = table_soup.find('tbody')
     tbody.attrs['id'] = 'tbody_id_cruise_list'
     trs = tbody.findAll('tr', recursive=False)
     if len(trs) > 10:
@@ -169,31 +138,29 @@ def list_cruises(request):
 
     for tr in trs:
         first_th = tr.find('th')
-        first_th.attrs['width'] = "2%"
+        first_th.attrs['style'] = "width: 2%; white-space: nowrap;"
         id = int(first_th.string)
         first_th.string = ""
-        first_th.append(data_btn := df_soup.new_tag('a'))
-        data_btn.append(span := df_soup.new_tag("span"))
+        first_th.append(data_btn := table_soup.new_tag('a'))
+        data_btn.append(span := table_soup.new_tag("span"))
         data_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
         data_btn.attrs['href'] = reverse_lazy('core:data_view', args=[int(id)])
         data_btn.attrs['title'] = _('Cruise Data')
         span.attrs['class'] = "bi bi-bar-chart"
 
         if request.user.groups.filter(name__in=["Chief Scientists", "MarDID Maintainers"]):
-            first_th.attrs['width'] = "5%"
-            first_th.append(update_btn:=df_soup.new_tag('a'))
-            update_btn.append(span := df_soup.new_tag("span"))
+            first_th.append(update_btn:=table_soup.new_tag('a'))
+            update_btn.append(span := table_soup.new_tag("span"))
             update_btn.attrs['class'] = "btn btn-sm btn-dark ms-2"
             update_btn.attrs['href'] = reverse_lazy('core:update_cruise_view', args=[int(id)])
             update_btn.attrs['title'] = _('Update cruise')
             span.attrs['class'] = "bi bi-pencil-square"
 
             if request.user.groups.filter(name__iexact="MarDID Maintainers").exists():
-                first_th.attrs['width'] = "8%"
                 row_id = f"tr_id_cruise_{id}"
                 tr.attrs['id'] = row_id
-                first_th.append(del_btn := df_soup.new_tag('a'))
-                del_btn.append(span := df_soup.new_tag("span"))
+                first_th.append(del_btn := table_soup.new_tag('a'))
+                del_btn.append(span := table_soup.new_tag("span"))
                 del_btn.attrs['class'] = "btn btn-sm btn-danger ms-2"
                 del_btn.attrs['title'] = _('Delete cruise')
                 del_btn.attrs['hx-confirm'] = _("Are you sure you want to delete this curise?")
@@ -205,7 +172,7 @@ def list_cruises(request):
     if page > 0:
         return HttpResponse(trs)
 
-    table = df_soup.find("table")
+    table = table_soup.find("table")
     table.attrs['class'] = 'table table-striped table-sm'
     # table.attrs['hx-get'] = request.path
     # table.attrs['hx-trigger'] = 'update_cruise_list from:body'
@@ -215,23 +182,19 @@ def list_cruises(request):
     t_head = table.find('thead')
     t_head.attrs['class'] = 'sticky-top bg-white'
 
-    if (tr:=t_head.find('tr')) and (tr:=tr.find_next('tr')):
-        # remove the second table row from the t-head
-        t_head.find('tr').find_next("tr").decompose()
-
     th = t_head.find('th')
     if request.user.is_authenticated:
-        th.append(add_btn:=df_soup.new_tag("a"))
+        th.append(add_btn:=table_soup.new_tag("a"))
         add_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
         add_btn.attrs['href'] = reverse_lazy('core:new_cruise_view')
         add_btn.attrs['title'] = _('Add a new cruise')
-        add_btn.append(span:= df_soup.new_tag("span"))
+        add_btn.append(span:= table_soup.new_tag("span"))
         span.attrs['class'] = "bi bi-plus-square"
 
     for th in t_head.find_all('th'):
         th.attrs['class'] = 'text-start'
 
-    return HttpResponse(df_soup)
+    return HttpResponse(table_soup)
 
 
 def authenticated(request):
@@ -258,18 +221,27 @@ def delete_cruise(request, cruise_id):
     return response
 
 
+def submit_filter_form(request):
+    response = HttpResponse('<input id="input_id_cruise_submit" type="hidden" name="submit" value="submit" />')
+    response['HX-Trigger'] = "update_cruise_list"
+    return response
+
+
 def clear_filter_form(request):
     context = {
         'filter_form': CruiseFilter()
     }
 
     html = render_to_string("core/partials/form_filter_cruises.html", context=context)
-    return HttpResponse(html)
+    response = HttpResponse(html)
+    return response
+
 
 urlpatterns = [
     path('cruise', CruiseListView.as_view(), name='cruise_view'),
     path('cruise/list', list_cruises, name='list_cruises'),
     path('cruise/delete/<int:cruise_id>', delete_cruise, name='delete_cruise'),
+    path('cruise/submit_fitler_form', submit_filter_form, name='submit_cruise_filter_form'),
     path('cruise/clear_fitler_form', clear_filter_form, name='clear_cruise_filter_form')
 ]
 
