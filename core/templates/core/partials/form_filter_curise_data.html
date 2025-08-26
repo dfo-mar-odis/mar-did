@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+<form id="form_cruise_data_form_area"
+      hx-get="{% url 'core:get_expected_data_form' cruise.id %}"
+      hx-trigger="load, update_list from:body" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+</form>
+{% endif %}

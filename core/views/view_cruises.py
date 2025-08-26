@@ -138,7 +138,7 @@ def list_cruises(request):
 
     if not queryset_list:
         if page <= 0:
-            html = render_to_string('core/partial/table_cruise.html')
+            html = render_to_string('core/partials/table_cruise.html')
             return HttpResponse(html)
         else:
             return HttpResponse()
@@ -263,7 +263,7 @@ def clear_filter_form(request):
         'filter_form': CruiseFilter()
     }
 
-    html = render_to_string("core/partial/form_filter_cruises.html", context=context)
+    html = render_to_string("core/partials/form_filter_cruises.html", context=context)
     return HttpResponse(html)
 
 urlpatterns = [

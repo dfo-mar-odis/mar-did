@@ -9,7 +9,7 @@ def get_alert(alert_id: str, alert_type: str, alert_message: str):
         "alert_type": alert_type,
         "message": alert_message
     }
-    html = render_to_string("core/partial/template_alert.html", context=context)
+    html = render_to_string("core/partials/template_alert.html", context=context)
     soup = BeautifulSoup(html, 'html.parser')
 
     return soup.find('div')

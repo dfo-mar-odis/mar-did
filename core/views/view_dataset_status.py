@@ -113,7 +113,7 @@ def list_datasets(request):
         'processors': User.objects.filter(groups=group),
         'csrf_token': get_token(request)
     }
-    html = render_to_string('core/partial/table_dataset_status.html', context=context)
+    html = render_to_string('core/partials/table_dataset_status.html', context=context)
     soup = BeautifulSoup(html, 'html.parser')
     table = soup.find(id="table_id_dataset_status_list")
     trs = table.find('tbody').find_all('tr')
@@ -165,7 +165,7 @@ def assign_datasets(request, dataset_id):
         'processors': User.objects.filter(groups=group),
         'csrf_token': get_token(request)
     }
-    html = render_to_string('core/partial/table_dataset_status.html', context)
+    html = render_to_string('core/partials/table_dataset_status.html', context)
     soup = BeautifulSoup(html, 'html.parser')
     tr = soup.find('tr', id=f'tr_id_dataset_status_{dataset_id}')
     return HttpResponse(tr)
@@ -173,7 +173,7 @@ def assign_datasets(request, dataset_id):
 
 def clear_filter(request):
     context = {'filter_form': DatasetStatusFilter()}
-    html = render_to_string('core/partial/form_filter_dataset_status.html', context=context)
+    html = render_to_string('core/partials/form_filter_dataset_status.html', context=context)
     return HttpResponse(html)
 
 

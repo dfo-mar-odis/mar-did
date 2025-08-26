@@ -102,7 +102,7 @@ def list_contacts(request):
         'contacts': User.objects.all().order_by('last_name', 'first_name'),
         'user': request.user
     }
-    html = render_to_string('core/partial/table_contacts_list.html', context=context)
+    html = render_to_string('core/partials/table_contacts_list.html', context=context)
     soup = BeautifulSoup(html, 'html.parser')
 
     return HttpResponse(soup.find('table', id="table_id_contacts_list"))
