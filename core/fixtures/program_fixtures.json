@@ -1,0 +1,26 @@
+[
+{
+    "model": "core.programs",
+    "pk": 1,
+    "fields": {
+        "name": "AZMP",
+        "description": "Atlantic Zone Monitoring Program"
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 2,
+    "fields": {
+        "name": "AZOMP",
+        "description": "Atlantic Zone Off-shelf Monitoring Program"
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 3,
+    "fields": {
+        "name": "BBMP",
+        "description": "Bedford Basin Monitoring Program"
+    }
+}
+]

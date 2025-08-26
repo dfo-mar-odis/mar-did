@@ -17,7 +17,7 @@ from crispy_forms.bootstrap import StrictButton
 
 from core import models
 
-class WorkQueueFilter(forms.Form):
+class DatasetStatusFilter(forms.Form):
 
     descriptor = forms.CharField(
         max_length=50,
@@ -43,8 +43,8 @@ class WorkQueueFilter(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        url = reverse_lazy('core:list_work')
-        target = '#table_id_workqueue_list'
+        url = reverse_lazy('core:list_datasets')
+        target = '#table_id_dataset_status_list'
 
         select_attrs = {
             'hx-get': url,
@@ -67,22 +67,22 @@ class WorkQueueFilter(forms.Form):
             ),
         )
 
-class WorkQueueView(TemplateView):
-    template_name = 'core/view_work_queue.html'
+class DatasetStatusView(TemplateView):
+    template_name = 'core/view_dataset_status.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         group = Group.objects.get(name__iexact="Datashop Processors")
-        context['title'] = "Datashop Work Queue"
-        context['filter_form'] = WorkQueueFilter()
+        context['title'] = "Dataset Status"
+        context['filter_form'] = DatasetStatusFilter()
 
         # context['datasets'] = models.Dataset.objects.all().order_by('-cruise__start_date')
         context['processors'] = User.objects.filter(groups=group)
         return context
 
 
-def list_work(request):
+def list_datasets(request):
     datasets = models.Dataset.objects.all().order_by('pk')
 
     if request.method == 'GET' and 'submit' not in request.GET:
@@ -113,9 +113,9 @@ def list_work(request):
         'processors': User.objects.filter(groups=group),
         'csrf_token': get_token(request)
     }
-    html = render_to_string('core/partial/table_work_queue.html', context=context)
+    html = render_to_string('core/partial/table_dataset_status.html', context=context)
     soup = BeautifulSoup(html, 'html.parser')
-    table = soup.find(id="table_id_workqueue_list")
+    table = soup.find(id="table_id_dataset_status_list")
     trs = table.find('tbody').find_all('tr')
     if len(trs) > 10:
         query_params = parse_qs(request.GET.urlencode())
@@ -127,7 +127,7 @@ def list_work(request):
         last_tr = trs[-10]
         last_tr.attrs['hx-trigger'] = 'intersect once'
         last_tr.attrs['hx-get'] = request.path + f"?{new_query_string}"
-        last_tr.attrs['hx-target'] = "#tbody_id_workqueue_list"
+        last_tr.attrs['hx-target'] = "#tbody_id_dataset_status_list"
         last_tr.attrs['hx-swap'] = 'beforeend'
 
     if not page:
@@ -136,7 +136,7 @@ def list_work(request):
     return HttpResponse(trs)
 
 
-def assign_work(request, dataset_id):
+def assign_datasets(request, dataset_id):
     datasets = models.Dataset.objects.filter(pk=dataset_id)
     dataset = datasets.first()
 
@@ -165,21 +165,21 @@ def assign_work(request, dataset_id):
         'processors': User.objects.filter(groups=group),
         'csrf_token': get_token(request)
     }
-    html = render_to_string('core/partial/table_work_queue.html', context)
+    html = render_to_string('core/partial/table_dataset_status.html', context)
     soup = BeautifulSoup(html, 'html.parser')
-    tr = soup.find('tr', id=f'tr_id_workqueue_{dataset_id}')
+    tr = soup.find('tr', id=f'tr_id_dataset_status_{dataset_id}')
     return HttpResponse(tr)
 
 
 def clear_filter(request):
-    context = {'filter_form': WorkQueueFilter()}
-    html = render_to_string('core/partial/form_filter_work_queue.html', context=context)
+    context = {'filter_form': DatasetStatusFilter()}
+    html = render_to_string('core/partial/form_filter_dataset_status.html', context=context)
     return HttpResponse(html)
 
 
 urlpatterns = [
-    path('workqueue', WorkQueueView.as_view(), name="workqueue_view"),
-    path('workqueue/list', list_work, name="list_work"),
-    path('workqueue/assign/<int:dataset_id>', assign_work, name="assign_work"),
-    path('workqueue/clear_filter', clear_filter, name="clear_work_queue_filter_form")
+    path('dataset_status', DatasetStatusView.as_view(), name="dataset_status_view"),
+    path('dataset_status/list', list_datasets, name="list_datasets"),
+    path('dataset_status/assign/<int:dataset_id>', assign_datasets, name="assign_datasets"),
+    path('dataset_status/clear_filter', clear_filter, name="clear_dataset_status_filter_form")
 ]

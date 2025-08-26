@@ -142,7 +142,7 @@ def update_contact(request, **kwargs):
 
     if form.is_valid():
         form.save()
-        response = HttpResponse(render_crispy_form(form))
+        response = HttpResponse(render_crispy_form(ContactForm()))
         response['HX-Trigger'] = 'update_list'
         return response
 

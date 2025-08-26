@@ -29,7 +29,7 @@
             {% endif %}
         </th>
         <td>{{ data.data_type }}</td>
-        <td><button class="btn btn-sm {{data.status.get_button_colour}}" title="{{data.status.description}}">{{ data.status.name }}</button></td>
+        <td><button type="button" class="btn btn-sm {{data.status.get_button_colour}}" title="{{data.status.description}}">{{ data.status.name }}</button></td>
         <td>{{ data.files.count }}</td>
     </tr>
     {% endfor %}

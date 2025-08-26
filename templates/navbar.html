@@ -9,11 +9,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="lookupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="viewsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-house me-1"></i>{% trans 'Views' %}
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="viewsDropdown">
                         <li><a class="dropdown-item" href="{% url 'core:cruise_view' %}">{% trans 'Cruises' %}</a></li>
+                        {% if user.is_authenticated and user|is_chief_scientist %}
+                        <li><a class="dropdown-item" href="{% url 'core:new_cruise_view' %}">{% trans 'Add a Cruise' %}</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

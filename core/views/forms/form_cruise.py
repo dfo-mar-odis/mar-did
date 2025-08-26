@@ -50,44 +50,44 @@ class CreateCruise(LoginRequiredMixin, TemplateView):
 class CruiseForm(forms.ModelForm):
     programs_select = forms.ModelChoiceField(
         queryset=models.Programs.objects.none(),
-        label="Select a program",
+        label=_("Select a program"),
         required=False,
         widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     programs = forms.ModelMultipleChoiceField(
         queryset=models.Programs.objects.none(),
-        label="Programs"
+        label=_("Programs")
     )
     chief_scientists_select = forms.ModelChoiceField(
         queryset=User.objects.none(),
-        label="Select Chief Scientist",
+        label=_("Select Chief Scientist"),
         required=False,
         widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     chief_scientists = forms.ModelMultipleChoiceField(
         queryset=User.objects.none(),
-        label="Chief Scientists"
+        label=_("Chief Scientists")
     )
     data_managers_select = forms.ModelChoiceField(
         queryset=User.objects.none(),
-        label="Select Data Managers",
+        label=_("Select Data Managers"),
         required=False,
         widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     data_managers = forms.ModelMultipleChoiceField(
         queryset=User.objects.none(),
         required=False,
-        label="Data Managers"
+        label=_("Data Managers")
     )
     locations_select = forms.ModelChoiceField(
         queryset=models.GeographicRegions.objects.none(),
-        label="Select Geographic Locations",
+        label=_("Select Geographic Locations"),
         required=False,
         widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     locations = forms.ModelMultipleChoiceField(
         queryset=models.GeographicRegions.objects.none(),
-        label="Geographic Locations"
+        label=_("Geographic Locations")
     )
 
     class Meta:
@@ -328,15 +328,14 @@ def update_cruise(request, **kwargs):
     # Create a mutable copy of the POST data
     post_data = request.POST.copy()
 
-    # If locations_select has a value but locations is empty, add the selection to locations
-    if 'locations_select' in post_data and post_data.get('locations_select') and not post_data.getlist('locations'):
-        location_id = post_data.get('locations_select')
-        post_data.setlist('locations', [location_id])
-
-    # If locations_select has a value but locations is empty, add the selection to locations
-    if 'chief_scientists_select' in post_data and post_data.get('chief_scientists_select') and not post_data.getlist('chief_scientists'):
-        location_id = post_data.get('chief_scientists_select')
-        post_data.setlist('chief_scientists', [location_id])
+    # If one of the select lookups has a value but the hidden multi-select is empty,
+    # add the selection to the multi-select
+    selects = ['locations', 'chief_scientists', 'data_managers', 'programs']
+    for select in selects:
+        if (f'{select}_select' in post_data and
+                post_data.get(f'{select}_select') and not post_data.getlist(select)):
+            select_id = post_data.get(f'{select}_select')
+            post_data.setlist(select, [select_id])
 
     if 'cruise_id' in kwargs:
         cruise_id = int(kwargs.get('cruise_id'))

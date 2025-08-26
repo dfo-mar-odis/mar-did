@@ -8,15 +8,18 @@ DEBUG = env.bool('DJANGO_DEBUG', default=True)
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-oracledb.init_oracle_client(lib_dir=env('ORACLE_INSTANT_CLIENT_PATH'))
+instant_client = os.getenv('ORACLE_INSTANT_CLIENT_PATH', None)
+if instant_client:
+    oracledb.init_oracle_client(lib_dir=instant_client)
+
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASE_BACKEND'),
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASS'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT')
+        'ENGINE': os.getenv('DATABASE_BACKEND'),
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASS'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT')
     }
 }
 
