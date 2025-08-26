@@ -1,0 +1,26 @@
+sequenceDiagram
+        participant User as User (Chief Scientist/Maintainer)
+        participant System as System
+
+        User->>System: Log in
+        System-->>User: Display landing page
+
+        User->>System: Select 'Add a Cruise' from the view dropdown
+        System-->>User: Display Cruise form
+
+        User->>System: Enter cruise name
+        User->>System: Enter cruise ID (optional)
+        User->>System: Select ship
+        User->>System: Select start and end dates
+        User->>System: Add one or more chief scientists
+        User->>System: Add zero or more data managers
+        User->>System: Add one or more programs
+        User->>System: Add one or more locations
+        User->>System: Submit form
+        System-->>User: Confirm cruise creation
+
+        User->>System: Add expected data types
+        User->>System: Select logging system (Elog, Andes, Custom)
+        User->>System: Add sensors
+        User->>System: Add samples
+        System-->>User: Confirm cruise setup complete

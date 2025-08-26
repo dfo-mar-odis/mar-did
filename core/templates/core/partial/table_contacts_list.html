@@ -19,6 +19,7 @@
     </thead>
     <tbody>
     {% for contact in contacts %}
+        {% if contact.username != 'mar-did-admin' %}
     <tr id="tr_id_contacts_{{contact.pk}}">
         <th style="white-space: nowrap;">
             {% if user.is_authenticated and user|is_maintainer %}
@@ -29,8 +30,9 @@
             {% endif %}
         </th>
         <td>{% if contact.last_name %}{{ contact.last_name }}, {{ contact.first_name }}{% else %}{{contact.username}}{% endif %}</td>
-        <td>{% for group in contact.groups.all %}<button class="btn btn-sm btn-outline-dark me-2" title="{{ group.profile.description }}">{{group.name}}</button>{% endfor %}</td>
+        <td>{% for group in contact.groups.all %}<button type="button" class="btn btn-sm btn-outline-dark me-2" title="{{ group.profile.description }}">{{group.name}}</button>{% endfor %}</td>
     </tr>
+        {% endif %}
     {% endfor %}
     </tbody>
 

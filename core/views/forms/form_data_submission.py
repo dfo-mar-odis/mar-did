@@ -181,13 +181,16 @@ def submit_data(request, data_id, notify):
                 group = auth_models.Group.objects.get(name__iexact='Datashop Processors')
                 users = auth_models.User.objects.filter(groups=group)
 
+                notifiers = {request.user.email}
                 notifiers = {user.email for user in users}
                 notifiers.update(user.email for user in data.cruise.data_managers.all())
                 notifiers.update(user.email for user in data.cruise.chief_scientists.all())
+                # remove blanks for ppl that didn't have an email
+                notifiers.remove('')
                 send_mail(
                     _("Cruise update: Files added"),
-                    f"{data.data_type.name} " + _("Files have been submitted to a crise") + f" [{data.cruise}]",
-                    "Do.Not.Reply@mar-did.dfo-mpo.gc.ca",
+                    f"{data.data_type.name} " + _("Files have been submitted for cruise") + f" [{data.cruise}]",
+                    _("Do.Not.Reply@mar-did.dfo-mpo.gc.ca"),
                     notifiers
                 )
 

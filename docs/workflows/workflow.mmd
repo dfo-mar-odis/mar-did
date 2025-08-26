@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant ChiefScientist as Chief Scientist
+    participant DataManager as Data Manager
+    participant System as System
+    participant Stakeholders as Stakeholders
+    participant DatashopProcessor as Datashop Processor
+    participant DatashopLead as Datashop Lead
+
+    ChiefScientist->>System: Log in
+    System-->>ChiefScientist: Display landing page
+
+    ChiefScientist->>System: Select 'Add a Cruise' from the view dropdown
+    System-->>ChiefScientist: Display Cruise form
+    ChiefScientist->>System: Enter cruise details and submit
+    System-->>ChiefScientist: Confirm cruise creation
+
+    ChiefScientist->>System: Add expected data types
+    System-->>ChiefScientist: Confirm expected data types added
+
+    ChiefScientist->>ChiefScientist: Cruise happens
+
+    ChiefScientist->>System: Submit datasets (Log files, CTD files, etc.)
+    DataManager->>System: Submit datasets (if applicable)
+    System->>ChiefScientist: Mark datasets as 'submitted'
+    System->>DataManager: Mark datasets as 'submitted'
+    System-->>Stakeholders: Send notification email
+
+    DatashopProcessor->>System: Claim a dataset
+    DatashopLead->>System: Assign a dataset to a processor (if needed)
+    System-->>DatashopProcessor: Confirm dataset assignment
