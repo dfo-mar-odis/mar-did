@@ -109,7 +109,7 @@ def list_cruises(request):
 
     if not queryset:
         if page <= 0:
-            html = render_to_string('core/partials/table_cruises.html')
+            html = render_to_string('core/partials/table_cruises.html', context={'user': request.user})
             return HttpResponse(html)
         else:
             return HttpResponse()

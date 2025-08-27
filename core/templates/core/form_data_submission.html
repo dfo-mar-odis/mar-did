@@ -3,9 +3,9 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <span class="mb-2 h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
+    <span class="h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
     {% if user.is_authenticated and data_form %}
-    <form id="form_id_data" class="mb-2" enctype="multipart/form-data"
+    <form id="form_id_data" class="mt-2" enctype="multipart/form-data"
           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
           hx-encoding="multipart/form-data">
 
@@ -21,14 +21,14 @@
                 title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
 
 {% trans 'Mark the dataset as expected if more datafiles are required' %}">
-            <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark Expected' %}
+            <span class="bi bi-check-square me-2"></span>{% trans 'Save' %}
         </button>
         <button id="btn_id_form_submit_lab" type="button" hx-swap="none"
                 hx-post="{% url 'core:submit_data' dataset.id 1 %}" class="btn btn-primary"
                 title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
 
 {% trans 'Mark a dataset as being with the lab for post cruise processing' %}">
-            <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark sent to Lab' %}
+            <span class="bi bi-check-square me-2"></span>{% trans 'Mark sent to Lab' %}
         </button>
         <button id="btn_id_form_submit_notifications" type="button" hx-swap="none"
                 hx-post="{% url 'core:submit_data' dataset.id 2 %}" class="btn btn-primary"
@@ -38,37 +38,19 @@
             <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark Submitted' %}
         </button>
     </form>
-    <div id="div_id_error_messages">
+    <div class="mt-2" id="div_id_error_messages">
         {# if files could not be uploaded we can swap error messages in here telling the user to archive the files #}
         {# that couldn't be uploaded with a message about why they're re-uploading the file #}
     </div>
     {% endif %}
-    <div id="div_id_file_list" class="table-responsive" style="max-height: 400px; overflow-y: auto;" hx-get="{% url 'core:update_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
-        <table class="table table-sm table-striped">
-            <thead>
-            <tr>
-                <th>{# button column #}</th>
-                <th>{% trans 'File Name' %}</th>
-                <th>{% trans 'File Location' %}</th>
-                <th>{% trans 'Submitted By' %}</th>
-                <th>{% trans 'Submitted Date' %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for file in dataset.files.all %}
-                <tr>
-                    <th style="width: 2%; white-space: nowrap;">
-                        <button class="btn btn-sm btn-warning" hx-target="#div_id_error_messages" hx-get="{% url 'core:get_archive_form' file.id %}" title="{% trans 'Archive File' %}"><span class="bi bi-safe"> {% trans 'Archive' %}</span></button>
-                        <button class="btn btn-sm btn-danger ms-2" hx-confirm="{% trans 'Are you sure?' %}" title="{% trans 'Delete File' %}"><span class="bi bi-dash-square"></span></button>
-                    </th>
-                    <td>{{ file.file_name }}</td>
-                    <td>{{ file.file }}</td>
-                    <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
-                    <td>{{ file.submitted_date }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+
+    <div id="div_id_file_list" class="table-responsive mt-2" style="max-height: 400px; overflow-y: auto;" hx-get="{% url 'core:update_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
+    {% include 'core/partials/table_dataset_files.html' with archive_table=False files=dataset.current_files %}
     </div>
+
+    <div id="div_id_archived_file_list" class="table-responsive mt-2" style="max-height: 400px; overflow-y: auto;" hx-get="{% url 'core:update_archive_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
+    {% include 'core/partials/table_dataset_files.html' with archive_table=True files=dataset.archived_files %}
+    </div>
+
 {% endblock %}
 

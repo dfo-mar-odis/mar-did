@@ -123,6 +123,14 @@ class Dataset(models.Model):
     instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='instruments')
     status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="datasets")
 
+    @property
+    def current_files(self):
+        return self.files.filter(is_archived=False)
+
+    @property
+    def archived_files(self):
+        return self.files.filter(is_archived=True)
+
     def __str__(self):
         return f'{self.data_type} : {self.status}'
 
@@ -132,17 +140,21 @@ class DataFiles(models.Model):
     file_name = models.CharField(verbose_name=_("File Name"), max_length=100)
     file = models.FileField(verbose_name=_("File"))
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT)
-    submitted_date = models.DateTimeField(auto_now=True)
+    submitted_date = models.DateTimeField(auto_now_add=True)
+    is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False)
 
     def __str__(self):
         return self.file.name
+
+    class Meta:
+        ordering = ['file_name']
 
 
 class DataFileIssues(models.Model):
     datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE, related_name='issues')
     issue = models.TextField(verbose_name=_("Issue Description"))
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT)
-    submitted_date = models.DateTimeField(auto_now=True)
+    submitted_date = models.DateTimeField(auto_now_add=True)
 
 
 class Processing(models.Model):

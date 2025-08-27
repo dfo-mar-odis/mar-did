@@ -1,0 +1,11 @@
+<div id="div_id_{{uuid}}" class="alert alert-danger">
+    <div class="row">
+        <div class="col-auto">
+            <button class="btn btn-sm btn-outline-dark" hx-get="{% url 'core:clear' %}" hx-swap="delete" hx-target="#div_id_{{uuid}}"><span
+                    class="bi bi-x"></span></button>
+        </div>
+        <div class="col">
+            {{ message }}
+        </div>
+    </div>
+</div>
