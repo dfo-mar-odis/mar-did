@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-27 22:21+0000\n"
+"POT-Creation-Date: 2025-08-27 22:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -343,6 +343,26 @@ msgstr "Voir les croisières"
 #: core/templates/core/view_landing.html:61
 msgid "Data Discovery"
 msgstr "Découverte de données"
+
+#: core/templatetags/labels_to_translate.py:3
+msgid "Expected"
+msgstr "Attendu"
+
+#: core/templatetags/labels_to_translate.py:4
+msgid "Submitted"
+msgstr "Soumis"
+
+#: core/templatetags/labels_to_translate.py:5
+msgid ""
+"Some data has been submitted. Follow up with the data provider and if all "
+"the data has been provided, mark it as received"
+msgstr ""
+"Des données ont été soumises. Faites un suivi avec le fournisseur de données "
+"et si toutes les données ont été fournies, marquez-les comme reçues"
+
+#: core/templatetags/labels_to_translate.py:6
+msgid "Lab"
+msgstr "Lab"
 
 #: core/views/forms/form_cruise.py:42
 msgid "Create Cruise"

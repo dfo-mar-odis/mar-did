@@ -18,7 +18,8 @@
             <td>{{ dataset.cruise }}</td>
             <td>{{ dataset.data_type.name }}</td>
             <td>
-                <button class="btn btn-sm {{dataset.status.get_button_colour}}" title="{{dataset.status.description}}">{{ dataset.status.name }}</button></td>
+                <button class="btn btn-sm {{dataset.status.get_button_colour}}" title="{% trans dataset.status.description %}">{% trans dataset.status.name %}</button>
+            </td>
             <td>
                 <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
                     {% csrf_token %}
