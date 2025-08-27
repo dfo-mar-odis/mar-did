@@ -5,7 +5,7 @@ from django.urls import path, reverse_lazy
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.http.response import HttpResponse
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -96,6 +96,23 @@ class CruiseForm(forms.ModelForm):
     class Meta:
         model = models.Cruises
         fields = '__all__'
+
+        ##########################################################################################
+        # This is specifically so labels and help text are translated
+        ##########################################################################################
+        labels = {
+            'name': _("Name"),
+            'start_date': _("Start date"),
+            'end_date': _("End date"),
+            'descriptor': _("Descriptor"),
+        }
+
+        help_texts = {
+            'name': _(model._meta.get_field('name').help_text),
+            'descriptor': _(model._meta.get_field('descriptor').help_text)
+        }
+        ##########################################################################################
+
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
             'end_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
@@ -288,7 +305,8 @@ class CruiseForm(forms.ModelForm):
             'hx-post': submit_url
         }
 
-        btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{_("Save Updates")}',
+        btn_label = _("Save Updates")
+        btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
                                   css_class='btn btn-sm btn-primary mb-1',
                                   **btn_submit_attrs)
 

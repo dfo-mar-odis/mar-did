@@ -75,7 +75,8 @@ class DatasetStatusView(TemplateView):
 
         group = Group.objects.get(name__iexact="Datashop Processors")
         context['title'] = "Dataset Status"
-        context['filter_form'] = DatasetStatusFilter()
+        submitted = models.DataStatus.objects.get(name__iexact='Submitted')
+        context['filter_form'] = DatasetStatusFilter(initial={'status': submitted})
 
         # context['datasets'] = models.Dataset.objects.all().order_by('-cruise__start_date')
         context['processors'] = User.objects.filter(groups=group)

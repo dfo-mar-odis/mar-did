@@ -42,10 +42,10 @@
                     <span class="navbar-text me-3"><i class="bi bi-person-circle me-1"></i>{{ user.username }}</span>
                     <form method="post" action="{% url 'logout' %}" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-light"><i class="bi bi-box-arrow-right me-1"></i>Logout</button>
+                        <button type="submit" class="btn btn-outline-light"><i class="bi bi-box-arrow-right me-1"></i>{% trans 'Logout' %}</button>
                     </form>
                 {% else %}
-                    <a class="btn btn-outline-light" href="{% url 'login' %}?next={{request.path}}"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+                    <a class="btn btn-outline-light" href="{% url 'login' %}?next={{request.path}}"><i class="bi bi-box-arrow-in-right me-1"></i>{% trans 'Login' %}</a>
                 {% endif %}
             </div>
             <div class="d-flex">
