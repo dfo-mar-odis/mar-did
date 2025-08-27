@@ -20,6 +20,8 @@ from core import models
 
 import logging
 
+from core.views.view_data import ExpectedDataForm
+
 logger = logging.getLogger('mardid')
 
 
@@ -41,6 +43,7 @@ class CreateCruise(LoginRequiredMixin, TemplateView):
         if 'cruise_id' in self.kwargs:
             context['object'] = models.Cruises.objects.get(pk=self.kwargs['cruise_id'])
             context['cruise_form'] = CruiseForm(instance=context['object'])
+            context['data_form'] = ExpectedDataForm(cruise=context['object'])
         else:
             context['cruise_form'] = CruiseForm()
 

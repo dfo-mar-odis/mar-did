@@ -4,6 +4,6 @@
 {% block content %}
 <span class="mb-2 h4">{{ object.name }} - {{ object.descriptor }}</span>
 
-{% include 'core/partials/form_filter_cruise_data.html' with cruise=object %}
+{% include 'core/partials/form_cruise_data.html' with cruise=object %}
 {% include 'core/partials/table_data_list.html' with cruise=object %}
 {% endblock %}

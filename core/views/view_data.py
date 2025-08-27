@@ -103,7 +103,12 @@ class ExpectedDataForm(forms.ModelForm):
 
 def list_data(request, cruise_id):
     cruise = models.Cruises.objects.get(pk=cruise_id)
-    html = render_to_string('core/partials/table_data_list.html', context={'cruise': cruise, 'user': request.user})
+    context = {
+        'cruise': cruise,
+        'user': request.user,
+        'data_form': ExpectedDataForm(cruise=cruise),
+    }
+    html = render_to_string('core/partials/table_data_list.html', context=context)
     soup = BeautifulSoup(html, 'html.parser')
     return HttpResponse(soup.find('table'))
 

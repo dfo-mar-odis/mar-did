@@ -1,5 +1,13 @@
 {% load i18n %}
+{% load crispy_forms_tags %}
 
+{% if user.is_authenticated %}
+<form id="form_cruise_data_form_area"
+      hx-get="{% url 'core:get_expected_data_form' cruise.id %}"
+      hx-trigger="update_list from:body" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    {% crispy data_form %}
+</form>
+{% endif %}
 
 <form id="form_cruise_data_table_area" {% if user.is_authenticated %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'{% endif %}>
 <div class="table-responsive" style="max-height: 400px;">
