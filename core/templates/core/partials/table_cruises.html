@@ -30,7 +30,7 @@
             <td class="text-start">{{ cruise.descriptor }}</td>
             <td class="text-start">{{ cruise.platform }}</td>
             <td class="text-start">{% for program in cruise.programs.all %}
-                <button type="button" class="btn btn-sm btn-outline-dark" title="{{project.description}}">{{program.name}}</button>
+                <button type="button" class="btn btn-sm btn-outline-dark" title="{{program.description}}">{{program.name}}</button>
                 {% endfor %}</td>
             <td class="text-start">{{ cruise.start_date }}</td>
             <td class="text-start">{{ cruise.end_date }}</td>

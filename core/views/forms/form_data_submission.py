@@ -46,13 +46,20 @@ class ArchiveFileForm(forms.ModelForm):
 
     class Meta:
         model = models.DataFileIssues
-        fields = '__all__'
+        fields = ['issue', 'datafile', 'submitted_by']
+        widgets = {
+            'datafile': forms.HiddenInput(),
+            'submitted_by': forms.HiddenInput(),
+        }
 
-    def __init__(self, *args, datafile=None, submitted_by=None, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_tag = False
+
+        # Add a more descriptive label for the issue field
+        self.fields['issue'].label = _("Reason for archiving file")
 
 
 class DataSubmissionForm(forms.ModelForm):
@@ -98,7 +105,7 @@ def save_files_to_media(files):
 def get_target_directory(dataset, archive: bool = False):
     cruise = dataset.cruise
     cruise_year = cruise.start_date.strftime('%Y')
-    path_elements = [settings.MEDIA_ROOT, cruise_year, cruise.name]
+    path_elements = [cruise_year, cruise.name]
 
     if archive:
         path_elements.append('archive')
@@ -118,14 +125,16 @@ def get_target_directory(dataset, archive: bool = False):
 def save_files(user, data, files, override=False):
     target_directory = get_target_directory(data)
 
-    # Ensure the directory exists
-    os.makedirs(target_directory, exist_ok=True)
-
     # Create DataFile objects for each file
     for file_ in files:
-        file_path = os.path.join(target_directory, file_.name)
+        media_path = os.path.join(settings.MEDIA_ROOT, target_directory)
 
-        data_files = data.files.filter(file=file_path)
+        # Ensure the directory exists
+        os.makedirs(media_path, exist_ok=True)
+
+        file_path = os.path.join(target_directory, file_.name)
+        media_file_path = os.path.join(media_path, file_.name)
+        data_files = data.files.filter(file=media_file_path)
         datafile = None
         if data_files.exists():
             if not override:
@@ -140,7 +149,7 @@ def save_files(user, data, files, override=False):
             datafile = data_files.first()
 
         # Write the file to the target directory
-        with open(file_path, 'wb+') as destination:
+        with open(media_file_path, 'wb+') as destination:
             for chunk in file_.chunks():
                 destination.write(chunk)
 
@@ -290,20 +299,24 @@ def archive(request, datafile_id):
     if form.is_valid():
         issue = form.save()
         dataset = file.data
-        old_path = file.file
-        target_directory = get_target_directory(dataset, archive=True)
 
-        # Ensure the directory exists
-        os.makedirs(target_directory, exist_ok=True)
+        current_file_path = get_target_directory(dataset)
+        archive_file_path = get_target_directory(dataset, archive=True)
 
-        # Move the file to the target directory
-        timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-        new_path = os.path.join(target_directory, f'{timestamp}_{file.file_name}')
+        media_current_path = os.path.join(settings.MEDIA_ROOT, current_file_path)
+        media_archive_path = os.path.join(settings.MEDIA_ROOT, archive_file_path)
 
-        shutil.move(old_path.path, new_path)
+        # Ensure the archive path exists
+        os.makedirs(media_archive_path, exist_ok=True)
+
+        archived_file = os.path.join(archive_file_path, file.file_name)
+
+        media_current_file = os.path.join(media_current_path, file.file_name)
+        media_archived_file = os.path.join(media_archive_path, file.file_name)
+        shutil.move(media_current_file, media_archived_file)
 
         # Update the file path in the database
-        file.file = new_path
+        file.file = archived_file
         file.save()
 
         response = HttpResponse()

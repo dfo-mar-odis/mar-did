@@ -146,6 +146,6 @@ class DataFileIssues(models.Model):
 
 
 class Processing(models.Model):
-    dataset = models.OneToOneField(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing')
+    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing')
     assigned_to = models.ForeignKey('auth.User', verbose_name=_("Assigned"), on_delete=models.PROTECT, related_name='processing')
     assigned_date = models.DateTimeField(auto_now=True)
