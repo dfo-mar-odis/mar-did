@@ -25,7 +25,7 @@
     <tbody>
         {% for cruise in cruises %}
         <tr>
-            <th class="text-start" width="2%">{{ cruise.id }}</th>
+            <th class="text-start" width="2%">{{ cruise.id }}</th> {# this ID column will get replaced with a button that uses the ID #}
             <td class="text-start">{{ cruise.name }}</td>
             <td class="text-start">{{ cruise.descriptor }}</td>
             <td class="text-start">{{ cruise.platform }}</td>

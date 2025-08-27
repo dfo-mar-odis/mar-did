@@ -1,0 +1,12 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+<form id="form_id_data_archive_form" class="mb-2">
+  {% crispy archive_form %}
+  <button type="button" hx-target="#form_id_data_archive_form"
+          hx-post="{% url 'core:archive_file' datafile_id %}"
+          hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+          hx-include="#form_id_data_archive_form"
+          hx-swap="outerHTML" class="btn btn-sm btn-primary">
+    <span class="bi bi-check-box"> {% trans 'Submit' %}</span>
+  </button>
+</form>

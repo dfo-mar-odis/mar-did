@@ -141,6 +141,8 @@ class DataFiles(models.Model):
 class DataFileIssues(models.Model):
     datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE, related_name='issues')
     issue = models.TextField(verbose_name=_("Issue Description"))
+    submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT)
+    submitted_date = models.DateTimeField(auto_now=True)
 
 
 class Processing(models.Model):

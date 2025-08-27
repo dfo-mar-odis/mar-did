@@ -38,11 +38,16 @@
             <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark Submitted' %}
         </button>
     </form>
+    <div id="div_id_error_messages">
+        {# if files could not be uploaded we can swap error messages in here telling the user to archive the files #}
+        {# that couldn't be uploaded with a message about why they're re-uploading the file #}
+    </div>
     {% endif %}
     <div id="div_id_file_list" class="table-responsive" style="max-height: 400px; overflow-y: auto;" hx-get="{% url 'core:update_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
         <table class="table table-sm table-striped">
             <thead>
             <tr>
+                <th>{# button column #}</th>
                 <th>{% trans 'File Name' %}</th>
                 <th>{% trans 'File Location' %}</th>
                 <th>{% trans 'Submitted By' %}</th>
@@ -52,6 +57,10 @@
             <tbody>
             {% for file in dataset.files.all %}
                 <tr>
+                    <th style="width: 2%; white-space: nowrap;">
+                        <button class="btn btn-sm btn-warning" hx-target="#div_id_error_messages" hx-get="{% url 'core:get_archive_form' file.id %}" title="{% trans 'Archive File' %}"><span class="bi bi-safe"> {% trans 'Archive' %}</span></button>
+                        <button class="btn btn-sm btn-danger ms-2" hx-confirm="{% trans 'Are you sure?' %}" title="{% trans 'Delete File' %}"><span class="bi bi-dash-square"></span></button>
+                    </th>
                     <td>{{ file.file_name }}</td>
                     <td>{{ file.file }}</td>
                     <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>

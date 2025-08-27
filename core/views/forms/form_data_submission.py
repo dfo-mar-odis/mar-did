@@ -1,10 +1,12 @@
 import os
 import copy
+import shutil
 
 from datetime import datetime
 from bs4 import BeautifulSoup
 
 from django import forms
+from django.middleware.csrf import get_token
 from django.contrib.auth import models as auth_models
 from django.urls import path, reverse_lazy
 from django.shortcuts import redirect
@@ -17,8 +19,11 @@ from django.core.mail import send_mail
 from django.core.files.storage import FileSystemStorage
 
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field
 
 from core import models
+
+from filecmp import cmp
 
 import logging
 
@@ -35,6 +40,19 @@ class DataSubmissionView(TemplateView):
         context['dataset'] = data_object
         context['title'] = _("Cruise") + " " + str(data_object.cruise) + " " + _("Data Submission")
         return context
+
+
+class ArchiveFileForm(forms.ModelForm):
+
+    class Meta:
+        model = models.DataFileIssues
+        fields = '__all__'
+
+    def __init__(self, *args, datafile=None, submitted_by=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
 
 
 class DataSubmissionForm(forms.ModelForm):
@@ -76,9 +94,29 @@ def save_files_to_media(files):
 
     return saved_files
 
+
+def get_target_directory(dataset, archive: bool = False):
+    cruise = dataset.cruise
+    cruise_year = cruise.start_date.strftime('%Y')
+    path_elements = [settings.MEDIA_ROOT, cruise_year, cruise.name]
+
+    if archive:
+        path_elements.append('archive')
+
+    # TODO: Talking to Lindsay, samples should be placed in a biochem directory. This ties in with a 'DataTypePurpose'
+    #   lookup I have planned. A data type prupose would be like 'Logging', 'Sample', 'Sensor', this way we can
+    #   do things like require a curise to specifiy how it's going to log data (Elog, Andes, Custom CSV), or save
+    #   Samples to a Biochem directory within the /Src/Mar-did/year/cruise/Biochem
+
+    # I would use the purpose.id for this, but using a string is more clear for humans.
+    # data_purpose = dataset.data_type.purpose
+    # if purpose.name.lower() == 'Sample':
+    #   path_elements.append('Biochem')
+    return os.path.join(*path_elements, dataset.data_type.name)
+
+
 def save_files(user, data, files, override=False):
-    cruise_year = data.cruise.start_date.strftime('%Y')
-    target_directory = os.path.join(settings.MEDIA_ROOT, cruise_year, data.cruise.name, data.data_type.name)
+    target_directory = get_target_directory(data)
 
     # Ensure the directory exists
     os.makedirs(target_directory, exist_ok=True)
@@ -87,12 +125,18 @@ def save_files(user, data, files, override=False):
     for file_ in files:
         file_path = os.path.join(target_directory, file_.name)
 
-        data_files = data.files.filter(file_name=file_.name)
+        data_files = data.files.filter(file=file_path)
         datafile = None
         if data_files.exists():
             if not override:
                 raise FileExistsError("This file already exists")
 
+            # Todo: if the file already exists, and the user has chosen to override it, then we sould archive the
+            #   old file in an archive folder. At that point we can ask the user why they uploaded a new file and
+            #   save the response to the DataFileIssues table attached to the archived file.
+            #   Or,
+            #   we don't allow the user to upload the file until they've manually archived the old file with
+            #   an explination as to why they archived it.
             datafile = data_files.first()
 
         # Write the file to the target directory
@@ -139,6 +183,7 @@ def submit_data(request, data_id, notify):
         if files:
             try:
                 # if the files already exist, we need to check with the user that it's ok to override them
+                # Todo: This is where
                 override = request.POST.get('override', False)
                 save_files(request.user, data, files, override=override)
             except FileExistsError as ex:
@@ -214,9 +259,70 @@ def list_files(request, data_id):
     soup = BeautifulSoup(html, 'html.parser')
     return HttpResponse(soup.find('div', id='div_id_file_list'))
 
+
+def get_archive_form(request, datafile_id):
+
+    datafile = models.DataFiles.objects.get(pk=datafile_id)
+    initial = {
+        'submitted_by': request.user.id,
+        'datafile': datafile
+    }
+    context = {
+        'datafile_id': datafile_id,
+        'archive_form': ArchiveFileForm(initial=initial),
+        'csrf_token': get_token(request)
+    }
+    html = render_to_string('core/partials/form_archive_file.html', context=context)
+    return HttpResponse(html)
+
+
+def archive(request, datafile_id):
+
+    file = models.DataFiles.objects.get(pk=datafile_id)
+
+    datafile = models.DataFiles.objects.get(pk=datafile_id)
+    initial = {
+        'submitted_by': request.user,
+        'datafile': datafile,
+        'issue': request.POST.get('issue')
+    }
+    form = ArchiveFileForm(request.POST)
+    if form.is_valid():
+        issue = form.save()
+        dataset = file.data
+        old_path = file.file
+        target_directory = get_target_directory(dataset, archive=True)
+
+        # Ensure the directory exists
+        os.makedirs(target_directory, exist_ok=True)
+
+        # Move the file to the target directory
+        timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+        new_path = os.path.join(target_directory, f'{timestamp}_{file.file_name}')
+
+        shutil.move(old_path.path, new_path)
+
+        # Update the file path in the database
+        file.file = new_path
+        file.save()
+
+        response = HttpResponse()
+        response['HX-Trigger'] = 'update_file_list'
+        return response
+
+    context = {
+        'datafile_id': datafile_id,
+        'archive_form': form,
+        'csrf_token': get_token(request)
+    }
+    html = render_to_string('core/partials/form_archive_file.html', context=context)
+    return HttpResponse(html)
+
 urlpatterns = [
     path('data_submission/<int:data_id>', DataSubmissionView.as_view(), name='data_submission_view'),
     path('data_submission/<int:data_id>/<int:notify>', submit_data, name='submit_data'),
     path('data_submission/<int:data_id>/list', list_files, name='update_file_list'),
+    path('data_submission/archive/form/<int:datafile_id>', get_archive_form, name='get_archive_form'),
+    path('data_submission/archive/<int:datafile_id>', archive, name='archive_file'),
     path('clear/', HttpResponse, name='clear')
 ]
