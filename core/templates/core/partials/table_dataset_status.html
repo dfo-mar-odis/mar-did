@@ -26,7 +26,7 @@
                         <select class="form-select form-select-sm" id="select_id_assigned_to" name="assigned_to">
                             <option value="">------</option>
                             {% for contact in processors %}
-                            <option value="{{contact.id}}" {% if dataset.processing and dataset.processing.assigned_to.id == contact.id %}selected{% endif %}>
+                            <option value="{{contact.id}}" {% if dataset.processing and dataset.processing.first.assigned_to.id == contact.id %}selected{% endif %}>
                                 {{ contact.get_full_name }}
                             </option>
                             {% endfor %}
@@ -39,8 +39,8 @@
                 </form>
             </td>
             <td>
-                {% if dataset.processing.assigned_date %}
-                {{ dataset.processing.assigned_date }}
+                {% if dataset.processing.first.assigned_date %}
+                {{ dataset.processing.first.assigned_date }}
                 {% endif %}
             </td>
         </tr>

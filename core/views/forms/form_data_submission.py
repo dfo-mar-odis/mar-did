@@ -240,7 +240,8 @@ def submit_data(request, data_id, notify):
                 notifiers.update(user.email for user in data.cruise.data_managers.all())
                 notifiers.update(user.email for user in data.cruise.chief_scientists.all())
                 # remove blanks for ppl that didn't have an email
-                notifiers.remove('')
+                if '' in notifiers:
+                    notifiers.remove('')
                 send_mail(
                     _("Cruise update: Files added"),
                     f"{data.data_type.name} " + _("Files have been submitted for cruise") + f" [{data.cruise}]",

@@ -146,13 +146,13 @@ def assign_datasets(request, dataset_id):
         dataset.status = models.DataStatus.objects.get(name__iexact="Received")
         dataset.save()
 
-        if not hasattr(dataset, "processing"):
+        if not dataset.processing.exists():
             processing = models.Processing.objects.create(dataset=dataset, assigned_to=assign_to)
         else:
-            dataset.processing.assigned_to = assign_to
-            dataset.processing.save()
+            processing = dataset.processing.first()
+            processing.assigned_to = assign_to
+            processing.save()
     else:
-        assign_to = None
         dataset.status = models.DataStatus.objects.get(name__iexact="Unknown")
         dataset.save()
 
