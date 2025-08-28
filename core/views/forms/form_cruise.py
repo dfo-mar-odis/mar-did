@@ -392,7 +392,7 @@ def get_contact_bullet(contact_id, lookup_model, prefix, post_remove_url_alias):
         'value_label': f"{contact.last_name}, {contact.first_name}",
         'post_url': reverse_lazy(post_remove_url_alias, args=[prefix, contact.pk]),
     }
-    return render_to_string('core/partials/multi_select_bullet.html', context=context)
+    return render_to_string('core/partials/components/multi_select_bullet.html', context=context)
 
 
 def get_lookup_bullet(id, lookup_model, prefix, post_remove_url_alias):
@@ -404,7 +404,7 @@ def get_lookup_bullet(id, lookup_model, prefix, post_remove_url_alias):
         'value_label': f"{lookup_obj.name}",
         'post_url': reverse_lazy(post_remove_url_alias, args=[prefix, lookup_obj.pk]),
     }
-    return render_to_string('core/partials/multi_select_bullet.html', context=context)
+    return render_to_string('core/partials/components/multi_select_bullet.html', context=context)
 
 
 def get_updated_list(contact_ids: [int], prefix):

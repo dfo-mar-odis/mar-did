@@ -1,6 +1,6 @@
 import os
-import copy
 import shutil
+import datetime
 
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -9,7 +9,6 @@ from django import forms
 from django.middleware.csrf import get_token
 from django.contrib.auth import models as auth_models
 from django.urls import path, reverse_lazy
-from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.http.response import HttpResponse
 from django.utils.translation import gettext as _
@@ -22,6 +21,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field
 
 from core import models
+from core.components import get_notification_alert
 
 from filecmp import cmp
 
@@ -110,14 +110,17 @@ def get_target_directory(dataset, archive: bool = False):
 
 
 def save_files(user, dataset, files, override=False):
+    logger = logging.getLogger(f'mardid.notifier{user.pk}')
     target_directory = get_target_directory(dataset)
     media_path = os.path.join(settings.MEDIA_ROOT, target_directory)
 
     created_files_buffer = []
     could_not_write_buffer = []
 
+    loading_msg = _("Loading")
     fs = FileSystemStorage(location=media_path)
     for file_ in files:
+        logger.info(loading_msg + f" : {file_.name}")
 
         file_path = os.path.join(media_path, file_.name)
         if dataset.files.filter(file=file_path).exists():
@@ -139,7 +142,24 @@ def save_files(user, dataset, files, override=False):
     models.DataFiles.objects.bulk_create(created_files_buffer)
     return could_not_write_buffer
 
+
 def submit_data(request, data_id, notify):
+
+    logger = logging.getLogger(f'mardid.notifier{request.user.id}')
+    soup = BeautifulSoup('', 'html.parser')
+    if request.method == "GET":
+        soup.append(div_container:=soup.new_tag("div"))
+        div_container.attrs['id'] = "div_id_data_submission_messages"
+        div_container.attrs['hx-swap-oob'] = "true"
+        div_container.attrs['class'] = "mt-2"
+
+        notification = get_notification_alert(logger)
+        div_container.append(notification)
+
+        response = HttpResponse(soup)
+        response['HX-Trigger'] = 'submit_form'
+        return response
+
     data_object = models.Dataset.objects.get(pk=data_id)
 
     form = DataSubmissionForm(
@@ -164,7 +184,7 @@ def submit_data(request, data_id, notify):
             override = request.POST.get('override', False)
             could_not_override = save_files(request.user, data, files, override=override)
             if could_not_override:
-                soup = BeautifulSoup('<div class="mt-2" id="div_id_error_messages"></div>', 'html.parser')
+                soup = BeautifulSoup('<div class="mt-2" id="div_id_data_submission_messages"></div>', 'html.parser')
                 html = ""
                 # for now we're just printing an error saying the file couldn't be uploaded,
                 # But AI assures me we could send the file back in a form, which could include
@@ -172,12 +192,13 @@ def submit_data(request, data_id, notify):
                 # if the user wanted to archive it.
                 for idx, file in enumerate(could_not_override):
                     context = {
-                        'uuid': idx,
+                        'alert_id': f'file_alert_{idx}',
+                        'alert_type': 'danger',
                         'message': f"{file.name} " + _("already exists. If intended, please archive the existing file with reasoning first and try uploading again.")
                     }
-                    html += render_to_string('core/partials/components/simple_alert.html', context)
+                    html += render_to_string('core/partials/components/template_alert.html', context)
 
-                div = soup.find('div', id="div_id_error_messages")
+                div = soup.find('div', id="div_id_data_submission_messages")
                 div.attrs['hx-swap-oob'] = True
                 div.append(BeautifulSoup(html, 'html.parser'))
                 return HttpResponse(soup)
@@ -206,7 +227,10 @@ def submit_data(request, data_id, notify):
                     notifiers
                 )
 
-        response = HttpResponse()
+        # we have to clear the notification dialog
+        notification = get_notification_alert(logger, swap_oob=True)
+
+        response = HttpResponse(notification)
         response['HX-Redirect'] = reverse_lazy('core:data_submission_view', args=[data.pk])
         return response
 
@@ -216,6 +240,10 @@ def submit_data(request, data_id, notify):
     soup = BeautifulSoup(html, 'html.parser')
     form = soup.find('form', id='form_id_data')
     form.attrs['hx-swap-oob'] = 'true'
+
+    notification = get_notification_alert(logger, swap_oob=True)
+    form.append(notification)
+
     return HttpResponse(form)
 
 

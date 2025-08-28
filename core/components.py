@@ -9,7 +9,23 @@ def get_alert(alert_id: str, alert_type: str, alert_message: str):
         "alert_type": alert_type,
         "message": alert_message
     }
-    html = render_to_string("core/partials/template_alert.html", context=context)
+    html = render_to_string("core/partials/components/template_alert.html", context=context)
     soup = BeautifulSoup(html, 'html.parser')
 
     return soup.find('div')
+
+
+def get_notification_alert(logger, swap_oob=False):
+    context = {
+        'alert_id': "notification_alert",
+        'logger': logger.name,
+        'alert_type': "info",
+        'message': _("Loading")
+    }
+    if swap_oob:
+        context['hx-swap-oob'] = 'true'
+
+    html = render_to_string('core/partials/components/template_channels_notifications.html', context=context)
+    notification = BeautifulSoup(html, 'html.parser')
+
+    return notification

@@ -16,8 +16,11 @@
             </label>
             <div><input type="file" name="files" class="form-control" multiple="" id="id_files"> </div>
         </div>
+        <input type="hidden" name="hidden-submit" hx-trigger="submit_form from:body"
+               hx-swap="none" hx-post="{% url 'core:submit_data' dataset.id 0 %}" />
+
         <button id="btn_id_form_submit" type="button" hx-swap="none"
-                hx-post="{% url 'core:submit_data' dataset.id 0 %}" class="btn btn-primary"
+                hx-get="{% url 'core:submit_data' dataset.id 0 %}" class="btn btn-primary"
                 title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
 
 {% trans 'Mark the dataset as expected if more datafiles are required' %}">
@@ -38,7 +41,7 @@
             <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark Submitted' %}
         </button>
     </form>
-    <div class="mt-2" id="div_id_error_messages">
+    <div class="mt-2" id="div_id_data_submission_messages">
         {# if files could not be uploaded we can swap error messages in here telling the user to archive the files #}
         {# that couldn't be uploaded with a message about why they're re-uploading the file #}
     </div>
