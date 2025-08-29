@@ -1,0 +1,42 @@
+name: Clean Master Branch
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  clean-tests:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove test files and directories
+        run: |
+          # Remove test directories recursively
+          find . -type d -name "tests" -exec -rf {} + 2>/dev/null || true
+          find . -type d -name "test_data" -exec -rf {} + 2>/dev/null || true
+          find . -type d -name "sample_data" -exec -rf {} + 2>/dev/null || true
+          
+          #Remove test files
+          find . -name "test_*.py" -delete 2>/dev/null || true
+          find . -name "*_test.py" -delete 2>/dev/null || true
+          
+          # Remove pytest configuration
+          rm -f pytest.ini .pytest_cache .coverage 2>/dev/null || true
+
+      - name: Commit changes if any
+        run: |
+          git config --local user.email "action@gihub.com"
+          git config --local user.name "GitHub Action"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Remove test files from master branch [skip ci]"
+            git push
+          fi

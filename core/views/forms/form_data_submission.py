@@ -92,7 +92,8 @@ class DataSubmissionForm(forms.ModelForm):
 def get_target_directory(dataset, archive: bool = False):
     cruise = dataset.cruise
     cruise_year = cruise.start_date.strftime('%Y')
-    path_elements = [cruise_year, cruise.name]
+    decade_folder = cruise_year[:3] + '0'
+    path_elements = [decade_folder, cruise_year, cruise.name]
 
     if archive:
         path_elements.append('archive')
@@ -122,8 +123,9 @@ def save_files(user, dataset, files, override=False):
     for file_ in files:
         logger.info(loading_msg + f" : {file_.name}")
 
-        file_path = os.path.join(media_path, file_.name)
-        if dataset.files.filter(file=file_path).exists():
+        file_path = os.path.join(target_directory, file_.name)
+        media_file_path = os.path.join(media_path, file_.name)
+        if dataset.files.filter(file=media_file_path).exists():
             could_not_write_buffer.append(file_)
             continue
 
