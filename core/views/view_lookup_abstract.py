@@ -21,6 +21,7 @@ from core import components
 
 logger = logging.getLogger("mardid")
 
+<<<<<<< HEAD
 
 
 class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
@@ -47,20 +48,26 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
         return context
 
 
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
 class SimpleLookupForm(forms.ModelForm):
 
     def get_update_url(self):
         return self.update_url
 
+<<<<<<< HEAD
     def get_form_url(self):
         return self.form_url
 
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_tag = False
 
+<<<<<<< HEAD
         btn_clear_attrs = {
             'title': _("Clear"),
             'hx-target': "#form_area",
@@ -70,6 +77,8 @@ class SimpleLookupForm(forms.ModelForm):
                                   css_class='btn btn-sm btn-primary mb-1',
                                   **btn_clear_attrs)
 
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
         url = self.get_update_url()
         submit_url = (reverse_lazy(url, args=[self.instance.pk])
                       if self.instance.pk else
@@ -79,7 +88,11 @@ class SimpleLookupForm(forms.ModelForm):
             'hx-target': "#form_area",
             'hx-post': submit_url
         }
+<<<<<<< HEAD
         btn_submit = StrictButton(f'<span class="bi bi-check-square"> {btn_submit_attrs['title']}</span>',
+=======
+        btn_submit = StrictButton('<span class="bi bi-check-square"></span>',
+>>>>>>> 8aa4604 (added alerts and delete functions)
                                   css_class='btn btn-sm btn-primary mb-1',
                                   **btn_submit_attrs)
 
@@ -98,8 +111,12 @@ class SimpleLookupForm(forms.ModelForm):
                 Div(
                     Row(*field_columns),
                     Row(
+<<<<<<< HEAD
                         Column(btn_submit, css_class='col-auto'),
                         Column(btn_clear, css_class='col-auto'),
+=======
+                        Column(btn_submit)
+>>>>>>> 8aa4604 (added alerts and delete functions)
                     ),
                     css_class='card-body'
                 ),
@@ -108,17 +125,45 @@ class SimpleLookupForm(forms.ModelForm):
         )
 
 
+<<<<<<< HEAD
+=======
+class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
+
+    template_name = 'core/view_lookup.html'
+    login_url = reverse_lazy('login')
+    table_url = None
+
+    def test_func(self):
+        return self.request.user.groups.filter(name='MarDID Maintainer').exists()
+
+    def get_table_url(self):
+        return self.table_url
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['table_update_url'] = self.get_table_url()
+
+        return context
+
+
+>>>>>>> 8aa4604 (added alerts and delete functions)
 def create_lookup_classes(lookup_model, name_key):
     """Factory function to create lookup form and view classes dynamically"""
     # Generate names
     name_update_lookup = f'update_lookup_{name_key}'
+<<<<<<< HEAD
     name_get_form = f'lookup_form_{name_key}'
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
     name_list_lookup = f'list_{name_key}'
 
     # Create form class dynamically
     class DynamicLookupForm(SimpleLookupForm):
         update_url = f'core:{name_update_lookup}'
+<<<<<<< HEAD
         form_url = f'core:{name_get_form}'
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
 
         class Meta:
             fields = "__all__"
@@ -127,7 +172,10 @@ def create_lookup_classes(lookup_model, name_key):
     # Create view class dynamically
     class DynamicLookupView(SimpleLookupView):
         table_url = reverse_lazy(f'core:{name_list_lookup}')
+<<<<<<< HEAD
         form_url = reverse_lazy(f'core:{name_get_form}')
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
 
     # Set proper names for better debugging and introspection
     DynamicLookupForm.__name__ = f"{lookup_model.__name__}Form"
@@ -149,10 +197,15 @@ def prep_table(request, dataframe, form_url, delete_url):
 
     table_head = table.find('thead')
     table_head.attrs['class'] = 'sticky-top bg-white'
+<<<<<<< HEAD
     first_row = table_head.find('tr')
     first_row.find_next('tr').decompose()
     first_row.find('th').attrs['width'] = '8%'  # 4% for each button to be added
     for th in first_row.find_all('th'):
+=======
+    table_head.find('tr').find_next('tr').decompose()
+    for th in table_head.find('tr').find_all('th'):
+>>>>>>> 8aa4604 (added alerts and delete functions)
         th.attrs['class'] = 'text-start'
 
     table_body = table.find('tbody')
@@ -180,6 +233,19 @@ def prep_table(request, dataframe, form_url, delete_url):
         btn_delete.attrs['hx-post'] = reverse_lazy(delete_url, args=[id])
         span_del.attrs['class'] = 'bi bi-dash-square'
 
+<<<<<<< HEAD
+=======
+    form_row = table_head.find('tr')
+    td = form_row.find('th')
+    td.append(btn_add:=df_soup.new_tag('button'))
+    btn_add.append(span_add:=df_soup.new_tag('span'))
+    btn_add.attrs['class'] = "btn btn-sm btn-outline-dark"
+    btn_add.attrs['hx-get'] = reverse_lazy(form_url)
+    btn_add.attrs['hx-target'] = "#form_area"
+    btn_add.attrs['hx-swap'] = "innerHTML"
+    span_add.attrs['class'] = 'bi bi-plus-square'
+
+>>>>>>> 8aa4604 (added alerts and delete functions)
     return df_soup
 
 
@@ -196,7 +262,11 @@ def get_lookup_form(model_form, **kwargs):
 @login_required(login_url=reverse_lazy('login'))
 def update_lookup(request, model_form, **kwargs):
     # Check if user belongs to MarDID Maintainer group
+<<<<<<< HEAD
     if not request.user.groups.filter(name='MarDID Maintainers').exists():
+=======
+    if not request.user.groups.filter(name='MarDID Maintainer').exists():
+>>>>>>> 8aa4604 (added alerts and delete functions)
         return HttpResponseForbidden(_("You must be a MarDID Maintainer to perform this action."))
 
     if 'pk' in kwargs:
@@ -207,7 +277,11 @@ def update_lookup(request, model_form, **kwargs):
 
     if form.is_valid():
         form.save()
+<<<<<<< HEAD
         response = HttpResponse(render_crispy_form(form))
+=======
+        response = HttpResponse()
+>>>>>>> 8aa4604 (added alerts and delete functions)
         response['HX-Trigger'] = 'update_table'
         return response
 
@@ -218,7 +292,11 @@ def update_lookup(request, model_form, **kwargs):
 @login_required(login_url=reverse_lazy('login'))
 def delete_element(request, pk, lookup_model):
     # Check if user belongs to MarDID Maintainer group
+<<<<<<< HEAD
     if not request.user.groups.filter(name='MarDID Maintainers').exists():
+=======
+    if not request.user.groups.filter(name='MarDID Maintainer').exists():
+>>>>>>> 8aa4604 (added alerts and delete functions)
         return HttpResponseForbidden(_("You must be a MarDID Maintainer to perform this action."))
 
     try:

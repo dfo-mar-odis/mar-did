@@ -1,4 +1,5 @@
 from django.db import models
+<<<<<<< HEAD
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
@@ -53,6 +54,10 @@ class GroupProfiles(models.Model):
 
     def __str__(self):
         return f"{self.group.name} - {self.description or _('No description')}"
+=======
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
+>>>>>>> 8aa4604 (added alerts and delete functions)
 
 
 class Programs(models.Model):
@@ -78,9 +83,12 @@ class GeographicRegions(models.Model):
             raise ValidationError(_("This region is in use and cannot be deleted."))
         super().delete(*args, **kwargs)
 
+<<<<<<< HEAD
     class Meta:
         ordering = ['name']
 
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
 
 class Cruises(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=20, help_text=_("The name of the cruise e.g 'CAR2025002'"))
@@ -98,9 +106,15 @@ class Cruises(models.Model):
 
 
 class Instruments(models.Model):
+<<<<<<< HEAD
     name = models.CharField(verbose_name=_("Name"), max_length=20)
     serial_number = models.CharField(verbose_name=_("Serial Number"), max_length=255, blank=True, null=True,
                                      help_text=_("Serial number of an instrument if it exists"), unique=True)
+=======
+    name = models.CharField(verbose_name=_("Name"), max_length=20, unique=True)
+    serial_number = models.CharField(verbose_name=_("Serial Number"), max_length=255, blank=True, null=True,
+                                     help_text=_("Serial number of an instrument if it exists"))
+>>>>>>> 8aa4604 (added alerts and delete functions)
     description = models.CharField(verbose_name=_("Description"), max_length=255)
 
     def __str__(self):

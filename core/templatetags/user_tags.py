@@ -7,6 +7,7 @@ register = template.Library()
 def is_maintainer(user):
     """Check if user belongs to MarDID Maintainer group"""
     if user.is_authenticated:
+<<<<<<< HEAD
         return user.is_superuser or user.groups.filter(name='MarDID Maintainers').exists()
     return False
 
@@ -17,4 +18,7 @@ def is_chief_scientist(user):
     if user.is_authenticated:
         return user.is_superuser or user.groups.filter(name='Chief Scientists').exists()
 
+=======
+        return user.is_superuser or user.groups.filter(name='MarDID Maintainer').exists()
+>>>>>>> 8aa4604 (added alerts and delete functions)
     return False

@@ -2,11 +2,17 @@
 
 
 {% block content %}
+<<<<<<< HEAD
     {% if user.is_authenticated %}
     <form id="form_area" hx-trigger="load, update_table from:body" hx-get="{{ form_url }}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
     </form>
     {% endif %}
+=======
+<form id="form_area" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+</form>
+>>>>>>> 8aa4604 (added alerts and delete functions)
 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 <table id="table_id_lookup_list" hx-swap="outerHTML" hx-get="{{ table_update_url }}" hx-trigger="load, update_table from:body" >
 
