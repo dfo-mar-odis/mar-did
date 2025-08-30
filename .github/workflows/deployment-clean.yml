@@ -1,0 +1,63 @@
+name: Clean and Sync Deployment Branch
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: write
+
+jobs:
+  clean-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo (full history)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Ensure deployment branch exists locally
+        run: |
+          if git ls-remote --exit-code --heads origin deployment; then
+            git fetch origin deployment:deployment
+          else
+            git checkout --orphan deployment
+            git rm -rf .
+            git commit --allow-empty -m "Initialize deployment branch"
+            git push origin deployment
+            git fetch origin deployment:deployment
+          fi
+
+      - name: Checkout deployment branch
+        run: git checkout deployment
+
+      - name: Fetch latest master
+        run: git fetch origin master:master
+
+      - name: Merge master into deployment
+        run: |
+          git merge --no-edit origin/master || git merge --no-edit master || true
+
+      - name: Remove tests and test data
+        run: |
+          find . -type d -name "tests" -exec rm -rf {} + || true
+          find . -type d -name "test_data" -exec rm -rf {} + || true
+          find . -type d -name "sample_data" -exec rm -rf {} + || true
+          find . -type f \( -name "test_*.py" -o -name "*_test.py" \) -delete || true
+          rm -rf pytest.ini .pytest_cache .coverage || true
+
+      - name: Commit and push cleaned deployment
+        run: |
+          git add -A
+          git commit -m "Clean deployment branch [skip ci]" || echo "No changes to commit"
+          git push origin deployment
