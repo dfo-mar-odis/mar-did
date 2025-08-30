@@ -1,0 +1,186 @@
+from http.client import responses
+from urllib.parse import urlencode, parse_qs, urlsplit, urlunsplit
+from bs4 import BeautifulSoup
+
+from django import forms
+from django.middleware.csrf import get_token
+from django.template.loader import render_to_string
+from django.utils.translation import gettext as _
+from django.http import HttpResponse
+from django.contrib.auth.models import User, Group
+from django.urls import path, reverse_lazy
+from django.views.generic import TemplateView
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Div, Row, Column, Field
+from crispy_forms.bootstrap import StrictButton
+
+from core import models
+
+class DatasetStatusFilter(forms.Form):
+
+    descriptor = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label=_('Cruise Descriptor')
+    )
+
+    name = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label=_('Cruise Name')
+    )
+
+    status = forms.ModelChoiceField(
+        queryset=models.DataStatus.objects.all(),
+        empty_label=_("Select a status"),
+        widget=forms.Select(attrs={'class': 'form-select'}),
+        required=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        url = reverse_lazy('core:list_datasets')
+        target = '#table_id_dataset_status_list'
+
+        select_attrs = {
+            'hx-get': url,
+            'hx-swap': 'none'
+        }
+
+        text_attrs = {
+            'hx-get': url,
+            'hx-swap': 'none',
+            'hx-trigger': 'keydown delay:1s'
+        }
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Row(
+                Column(Field('name', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
+                Column(Field('descriptor', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
+                Column(Field('status', css_class="form-select form-select-sm", **select_attrs), css_class="col-2"),
+            ),
+        )
+
+class DatasetStatusView(TemplateView):
+    template_name = 'core/view_dataset_status.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        group = Group.objects.get(name__iexact="Datashop Processors")
+        context['title'] = "Dataset Status"
+        submitted = models.DataStatus.objects.get(name__iexact='Submitted')
+        context['filter_form'] = DatasetStatusFilter(initial={'status': submitted})
+
+        # context['datasets'] = models.Dataset.objects.all().order_by('-cruise__start_date')
+        context['processors'] = User.objects.filter(groups=group)
+        return context
+
+
+def list_datasets(request):
+    datasets = models.Dataset.objects.all().order_by('pk')
+
+    if request.method == 'GET' and 'submit' not in request.GET:
+        response = HttpResponse()
+        response['HX-Trigger'] = 'update_list'
+        return response
+
+    if name:=request.GET.get('name', None):
+        datasets = datasets.filter(cruise__name__icontains=name)
+
+    if ident:=request.GET.get('descriptor', None):
+        datasets = datasets.filter(cruise__descriptor__icontains=ident)
+
+    if status_id:=request.GET.get('status', None):
+        status = models.DataStatus(pk=status_id)
+        datasets = datasets.filter(status=status)
+
+    limit = 25
+    page = int(request.GET.get('page', 0))
+    start = page * limit
+    end = (page+1) * limit
+    datasets = datasets[start:end]
+
+    group = Group.objects.get(name__iexact="Datashop Processors")
+    context = {
+        'user': request.user,
+        'datasets': datasets,
+        'processors': User.objects.filter(groups=group),
+        'csrf_token': get_token(request)
+    }
+    html = render_to_string('core/partials/table_dataset_status.html', context=context)
+    soup = BeautifulSoup(html, 'html.parser')
+    table = soup.find(id="table_id_dataset_status_list")
+    trs = table.find('tbody').find_all('tr')
+    if len(trs) > 10:
+        query_params = parse_qs(request.GET.urlencode())
+        query_params['page'] = page+1
+        new_query_string = urlencode(query_params, doseq=True)
+
+        # we can show up to 10 TRs on the screen, but not having the trigger on the very last
+        # row we can start the loading process before the user gets to the final TR.
+        last_tr = trs[-10]
+        last_tr.attrs['hx-trigger'] = 'intersect once'
+        last_tr.attrs['hx-get'] = request.path + f"?{new_query_string}"
+        last_tr.attrs['hx-target'] = "#tbody_id_dataset_status_list"
+        last_tr.attrs['hx-swap'] = 'beforeend'
+
+    if not page:
+        return HttpResponse(table)
+
+    return HttpResponse(trs)
+
+
+def assign_datasets(request, dataset_id):
+    datasets = models.Dataset.objects.filter(pk=dataset_id)
+    dataset = datasets.first()
+
+    user_id = request.POST.get('assigned_to', None)
+    if user_id:
+        assign_to = User.objects.get(pk=user_id)
+        dataset.status = models.DataStatus.objects.get(name__iexact="Received")
+        dataset.save()
+
+        if not dataset.processing.exists():
+            processing = models.Processing.objects.create(dataset=dataset, assigned_to=assign_to)
+        else:
+            processing = dataset.processing.first()
+            processing.assigned_to = assign_to
+            processing.save()
+    else:
+        dataset.status = models.DataStatus.objects.get(name__iexact="Unknown")
+        dataset.save()
+
+        dataset.processing.delete()
+
+    group = Group.objects.get(name__iexact="Datashop Processors")
+    context = {
+        'user': request.user,
+        'datasets': datasets,
+        'processors': User.objects.filter(groups=group),
+        'csrf_token': get_token(request)
+    }
+    html = render_to_string('core/partials/table_dataset_status.html', context)
+    soup = BeautifulSoup(html, 'html.parser')
+    tr = soup.find('tr', id=f'tr_id_dataset_status_{dataset_id}')
+    return HttpResponse(tr)
+
+
+def clear_filter(request):
+    context = {'filter_form': DatasetStatusFilter()}
+    html = render_to_string('core/partials/form_filter_dataset_status.html', context=context)
+    return HttpResponse(html)
+
+
+urlpatterns = [
+    path('dataset_status', DatasetStatusView.as_view(), name="dataset_status_view"),
+    path('dataset_status/list', list_datasets, name="list_datasets"),
+    path('dataset_status/assign/<int:dataset_id>', assign_datasets, name="assign_datasets"),
+    path('dataset_status/clear_filter', clear_filter, name="clear_dataset_status_filter_form")
+]

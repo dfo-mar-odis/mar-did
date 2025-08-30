@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div id="{{ alert_id }}" class="alert alert-{{ alert_type }}" hx-ext="ws"
+     ws-connect="/ws/notifications/{{ logger }}/{{ alert_id }}_status">
+    <div class="row">
+        <div class="col">
+            <div id="{{ alert_id }}_status" >{{ message }}</div>
+        </div>
+        <div class="col-auto">
+        </div>
+    </div>
+</div>

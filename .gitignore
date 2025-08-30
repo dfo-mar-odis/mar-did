@@ -52,7 +52,7 @@ coverage.xml
 cover/
 
 # Translations
-*.mo
+#*.mo
 *.pot
 
 # Django stuff:
@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+staticfiles
+media
+*.mwb.bak

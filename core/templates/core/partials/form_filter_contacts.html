@@ -1,0 +1,5 @@
+{% load user_tags %}
+{% if user.is_authenticated and user|is_maintainer %}
+<form id="form_contacts_form_area" hx-trigger="load" hx-get="{% url 'core:get_contact_form' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+</form>
+{% endif %}

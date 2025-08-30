@@ -1,0 +1,18 @@
+/* static/css/main.css */
+body {
+    background-color: #b9bcbf; !important /* Light gray background */
+}
+
+.dropdown-menu {
+    z-index: 1050; !important /* Higher z-index for dropdowns */
+<<<<<<< HEAD
+}
+
+.fill-card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10rem; /* Adjust size as needed */
+=======
+>>>>>>> 8aa4604 (added alerts and delete functions)
+}

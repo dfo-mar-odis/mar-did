@@ -1,0 +1,828 @@
+[
+    {
+        "model": "core.geographicregions",
+        "pk": 1,
+        "fields": {
+            "name": "Banqereau Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 2,
+        "fields": {
+            "name": "Barrow Strait"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 3,
+        "fields": {
+            "name": "Bay of Fundy"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 4,
+        "fields": {
+            "name": "Bras d’Or Lakes"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 5,
+        "fields": {
+            "name": "Brown’s Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 6,
+        "fields": {
+            "name": "Cabot Strait"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 7,
+        "fields": {
+            "name": "Chaleur Bay"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 8,
+        "fields": {
+            "name": "Chedabucto Bay"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 9,
+        "fields": {
+            "name": "Continental Slope"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 10,
+        "fields": {
+            "name": "Davis Strait"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 11,
+        "fields": {
+            "name": "Emerald Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 12,
+        "fields": {
+            "name": "Emerald Basin"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 13,
+        "fields": {
+            "name": "Flemish Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 14,
+        "fields": {
+            "name": "Flemish Cap"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 15,
+        "fields": {
+            "name": "Flemish Pass"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 16,
+        "fields": {
+            "name": "Georges Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 17,
+        "fields": {
+            "name": "Grand Banks"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 18,
+        "fields": {
+            "name": "Gulf of Maine"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 19,
+        "fields": {
+            "name": "Hudson Bay"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 20,
+        "fields": {
+            "name": "LaHave Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 21,
+        "fields": {
+            "name": "Labrador Shelf"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 22,
+        "fields": {
+            "name": "Laurentian Fan"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 23,
+        "fields": {
+            "name": "Laurentian Trough"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 24,
+        "fields": {
+            "name": "Magdalen Shelf"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 25,
+        "fields": {
+            "name": "Northumberland Strait"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 26,
+        "fields": {
+            "name": "Orphan Basin"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 27,
+        "fields": {
+            "name": "Orphan Knoll"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 28,
+        "fields": {
+            "name": "Sable Island"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 29,
+        "fields": {
+            "name": "Scotian Shelf"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 30,
+        "fields": {
+            "name": "Shediac Valley"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 31,
+        "fields": {
+            "name": "St. Anne’s Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 32,
+        "fields": {
+            "name": "St. Lawrence Estuary"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 33,
+        "fields": {
+            "name": "Sydney Bight"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 34,
+        "fields": {
+            "name": "The Gulf of St. Lawrence"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 35,
+        "fields": {
+            "name": "The Gully"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 36,
+        "fields": {
+            "name": "West Bank"
+        }
+    },
+    {
+        "model": "core.geographicregions",
+        "pk": 37,
+        "fields": {
+            "name": "Whycocomagh Bay"
+        }
+    },
+    {
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ADCP",
+			"description": "ACOUSTIC DOPPLER CURRENT PROFILER, RDI & AMETEK"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "AMMONIA",
+			"description": "AMMONIA NH4 ANALYSIS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "AMT",
+			"description": "AMETEK"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "BATF",
+			"description": "BATFISH DATA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "BENTH",
+			"description": "BENTHIC SAMPLING"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "BOTPHOT",
+			"description": "BOTTOM PHOTOGRAPHY"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CFC",
+			"description": "CHLOROFLOURO CARBON"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CTD",
+			"description": "CONDUCTIVITY TEMPERATURE DEPTH"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "DRIB",
+			"description": "DRIFTING ARGOS BUOY"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "DRIB\/MAB",
+			"description": "DRIFTING OR MOORED ARGOS BUOY"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "LADCP",
+			"description": "LOWERED ADCP"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MAB",
+			"description": "MOORED ARGOS BUOY"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MADCP",
+			"description": "MOORED  ACOUSTIC DOPPLER  CURRENT  PROFILER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MBT",
+			"description": "DIGITAL MECHANICAL BATHYTHERMOGRAPH"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MCM",
+			"description": "MOORED CURRENT METER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MCTD",
+			"description": "MOORED CTD"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MET",
+			"description": "METROLOGICAL DATA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MMB",
+			"description": "METEORLOGICAL BUOYS, MINIMET"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MTC",
+			"description": "MOORED TEMPERATURE CHAIN (RELATED TO TEMP)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MTG",
+			"description": "MOORED TIDE GAUGE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MTR",
+			"description": "MOORED TEMPERATURE RECORDER (RELATED TO TEMP)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "MVCTD",
+			"description": "MOVING VESSEL CTD"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "NONE",
+			"description": "NO DATA TYPE AVAILABLE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "PPLANK",
+			"description": "PHYTO PLANKTON FROM BOTTLE SAMPLES FOR ZMP"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "SAT",
+			"description": "SATELLITE DATA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "SURF",
+			"description": "SURFACE & UPPER AIR"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "UNKNOWN",
+			"description": "UNKNOWN DATA TYPE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "VADCP",
+			"description": "VESSEL MOUNTED ACOUSTIC DOPPLER PROFILER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "WATM",
+			"description": "MOORED WATER SAMPLER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "WAVM",
+			"description": "WAVE MEASUREMENTS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "WB",
+			"description": "WAVE BOUYS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "XBT",
+			"description": "EXPENDABLE BATHYTHERMOGRAPH"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ZPLANK",
+			"description": "ZOOPLANKTON USING RING NETS FOR ZMP"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "HPLC",
+			"description": "HIGH PERFORMANCE LIQUID CHROMATOGRAPH MICROGRAMS\/L"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "LEMCM",
+			"description": "LOWERED ELECTROMAGNETIC CURRENT METER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "IPS",
+			"description": "ICE PROFILING SONAR INSTRUMENT (CREATES ULS DATA TYPE)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "BIOLSUM",
+			"description": "BIOLOGICAL & NUTRIENTS SUMMARY OF BOTTLE DATA AZMP\/AZOMP PROTOCOLS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "SEAH",
+			"description": "SEAHORSE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "AMAR",
+			"description": "AUTONOMOUS MULTICHANNEL ACOUSTIC RECORDER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "VLOPC",
+			"description": "VERTICAL LASER OPTICAL PARTICLE (PLANKTON) COUNTER  (ON CTD OR NET)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "BOTLNUTS",
+			"description": "BOTTLE NUTRIENTS AND CHLOROPHYLL FOR ZMP LABSEA PROFILES"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ELOG",
+			"description": "ELECTRONIC LOG (AUTOMATED)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "BPR",
+			"description": "BOTTOM PRESSURE RECORDER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "LOPC",
+			"description": "LASER OPTICAL PARTICLE (PLANKTON) COUNTER (ATTACHED TO MVP)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ULS",
+			"description": "UPWARD LOOKING SONAR (DATA TYPE CREATED USING IPS INSTRUMENT)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "BTL",
+			"description": "BOTTLE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CPHL",
+			"description": "CHLOROPHYLL-A CONTENT MG\/M**3 HOLM-HANSEN CALCULATION METHOD gf3defs code"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CHN",
+			"description": "CARBON HYDROGEN NITROGEN MICROGRAMS\/L"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "PSAL",
+			"description": "PRACTICAL SALINITY PSU (gf3defs code) SALINOMETER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "PHPH",
+			"description": "HYDROGEN ION CONCENTRATION CALCULATED IN SITU (PH) (gf3defs code)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "TSG",
+			"description": "THERMOSALINOGRAPH UNDERWAY FLOW THRU DATA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "SCS",
+			"description": "SCIENTIFIC COMPUTER SYSTEM DATA MERGING PROGRAM BY NOAA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CO2_SYS",
+			"description": "CARBONATE (CO2) SYSTEM PARMS TA AND TIC umol\/kg pH_25 (25 deg C) pCO2 uatm"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "DRIFTS",
+			"description": "DRIFTING SATELLITE TRACKED SEIMAC BARREL"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ZPLANKBION",
+			"description": "ZOOPLANKTON COLLECTED USING BIONESS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ZPLANKMULT",
+			"description": "ZOOPLANKTON COLLECTED USING MULTINET"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ORGNUT_DAL",
+			"description": "ORGANIC NUTRIENT CONCENTRATION (BERTRAND LAB DAL)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "WINK",
+			"description": "WINKLER TITRATIONS OF OXYGEN ML\/L"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "O2METER",
+			"description": "BENCH PROBE O2CONC ML\/L (IE HACH HQ40d Portable)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "AZMP_DAL",
+			"description": "Total Dissolved Inorganic Carbon DIC & Total Alkalinity TA µmol\/kg DAL U"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "TICTA",
+			"description": "TOTAL INORGANIC CARBON AND TOTAL ALKALINITY"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "DTNTR",
+			"description": "DEMERSAL TRAWL NET TEMPERATURE RECORDER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "AZMP_TEMPL",
+			"description": "AZMP ENTRY TEMPLATE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "NUTS",
+			"description": "BOTTLE NUTRIENT DATA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "IGNORE",
+			"description": "DUPLICATE DATA RECORD CAN BE IGNORED"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "O2ELECTROD",
+			"description": "BENCH PROBE O2CONC % SAT & TEMPERATURE OF ANALYSIS (IE HACH HQ40d Portable)"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CYTO",
+			"description": "CYTOMETRY DATA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "PCO2_FT",
+			"description": "PARTIAL PRESSURE CO2 (pCO2) UNDERWAY UNCONTAMINATED SEAWATER FLOW THRU"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ECHO_KNUD",
+			"description": "KNUDSEN ECHOSOUNDER DEPTH DATA"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "PH25",
+			"description": "PH MEASUREMENTS AT 25 DEGREES CELSIUS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CASTCTD",
+			"description": "CASTAWAY CTD"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "PAM",
+			"description": "PASSIVE ACOUSTIC MOORINGS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "SF6",
+			"description": "SULFUR HEXAFLUORIDE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "RBR",
+			"description": "RBR SENSOR - DOXY, PH, TURBIDITY, FLOUR"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ICYCLER",
+			"description": "OCEAN SURFACE PROFILER MOORED UNDER MOBILE PACK ICE"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ANDES",
+			"description": "EVENT LOGGING SYSTEM"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "CO2_SYS_FT",
+			"description": "FLOW THRU DISCRETE CARBONATE (CO2) SYSTEM PARMS TA AND TIC pH_25  pCO2 "
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "ZPLANKMANT",
+			"description": "ZOOPLANKTON COLLECTED USING MANTA NET FOR ZMP"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "GLD",
+			"description": "GLIDER"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "HUB",
+			"description": "HUB SUBSURFACE MOORINGS"
+		}
+	},
+	{
+		"model": "core.datatypes",
+		"fields": {
+			"name": "SUNA",
+			"description": "Sea-Bird SUNA V2 Nitrate Sensor"
+		}
+	}
+]

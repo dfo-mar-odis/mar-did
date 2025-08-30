@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% include 'core/partials/form_filter_dataset_status.html' %}
+<div class="table-responsive" style="max-height: 400px;">
+    {% include 'core/partials/table_dataset_status.html' %}
+</div>
+{% endblock %}

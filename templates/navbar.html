@@ -1,0 +1,90 @@
+{% load static %}
+{% load i18n %}
+{% load user_tags %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i class="bi bi-grid-3x3-gap-fill me-2"></i>{% trans 'Maritimes Datashop Inventory Dashboard' %}</a>
+
+        <!-- Add the toggle button for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown">
+<<<<<<< HEAD
+                    <a class="nav-link dropdown-toggle" href="#" id="viewsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-house me-1"></i>{% trans 'Views' %}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="viewsDropdown">
+                        <li><a class="dropdown-item" href="{% url 'core:cruise_view' %}">{% trans 'Cruises' %}</a></li>
+                        {% if user.is_authenticated and user|is_chief_scientist %}
+                        <li><a class="dropdown-item" href="{% url 'core:new_cruise_view' %}">{% trans 'Add a Cruise' %}</a></li>
+                        {% endif %}
+=======
+                    <a class="nav-link dropdown-toggle" href="#" id="lookupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-house me-1"></i>{% trans 'Views' %}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
+                        <li><a class="dropdown-item" href="{% url 'core:cruise_view' %}">{% trans 'Cruises' %}</a></li>
+>>>>>>> 8aa4604 (added alerts and delete functions)
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    {% if user.is_authenticated and user|is_maintainer %}
+                        <a class="nav-link dropdown-toggle" href="#" id="lookupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-search me-1"></i>{% trans 'Lookup Tables' %}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
+<<<<<<< HEAD
+                            {% if user.is_superuser %}
+                            <li><a class="dropdown-item" href="/admin">{% trans 'Administrator' %}</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'core:contacts_view' %}">{% trans 'Contacts' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_geo_regions' %}">{% trans 'Geographic Regions' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_instruments' %}">{% trans 'Instruments' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_platforms' %}">{% trans 'Ships and Platforms' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_programs' %}">{% trans 'Programs' %}</a></li>
+=======
+                            <li><a class="dropdown-item" href="/admin/auth/user/">{% trans 'Contacts' %}</a></li>
+                            <li><a class="dropdown-item" href="/admin/auth/group/">{% trans 'Contact Roles' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_geo_regions' %}">{% trans 'Geographic Regions' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_instruments' %}">{% trans 'Instruments' %}</a></li>
+>>>>>>> 8aa4604 (added alerts and delete functions)
+                        </ul>
+                    {% endif %}
+                </li>
+            </ul>
+            <div class="d-flex">
+                {% if user.is_authenticated %}
+                    <span class="navbar-text me-3"><i class="bi bi-person-circle me-1"></i>{{ user.username }}</span>
+                    <form method="post" action="{% url 'logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-light"><i class="bi bi-box-arrow-right me-1"></i>{% trans 'Logout' %}</button>
+                    </form>
+                {% else %}
+                    <a class="btn btn-outline-light" href="{% url 'login' %}?next={{request.path}}"><i class="bi bi-box-arrow-in-right me-1"></i>{% trans 'Login' %}</a>
+                {% endif %}
+            </div>
+            <div class="d-flex">
+                <div class="language-selector">
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+
+                    {% for lang_code, lang_name in AVAILABLE_LANGUAGES %}
+                        {% if lang_code != CURRENT_LANGUAGE %}
+                            <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                <input name="language" type="hidden" value="{{ lang_code }}">
+                                <button type="submit" class="btn btn-outline-light ms-2"><i class="bi bi-translate me-1"></i>{{ lang_name }}</button>
+                            </form>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

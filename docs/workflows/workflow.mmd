@@ -1,0 +1,73 @@
+%%%%{init: {'theme': 'base', 'themeVariables': {
+%%    'primaryColor': '#ffcc00',
+%%    'edgeLabelBackground': '#ffffff',
+%%    'actorBorder': '#000000',
+%%    'actorBkg': '#e6f7ff',
+%%    'actorTextColor': '#000000'
+%%}}}%%
+sequenceDiagram
+    box rgb(126, 126, 126, .1) Datashop
+    participant DatashopProcessor as Datashop Processor
+    participant DatashopLoader as Datashop Loader
+    end
+    participant ChiefScientist as Chief Scientist
+    participant DataManager as Data Manager
+    participant LabTechnicians as Lab Technicians
+    box rgb(0, 255, 0, .1) Mar-DID
+    participant System as Webpage
+    participant WorkQueue as Work Queue
+    participant Notification as Notification
+    participant Storage as Storage
+    end
+
+    note over DatashopProcessor,DataManager: Any of these roles can create the cruise
+    DatashopProcessor->>System: Add cruise details and submit
+
+    System->>Notification: Send Notifications
+    Notification-->>ChiefScientist: Chief Scientist notified of cruise creation
+
+    ChiefScientist->>System: Confirm Details
+    System->>WorkQueue: Mark Datasets as "Expected"
+
+    note over DatashopProcessor,LabTechnicians: Cruise Happens
+    note over DatashopProcessor,LabTechnicians: Any of these can handle data upload
+
+    ChiefScientist->>System: Upload datasets (Log files, CTD files, etc.)
+    System->>Storage: Data files are uploaded to SRC/NAS storage
+    System->>WorkQueue: Mark Datasets as "Submitted"
+    System->>Notification: Notify Parties
+
+    Notification-->>DataManager: Receipt for submitted data and where it is archived
+    Notification-->>ChiefScientist: Cruise data was submitted
+    Notification-->>DatashopProcessor: Notified data has been submitted for processing and Loading
+
+    DataManager->>System: Assign unprocessed data to a Lab Technician
+    System->>WorkQueue: Add work to a Lab Technician's Queue
+    note right of WorkQueue: We can now see who has<br/>data for future followup
+
+    DatashopProcessor->>System: Claim a dataset or assign a dataset to a processor/Lab Tech
+    System->>WorkQueue: Add work to a Datashop Processor's or Loader's Queue
+    note right of WorkQueue: We can now see who has<br/>data for future followup
+    loop Data Processing
+    note over DatashopProcessor,Storage: Data is acquired for processing / loading to Biochem
+    end
+
+    DatashopProcessor->>System: Upload processed data
+    System->>WorkQueue: Mark Datasets as "Processed"
+    LabTechnicians->>System: Upload processed data
+    System->>WorkQueue: Mark Datasets as "Submitted"
+
+    System->>Storage: Version control original data in archive directory
+    System->>Storage: Upload new data
+    System->>Notification: Notify Parties
+
+    Notification-->>ChiefScientist: Notify: Data Processed
+    Notification-->>DataManager: Notify: Data Processed
+    Notification-->>DatashopLoader: Notify: Data ready for loading
+
+    DatashopLoader->>System: Request 'Submitted' data
+    System->>Storage: Get recent data
+    Storage-->>System: Return recent data
+    System-->>DatashopLoader: Retrieve data to work with
+
+    note over DatashopLoader,System: Data is Loaded

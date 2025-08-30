@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load user_tags %}
+
+<form id="form_contacts_table_area" {% if user.is_authenticated %}hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'{% endif %}>
+<div class="table-responsive" style="max-height: 400px;">
+<table id="table_id_contacts_list" class="table table-striped table-sm" hx-get="{% url 'core:list_contacts' %}" hx-trigger="update_list from:body" hx-swap="innerHTML">
+    <thead class="sticky-top bg-white">
+        <tr>
+            <th width="2%" style="white-space: nowrap;">
+            </th>
+            <th style="white-space: nowrap;">{% trans 'Name' %}</th>
+            <th style="white-space: nowrap;">{% trans 'Groups' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for contact in contacts %}
+        {% if contact.username != 'mar-did-admin' %}
+    <tr id="tr_id_contacts_{{contact.pk}}">
+        <th style="white-space: nowrap;">
+            {% if user.is_authenticated and user|is_maintainer %}
+            <a class="btn btn-sm btn-dark" hx-swap="outerHTMl" hx-target="#form_contacts_form_area"
+               hx-get="{% url 'core:get_contact_form' contact.pk %}" title="{% trans 'Update Contact Information' %}"><span class="bi bi-pencil-square"></span></a>
+            <a class="btn btn-sm btn-danger ms-2" hx-confirm="{% trans 'Are you sure?' %}" hx-target="#tr_id_contacts_{{contact.pk}}"
+               hx-post="{% url 'core:remove_contact' contact.pk %}" title="{% trans 'Remove data type from contacts' %}"><span class="bi bi-dash-square"></span></a>
+            {% endif %}
+        </th>
+        <td>{% if contact.last_name %}{{ contact.last_name }}, {{ contact.first_name }}{% else %}{{contact.username}}{% endif %}</td>
+        <td>{% for group in contact.groups.all %}<button type="button" class="btn btn-sm btn-outline-dark me-2" title="{{ group.profile.description }}">{{group.name}}</button>{% endfor %}</td>
+    </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+
+</table>
+</div>
+</form>
