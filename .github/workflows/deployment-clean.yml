@@ -50,7 +50,8 @@ jobs:
 
       - name: Merge master into deployment
         run: |
-          git merge --no-edit origin/master || git merge --no-edit master || true
+          git merge --allow-unrelated-histories --no-edit origin/master || \
+          git merge --allow-unrelated-histories --no-edit master || true
 
       - name: Remove tests and test data
         run: |
