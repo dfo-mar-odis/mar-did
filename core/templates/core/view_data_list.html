@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<span class="mb-2 h4">{{ object.name }} - {{ object.descriptor }}</span>
+
+{% include 'core/partials/table_data_list.html' with cruise=object %}
+{% endblock %}

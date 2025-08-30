@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_cruise">
+        {% crispy cruise_form %}
+    </form>
+
+    {% if object %}
+        {% include 'core/partials/table_data_list.html' with cruise=object%}
+    {% endif %}
+{% endblock %}
+

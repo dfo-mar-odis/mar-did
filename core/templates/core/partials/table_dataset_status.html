@@ -1,0 +1,51 @@
+{% load i18n %}
+
+<table id="table_id_dataset_status_list" class="table table-striped table-sm" hx-swap="innerHTML">
+        <thead class="sticky-top bg-white">
+        <tr>
+            <th>{# button column #}</th>
+            <th>{% trans 'Cruise' %}</th>
+            <th>{% trans 'Dataset' %}</th>
+            <th>{% trans 'Status' %}</th>
+            <th>{% trans 'Assign To' %}</th>
+            <th>{% trans 'Assign Date' %}</th>
+        </tr>
+        </thead>
+        <tbody id="tbody_id_dataset_status_list">
+        {% for dataset in datasets %}
+        <tr id="tr_id_dataset_status_{{dataset.id}}">
+            <td>{{dataset.pk}}</td>
+            <td>{{ dataset.cruise }}</td>
+            <td>{{ dataset.data_type.name }}</td>
+            <td>
+                <button class="btn btn-sm {{dataset.status.get_button_colour}}" title="{% trans dataset.status.description %}">{% trans dataset.status.name %}</button>
+            </td>
+            <td>
+                <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <select class="form-select form-select-sm" id="select_id_assigned_to" name="assigned_to">
+                            <option value="">------</option>
+                            {% for contact in processors %}
+                            <option value="{{contact.id}}" {% if dataset.processing and dataset.processing.first.assigned_to.id == contact.id %}selected{% endif %}>
+                                {{ contact.get_full_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-sm btn-outline-dark" type="button"
+                                hx-post="{% url 'core:assign_datasets' dataset.id %}"
+                                hx-target="#tr_id_dataset_status_{{dataset.id}}"><span class="bi bi-check-square"></span>
+                        </button>
+                    </div>
+                </form>
+            </td>
+            <td>
+                {% if dataset.processing.first.assigned_date %}
+                {{ dataset.processing.first.assigned_date }}
+                {% endif %}
+            </td>
+        </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>

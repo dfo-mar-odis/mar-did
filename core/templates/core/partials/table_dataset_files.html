@@ -1,0 +1,52 @@
+{% load i18n %}
+
+<table class="table table-sm table-striped">
+    <thead class="sticky-top bg-white">
+    <tr>
+        {% if not archive_table %}
+        <th>{# button column #}</th>
+        {% endif %}
+        <th>{% trans 'File Name' %}</th>
+        <th>{% trans 'File Location' %}</th>
+        <th>{% trans 'Submitted By' %}</th>
+        <th>{% trans 'Submitted Date' %}</th>
+        {% if archive_table %}
+        <td></td>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for file in files %}
+    <tr>
+        {% if not file.is_archived %}
+        <th style="width: 2%; white-space: nowrap;">
+            <button class="btn btn-sm btn-warning" hx-target="#div_id_data_submission_messages"
+                    hx-get="{% url 'core:get_archive_form' file.id %}" title="{% trans 'Archive File' %}"><span
+                    class="bi bi-safe"> {% trans 'Archive' %}</span></button>
+        </th>
+        {% endif %}
+        <td>{{ file.file_name }}</td>
+        <td>{{ file.file }}</td>
+        <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
+        <td>{{ file.submitted_date }}</td>
+        {% if file.is_archived %}
+        <td></td>
+        {% endif %}
+
+    </tr>
+    {% for issue in file.issues.all %}
+    <tr class="table-success">
+        <th>{% trans 'Issue' %}</th>
+        <td colspan="4">{{ issue.issue }}</td>
+    </tr>
+    <tr class="table-success">
+        <th></th>
+        <th></th>
+        <td>{{ issue.submitted_by }}</td>
+        <td>{{ issue.submitted_date }}</td>
+        <td></td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>

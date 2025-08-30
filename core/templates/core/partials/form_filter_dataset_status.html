@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+{% load i18n %}
+<form id="form_id_datasets_filter_form" class="card mb-2" hx-target="#table_id_dataset_status_list" hx-get="{% url 'core:list_datasets' %}" hx-trigger="load, update_list from:body">
+    <div class="card-header">
+        <div class="card-title">
+            <button type="button" class="btn btn-sm btn-outline-dark" title="{% trans 'Clear Filters' %}" hx-swap="outerHTML" hx-get="{% url 'core:clear_dataset_status_filter_form' %}" hx-target="#form_id_datasets_filter_form"><span class="bi bi-eraser" style="font-size: 1.5em;"> {% trans 'Filter' %}</span></button>
+        </div>
+    </div>
+    <div class="card-body mb-2">
+        <input type="hidden" name="submit" value="submit" />
+        {% crispy filter_form %}
+    </div>
+</form>

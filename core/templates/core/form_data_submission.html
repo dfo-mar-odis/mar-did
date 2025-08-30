@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <span class="h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
+    {% if user.is_authenticated and data_form %}
+    <form id="form_id_data" class="mt-2" enctype="multipart/form-data"
+          hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+          hx-encoding="multipart/form-data">
+
+        {% crispy data_form %}
+        <div id="div_id_files" class="mb-3">
+            <label for="id_files" class="form-label">
+                Upload Files
+            </label>
+            <div><input type="file" name="files" class="form-control" multiple="" id="id_files"> </div>
+        </div>
+        <input type="hidden" name="hidden-submit" hx-indicator="#spinner" hx-trigger="submit_form from:body"
+               hx-swap="none" hx-post="{% url 'core:submit_data' dataset.id 0 %}" />
+
+        <button id="btn_id_form_submit" type="button" hx-swap="none"
+                hx-get="{% url 'core:submit_data' dataset.id 0 %}" class="btn btn-primary"
+                title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
+
+{% trans 'Mark the dataset as expected if more datafiles are required' %}">
+            <span class="bi bi-check-square me-2"></span>{% trans 'Save' %}
+        </button>
+        <button id="btn_id_form_submit_lab" type="button" hx-swap="none"
+                hx-post="{% url 'core:submit_data' dataset.id 1 %}" class="btn btn-primary"
+                title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
+
+{% trans 'Mark a dataset as being with the lab for post cruise processing' %}">
+            <span class="bi bi-check-square me-2"></span>{% trans 'Mark sent to Lab' %}
+        </button>
+        <button id="btn_id_form_submit_notifications" type="button" hx-swap="none"
+                hx-post="{% url 'core:submit_data' dataset.id 2 %}" class="btn btn-primary"
+                title="{% trans 'Save Instrument selections and upload datafiles if attached.' %}
+
+{% trans 'Mark a dataset submitted to send notifications to stakeholders that data is ready for processing and/or loading' %}">
+            <span class="bi bi-check-square me-2"></span>{% trans 'Save, Mark Submitted' %}
+        </button>
+    </form>
+    <div class="mt-2" id="div_id_data_submission_messages">
+        {# if files could not be uploaded we can swap error messages in here telling the user to archive the files #}
+        {# that couldn't be uploaded with a message about why they're re-uploading the file #}
+    </div>
+    {% endif %}
+
+    <div id="div_id_file_list" class="table-responsive mt-2" style="max-height: 400px; overflow-y: auto;" hx-get="{% url 'core:update_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
+    {% include 'core/partials/table_dataset_files.html' with archive_table=False files=dataset.current_files %}
+    </div>
+
+    <div id="div_id_archived_file_list" class="table-responsive mt-2" style="max-height: 400px; overflow-y: auto;" hx-get="{% url 'core:update_archive_file_list' dataset.pk %}" hx-trigger="update_file_list from:body">
+    {% include 'core/partials/table_dataset_files.html' with archive_table=True files=dataset.archived_files %}
+    </div>
+
+{% endblock %}
+
