@@ -59,6 +59,7 @@ jobs:
           find . -type d -name "test_data" -exec rm -rf {} + || true
           find . -type d -name "sample_data" -exec rm -rf {} + || true
           find . -type f \( -name "test_*.py" -o -name "*_test.py" \) -delete || true
+          find . -type f -name "[d|D]ocker" -exec rm -rf {} + || true
           rm -rf pytest.ini .pytest_cache .coverage || true
 
       - name: Commit and push cleaned deployment
