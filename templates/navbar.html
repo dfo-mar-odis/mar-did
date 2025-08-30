@@ -14,7 +14,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
-<<<<<<< HEAD
                     <a class="nav-link dropdown-toggle" href="#" id="viewsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-house me-1"></i>{% trans 'Views' %}
                     </a>
@@ -23,13 +22,6 @@
                         {% if user.is_authenticated and user|is_chief_scientist %}
                         <li><a class="dropdown-item" href="{% url 'core:new_cruise_view' %}">{% trans 'Add a Cruise' %}</a></li>
                         {% endif %}
-=======
-                    <a class="nav-link dropdown-toggle" href="#" id="lookupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-house me-1"></i>{% trans 'Views' %}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
-                        <li><a class="dropdown-item" href="{% url 'core:cruise_view' %}">{% trans 'Cruises' %}</a></li>
->>>>>>> 8aa4604 (added alerts and delete functions)
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -38,7 +30,6 @@
                             <i class="bi bi-search me-1"></i>{% trans 'Lookup Tables' %}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="lookupDropdown">
-<<<<<<< HEAD
                             {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="/admin">{% trans 'Administrator' %}</a></li>
                             {% endif %}
@@ -47,12 +38,6 @@
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_instruments' %}">{% trans 'Instruments' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_platforms' %}">{% trans 'Ships and Platforms' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_programs' %}">{% trans 'Programs' %}</a></li>
-=======
-                            <li><a class="dropdown-item" href="/admin/auth/user/">{% trans 'Contacts' %}</a></li>
-                            <li><a class="dropdown-item" href="/admin/auth/group/">{% trans 'Contact Roles' %}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_geo_regions' %}">{% trans 'Geographic Regions' %}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_instruments' %}">{% trans 'Instruments' %}</a></li>
->>>>>>> 8aa4604 (added alerts and delete functions)
                         </ul>
                     {% endif %}
                 </li>
