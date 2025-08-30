@@ -29,13 +29,17 @@ jobs:
       - name: Ensure deployment branch exists locally
         run: |
           if git ls-remote --exit-code --heads origin deployment; then
-            git fetch origin deployment:deployment
+            git fetch origin deployment
+            git checkout deployment
+            git reset --hard origin/deployment
           else
             git checkout --orphan deployment
             git rm -rf .
             git commit --allow-empty -m "Initialize deployment branch"
             git push origin deployment
-            git fetch origin deployment:deployment
+            git fetch origin deployment
+            git checkout deployment
+            git reset --hard origin/deployment
           fi
 
       - name: Checkout deployment branch
