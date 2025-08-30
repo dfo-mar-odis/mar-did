@@ -54,6 +54,7 @@ class GroupProfiles(models.Model):
     def __str__(self):
         return f"{self.group.name} - {self.description or _('No description')}"
 
+
 class Programs(models.Model):
     name = models.CharField(_("Program name"), max_length=100, unique=True)
     description = models.TextField(_("Program description"))
