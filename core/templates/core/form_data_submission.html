@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <span class="h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
+    <span class="h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {{ dataset.data_type.name }} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
     {% if user.is_authenticated and data_form %}
     <form id="form_id_data" class="mt-2" enctype="multipart/form-data"
           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
@@ -16,7 +16,7 @@
             </label>
             <div><input type="file" name="files" class="form-control" multiple="" id="id_files"> </div>
         </div>
-        <input type="hidden" name="hidden-submit" hx-indicator="#spinner" hx-trigger="submit_form from:body"
+        <input type="hidden" name="hidden-submit" hx-trigger="submit_form from:body"
                hx-swap="none" hx-post="{% url 'core:submit_data' dataset.id 0 %}" />
 
         <button id="btn_id_form_submit" type="button" hx-swap="none"

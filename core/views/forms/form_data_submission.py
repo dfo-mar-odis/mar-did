@@ -120,23 +120,23 @@ def save_files(user, dataset, files, override=False):
 
     loading_msg = _("Loading")
     fs = FileSystemStorage(location=media_path)
-    for file_ in files:
-        logger.info(loading_msg + f" : {file_.name}")
+    for uploaded_file in files:
+        logger.info(loading_msg + f" : {uploaded_file.name}")
 
-        file_path = os.path.join(target_directory, file_.name)
-        media_file_path = os.path.join(media_path, file_.name)
-        if dataset.files.filter(file=media_file_path).exists():
-            could_not_write_buffer.append(file_)
+        file_path = os.path.join(target_directory, uploaded_file.name)
+        media_file_path = os.path.join(media_path, uploaded_file.name)
+        if dataset.files.filter(file=file_path).exists():
+            could_not_write_buffer.append(uploaded_file)
             continue
 
-        fn = fs.save(file_.name, file_)
+        fn = fs.save(uploaded_file.name, uploaded_file)
         mfp = fs.path(fn)
 
         created_files_buffer.append(
             models.DataFiles(
                 data=dataset,
                 file=file_path,
-                file_name=file_.name,
+                file_name=uploaded_file.name,
                 submitted_by=user
             )
         )
@@ -203,7 +203,9 @@ def submit_data(request, data_id, notify):
                 div = soup.find('div', id="div_id_data_submission_messages")
                 div.attrs['hx-swap-oob'] = True
                 div.append(BeautifulSoup(html, 'html.parser'))
-                return HttpResponse(soup)
+                response = HttpResponse(soup)
+                response['HX-Trigger'] = 'update_file_list'
+                return response
 
         if notify:
             if int(notify) == 1:

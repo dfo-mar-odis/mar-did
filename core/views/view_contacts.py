@@ -89,9 +89,9 @@ class ContactForm(forms.ModelForm):
             )
         )
 
-def authenticated(request):
+def authenticated(user):
     # Check if user belongs to MarDID Maintainers or Chief Scientists groups
-    if request.user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
+    if user.is_superuser or user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
         return True
 
     return False
@@ -108,7 +108,7 @@ def list_contacts(request):
     return HttpResponse(soup.find('table', id="table_id_contacts_list"))
 
 def get_contact_form(request, **kwargs):
-    if not authenticated(request):
+    if not authenticated(request.user):
         next_page = reverse_lazy('core:contacts_view')
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         response = HttpResponse()
@@ -127,7 +127,7 @@ def get_contact_form(request, **kwargs):
 
 
 def update_contact(request, **kwargs):
-    if not authenticated(request):
+    if not authenticated(request.user):
         next_page = request.path
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         response = HttpResponse()
@@ -151,7 +151,7 @@ def update_contact(request, **kwargs):
 
 
 def remove_contact(request, contact_id):
-    if not authenticated(request):
+    if not authenticated(request.user):
         next_page = request.path
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         response = HttpResponse()
