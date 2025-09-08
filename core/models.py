@@ -137,8 +137,8 @@ class Dataset(models.Model):
 
 class DataFiles(models.Model):
     data = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='files')
-    file_name = models.CharField(verbose_name=_("File Name"), max_length=100)
-    file = models.FileField(verbose_name=_("File"))
+    file_name = models.CharField(verbose_name=_("File Name"), max_length=200)
+    file = models.FileField(verbose_name=_("File"), max_length=255)
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT)
     submitted_date = models.DateTimeField(auto_now_add=True)
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False)

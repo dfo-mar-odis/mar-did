@@ -1,0 +1,2532 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Chief Scientists",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "MarDID Maintainers",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Data Managers",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 4,
+    "fields": {
+      "name": "Data Technicians",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 5,
+    "fields": {
+      "name": "Datashop Processors",
+      "permissions": []
+    }
+  },
+  {
+    "model": "core.groupprofiles",
+    "pk": 1,
+    "fields": {
+      "group": 1,
+      "description": "Person responsible for a project, mission, cruise, and data and should receive notifications when updates to a project, mission, cruise or data occur"
+    }
+  },
+  {
+    "model": "core.groupprofiles",
+    "pk": 2,
+    "fields": {
+      "group": 2,
+      "description": "An application Maintainer, this is a person who can create users, groups and can modify lookup tables."
+    }
+  },
+  {
+    "model": "core.groupprofiles",
+    "pk": 3,
+    "fields": {
+      "group": 3,
+      "description": "A person responsible for data collected on a cruise. Aside from a chief scientists, this person will be a point of contact for data and should be notified when there are updates to the data."
+    }
+  },
+  {
+    "model": "core.groupprofiles",
+    "pk": 4,
+    "fields": {
+      "group": 4,
+      "description": "Data Technicians process samples and will be responsible for submitting data for further processing and quality control on a mission."
+    }
+  },
+  {
+    "model": "core.groupprofiles",
+    "pk": 5,
+    "fields": {
+      "group": 5,
+      "description": "Datashop processors are responsible for secondary processing and loading data to Biochem and will be notified when data is submitted."
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 1,
+    "fields": {
+      "name": "Banqereau Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 2,
+    "fields": {
+      "name": "Barrow Strait"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 3,
+    "fields": {
+      "name": "Bay of Fundy"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 4,
+    "fields": {
+      "name": "Bras d’Or Lakes"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 5,
+    "fields": {
+      "name": "Brown’s Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 6,
+    "fields": {
+      "name": "Cabot Strait"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 7,
+    "fields": {
+      "name": "Chaleur Bay"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 8,
+    "fields": {
+      "name": "Chedabucto Bay"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 9,
+    "fields": {
+      "name": "Continental Slope"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 10,
+    "fields": {
+      "name": "Davis Strait"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 11,
+    "fields": {
+      "name": "Emerald Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 12,
+    "fields": {
+      "name": "Emerald Basin"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 13,
+    "fields": {
+      "name": "Flemish Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 14,
+    "fields": {
+      "name": "Flemish Cap"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 15,
+    "fields": {
+      "name": "Flemish Pass"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 16,
+    "fields": {
+      "name": "Georges Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 17,
+    "fields": {
+      "name": "Grand Banks"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 18,
+    "fields": {
+      "name": "Gulf of Maine"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 19,
+    "fields": {
+      "name": "Hudson Bay"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 20,
+    "fields": {
+      "name": "LaHave Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 21,
+    "fields": {
+      "name": "Labrador Shelf"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 22,
+    "fields": {
+      "name": "Laurentian Fan"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 23,
+    "fields": {
+      "name": "Laurentian Trough"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 24,
+    "fields": {
+      "name": "Magdalen Shelf"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 25,
+    "fields": {
+      "name": "Northumberland Strait"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 26,
+    "fields": {
+      "name": "Orphan Basin"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 27,
+    "fields": {
+      "name": "Orphan Knoll"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 28,
+    "fields": {
+      "name": "Sable Island"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 29,
+    "fields": {
+      "name": "Scotian Shelf"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 30,
+    "fields": {
+      "name": "Shediac Valley"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 31,
+    "fields": {
+      "name": "St. Anne’s Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 32,
+    "fields": {
+      "name": "St. Lawrence Estuary"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 33,
+    "fields": {
+      "name": "Sydney Bight"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 34,
+    "fields": {
+      "name": "The Gulf of St. Lawrence"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 35,
+    "fields": {
+      "name": "The Gully"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 36,
+    "fields": {
+      "name": "West Bank"
+    }
+  },
+  {
+    "model": "core.geographicregions",
+    "pk": 37,
+    "fields": {
+      "name": "Whycocomagh Bay"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ADCP",
+      "description": "ACOUSTIC DOPPLER CURRENT PROFILER, RDI & AMETEK"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "AMMONIA",
+      "description": "AMMONIA NH4 ANALYSIS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "AMT",
+      "description": "AMETEK"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "BATF",
+      "description": "BATFISH DATA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "BENTH",
+      "description": "BENTHIC SAMPLING"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "BOTPHOT",
+      "description": "BOTTOM PHOTOGRAPHY"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CFC",
+      "description": "CHLOROFLOURO CARBON"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CTD",
+      "description": "CONDUCTIVITY TEMPERATURE DEPTH"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "DRIB",
+      "description": "DRIFTING ARGOS BUOY"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "DRIB\/MAB",
+      "description": "DRIFTING OR MOORED ARGOS BUOY"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "LADCP",
+      "description": "LOWERED ADCP"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MAB",
+      "description": "MOORED ARGOS BUOY"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MADCP",
+      "description": "MOORED  ACOUSTIC DOPPLER  CURRENT  PROFILER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MBT",
+      "description": "DIGITAL MECHANICAL BATHYTHERMOGRAPH"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MCM",
+      "description": "MOORED CURRENT METER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MCTD",
+      "description": "MOORED CTD"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MET",
+      "description": "METROLOGICAL DATA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MMB",
+      "description": "METEORLOGICAL BUOYS, MINIMET"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MTC",
+      "description": "MOORED TEMPERATURE CHAIN (RELATED TO TEMP)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MTG",
+      "description": "MOORED TIDE GAUGE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MTR",
+      "description": "MOORED TEMPERATURE RECORDER (RELATED TO TEMP)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "MVCTD",
+      "description": "MOVING VESSEL CTD"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "NONE",
+      "description": "NO DATA TYPE AVAILABLE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "PPLANK",
+      "description": "PHYTO PLANKTON FROM BOTTLE SAMPLES FOR ZMP"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "SAT",
+      "description": "SATELLITE DATA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "SURF",
+      "description": "SURFACE & UPPER AIR"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "UNKNOWN",
+      "description": "UNKNOWN DATA TYPE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "VADCP",
+      "description": "VESSEL MOUNTED ACOUSTIC DOPPLER PROFILER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "WATM",
+      "description": "MOORED WATER SAMPLER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "WAVM",
+      "description": "WAVE MEASUREMENTS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "WB",
+      "description": "WAVE BOUYS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "XBT",
+      "description": "EXPENDABLE BATHYTHERMOGRAPH"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ZPLANK",
+      "description": "ZOOPLANKTON USING RING NETS FOR ZMP"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "HPLC",
+      "description": "HIGH PERFORMANCE LIQUID CHROMATOGRAPH MICROGRAMS\/L"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "LEMCM",
+      "description": "LOWERED ELECTROMAGNETIC CURRENT METER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "IPS",
+      "description": "ICE PROFILING SONAR INSTRUMENT (CREATES ULS DATA TYPE)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "BIOLSUM",
+      "description": "BIOLOGICAL & NUTRIENTS SUMMARY OF BOTTLE DATA AZMP\/AZOMP PROTOCOLS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "SEAH",
+      "description": "SEAHORSE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "AMAR",
+      "description": "AUTONOMOUS MULTICHANNEL ACOUSTIC RECORDER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "VLOPC",
+      "description": "VERTICAL LASER OPTICAL PARTICLE (PLANKTON) COUNTER  (ON CTD OR NET)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "BOTLNUTS",
+      "description": "BOTTLE NUTRIENTS AND CHLOROPHYLL FOR ZMP LABSEA PROFILES"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ELOG",
+      "description": "ELECTRONIC LOG (AUTOMATED)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "BPR",
+      "description": "BOTTOM PRESSURE RECORDER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "LOPC",
+      "description": "LASER OPTICAL PARTICLE (PLANKTON) COUNTER (ATTACHED TO MVP)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ULS",
+      "description": "UPWARD LOOKING SONAR (DATA TYPE CREATED USING IPS INSTRUMENT)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "BTL",
+      "description": "BOTTLE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CPHL",
+      "description": "CHLOROPHYLL-A CONTENT MG\/M**3 HOLM-HANSEN CALCULATION METHOD gf3defs code"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CHN",
+      "description": "CARBON HYDROGEN NITROGEN MICROGRAMS\/L"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "PSAL",
+      "description": "PRACTICAL SALINITY PSU (gf3defs code) SALINOMETER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "PHPH",
+      "description": "HYDROGEN ION CONCENTRATION CALCULATED IN SITU (PH) (gf3defs code)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "TSG",
+      "description": "THERMOSALINOGRAPH UNDERWAY FLOW THRU DATA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "SCS",
+      "description": "SCIENTIFIC COMPUTER SYSTEM DATA MERGING PROGRAM BY NOAA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CO2_SYS",
+      "description": "CARBONATE (CO2) SYSTEM PARMS TA AND TIC umol\/kg pH_25 (25 deg C) pCO2 uatm"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "DRIFTS",
+      "description": "DRIFTING SATELLITE TRACKED SEIMAC BARREL"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ZPLANKBION",
+      "description": "ZOOPLANKTON COLLECTED USING BIONESS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ZPLANKMULT",
+      "description": "ZOOPLANKTON COLLECTED USING MULTINET"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ORGNUT_DAL",
+      "description": "ORGANIC NUTRIENT CONCENTRATION (BERTRAND LAB DAL)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "WINK",
+      "description": "WINKLER TITRATIONS OF OXYGEN ML\/L"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "O2METER",
+      "description": "BENCH PROBE O2CONC ML\/L (IE HACH HQ40d Portable)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "AZMP_DAL",
+      "description": "Total Dissolved Inorganic Carbon DIC & Total Alkalinity TA µmol\/kg DAL U"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "TICTA",
+      "description": "TOTAL INORGANIC CARBON AND TOTAL ALKALINITY"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "DTNTR",
+      "description": "DEMERSAL TRAWL NET TEMPERATURE RECORDER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "AZMP_TEMPL",
+      "description": "AZMP ENTRY TEMPLATE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "NUTS",
+      "description": "BOTTLE NUTRIENT DATA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "IGNORE",
+      "description": "DUPLICATE DATA RECORD CAN BE IGNORED"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "O2ELECTROD",
+      "description": "BENCH PROBE O2CONC % SAT & TEMPERATURE OF ANALYSIS (IE HACH HQ40d Portable)"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CYTO",
+      "description": "CYTOMETRY DATA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "PCO2_FT",
+      "description": "PARTIAL PRESSURE CO2 (pCO2) UNDERWAY UNCONTAMINATED SEAWATER FLOW THRU"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ECHO_KNUD",
+      "description": "KNUDSEN ECHOSOUNDER DEPTH DATA"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "PH25",
+      "description": "PH MEASUREMENTS AT 25 DEGREES CELSIUS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CASTCTD",
+      "description": "CASTAWAY CTD"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "PAM",
+      "description": "PASSIVE ACOUSTIC MOORINGS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "SF6",
+      "description": "SULFUR HEXAFLUORIDE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "RBR",
+      "description": "RBR SENSOR - DOXY, PH, TURBIDITY, FLOUR"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ICYCLER",
+      "description": "OCEAN SURFACE PROFILER MOORED UNDER MOBILE PACK ICE"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ANDES",
+      "description": "EVENT LOGGING SYSTEM"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "CO2_SYS_FT",
+      "description": "FLOW THRU DISCRETE CARBONATE (CO2) SYSTEM PARMS TA AND TIC pH_25  pCO2 "
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "ZPLANKMANT",
+      "description": "ZOOPLANKTON COLLECTED USING MANTA NET FOR ZMP"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "GLD",
+      "description": "GLIDER"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "HUB",
+      "description": "HUB SUBSURFACE MOORINGS"
+    }
+  },
+  {
+    "model": "core.datatypes",
+    "fields": {
+      "name": "SUNA",
+      "description": "Sea-Bird SUNA V2 Nitrate Sensor"
+    }
+  },
+  {
+    "model": "core.programs",
+    "pk": 1,
+    "fields": {
+      "name": "AZMP",
+      "description": "Atlantic Zone Monitoring Program"
+    }
+  },
+  {
+    "model": "core.programs",
+    "pk": 2,
+    "fields": {
+      "name": "AZOMP",
+      "description": "Atlantic Zone Off-shelf Monitoring Program"
+    }
+  },
+  {
+    "model": "core.programs",
+    "pk": 3,
+    "fields": {
+      "name": "BBMP",
+      "description": "Bedford Basin Monitoring Program"
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Unknown",
+      "id": 1,
+      "description": "The status of the data is unknown."
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Expected",
+      "id": 2,
+      "description": "The data is expected but not yet received."
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Submitted",
+      "id": 3,
+      "description": "Some data has been submitted. Follow up with the data provider and if all the data has been provided, mark it as received"
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Received",
+      "id": 4,
+      "description": "The data has been received and is ready to be processed."
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Processing",
+      "id": 5,
+      "description": "The data is currently being processed."
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Processed",
+      "id": 6,
+      "description": "The data has been processed, and is ready for biochem loading"
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Loading",
+      "id": 7,
+      "description": "The data has been processed, and is ready for biochem validation and loading"
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Loaded",
+      "id": 8,
+      "description": "The data has been loaded to Biochem."
+    }
+  },
+  {
+    "model": "core.datastatus",
+    "fields": {
+      "name": "Lab",
+      "id": 9,
+      "description": "Samples are being processed in the lab."
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 426,
+    "fields": {
+      "name": "ALERT (UK)",
+      "ship_code": "74AL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 427,
+    "fields": {
+      "name": "ANTON DOHRN (GER)",
+      "ship_code": "06AD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 428,
+    "fields": {
+      "name": "ANTON DOHRN (GER) ",
+      "ship_code": "06DA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 429,
+    "fields": {
+      "name": "DANA (A choice)",
+      "ship_code": "26DA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 430,
+    "fields": {
+      "name": "DANA (1 choice)",
+      "ship_code": "26D1"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 431,
+    "fields": {
+      "name": "DANA (2 choice)",
+      "ship_code": "26D2"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 432,
+    "fields": {
+      "name": "DANA (3 choice)",
+      "ship_code": "26D3"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 433,
+    "fields": {
+      "name": "DANA (4 choice)",
+      "ship_code": "26D4"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 434,
+    "fields": {
+      "name": "DISCOVERY (UK) (Choice 2)",
+      "ship_code": "74DI"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 435,
+    "fields": {
+      "name": "DISCOVERY (UK) (Choice 1) - current 2023",
+      "ship_code": "74EQ"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 436,
+    "fields": {
+      "name": "DISCOVERY (UK) (Choice 4)",
+      "ship_code": "74E3"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 437,
+    "fields": {
+      "name": "ENDEAVOR (US) (Choice 2)",
+      "ship_code": "33EN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 438,
+    "fields": {
+      "name": "EXPLORER (UK)",
+      "ship_code": "74EX"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 439,
+    "fields": {
+      "name": "EXPLORER (BAHAMAS)",
+      "ship_code": "BHAB"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 440,
+    "fields": {
+      "name": "FREDERICK G CREED (Call Sign: CB6099) OBSOLETE",
+      "ship_code": "18FC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 441,
+    "fields": {
+      "name": "ICE ISLAND (US) (Choice 2)",
+      "ship_code": "314K"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 442,
+    "fields": {
+      "name": "LANCE (NORWAY)",
+      "ship_code": "58LA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 443,
+    "fields": {
+      "name": "LANCE (JAPAN)",
+      "ship_code": "49L2"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 444,
+    "fields": {
+      "name": "POLAR CIRCLE (NORWAY)",
+      "ship_code": "58PC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 445,
+    "fields": {
+      "name": "WESTPORT (US)",
+      "ship_code": "32Y9"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 446,
+    "fields": {
+      "name": "A H CHEVARIE (NO ICES CODE)",
+      "ship_code": "AHC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 447,
+    "fields": {
+      "name": "A T CAMERON",
+      "ship_code": "ATC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 448,
+    "fields": {
+      "name": "ACADIA",
+      "ship_code": "ACD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 449,
+    "fields": {
+      "name": "ALFRED NEEDLER",
+      "ship_code": "NED"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 450,
+    "fields": {
+      "name": "ANN HARVEY (18AV OR 18AH)",
+      "ship_code": "AHV"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 451,
+    "fields": {
+      "name": "AQUARIEL (NO ICES CODE)",
+      "ship_code": "AQU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 452,
+    "fields": {
+      "name": "ARCADIE (NO ICES CODE)",
+      "ship_code": "ARC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 453,
+    "fields": {
+      "name": "BAFFIN CSS",
+      "ship_code": "BAF"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 454,
+    "fields": {
+      "name": "BICKERTON (NO ICES CODE)",
+      "ship_code": "BIK"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 455,
+    "fields": {
+      "name": "BIO CRUISE DATA (NO ICES CODE)",
+      "ship_code": "BCD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 456,
+    "fields": {
+      "name": "CAPE LIGHT (NO ICES CODE)",
+      "ship_code": "CLT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 457,
+    "fields": {
+      "name": "CLARKS HARBOUR (NO ICES CODE)",
+      "ship_code": "CHB"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 458,
+    "fields": {
+      "name": "COURTNEY BAY (NO ICES CODE)",
+      "ship_code": "CBY"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 459,
+    "fields": {
+      "name": "CUMELLA (NO ICES CODE)",
+      "ship_code": "CUM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 460,
+    "fields": {
+      "name": "CYGNUS",
+      "ship_code": "CYG"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 461,
+    "fields": {
+      "name": "DAWSON",
+      "ship_code": "DAW"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 462,
+    "fields": {
+      "name": "DES GROSEILLIERS",
+      "ship_code": "DGR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 463,
+    "fields": {
+      "name": "DOMINION VICTORY (NO ICES CODE)",
+      "ship_code": "VIC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 464,
+    "fields": {
+      "name": "E E PRINCE",
+      "ship_code": "PRN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 465,
+    "fields": {
+      "name": "EARL GREY",
+      "ship_code": "EGR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 466,
+    "fields": {
+      "name": "ECOSYSTEM PROGRAM (NO ICES CODE)",
+      "ship_code": "IEP"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 467,
+    "fields": {
+      "name": "EDWARD CORNWALLIS (NO ICES CODE)",
+      "ship_code": "ECW"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 468,
+    "fields": {
+      "name": "ERD PACKCAT (NO ICES CODE)",
+      "ship_code": "EPK"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 469,
+    "fields": {
+      "name": "FRANK M WESTON",
+      "ship_code": "WES"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 470,
+    "fields": {
+      "name": "FUNDY SPRAY",
+      "ship_code": "FSP"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 471,
+    "fields": {
+      "name": "GEOLOGICAL SURVEY OF CANADA (ATLANTIC) (NO ICES CODE)",
+      "ship_code": "GSC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 472,
+    "fields": {
+      "name": "HARENGUS",
+      "ship_code": "HAR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 473,
+    "fields": {
+      "name": "HENRY LARSEN",
+      "ship_code": "HL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 474,
+    "fields": {
+      "name": "HOWE POINT (NO ICES CODE)",
+      "ship_code": "HPT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 475,
+    "fields": {
+      "name": "HUDSON",
+      "ship_code": "HUD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 476,
+    "fields": {
+      "name": "IBMF BARGE (NO ICES CODE)",
+      "ship_code": "IBM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 477,
+    "fields": {
+      "name": "ISLES DE BARQUES (NO ICES CODE)",
+      "ship_code": "IDB"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 478,
+    "fields": {
+      "name": "J J COWIE (NO ICES CODE)",
+      "ship_code": "JJC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 479,
+    "fields": {
+      "name": "J L HART",
+      "ship_code": "HRT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 480,
+    "fields": {
+      "name": "LADY HAMMOND",
+      "ship_code": "HAM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 481,
+    "fields": {
+      "name": "LOUIS S ST LAURENT",
+      "ship_code": "LSL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 482,
+    "fields": {
+      "name": "MARINE FISH DIVISION (NO ICES CODE)",
+      "ship_code": "MFD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 483,
+    "fields": {
+      "name": "MARTHA L BLACK",
+      "ship_code": "MLB"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 484,
+    "fields": {
+      "name": "MATTHEW",
+      "ship_code": "MAT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 485,
+    "fields": {
+      "name": "NAVICULA",
+      "ship_code": "NAV"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 486,
+    "fields": {
+      "name": "NORTH BAR (NO ICES CODE)",
+      "ship_code": "NBR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 487,
+    "fields": {
+      "name": "OCEAN SCIENCES DIVISION (NO ICES CODE)",
+      "ship_code": "OSD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 488,
+    "fields": {
+      "name": "OPILIO",
+      "ship_code": "OPL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 489,
+    "fields": {
+      "name": "PANDALUS 3 (PANDALUS)",
+      "ship_code": "PAN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 490,
+    "fields": {
+      "name": "PARIZEAU CCGS",
+      "ship_code": "PAR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 491,
+    "fields": {
+      "name": "PARTRIDGE ISLAND (NO ICES CODE)",
+      "ship_code": "PIS"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 492,
+    "fields": {
+      "name": "PROVO WALLIS",
+      "ship_code": "PRW"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 493,
+    "fields": {
+      "name": "SACKVILLE",
+      "ship_code": "SCK"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 494,
+    "fields": {
+      "name": "SAMBRO",
+      "ship_code": "SAM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 495,
+    "fields": {
+      "name": "SHIPPEGAN (NO ICES CODE)",
+      "ship_code": "SHP"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 496,
+    "fields": {
+      "name": "SIR WILLIAM ALEXANDER",
+      "ship_code": "SWA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 497,
+    "fields": {
+      "name": "SOURIS (NO ICES CODE)",
+      "ship_code": "SOU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 498,
+    "fields": {
+      "name": "SPINDRIFT (NO ICES CODE)",
+      "ship_code": "SPN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 499,
+    "fields": {
+      "name": "SPRAY CCGS",
+      "ship_code": "SPR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 500,
+    "fields": {
+      "name": "TERRY FOX (NO ICES CODE)",
+      "ship_code": "TFX"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 501,
+    "fields": {
+      "name": "VIGILANCE (UK)",
+      "ship_code": "VIG"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 502,
+    "fields": {
+      "name": "WESTPORT (CANADA) (NO ICES CODE)",
+      "ship_code": "WEST"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 503,
+    "fields": {
+      "name": "WILFRED TEMPLEMAN",
+      "ship_code": "TEM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 504,
+    "fields": {
+      "name": "SIMON FRASER",
+      "ship_code": "SIMF"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 505,
+    "fields": {
+      "name": "UNKNOWN",
+      "ship_code": "UNK"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 506,
+    "fields": {
+      "name": "KAPUSKASING",
+      "ship_code": "18KP"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 507,
+    "fields": {
+      "name": "A C D HOWE (NO ICES CODE)",
+      "ship_code": "HOWE"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 508,
+    "fields": {
+      "name": "AKADEMIK KNIPOVICH",
+      "ship_code": "90KN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 509,
+    "fields": {
+      "name": "AEGIR",
+      "ship_code": "46AE"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 510,
+    "fields": {
+      "name": "AKPATOK",
+      "ship_code": "18AA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 511,
+    "fields": {
+      "name": "ALERT (US)",
+      "ship_code": "319L"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 512,
+    "fields": {
+      "name": "AMBROSE FOOTE",
+      "ship_code": "18FO"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 513,
+    "fields": {
+      "name": "ANDERSON",
+      "ship_code": "18ND"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 514,
+    "fields": {
+      "name": "ANTON DOHRN (US)",
+      "ship_code": "31AD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 515,
+    "fields": {
+      "name": "ARGUS (USSR)",
+      "ship_code": "90A3"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 516,
+    "fields": {
+      "name": "BAYFIELD",
+      "ship_code": "18BY"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 517,
+    "fields": {
+      "name": "BEDEQUE",
+      "ship_code": "18BQ"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 518,
+    "fields": {
+      "name": "BLUE THROAT",
+      "ship_code": "18BT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 519,
+    "fields": {
+      "name": "ANN BRENDA (NO ICES CODE)",
+      "ship_code": "BREN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 520,
+    "fields": {
+      "name": "BONNIE BRAE (NO ICES CODE)",
+      "ship_code": "BRAE"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 521,
+    "fields": {
+      "name": "BRANDAL",
+      "ship_code": "18BR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 522,
+    "fields": {
+      "name": "RED HEAD C.S.L.",
+      "ship_code": "18RH"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 523,
+    "fields": {
+      "name": "CANSO CONDOR",
+      "ship_code": "18CC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 524,
+    "fields": {
+      "name": "CANSO LIGHT",
+      "ship_code": "18CX"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 525,
+    "fields": {
+      "name": "PRINCESS CGS",
+      "ship_code": "18PS"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 526,
+    "fields": {
+      "name": "ALUMINUM BOAT (NO ICES CODE)",
+      "ship_code": "ALUM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 527,
+    "fields": {
+      "name": "BOSTON WHALER",
+      "ship_code": "18BW"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 528,
+    "fields": {
+      "name": "MARY HICHINS CCG (NO ICES CODE)",
+      "ship_code": "HICH"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 529,
+    "fields": {
+      "name": "SCAMP CDL (NO ICES CODE)",
+      "ship_code": "SCAM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 530,
+    "fields": {
+      "name": "VARIOUS CHARTERED VESSELS",
+      "ship_code": "1888"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 531,
+    "fields": {
+      "name": "CHEBUCTO",
+      "ship_code": "18CH"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 532,
+    "fields": {
+      "name": "FREDERICK G CREED (Call Sign: CG3198) ",
+      "ship_code": "18FH"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 533,
+    "fields": {
+      "name": "EIDER MS (US)",
+      "ship_code": "33ED"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 534,
+    "fields": {
+      "name": "EKLIPTIKA (USSR)",
+      "ship_code": "90EL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 535,
+    "fields": {
+      "name": "ENDEAVOR RV (US)",
+      "ship_code": "32EV"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 536,
+    "fields": {
+      "name": "ERNEST HOLT (UK)",
+      "ship_code": "74EH"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 537,
+    "fields": {
+      "name": "EXPLORER (US)",
+      "ship_code": "31EX"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 538,
+    "fields": {
+      "name": "FAIRMORSE",
+      "ship_code": "18FA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 539,
+    "fields": {
+      "name": "SMITH FCG",
+      "ship_code": "18SF"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 540,
+    "fields": {
+      "name": "FISHING BOAT (CANADA) (NO ICES CODE)",
+      "ship_code": "FISH"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 541,
+    "fields": {
+      "name": "FORT FRANCIS",
+      "ship_code": "18FF"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 542,
+    "fields": {
+      "name": "FOTON (USSR)",
+      "ship_code": "906F"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 543,
+    "fields": {
+      "name": "GECO TRITON (PANAMA)",
+      "ship_code": "PAGT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 544,
+    "fields": {
+      "name": "GEOLOG FERSMAN (USSR)",
+      "ship_code": "19GG"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 545,
+    "fields": {
+      "name": "GEORGE R PEARKES",
+      "ship_code": "18GP"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 546,
+    "fields": {
+      "name": "GALWAY BLAZER CHARTER (NO ICES CODE)",
+      "ship_code": "GALW"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 547,
+    "fields": {
+      "name": "GOSARS (NO ICES CODE)",
+      "ship_code": "GOSA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 548,
+    "fields": {
+      "name": "GULF STAR (NO ICES CODE)",
+      "ship_code": "GULF"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 549,
+    "fields": {
+      "name": "HELICOPTER",
+      "ship_code": "18HE"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 550,
+    "fields": {
+      "name": "IBIS (NO ICES CODE)",
+      "ship_code": "IBIS"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 551,
+    "fields": {
+      "name": "ICE ISLAND (US) (Choice 1)",
+      "ship_code": "313T"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 552,
+    "fields": {
+      "name": "HUDSON BARGE (NO ICES CODE)",
+      "ship_code": "HUDB"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 553,
+    "fields": {
+      "name": "JOHN A MACDONALD",
+      "ship_code": "18MC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 554,
+    "fields": {
+      "name": "LABRADOR",
+      "ship_code": "18LA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 555,
+    "fields": {
+      "name": "LACUNA",
+      "ship_code": "18LC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 556,
+    "fields": {
+      "name": "LADY MOOD",
+      "ship_code": "18LM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 557,
+    "fields": {
+      "name": "LANCE (USSR)",
+      "ship_code": "909N"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 558,
+    "fields": {
+      "name": "MALLOTUS",
+      "ship_code": "18MA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 559,
+    "fields": {
+      "name": "MARGARET AND ROBERT",
+      "ship_code": "18PG"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 560,
+    "fields": {
+      "name": "MAXWELL",
+      "ship_code": "18MX"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 561,
+    "fields": {
+      "name": "CALANUS II",
+      "ship_code": "18CN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 562,
+    "fields": {
+      "name": "PETREL V",
+      "ship_code": "18PT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 563,
+    "fields": {
+      "name": "NARWHAL",
+      "ship_code": "18NR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 564,
+    "fields": {
+      "name": "OCEANUS (US)",
+      "ship_code": "32OC"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 565,
+    "fields": {
+      "name": "ODEN (SWEDEN)",
+      "ship_code": "77DN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 566,
+    "fields": {
+      "name": "POLAR CIRCLE (UK)",
+      "ship_code": "74P6"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 567,
+    "fields": {
+      "name": "POLARSTERN (GER)",
+      "ship_code": "06AQ"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 568,
+    "fields": {
+      "name": "PRINCE 1916-1923",
+      "ship_code": "18PN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 569,
+    "fields": {
+      "name": "QUADRA",
+      "ship_code": "18QA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 570,
+    "fields": {
+      "name": "QUEST",
+      "ship_code": "18QU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 571,
+    "fields": {
+      "name": "CHARLES DARWIN (UK)",
+      "ship_code": "74AB"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 572,
+    "fields": {
+      "name": "KNORR (US)",
+      "ship_code": "316N"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 573,
+    "fields": {
+      "name": "DISCOVERY (UK) (Choice 1)",
+      "ship_code": "74DS"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 574,
+    "fields": {
+      "name": "SIGMA-T 2008",
+      "ship_code": "18SG"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 575,
+    "fields": {
+      "name": "TUDLIK CSL",
+      "ship_code": "18TU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 576,
+    "fields": {
+      "name": "SONNE (GER)",
+      "ship_code": "06BE"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 577,
+    "fields": {
+      "name": "TELEOST",
+      "ship_code": "TEL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 578,
+    "fields": {
+      "name": "THALASSA (FRANCE)",
+      "ship_code": "35HT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 579,
+    "fields": {
+      "name": "THERON",
+      "ship_code": "18TE"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 580,
+    "fields": {
+      "name": "THETA",
+      "ship_code": "18TH"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 581,
+    "fields": {
+      "name": "TOPSEDA (USSR)",
+      "ship_code": "90TP"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 582,
+    "fields": {
+      "name": "TYDEMAN (NETHERLANDS)",
+      "ship_code": "64TM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 583,
+    "fields": {
+      "name": "TYRO (NETHERLANDS)",
+      "ship_code": "64TO"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 584,
+    "fields": {
+      "name": "VIANDRA (USSR)",
+      "ship_code": "905C"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 585,
+    "fields": {
+      "name": "VILMA",
+      "ship_code": "18VL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 586,
+    "fields": {
+      "name": "VYKHMA (USSR)",
+      "ship_code": "906G"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 587,
+    "fields": {
+      "name": "WHIP THE WIND",
+      "ship_code": "18WW"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 588,
+    "fields": {
+      "name": "ZODIAC LAUNCH (NO ICES CODE)",
+      "ship_code": "ZODI"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 589,
+    "fields": {
+      "name": "VIOLA M DAVIDSON CCGS",
+      "ship_code": "18AU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 590,
+    "fields": {
+      "name": "VLADYKOV",
+      "ship_code": "18VD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 591,
+    "fields": {
+      "name": "SANNA R/V",
+      "ship_code": "SAN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 592,
+    "fields": {
+      "name": "M PERLEY",
+      "ship_code": "18MU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 593,
+    "fields": {
+      "name": "PANDORA II (PANDORA)",
+      "ship_code": "18P2"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 594,
+    "fields": {
+      "name": "BELUGA II",
+      "ship_code": "18BP"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 595,
+    "fields": {
+      "name": "PIERRE RADISSON CCGS",
+      "ship_code": "PRD"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 596,
+    "fields": {
+      "name": "VARIOUS",
+      "ship_code": "18VA"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 597,
+    "fields": {
+      "name": "CAP BRETON",
+      "ship_code": "18BO"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 598,
+    "fields": {
+      "name": "CAP ROGER",
+      "ship_code": "18CG"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 599,
+    "fields": {
+      "name": "AMUNDSEN",
+      "ship_code": "18DL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 600,
+    "fields": {
+      "name": "SIR WILFRED GRENFELL",
+      "ship_code": "18GN"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 601,
+    "fields": {
+      "name": "FIXED STATIONS CANADA",
+      "ship_code": "18FX"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 602,
+    "fields": {
+      "name": "J P TULLY",
+      "ship_code": "TULL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 603,
+    "fields": {
+      "name": "LEIM",
+      "ship_code": "18LO"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 604,
+    "fields": {
+      "name": "SHAMOOK",
+      "ship_code": "18OK"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 605,
+    "fields": {
+      "name": "SIR WILFRED LAURIER",
+      "ship_code": "18LU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 606,
+    "fields": {
+      "name": "TANU",
+      "ship_code": "TANU"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 607,
+    "fields": {
+      "name": "VECTOR",
+      "ship_code": "18VT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 608,
+    "fields": {
+      "name": "W E RICKER",
+      "ship_code": "18RK"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 609,
+    "fields": {
+      "name": "SIGMA T PRE2008",
+      "ship_code": "SIGM"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 610,
+    "fields": {
+      "name": "HENRY BIGELOW",
+      "ship_code": "HB"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 611,
+    "fields": {
+      "name": "RV ENDEAVOR (US)",
+      "ship_code": null
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 612,
+    "fields": {
+      "name": "CARTIER",
+      "ship_code": "18CR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 613,
+    "fields": {
+      "name": "ATLANTIS",
+      "ship_code": "32AT"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 614,
+    "fields": {
+      "name": "SERVICE LEADER M/V",
+      "ship_code": "SL"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 615,
+    "fields": {
+      "name": "CORIOLIS II RV",
+      "ship_code": "COR"
+    }
+  },
+  {
+    "model": "core.platforms",
+    "pk": 616,
+    "fields": {
+      "name": "VIKING BUOY",
+      "ship_code": "VIKB"
+    }
+  }
+]
