@@ -181,7 +181,6 @@ def list_cruises(request):
 
     t_head = table.find('thead')
     t_head.attrs['class'] = 'sticky-top bg-white'
-
     th = t_head.find('th')
     if request.user.is_authenticated:
         th.append(add_btn:=table_soup.new_tag("a"))

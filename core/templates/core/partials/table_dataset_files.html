@@ -20,7 +20,7 @@
     <tr>
         {% if not file.is_archived %}
         <th style="width: 2%; white-space: nowrap;">
-            <button class="btn btn-sm btn-warning" hx-target="#div_id_error_messages"
+            <button class="btn btn-sm btn-warning" hx-target="#div_id_data_submission_messages"
                     hx-get="{% url 'core:get_archive_form' file.id %}" title="{% trans 'Archive File' %}"><span
                     class="bi bi-safe"> {% trans 'Archive' %}</span></button>
         </th>

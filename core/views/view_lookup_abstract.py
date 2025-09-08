@@ -22,6 +22,9 @@ from core import components
 logger = logging.getLogger("mardid")
 
 
+def user_test(user):
+    return user.groups.filter(name='MarDID Maintainers').exists() or user.is_superuser
+
 
 class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
 
@@ -31,7 +34,7 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     form_url = None
 
     def test_func(self):
-        return self.request.user.groups.filter(name='MarDID Maintainers').exists()
+        return user_test(self.request.user)
 
     def get_table_url(self):
         return self.table_url
@@ -196,7 +199,7 @@ def get_lookup_form(model_form, **kwargs):
 @login_required(login_url=reverse_lazy('login'))
 def update_lookup(request, model_form, **kwargs):
     # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name='MarDID Maintainers').exists():
+    if not user_test(request.user):
         return HttpResponseForbidden(_("You must be a MarDID Maintainer to perform this action."))
 
     if 'pk' in kwargs:
@@ -218,7 +221,7 @@ def update_lookup(request, model_form, **kwargs):
 @login_required(login_url=reverse_lazy('login'))
 def delete_element(request, pk, lookup_model):
     # Check if user belongs to MarDID Maintainer group
-    if not request.user.groups.filter(name='MarDID Maintainers').exists():
+    if not user_test(request.user):
         return HttpResponseForbidden(_("You must be a MarDID Maintainer to perform this action."))
 
     try:

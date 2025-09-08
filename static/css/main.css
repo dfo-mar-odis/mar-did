@@ -13,3 +13,8 @@ body {
     align-items: center;
     font-size: 10rem; /* Adjust size as needed */
 }
+
+/* Hide Dropzone upload queue */
+#dropzone-upload .dz-preview {
+    display: none !important;
+}
