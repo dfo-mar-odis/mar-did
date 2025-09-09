@@ -210,3 +210,6 @@ __marimo__/
 staticfiles/*
 media
 *.mwb.bak
+
+# this is a script on the server to start the Daphane server
+start_mardid.sh

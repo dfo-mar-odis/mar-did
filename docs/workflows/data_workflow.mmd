@@ -1,0 +1,112 @@
+flowchart RL
+
+subgraph DataAcquisition[Data Acquisition]
+    subgraph DuringCruise[During the Cruise]
+        subgraph Event[Event]
+            EventLog[Event Log Files]
+
+            subgraph CTDEvent[CTD]
+                Raw_CTD_Data[Raw CTD Data]
+                Raw_CTD_DeckSheet[Deck Sheet]
+                Raw_CTD_Samples[/Water Samples/]
+            end
+
+            subgraph NetEvent[Net]
+                Raw_Net_Samples[/Plankton Samples/]
+                Raw_Net_DeckSheet[Deck Sheets]
+            end
+
+            subgraph OtherEvent[Other]
+                oe_something(Something is done)
+            end
+        end
+
+        subgraph UC_BTL_Processing[CTDDAP Processing]
+            UC_BTL[Uncalibrated BTL Files]
+            UC_QAT[QAT]
+            UC_ODF[ODF]
+            UC_Other[Other]
+        end
+
+        subgraph WS_SampleProcessing[Lab Processing]
+            WS_Data[Processed Sample Data]
+        end
+
+        subgraph Scanning[Scanned Deck Shets]
+            Scanned[Scanned Logs]
+        end
+
+        subgraph DC_Dart[Dart]
+            DC_Dart_CompiledData[Reports]
+        end
+
+        Raw_CTD_Data --> UC_BTL_Processing
+        Raw_CTD_Samples --> WS_SampleProcessing
+
+        EventLog --> DC_Dart
+        UC_BTL --> DC_Dart
+        WS_Data --> DC_Dart
+
+        Raw_CTD_DeckSheet --> Scanning
+        Raw_Net_DeckSheet --> Scanning
+
+    end
+
+    subgraph AfterCruise[After Cruise]
+        packaged -- Data Manager -->submission[(Mar-DID Submittion)]
+
+        submission -- Data Loader --> AC_Data_In
+        submission -- Datashop Processor --> AC_UP_CTD_Data
+
+        subgraph packaged[Submitted Data]
+            CTD_Data[Raw CTD Data]
+            Event_Logs[Event Log Files]
+            Scanned_logs[Scanned Logs]
+            subgraph processed_samples[Processed Sample Data]
+                Data[E.g Oxygen, Salts, Chl]
+            end
+            Uncalibrated_BTL[Uncalibrated BTL Files]
+            Uncalibrated_Other[Other Files]
+        end
+
+        subgraph Cal_BTL_Processing[Datashop Processing]
+            subgraph AC_UP_CTD_Data[Data Input]
+                AC_Data[Raw CTD Data]
+            end
+
+            subgraph AC_CTD_Processing[CTDDAP Processing]
+                Cal_QAT[QAT]
+                Cal_ODF[ODF]
+                Cal_Other[Other]
+                Cal_BTL[Calibrated BTL Files]
+            end
+            AC_UP_CTD_Data --> AC_CTD_Processing
+        end
+        AC_CTD_Processing --> ProcessedData[Processed Data] --> submission
+
+        subgraph AC_Init_Biochem_Load[Initial Load Biochem]
+            subgraph AC_Data_In[Data Input]
+                AC_EventLog[Event Log Files]
+                AC_P_CTD_Data[BTL Files]
+                AC_Samples[Processed Sample Data]
+                AC_Scanned_Logs[Scanned Logs]
+            end
+
+            subgraph AC_Dart[Dart]
+                AC_Dart_CompiledData[(Biochem)]
+            end
+            AC_Data_In --> AC_Dart
+        end
+        AC_Dart --> CorrectData[Corrected/QC Data] --> submission
+
+        subgraph Unprocessed_samples[Unprocessed Samples]
+            AC_WaterSamples[/Water Samples/] --> LWS_SampleProcessing
+            AC_NetSamples[/Plankton Samples/] --> LWS_SampleProcessing
+
+            subgraph LWS_SampleProcessing[Lab Processing]
+                LWS_Data["Processed Sample Data"]
+            end
+        end
+        LWS_Data -- Data Technician --> submission
+    end
+end
