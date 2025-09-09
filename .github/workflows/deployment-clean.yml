@@ -55,6 +55,7 @@ jobs:
 
       - name: Remove tests and test data
         run: |
+          find . -type d -name "media" -exec rm -rf {} + || true
           find . -type d -name "tests" -exec rm -rf {} + || true
           find . -type d -name "test_data" -exec rm -rf {} + || true
           find . -type d -name "sample_data" -exec rm -rf {} + || true
