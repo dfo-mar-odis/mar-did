@@ -1,0 +1,103 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C76F1E92-DAAC-90E8-3886-5F51B6E22841" name="MISSION_COMMENT">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:43:04 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_22</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MISSION_COMMENT_SEQ" id="E9A60B9F-401D-6DB8-CBD3-8E4AEC4E7082">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:43:04 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>7</dataTypePrecision>
+<ownDataTypeParameters>,7,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MISSION_COMMENT" id="2FC701DC-B61E-7DFF-BF4E-243A0063449E">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:43:04 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AUTHOR_SEQ" id="15A6E2F9-1F1A-AD5B-6E01-86BE34762FB2">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:43:04 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E3856D7C-6DE1-23CF-2591-1E714860175E" referredColumn="C73CC082-94C2-87D6-AA92-056611B3E40D"/>
+</associations>
+</Column>
+<Column name="MISSION_META_SEQ" id="77462A86-64C6-7E65-6554-7B38205ABFE6">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:43:04 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5BC8CEF8-B9C1-0FEB-749B-9D4C5CEC8D82" referredColumn="8ADF41FF-026F-2BC7-4801-0CD272F000DC"/>
+</associations>
+</Column>
+<Column name="COMMENT_DATE" id="5EA5689E-4BC7-161F-D461-3F5BBD52AC1B">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:43:04 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9BA227FC-81FA-60E8-AD3F-B1786BF33D7D" name="MISSION_COMMENT_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:43:04 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E9A60B9F-401D-6DB8-CBD3-8E4AEC4E7082"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="38E74CEB-7A0C-3688-8971-FE72E013BBFB" name="MISSION_COMMENT_MISSION_METADATA_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:45:21 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="77462A86-64C6-7E65-6554-7B38205ABFE6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4ADE9806-157A-71A8-74D2-73273DE32710" name="MISSION_COMMENT_LU_CONTACT_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-12-03 15:46:23 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="15A6E2F9-1F1A-AD5B-6E01-86BE34762FB2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

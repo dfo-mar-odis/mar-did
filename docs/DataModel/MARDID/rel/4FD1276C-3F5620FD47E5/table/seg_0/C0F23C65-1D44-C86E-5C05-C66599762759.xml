@@ -1,0 +1,54 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C0F23C65-1D44-C86E-5C05-C66599762759" name="LU_EQUIPMENT_TYPE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:29:59 UTC</createdTime>
+<comment><![CDATA[Types:
+- SBE Sensor
+- Bottle
+- 76 or 202 um ring net
+- Microcat CTD
+- various types of ADCP
+- thermograph (Minilog or HOBO)
+etc.]]></comment>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_28</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="EQUIPMENT_TYPE_SEQ" id="A4E03A70-7676-289B-18E5-DA13958E7FB4">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:29:59 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EQUIPMENT_TYPE" id="5B786966-601D-A825-2F30-9904728B1362">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:29:59 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>35</dataTypeSize>
+<ownDataTypeParameters>35,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0B2C96BD-5498-7BC3-32F0-A4CEBA6991EE" name="LU_EQUIPMENT_TYPE_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:29:59 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A4E03A70-7676-289B-18E5-DA13958E7FB4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

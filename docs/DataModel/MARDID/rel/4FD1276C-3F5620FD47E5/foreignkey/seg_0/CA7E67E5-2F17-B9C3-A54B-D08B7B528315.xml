@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="CA7E67E5-2F17-B9C3-A54B-D08B7B528315" containerWithKeyObject="F23E7805-DB82-C33D-F5CB-06B397B62561" localFKIndex="95541420-00FF-4257-E3C2-6C305F56B543" name="INSTRUMENTS_LU_PARAMETER_TYPES_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:51:28 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<referredTableLongName>LU_PARAMETER_TYPES</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>2993F626-DAC3-2493-FC53-265AE67F8319</referredTableID>
+<keyObject>388ED4AF-9053-5B41-C446-51895E5D5246</keyObject>
+<referredKeyID>388ED4AF-9053-5B41-C446-51895E5D5246</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>PARAMETER_TYPE_SEQ</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

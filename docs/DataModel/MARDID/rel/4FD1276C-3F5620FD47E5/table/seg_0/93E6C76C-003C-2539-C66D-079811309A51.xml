@@ -1,0 +1,193 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="93E6C76C-003C-2539-C66D-079811309A51" name="FILE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>46018AB1-6499-5F43-047E-FB6A419E421A</importedID>
+<ordsAlias>table_25</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="FILE_SEQ" id="F20A7935-CFB0-8CBD-2185-E84C7A19074D">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>61B7A2B5-E7DF-F64E-EE37-EDD9857D16BA</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MISSION_METADATA_SEQ" id="1CD4C702-69C4-DF63-A225-F370326515D0">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>25F1BA31-0811-69CC-7429-CEF02FB1DBDE</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="14A17184-D26F-0FB3-DBDC-D030D02D41A3" referredColumn="8ADF41FF-026F-2BC7-4801-0CD272F000DC"/>
+</associations>
+</Column>
+<Column name="DATA_COLLECTED_SEQ" id="B6D52AC2-EEFE-DFD0-C3BD-990F3594D9E9">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:59:58 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A1B88716-5055-A805-7231-979CED46F35D" referredColumn="FD7AB83D-69A1-A30B-EA2D-B2BFF1FE1ADD"/>
+</associations>
+</Column>
+<Column name="FILE_TYPE_SEQ" id="26BF6F03-8E9B-FC4F-59F4-7B9E64EE4C9D">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>07202D65-1E9B-84CC-8942-CB7E35C76AFE</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F9935A08-AD2C-03AC-E089-0297CC072E4E" referredColumn="8F079EE1-F75D-EB97-9C8B-1B61C89EB5F7"/>
+</associations>
+</Column>
+<Column name="FOLDER_PATH_SEQ" id="29848A3C-1274-F736-939F-73FB0FB11645">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>513CD531-C6E8-6AB0-C9DE-40DF1F3060F5</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="CD4AF8C5-FB0D-51E7-A8CA-7329A0087AD3" referredColumn="4FF1B8CB-6033-F354-5A2C-135D5B4A7F5D"/>
+</associations>
+</Column>
+<Column name="RELATIVE_PATH" id="0D4F9D80-4678-2598-4F2F-7FCF65FEB0C9">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>90964526-7EA9-DB1C-756A-93D1DB867603</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FILE_STATE_SEQ" id="B91D2F00-2F6D-EF06-AAAE-C96B56FCF5EA">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>0A55BA27-BE2A-700D-687C-B4E56FB32B84</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FILE_NAME" id="EC5029DD-F874-2B9A-80AD-67EE76A61FDA">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>CBACAA46-B4D5-C975-B236-0F82C5E78406</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DATE_SUBMITTED" id="24893355-BE6D-77C6-1B1A-34BA824CF11F">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>61DFFD12-44FC-C5D6-D3D2-BE348DD955DE</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SUBMITTED_BY" id="7C9FEF3E-5B8B-0D16-514C-ED65F9E4F194">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[THIS WILL BE PROVIDED BY THE APP]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>01E6827B-B1D0-D298-FB06-A657F3A3C943</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BE2AF1F2-F85B-3DB0-3976-D492B92FE7F0" name="FILE_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>5042B7E8-9B37-9089-FD13-8E51BE0512EB</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F20A7935-CFB0-8CBD-2185-E84C7A19074D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9ECF0DEE-4179-69D4-723E-47196DD65732" name="FILE_MISSION_METADATA_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1CD4C702-69C4-DF63-A225-F370326515D0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="63D4BC5A-1D95-8467-6095-7090994E3490" name="FILE_LU_INSTRUMENT_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 11:00:54 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B6D52AC2-EEFE-DFD0-C3BD-990F3594D9E9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5B6299A2-9507-6143-AA09-EE04617C6334" name="FILE_SHARE_PATH_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:37:21 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="29848A3C-1274-F736-939F-73FB0FB11645"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B32F1067-1DA2-AE95-0E1E-20B089B065BC" name="FILE_LU_FILE_TYPE_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:54:05 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="26BF6F03-8E9B-FC4F-59F4-7B9E64EE4C9D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
