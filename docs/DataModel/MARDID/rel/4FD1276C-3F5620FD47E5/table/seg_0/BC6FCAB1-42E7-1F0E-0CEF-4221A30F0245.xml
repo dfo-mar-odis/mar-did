@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BC6FCAB1-42E7-1F0E-0CEF-4221A30F0245" name="LU_FILE_TYPE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:52:46 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_25</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="FILE_TYPE_SEQ" id="8F079EE1-F75D-EB97-9C8B-1B61C89EB5F7">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:53:12 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,4,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FILE_TYPE_NAME" id="41019DD2-39FF-4D87-D9C4-E739177ED6FD">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:53:27 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FILE_TYPE_DESCRIPTION" id="D99B53DA-A754-37FB-59E2-D3186BD66E93">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:53:40 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="99C1947D-DB6C-0C32-C231-AA6014B4D7CF" name="LU_FILE_TYPE_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:53:12 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8F079EE1-F75D-EB97-9C8B-1B61C89EB5F7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

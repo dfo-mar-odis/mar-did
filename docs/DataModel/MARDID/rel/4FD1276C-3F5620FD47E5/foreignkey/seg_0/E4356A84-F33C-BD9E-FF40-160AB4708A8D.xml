@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="E4356A84-F33C-BD9E-FF40-160AB4708A8D" containerWithKeyObject="F23E7805-DB82-C33D-F5CB-06B397B62561" localFKIndex="5200D365-CBFF-A924-2D69-5B4B9F1C3336" name="DATA_COLLECTED_LU_PROCESS_STATE_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:49:49 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<referredTableLongName>LU_PROCESS_STATE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>C69DCF0C-EFEB-B586-6857-4B974E9C181A</referredTableID>
+<keyObject>1151A8C5-12FD-8E74-E41C-58E447FA536B</keyObject>
+<referredKeyID>1151A8C5-12FD-8E74-E41C-58E447FA536B</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>PROCESS_STATE_SEQ</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

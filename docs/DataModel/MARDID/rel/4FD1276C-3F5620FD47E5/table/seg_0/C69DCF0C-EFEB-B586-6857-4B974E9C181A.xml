@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C69DCF0C-EFEB-B586-6857-4B974E9C181A" name="LU_PROCESSING_STATE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:48:12 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_24</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PROCESSING_STATE_SEQ" id="36BF3DAD-9CDB-3E89-112A-FAD44A8D9183">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:48:38 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PROCESSING_STATE_NAME" id="FEB4FB04-FD8A-3E5A-88D9-AB81F2C7D508">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:48:54 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PROCESSING_STATE_DESCRIPTION" id="7B702C61-BFC5-A4B5-7683-C47C505EF831">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:49:09 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1151A8C5-12FD-8E74-E41C-58E447FA536B" name="LU_PROCESSING_STATE_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:49:28 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="36BF3DAD-9CDB-3E89-112A-FAD44A8D9183"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

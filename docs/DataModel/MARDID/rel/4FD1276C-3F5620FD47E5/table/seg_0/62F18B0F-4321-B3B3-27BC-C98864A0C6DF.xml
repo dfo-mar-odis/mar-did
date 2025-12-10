@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="62F18B0F-4321-B3B3-27BC-C98864A0C6DF" name="GROUP">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 19:49:09 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_16</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="GROUP_SEQ" id="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 19:49:56 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="GROUP_NAME" id="B27E27CF-9AF6-4B84-C030-E8D906C4C58F">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 20:01:14 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E740A4E4-C5DA-A604-6657-4A01E81EAD72" name="GROUP_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 19:53:54 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

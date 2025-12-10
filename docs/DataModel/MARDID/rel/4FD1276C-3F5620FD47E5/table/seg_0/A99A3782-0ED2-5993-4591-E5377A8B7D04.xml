@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A99A3782-0ED2-5993-4591-E5377A8B7D04" name="LU_INSTRUMENT_TYPE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<comment><![CDATA[Types:
+- SBE Sensor
+- Bottle
+- 76 or 202 um ring net
+- Microcat CTD
+- various types of ADCP
+- thermograph (Minilog or HOBO)
+etc.]]></comment>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>F3CB42C3-5B9D-AFFC-1F68-985FEC416B5E</importedID>
+<ordsAlias>table_28</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="INSTRUMENT_TYPE_SEQ" id="992D1F0C-4702-E297-3963-20D6BAC2EE09">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>EF1CFB96-6E15-A5C4-BFFD-E5AD1806D2AF</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSTRUMENT_TYPE" id="C67233FE-D5A6-4EAB-B844-EC77AB958C47">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>1E443C92-F092-AE37-3639-0D0E2308DFB9</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>35</dataTypeSize>
+<ownDataTypeParameters>35,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INSTRUMENT_CATEGORY_SEQ" id="BBDA5EA9-04B5-C81E-AFCF-23C650A270B4">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>5B4B0339-CD47-3DE6-3887-148B667CBAAE</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2CF6F1CB-06C1-F6BF-1B8E-C582B904A0EA" name="INSTRUMENT_TYPE_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>3850EA5C-CF7F-A10F-95FA-6F63BCBDC538</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="992D1F0C-4702-E297-3963-20D6BAC2EE09"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

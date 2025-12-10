@@ -1,0 +1,202 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="461EE8BC-C317-3F83-7D5D-8B3DDC5E8787" name="MISSION_METADATA">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>5183A859-F52F-4579-9790-70E45E4EC0C8</importedID>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MISSION_METADATA_SEQ" id="8ADF41FF-026F-2BC7-4801-0CD272F000DC">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>FB8699C5-A949-E17B-5F07-6F7C6AF940CF</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MISSION_NAME" id="8EEEF0CB-4A91-1DB5-C48C-D47F537531BD">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[The assigned mission name OR a unique name for the collection event within the program or project.]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>85137639-FCBE-952F-8A57-82DF160E9E52</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PLATFORM_SEQ" id="BCE2E70E-2511-A616-7CAE-5FA80DD65CB8">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[Sequence to link to the details about the platform/method for collection of the data.]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>A551B633-C5BB-2C4C-7368-459EABE7F3F9</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="02406DD0-8CFE-68BD-214C-047CFB2702C1" referredColumn="DA6C4CBE-33B7-4BCA-86E9-F65F095F06A7"/>
+</associations>
+</Column>
+<Column name="NODC_DESCRIPTOR" id="33400C2A-DF10-1ACE-D68D-70541C481BC2">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[The MEDS assigned mission ID, if one exists, required for BioChem data.]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>391D95E0-2221-78D8-AD24-AD23439D82B1</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="START_DATE" id="58536BD9-4BAB-BA1F-C0DA-09605FC2B0FE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>24A112D1-FCEA-1D05-409B-3C81F1B72CC4</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="END_DATE" id="7403F42C-ADD5-4707-0C7C-85B3CC04B475">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>ABD92093-850E-593C-6322-B3EFFC7B83FF</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CONTACT_GROUP_SEQ" id="50BB39D7-6520-817E-38F3-DAD1E9BD18C3">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:27:21 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D2DA495E-04E5-B85F-61AC-33BCFF087F63" referredColumn="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D"/>
+</associations>
+</Column>
+<Column name="PROGRAM_SEQ" id="AC2B3402-13D1-2408-8A73-73730828C1A8">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[The protocol, program, or project which is the leader or primary funder, of the mission.]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>2DA65765-90A0-9E2C-3F2B-53D242A2E772</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FC970C6E-711C-FD1F-E1FB-A3C2E44D40DB" referredColumn="43857219-FF44-5344-3327-0E13AB66D119"/>
+</associations>
+</Column>
+<Column name="INSTITUTE_SEQ" id="A361544F-9BE5-121C-084A-8E90DD4111F9">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>65FA3A80-76CA-6E40-7393-FD5A479DCDF8</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="88175539-6BA7-1BC2-5936-DF6D6F6A9DD1" referredColumn="6F357FCD-5D41-9B4A-70E7-78D2DDAB43AD"/>
+</associations>
+</Column>
+<Column name="PPT_ID" id="F28C4FA7-80EB-E294-A642-D5EACAD5A884">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>105A8C38-B380-DECD-A154-55E63DFDF30D</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="47E79342-B935-C4C8-8E1A-B17D0397A0CD" name="MISSION_METADATA_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>098751D4-E01F-4A24-85B3-F1EB2D494F00</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8ADF41FF-026F-2BC7-4801-0CD272F000DC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="234FB1A9-6A25-339B-CA83-26ADDF6FF1CE" name="MISSION_METADATA_LU_PLATFORM_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 18:10:33 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BCE2E70E-2511-A616-7CAE-5FA80DD65CB8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="31E1C63E-32D4-F74A-0292-EBC9DAC27137" name="MISSION_METADATA_LU_INSTITUTE_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 18:11:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A361544F-9BE5-121C-084A-8E90DD4111F9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2D189FB0-740B-7FF0-791A-E6BFD14B7326" name="MISSION_METADATA_GROUP_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:28:16 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="50BB39D7-6520-817E-38F3-DAD1E9BD18C3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5796BE3E-A2A6-1B60-F93E-2819CC3105B8" name="MISSION_METADATA_LU_PROGRAM_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:42:47 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AC2B3402-13D1-2408-8A73-73730828C1A8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

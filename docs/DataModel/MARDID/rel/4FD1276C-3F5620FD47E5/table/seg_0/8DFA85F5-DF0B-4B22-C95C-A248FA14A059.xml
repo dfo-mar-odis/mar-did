@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8DFA85F5-DF0B-4B22-C95C-A248FA14A059" name="LU_MISSION_REGION">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>E6879220-5E95-9F19-3BAD-47AFA559FB10</importedID>
+<ordsAlias>table_2</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MISSION_SEQ" id="F493B356-B433-CCC2-19CA-92E18366E9E3">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>A2F80F24-A850-F87E-BA92-532034BDF070</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="84A673CF-69FD-BDE0-5921-ACC6E457A528" referredColumn="8ADF41FF-026F-2BC7-4801-0CD272F000DC"/>
+</associations>
+</Column>
+<Column name="GEOGRAPHIC_SEQ" id="BBE7DF32-509D-686B-71FF-28A5C716E514">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>F04737DB-6F85-7EA9-E551-314C5E187B42</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4B8185BB-816E-2EF4-8DCF-2DCCB2508EAF" referredColumn="D7D810D3-C608-71A4-5F4C-381A6B1D4EAA"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9CC23388-7CA3-D1D1-147B-BEBC753D272A" name="MISSION_REGIONS__UN">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>3AD72885-88E3-E0D5-DAA4-67078A7BD32C</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F493B356-B433-CCC2-19CA-92E18366E9E3"/>
+<colUsage columnID="BBE7DF32-509D-686B-71FF-28A5C716E514"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="50D90DA3-27D2-FC30-63E2-D4D6B7207805" name="MISSION_REGION_MISSION_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F493B356-B433-CCC2-19CA-92E18366E9E3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2F082821-3FAE-B2F3-FE1D-873F9507DFE9" name="MISSION_REGION_GEOGRAPHIC_REGION_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BBE7DF32-509D-686B-71FF-28A5C716E514"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

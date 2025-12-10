@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="10EDC7D5-B745-F84E-AC82-47AAEF539D46" containerWithKeyObject="B6D9AE96-AE80-31FE-14AF-588EC2BFE7F4" localFKIndex="6F6DFC8A-46E8-DC14-4087-9BDCE973C461" name="EQUIPMENT_MISSION_METADATA_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>D62ECE67-938A-903F-B310-B0F686F74DCF</importedID>
+<referredTableLongName>MISSION_METADATA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>461EE8BC-C317-3F83-7D5D-8B3DDC5E8787</referredTableID>
+<keyObject>47E79342-B935-C4C8-8E1A-B17D0397A0CD</keyObject>
+<referredKeyID>47E79342-B935-C4C8-8E1A-B17D0397A0CD</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>MISSION_METADATA_SEQ</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

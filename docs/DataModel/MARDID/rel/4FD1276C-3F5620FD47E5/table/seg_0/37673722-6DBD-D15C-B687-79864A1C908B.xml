@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="37673722-6DBD-D15C-B687-79864A1C908B" name="LU_ROLE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 18:33:22 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_29</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ROLE_SEQ" id="B5D85BA3-F7B1-D653-E3EA-1C6CB2CEC51F">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 18:33:54 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ROLE_NAME" id="0AA4EFC0-F7CE-A2B2-923D-63A473C4BBA2">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 11:17:54 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ROLE_DESCRIPTION" id="FC4376C9-5E9D-40D4-9B92-9428E5DBEA21">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-27 13:24:47 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E791E287-FB7B-42BA-A93E-94FD75332614" name="LU_ROLE_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 18:33:54 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B5D85BA3-F7B1-D653-E3EA-1C6CB2CEC51F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
