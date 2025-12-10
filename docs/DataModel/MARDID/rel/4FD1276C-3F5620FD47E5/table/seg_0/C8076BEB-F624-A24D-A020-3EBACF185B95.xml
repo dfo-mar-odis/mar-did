@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C8076BEB-F624-A24D-A020-3EBACF185B95" name="GROUP_MEMBER">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:22:24 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_17</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="GROUP_SEQ" id="1F839ABA-0D39-2650-AFC3-A969261B3320">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:24:06 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0C0B0875-5D36-F67D-85C5-831D100E7C6D" referredColumn="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D"/>
+</associations>
+</Column>
+<Column name="CONTACT_SEQ" id="3EFE605E-A16A-6E0E-F57B-07ED9043DB42">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:24:18 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="49DC1B4D-C352-D892-BCCC-6687362E9B75" referredColumn="C73CC082-94C2-87D6-AA92-056611B3E40D"/>
+</associations>
+</Column>
+<Column name="ROLE_SEQ" id="C5DA1AC4-17A7-A2D0-E286-D36CDFDE3BA9">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-26 15:01:36 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="52325ECE-2602-7BF3-A8C0-04B36148F278" referredColumn="B5D85BA3-F7B1-D653-E3EA-1C6CB2CEC51F"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F3472A07-5B7E-CE81-7893-FC2A2F48B0D1" name="GROUP_MEMBER_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:24:53 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1F839ABA-0D39-2650-AFC3-A969261B3320"/>
+<colUsage columnID="3EFE605E-A16A-6E0E-F57B-07ED9043DB42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="87BC69FF-7CEA-32D4-D22B-5C9510D0CDD3" name="GROUP_MEMBER_GROUP_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:24:34 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1F839ABA-0D39-2650-AFC3-A969261B3320"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6AB1824A-6D8E-669B-529A-DE0B7DA40EE1" name="GROUP_MEMBER_LU_CONTACT_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 21:24:42 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EFE605E-A16A-6E0E-F57B-07ED9043DB42"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="59CB3444-677F-0E66-2029-CDA7FECAAA7A" name="GROUP_MEMBER_LU_ROLE_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-26 15:01:53 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C5DA1AC4-17A7-A2D0-E286-D36CDFDE3BA9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

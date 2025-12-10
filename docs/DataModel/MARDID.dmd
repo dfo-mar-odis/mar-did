@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="MARDID" id="57459C85-1444-08A2-043F-E2F827EC0026" version="3.5">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:53:31 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>57459C85-1444-08A2-043F-E2F827EC0026</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="EACE7866-EC80-0E7D-CA15-22950402E8BE">
+<designStoragePath>C:\Users\jacksonj\OneDrive - DFO-MPO\Database\NewDataModel_strawman\MARDID</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

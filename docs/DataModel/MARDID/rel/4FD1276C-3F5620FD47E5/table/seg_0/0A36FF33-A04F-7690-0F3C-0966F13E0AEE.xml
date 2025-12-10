@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0A36FF33-A04F-7690-0F3C-0966F13E0AEE" name="LU_GEOGRAPHIC_REGION">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>3621CF03-051B-2C26-4804-F199B4141ECC</importedID>
+<ordsAlias>table_3</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="GEOGRAPHIC_SEQ" id="D7D810D3-C608-71A4-5F4C-381A6B1D4EAA">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>4110203A-D0B4-0441-52C5-4B5C9BC98769</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="GEOGRAPHIC_NAME" id="D3633392-97BF-2C51-2E47-7B190D486792">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>87DF9A1E-F6B6-3FBB-DBB1-3E1AD1BC3367</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2AE509AC-30B8-D6FF-7B43-167FC578A362" name="GEOGRAPHIC_REGION_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>47185805-EE5D-CCB3-E274-BD08002C2B77</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D7D810D3-C608-71A4-5F4C-381A6B1D4EAA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

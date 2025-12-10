@@ -1,0 +1,56 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AD88C773-C760-69DC-C8DE-A167CF4C9C4B" name="LU_CONTACT">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>F3710204-8B50-834B-DF51-E79762A082CD</importedID>
+<ordsAlias>table_21</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CONTACT_SEQ" id="C73CC082-94C2-87D6-AA92-056611B3E40D">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 18:35:19 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LAST_NAME" id="5D9AD805-12DE-887A-52E7-67F80F0FCD2E">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>F009ACE9-AB11-C249-4B4E-B7E94203A1C4</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FIRST_NAME" id="67485C74-9469-05AA-2175-A6A102D6A483">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>310B9606-603A-EBD3-2DEF-6658CD85C81B</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="0444C417-E90C-70C1-90F4-89698BFD8233" name="LU_CONTACT_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 18:35:30 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C73CC082-94C2-87D6-AA92-056611B3E40D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

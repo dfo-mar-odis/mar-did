@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="4B8185BB-816E-2EF4-8DCF-2DCCB2508EAF" containerWithKeyObject="8DFA85F5-DF0B-4B22-C95C-A248FA14A059" localFKIndex="2F082821-3FAE-B2F3-FE1D-873F9507DFE9" name="MISSION_REGION_GEOGRAPHIC_REGION_FK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>DBD2B5FB-5F88-9D35-6D9B-82B70F8123B2</importedID>
+<referredTableLongName>LU_GEOGRAPHIC_REGION</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>0A36FF33-A04F-7690-0F3C-0966F13E0AEE</referredTableID>
+<keyObject>2AE509AC-30B8-D6FF-7B43-167FC578A362</keyObject>
+<referredKeyID>2AE509AC-30B8-D6FF-7B43-167FC578A362</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>GEOGRAPHIC_SEQ</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

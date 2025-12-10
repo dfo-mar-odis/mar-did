@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2993F626-DAC3-2493-FC53-265AE67F8319" name="LU_PARAMETER_TYPE">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:48:58 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<ordsAlias>table_18</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PARAMETER_TYPE_SEQ" id="3FA38060-051A-EE35-C500-B8BCEB466874">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:49:26 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PARAMETER_TYPE" id="981AFF81-8B24-34E0-2226-5A7CBE5ECEFC">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:49:44 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PARAMETER_UNITS" id="DE260015-2129-B2C4-B6C6-CAFF15E29087">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:50:16 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="388ED4AF-9053-5B41-C446-51895E5D5246" name="LU_PARAMETER_TYPE_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-25 10:51:00 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3FA38060-051A-EE35-C500-B8BCEB466874"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

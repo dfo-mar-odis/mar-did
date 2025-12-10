@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5078DD1F-C84B-6267-A955-5750348F61F8" name="LU_COUNTRY">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>EA6EAF57-19EC-B586-5123-14D5A1C31D00</importedID>
+<ordsAlias>table_4</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="COUNTRY_SEQ" id="217E7642-58DB-9697-383D-336738E81870">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[MEDS uses a list of country codes that I think are from ICES, we should adopt that...]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>69266224-03E5-4BDE-F6D4-064A02D4C60E</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="COUNTRY_NAME" id="DC14692A-EA9C-71AD-A5B8-89ADE47955C7">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<commentInRDBMS><![CDATA[Official name of the country]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>522F29AD-D2DF-25F8-6731-FF160287A454</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>35</dataTypeSize>
+<ownDataTypeParameters>35,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D671EE5C-C96A-B191-FA8F-8749171AEE98" name="COUNTRY_PK">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2025-11-24 16:54:32 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<importedID>88930C71-D847-D523-EB03-2D0EAD705886</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="217E7642-58DB-9697-383D-336738E81870"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
