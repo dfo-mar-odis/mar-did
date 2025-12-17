@@ -1,9 +1,9 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="865E6881-A442-3F56-9366-C31C64F01DF3" containerWithKeyObject="B6D9AE96-AE80-31FE-14AF-588EC2BFE7F4" localFKIndex="B619D3A5-0C7F-084D-FD8C-1733147BF102" name="EQUIPMENT_LU_PROJECTS_FK">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-27 13:46:44 UTC</createdTime>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="8A784AF5-D5AF-FA19-D1AB-2D9D2D994DE4" containerWithKeyObject="E4A437E9-A62E-19D0-50A6-8561DEF34F65" localFKIndex="5DE61996-DC06-B082-3A94-B76F05DBC153" name="EQUIPMENT_PROJECTS_LU_PROJECT_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2025-12-10 11:42:57 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
-<referredTableLongName>LU_PROJECTS</referredTableLongName>
+<referredTableLongName>LU_PROJECT</referredTableLongName>
 <deleteRule>NO ACTION</deleteRule>
 <referredTableID>9BD4983A-F81E-519C-FFE9-B1AEFA19A220</referredTableID>
 <keyObject>E158C2DD-F51A-7B10-57BA-D62092E911B1</keyObject>
