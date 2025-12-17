@@ -75,21 +75,6 @@
 <colAssociation fkAssociation="10EDC7D5-B745-F84E-AC82-47AAEF539D46" referredColumn="8ADF41FF-026F-2BC7-4801-0CD272F000DC"/>
 </associations>
 </Column>
-<Column name="PROJECT_SEQ" id="C9799202-6608-68EC-F5F1-ECCC1F2B44CE">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-24 16:54:32 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<importedID>659C9363-755E-0A96-84AA-D0958EB470CA</importedID>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>4</dataTypePrecision>
-<ownDataTypeParameters>,4,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="865E6881-A442-3F56-9366-C31C64F01DF3" referredColumn="92586923-5245-B0A2-AE25-126BA0256E22"/>
-</associations>
-</Column>
 <Column name="DEPLOYMENT_DATE" id="B11D78BE-84F5-F2BA-6731-C0E070D9FB7B">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-24 16:54:32 UTC</createdTime>
@@ -231,16 +216,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="BBC21403-AB8C-3E46-2B1C-C903C0372DCD"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="B619D3A5-0C7F-084D-FD8C-1733147BF102" name="EQUIPMENT_LU_PROJECTS_FK">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-27 13:46:44 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="C9799202-6608-68EC-F5F1-ECCC1F2B44CE"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
