@@ -47,6 +47,30 @@
 <colAssociation fkAssociation="8E30CD84-A2D4-1AD4-0918-946E6B621CA6" referredColumn="217E7642-58DB-9697-383D-336738E81870"/>
 </associations>
 </Column>
+<Column name="CALL_SIGN" id="B11DC444-F663-797A-C507-ACC4B4780546">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2026-01-08 11:10:47 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MAXIMUM_SPEED" id="1A434B5C-F973-D3BD-F868-129D7DE3EFDD">
+<createdBy>JacksonJ</createdBy>
+<createdTime>2026-01-08 11:11:15 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="D0754FA7-1B72-8AD5-42BA-03BCC1D72530" name="LU_PLATFORM_PK">
