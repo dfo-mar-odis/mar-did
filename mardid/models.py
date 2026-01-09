@@ -26,6 +26,8 @@ class Platform(models.Model):
     # meaningful collection method (ie glider) of the data.
     platform = models.CharField(max_length=100, db_column='PLATFORM', help_text=_("Platform name or description"))
     country = models.ForeignKey(Country, related_name="platforms", on_delete=models.CASCADE, blank=True, null=True, db_column='COUNTRY_SEQ')
+    call_sign = models.CharField(max_length=10, db_column='CALL_SIGN', blank=True, null=True, help_text=_("Platform call sign, if applicable"))
+    max_speed = models.IntegerField(max_length=3, db_column='MAXIMUM_SPEED', blank=True, null=True, help_text=_("Maximum speed of the platform in knots"))
 
     class Meta:
         db_table = 'LU_PLATFORM'
