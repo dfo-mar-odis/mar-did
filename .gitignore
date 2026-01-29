@@ -136,6 +136,8 @@ celerybeat.pid
 
 # Environments
 .env
+.env.*
+!.env.example
 .envrc
 .venv
 env/
@@ -208,7 +210,7 @@ __marimo__/
 
 
 staticfiles/*
-media
+/media/
 *.mwb.bak
 
 # this is a script on the server to start the Daphane server

@@ -1,7 +1,7 @@
 from .base import *
 from config.env import env
 
-ALLOWED_HOSTS = ['ci-bio-mar-did-1']
+ALLOWED_HOSTS = ['*']
 DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 AZURE_AUTH = {}
@@ -14,7 +14,6 @@ INSTALLED_APPS += [
     'azure_auth',
 ]
 
-oracledb.init_oracle_client(lib_dir=env('ORACLE_INSTANT_CLIENT_PATH'))
 DATABASES = {
     'default': {
         'ENGINE': env('DATABASE_BACKEND'),
