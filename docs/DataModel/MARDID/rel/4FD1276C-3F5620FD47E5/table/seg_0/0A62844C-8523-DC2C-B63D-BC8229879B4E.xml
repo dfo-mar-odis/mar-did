@@ -71,6 +71,32 @@
 <ownDataTypeParameters>,3,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="ICES_CODE" id="BE170A91-BD3B-6228-FA1B-9C3AAAD070DB">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 14:31:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[The 4-character ICES code from https://vocab.ices.dk/]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>4</dataTypeSize>
+<ownDataTypeParameters>4,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SHIP_CODE" id="A0C89D67-CBEC-1BC7-4C16-E60D3E732BD1">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 14:31:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Legacy codes that come from the OSCCRUISE database]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>6 CHAR</dataTypeSize>
+<ownDataTypeParameters>6 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="D0754FA7-1B72-8AD5-42BA-03BCC1D72530" name="LU_PLATFORM_PK">

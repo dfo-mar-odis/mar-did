@@ -35,5 +35,6 @@ urlpatterns += i18n_patterns(
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='core:landing_view'), name='logout'),
     path('', include('core.urls')),
+    path('', include('mardid.urls')),
     prefix_default_language=True  # Set to False if you don't want prefix for default language
 )

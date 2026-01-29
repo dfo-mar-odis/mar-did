@@ -35,6 +35,19 @@
 <ownDataTypeParameters>35,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="COUNTRY_CODE" id="CA12F5A4-339A-3455-E7D8-D18D51D44769">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 14:20:37 UTC</createdTime>
+<commentInRDBMS><![CDATA[The character 2-letter code that represents a country.]]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2 CHAR</dataTypeSize>
+<ownDataTypeParameters>2 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="D671EE5C-C96A-B191-FA8F-8749171AEE98" name="COUNTRY_PK">

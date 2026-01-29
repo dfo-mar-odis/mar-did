@@ -111,7 +111,7 @@ class SimpleLookupForm(forms.ModelForm):
         )
 
 
-def create_lookup_classes(lookup_model, name_key):
+def create_lookup_classes(lookup_model, name_key, app_name:str= 'core'):
     """Factory function to create lookup form and view classes dynamically"""
     # Generate names
     name_update_lookup = f'update_lookup_{name_key}'
@@ -120,8 +120,8 @@ def create_lookup_classes(lookup_model, name_key):
 
     # Create form class dynamically
     class DynamicLookupForm(SimpleLookupForm):
-        update_url = f'core:{name_update_lookup}'
-        form_url = f'core:{name_get_form}'
+        update_url = f'{app_name}:{name_update_lookup}'
+        form_url = f'{app_name}:{name_get_form}'
 
         class Meta:
             fields = "__all__"
@@ -129,8 +129,8 @@ def create_lookup_classes(lookup_model, name_key):
 
     # Create view class dynamically
     class DynamicLookupView(SimpleLookupView):
-        table_url = reverse_lazy(f'core:{name_list_lookup}')
-        form_url = reverse_lazy(f'core:{name_get_form}')
+        table_url = reverse_lazy(f'{app_name}:{name_list_lookup}')
+        form_url = reverse_lazy(f'{app_name}:{name_get_form}')
 
     # Set proper names for better debugging and introspection
     DynamicLookupForm.__name__ = f"{lookup_model.__name__}Form"
