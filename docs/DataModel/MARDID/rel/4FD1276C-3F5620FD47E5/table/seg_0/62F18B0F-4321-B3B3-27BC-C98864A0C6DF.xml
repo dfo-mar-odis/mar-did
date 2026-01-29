@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="62F18B0F-4321-B3B3-27BC-C98864A0C6DF" name="GROUP">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="62F18B0F-4321-B3B3-27BC-C98864A0C6DF" name="MISSION_PARTICIPANT">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-25 19:49:09 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
@@ -8,7 +8,7 @@
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="GROUP_SEQ" id="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D">
+<Column name="PARTICIPANT_SEQ" id="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-25 19:49:56 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
@@ -18,21 +18,48 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="GROUP_NAME" id="B27E27CF-9AF6-4B84-C030-E8D906C4C58F">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-25 20:01:14 UTC</createdTime>
+<Column name="MISSION_SEQ" id="0E5957F3-4009-3D91-BA46-52EB689E4C3B">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:38:46 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>50</dataTypeSize>
-<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2C063E2E-3656-52AA-1B4E-B24A1AC35327" referredColumn="8ADF41FF-026F-2BC7-4801-0CD272F000DC"/>
+</associations>
+</Column>
+<Column name="ROLE_SEQ" id="664445B0-1B53-D12F-8AE2-EFC251DC3DA3">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:43:22 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1EC31521-B9BC-E6D0-0FFD-E1E7C348C0F4" referredColumn="B5D85BA3-F7B1-D653-E3EA-1C6CB2CEC51F"/>
+</associations>
+</Column>
+<Column name="CONTACT_SEQ" id="8559F2D5-FC11-01B5-EF7E-8557523539C1">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:43:49 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="53B0BE49-D954-47A5-0463-EF3EDBDAD07E" referredColumn="C73CC082-94C2-87D6-AA92-056611B3E40D"/>
+</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="E740A4E4-C5DA-A604-6657-4A01E81EAD72" name="GROUP_PK">
+<ind_PK_UK id="E740A4E4-C5DA-A604-6657-4A01E81EAD72" name="PARTICIPANT_PK">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-25 19:53:54 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
@@ -41,6 +68,36 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="76D5F017-953A-EFEB-858D-7B5842244F14" name="MISSION_PARTICIPANT_GROUP_MEMBER_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:40:34 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0E5957F3-4009-3D91-BA46-52EB689E4C3B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DB7335C1-528D-1101-0D03-AA22965ECBF1" name="MISSION_PARTICIPANT_LU_ROLE_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:44:55 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="664445B0-1B53-D12F-8AE2-EFC251DC3DA3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3F450B15-98AA-0C8C-CB2E-74474FDFB415" name="MISSION_PARTICIPANT_LU_CONTACT_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:44:55 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8559F2D5-FC11-01B5-EF7E-8557523539C1"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

@@ -115,6 +115,7 @@
 <Column name="DATE_ENTERED" id="59059D72-9156-5123-1561-8BD0459AB52C">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-24 19:08:37 UTC</createdTime>
+<commentInRDBMS><![CDATA[This the date the dataset was added to Mar-did]]></commentInRDBMS>
 <ownerDesignName>MARDID</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -128,9 +129,12 @@
 <ownerDesignName>MARDID</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AF5C6FCE-F16A-4416-6725-279BB7371BAB" referredColumn="C73CC082-94C2-87D6-AA92-056611B3E40D"/>
+</associations>
 </Column>
 <Column name="DATE_RECEIVED" id="0709A39D-7C8F-C488-104C-7E0BFC2F495D">
 <createdBy>JacksonJ</createdBy>
@@ -202,6 +206,33 @@
 <associations>
 <colAssociation fkAssociation="0C3DA28D-04A1-7BCC-DAF4-9741175FEF67" referredColumn="7D0220D8-93BE-16C1-C609-56B8031DB165"/>
 </associations>
+</Column>
+<Column name="FOLDER_PATH_SEQ" id="CF8C18E2-7411-A34F-CD87-7DCE37D36C19">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:12:09 UTC</createdTime>
+<commentInRDBMS><![CDATA[Represents the root directory for mission files such as 'ARC', 'SRC', 'PRV']]></commentInRDBMS>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A6196A1D-2F5D-253D-AF07-CB17DCC06126" referredColumn="4FF1B8CB-6033-F354-5A2C-135D5B4A7F5D"/>
+</associations>
+</Column>
+<Column name="RELATIVE_PATH" id="0ED69114-6E6F-ADCF-0EE2-416BEA67995A">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:13:20 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -284,6 +315,26 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="783A4446-067B-75C8-0202-A74EAA383347"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A40F244E-D2ED-EE5D-E627-D89968AB8D8C" name="DATA_COLLECTED_LU_FOLDER_PATH_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:12:09 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CF8C18E2-7411-A34F-CD87-7DCE37D36C19"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A9D53D55-3004-CC4B-D88F-60607BCE0EF0" name="DATA_COLLECTED_LU_CONTACT_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 15:58:37 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A6DA7DFB-7534-4F2E-ABF7-F441F2754F7A"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

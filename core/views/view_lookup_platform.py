@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from django.template.loader import render_to_string
 
 from django.urls import path
 from django.http import HttpResponse
@@ -16,6 +17,7 @@ lookup_model = models.Platforms
 
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
+app_name = 'core'
 name_key = 'platforms'
 columns = ['name', 'ship_code']
 
@@ -26,7 +28,7 @@ name_get_view = f'lookup_view_{name_key}'
 name_update_lookup = f'update_lookup_{name_key}'
 name_delete_element = f'lookup_delete_{name_key}'
 
-model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key)
+model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key, app_name)
 
 field_lookup = {field.name: field for field in lookup_model._meta.fields if field.name in columns}
 labels = [(field_lookup[col_name].verbose_name if field_lookup[col_name].verbose_name else col_name) for col_name in columns]
@@ -44,8 +46,8 @@ def list_lookup(request):
     df = df[[col for col in columns if col in df.columns]]
     df.columns = labels
 
-    form_url_alias = f"core:{name_get_form}"
-    delete_url_alias = f"core:{name_delete_element}"
+    form_url_alias = f"{app_name}:{name_get_form}"
+    delete_url_alias = f"{app_name}:{name_delete_element}"
     table = view_lookup_abstract.prep_table(request, df, form_url_alias, delete_url_alias)
     return HttpResponse(table)
 
@@ -54,24 +56,12 @@ def get_form(request, **kwargs):
     form = view_lookup_abstract.get_lookup_form(model_form, **kwargs)
     html = render_crispy_form(form)
 
-    link_label = _("ICES")
-    message = _('To search for a ship code see : ')
     soup = BeautifulSoup(html, 'html.parser')
-    soup.append(alert:=soup.new_tag("div", attrs={'class': 'alert alert-info'}))
-    alert.string = message
-    alert.append(link:=soup.new_tag('a', attrs={'class': 'btn btn-sm btn-outline-dark ms-2', 'href': "https://vocab.ices.dk/"}))
-    link.string = link_label
-    link.append(soup.new_tag('span', attrs={'class': 'bi bi-globe ms-2'}))
+    alert = BeautifulSoup(render_to_string('core/partials/alert_ices_message.html'), 'html.parser')
+
+    soup.append(alert)
 
     return HttpResponse(soup)
-
-
-def update_lookup(request, **kwargs):
-    return view_lookup_abstract.update_lookup(request, model_form, **kwargs)
-
-
-def delete_element(request, pk):
-    return view_lookup_abstract.delete_element(request, pk, lookup_model)
 
 
 urlpatterns = [
@@ -79,7 +69,13 @@ urlpatterns = [
     path(f'lookup/{name_key}/form', get_form, name=name_get_form),
     path(f'lookup/{name_key}/form/<int:pk>', get_form, name=name_get_form),
     path(f'lookup/{name_key}/table/list', list_lookup, name=name_list_lookup),
-    path(f'lookup/{name_key}/add', update_lookup, name=name_update_lookup),
-    path(f'lookup/{name_key}/update/<int:pk>', update_lookup, name=name_update_lookup),
-    path(f'lookup/{name_key}/delete/<int:pk>', delete_element, name=name_delete_element)
+
+    path(f'lookup/{name_key}/add', view_lookup_abstract.update_lookup,
+         kwargs={'model_form': model_form}, name=name_update_lookup),
+
+    path(f'lookup/{name_key}/update/<int:pk>', view_lookup_abstract.update_lookup,
+         kwargs={'model_form': model_form}, name=name_update_lookup),
+
+    path(f'lookup/{name_key}/delete/<int:pk>', view_lookup_abstract.delete_element,
+         kwargs={'lookup_model': lookup_model}, name=name_delete_element)
 ]

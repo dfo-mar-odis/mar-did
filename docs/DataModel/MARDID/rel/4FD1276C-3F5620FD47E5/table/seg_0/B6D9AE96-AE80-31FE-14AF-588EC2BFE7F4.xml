@@ -38,7 +38,7 @@
 <Column name="EQUIPMENT_NUMBER" id="66B4E5E2-626F-1327-A62A-6E31AA054B0F">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-24 16:54:32 UTC</createdTime>
-<commentInRDBMS><![CDATA[A mooring or serial number for example.]]></commentInRDBMS>
+<commentInRDBMS><![CDATA[A mooring or serial number, for example, provied by someone at BIO]]></commentInRDBMS>
 <ownerDesignName>MARDID</ownerDesignName>
 <importedID>9A855F4A-37D9-99E2-DA2D-2796CB11F22F</importedID>
 <nullsAllowed>true</nullsAllowed>
@@ -165,12 +165,14 @@
 <createdTime>2025-11-24 16:54:32 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
 <importedID>B370E6D5-FF37-88DA-6ACA-E29927B5D1F3</importedID>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="15104783-E603-D975-377A-464AA3097E26" referredColumn="C73CC082-94C2-87D6-AA92-056611B3E40D"/>
+</associations>
 </Column>
 <Column name="RECOVERY_MISSION_METADATA_SEQ" id="259B73DE-E684-B3F7-10A6-7EF92FCD89FC">
 <createdBy>JacksonJ</createdBy>
@@ -216,6 +218,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="BBC21403-AB8C-3E46-2B1C-C903C0372DCD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AF898B71-F366-46E8-4D77-EB93C13C32B6" name="EQUIPMENT_LU_CONTACT_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-27 16:03:06 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EF1D5E0F-A194-5D7A-AEDD-4F2931E560A5"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
