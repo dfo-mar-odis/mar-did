@@ -33,6 +33,8 @@
                             {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="/admin">{% trans 'Administrator' %}</a></li>
                             {% endif %}
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_country' %}">{% trans 'Countries' %}</a></li>
+                            <li><hr/></li>
                             <li><a class="dropdown-item" href="{% url 'core:contacts_view' %}">{% trans 'Contacts' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_geo_regions' %}">{% trans 'Geographic Regions' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_instruments' %}">{% trans 'Instruments' %}</a></li>

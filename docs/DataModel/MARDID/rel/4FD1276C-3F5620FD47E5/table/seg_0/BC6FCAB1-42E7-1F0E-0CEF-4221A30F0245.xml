@@ -23,7 +23,6 @@
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-27 13:53:27 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
@@ -35,7 +34,6 @@
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-27 13:53:40 UTC</createdTime>
 <ownerDesignName>MARDID</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>

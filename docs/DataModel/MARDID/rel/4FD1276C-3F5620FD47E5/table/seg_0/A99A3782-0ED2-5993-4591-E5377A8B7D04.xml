@@ -40,18 +40,6 @@ etc.]]></comment>
 <ownDataTypeParameters>35,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="INSTRUMENT_CATEGORY_SEQ" id="BBDA5EA9-04B5-C81E-AFCF-23C650A270B4">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-24 16:54:32 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<importedID>5B4B0339-CD47-3DE6-3887-148B667CBAAE</importedID>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>3</dataTypePrecision>
-<ownDataTypeParameters>,3,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="2CF6F1CB-06C1-F6BF-1B8E-C582B904A0EA" name="INSTRUMENT_TYPE_PK">

@@ -63,33 +63,6 @@
 <colAssociation fkAssociation="F9935A08-AD2C-03AC-E089-0297CC072E4E" referredColumn="8F079EE1-F75D-EB97-9C8B-1B61C89EB5F7"/>
 </associations>
 </Column>
-<Column name="FOLDER_PATH_SEQ" id="29848A3C-1274-F736-939F-73FB0FB11645">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-24 16:54:32 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<importedID>513CD531-C6E8-6AB0-C9DE-40DF1F3060F5</importedID>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>5</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="CD4AF8C5-FB0D-51E7-A8CA-7329A0087AD3" referredColumn="4FF1B8CB-6033-F354-5A2C-135D5B4A7F5D"/>
-</associations>
-</Column>
-<Column name="RELATIVE_PATH" id="0D4F9D80-4678-2598-4F2F-7FCF65FEB0C9">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-24 16:54:32 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<importedID>90964526-7EA9-DB1C-756A-93D1DB867603</importedID>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>200</dataTypeSize>
-<ownDataTypeParameters>200,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
 <Column name="FILE_STATE_SEQ" id="B91D2F00-2F6D-EF06-AAAE-C96B56FCF5EA">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-24 16:54:32 UTC</createdTime>
@@ -167,16 +140,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="B6D52AC2-EEFE-DFD0-C3BD-990F3594D9E9"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="5B6299A2-9507-6143-AA09-EE04617C6334" name="FILE_SHARE_PATH_FK">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-27 13:37:21 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="29848A3C-1274-F736-939F-73FB0FB11645"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="B32F1067-1DA2-AE95-0E1E-20B089B065BC" name="FILE_LU_FILE_TYPE_FK">

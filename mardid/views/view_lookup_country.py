@@ -5,18 +5,18 @@ from django.utils.translation import gettext as _
 
 from crispy_forms.utils import render_crispy_form
 
-from core import models
+from mardid import models
 from core.views import view_lookup_abstract
 
 # If copy and pasting this module as a template, change the lookup model to match
 # the model of the simple look up class being extended
-lookup_model = models.GeographicRegions
+lookup_model = models.Country
 
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
-app_name = 'core'
-name_key = 'geo_regions'
-columns = ['name', 'description']
+app_name = 'mardid'
+name_key = 'country'
+columns = ['name']
 
 ###### DO NOT CHANGE THESE #############
 name_get_form = f'lookup_form_{name_key}'

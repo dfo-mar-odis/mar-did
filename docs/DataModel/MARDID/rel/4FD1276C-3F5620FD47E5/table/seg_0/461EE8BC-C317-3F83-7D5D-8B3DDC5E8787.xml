@@ -87,19 +87,6 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="CONTACT_GROUP_SEQ" id="50BB39D7-6520-817E-38F3-DAD1E9BD18C3">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-25 21:27:21 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="D2DA495E-04E5-B85F-61AC-33BCFF087F63" referredColumn="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D"/>
-</associations>
-</Column>
 <Column name="PROGRAM_SEQ" id="AC2B3402-13D1-2408-8A73-73730828C1A8">
 <createdBy>JacksonJ</createdBy>
 <createdTime>2025-11-24 16:54:32 UTC</createdTime>
@@ -176,16 +163,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="A361544F-9BE5-121C-084A-8E90DD4111F9"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="2D189FB0-740B-7FF0-791A-E6BFD14B7326" name="MISSION_METADATA_GROUP_FK">
-<createdBy>JacksonJ</createdBy>
-<createdTime>2025-11-25 21:28:16 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="50BB39D7-6520-817E-38F3-DAD1E9BD18C3"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="5796BE3E-A2A6-1B60-F93E-2819CC3105B8" name="MISSION_METADATA_LU_PROGRAM_FK">
