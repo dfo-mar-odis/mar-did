@@ -315,7 +315,7 @@
     "model": "mardid.country",
     "pk": 40,
     "fields": {
-        "name": "Congo, People’s Republic",
+        "name": "Congo, Peopleâ€™s Republic",
         "code": "CG"
     }
 },
@@ -1203,7 +1203,7 @@
     "model": "mardid.country",
     "pk": 151,
     "fields": {
-        "name": "Sao Tome and Príncipe",
+        "name": "Sao Tome and PrÃ­ncipe",
         "code": "ST"
     }
 },
