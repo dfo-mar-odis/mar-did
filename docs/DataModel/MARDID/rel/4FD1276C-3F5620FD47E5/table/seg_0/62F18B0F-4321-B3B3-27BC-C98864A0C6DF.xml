@@ -18,19 +18,6 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="MISSION_SEQ" id="0E5957F3-4009-3D91-BA46-52EB689E4C3B">
-<createdBy>UpsonP</createdBy>
-<createdTime>2026-01-27 15:38:46 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="2C063E2E-3656-52AA-1B4E-B24A1AC35327" referredColumn="8ADF41FF-026F-2BC7-4801-0CD272F000DC"/>
-</associations>
-</Column>
 <Column name="ROLE_SEQ" id="664445B0-1B53-D12F-8AE2-EFC251DC3DA3">
 <createdBy>UpsonP</createdBy>
 <createdTime>2026-01-27 15:43:22 UTC</createdTime>
@@ -68,16 +55,6 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="76D5F017-953A-EFEB-858D-7B5842244F14" name="MISSION_PARTICIPANT_GROUP_MEMBER_FK">
-<createdBy>UpsonP</createdBy>
-<createdTime>2026-01-27 15:40:34 UTC</createdTime>
-<ownerDesignName>MARDID</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="0E5957F3-4009-3D91-BA46-52EB689E4C3B"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="DB7335C1-528D-1101-0D03-AA22965ECBF1" name="MISSION_PARTICIPANT_LU_ROLE_FK">
