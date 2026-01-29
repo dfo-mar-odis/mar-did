@@ -131,6 +131,19 @@
 <ownDataTypeParameters>,6,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="PARTICIPANT_SEQ" id="2AE95BC4-DCF2-B55D-90C5-88370FFC7BDE">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-29 15:25:21 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8F5DF5B6-A814-BDD0-AD3D-DA906E41A594" referredColumn="0A0D9D53-72FE-DC3A-BAC0-15A7B7A8386D"/>
+</associations>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="47E79342-B935-C4C8-8E1A-B17D0397A0CD" name="MISSION_METADATA_PK">
@@ -173,6 +186,16 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="AC2B3402-13D1-2408-8A73-73730828C1A8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E4BB263D-4A46-E0D9-AF2A-519CA82F87D5" name="MISSION_METADATA_MISSION_PARTICIPANT_FK">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-01-29 15:25:21 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2AE95BC4-DCF2-B55D-90C5-88370FFC7BDE"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>
