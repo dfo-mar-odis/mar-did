@@ -3,1316 +3,1496 @@
     "model": "mardid.country",
     "pk": 1,
     "fields": {
-        "name": "Afghanistan"
+        "name": "Afghanistan",
+        "code": "AF"
     }
 },
 {
     "model": "mardid.country",
     "pk": 2,
     "fields": {
-        "name": "Albania"
+        "name": "Albania",
+        "code": "AL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 3,
     "fields": {
-        "name": "Algeria"
+        "name": "Algeria",
+        "code": "DZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 4,
     "fields": {
-        "name": "Andorra"
+        "name": "Andorra",
+        "code": "AD"
     }
 },
 {
     "model": "mardid.country",
     "pk": 5,
     "fields": {
-        "name": "Angola"
+        "name": "Angola",
+        "code": "AO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 6,
     "fields": {
-        "name": "Antigua and Barbuda"
+        "name": "Antigua and Barbuda",
+        "code": "AG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 7,
     "fields": {
-        "name": "Argentina"
+        "name": "Argentina",
+        "code": "AR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 8,
     "fields": {
-        "name": "Armenia"
+        "name": "Armenia",
+        "code": "AM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 9,
     "fields": {
-        "name": "Australia"
+        "name": "Australia",
+        "code": "AU"
     }
 },
 {
     "model": "mardid.country",
     "pk": 10,
     "fields": {
-        "name": "Austria"
+        "name": "Austria",
+        "code": "AT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 11,
     "fields": {
-        "name": "Azerbaijan"
+        "name": "Azerbaijan",
+        "code": "AZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 12,
     "fields": {
-        "name": "Bahamas"
+        "name": "Bahamas",
+        "code": "BS"
     }
 },
 {
     "model": "mardid.country",
     "pk": 13,
     "fields": {
-        "name": "Bahrain"
+        "name": "Bahrain",
+        "code": "BH"
     }
 },
 {
     "model": "mardid.country",
     "pk": 14,
     "fields": {
-        "name": "Bangladesh"
+        "name": "Bangladesh",
+        "code": "BD"
     }
 },
 {
     "model": "mardid.country",
     "pk": 15,
     "fields": {
-        "name": "Barbados"
+        "name": "Barbados",
+        "code": "BB"
     }
 },
 {
     "model": "mardid.country",
     "pk": 16,
     "fields": {
-        "name": "Belarus"
+        "name": "Belarus",
+        "code": "BY"
     }
 },
 {
     "model": "mardid.country",
     "pk": 17,
     "fields": {
-        "name": "Belgium"
+        "name": "Belgium",
+        "code": "BE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 18,
     "fields": {
-        "name": "Belize"
+        "name": "Belize",
+        "code": "BZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 19,
     "fields": {
-        "name": "Benin"
+        "name": "Benin",
+        "code": "BJ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 20,
     "fields": {
-        "name": "Bhutan"
+        "name": "Bhutan",
+        "code": "BT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 21,
     "fields": {
-        "name": "Bolivia"
+        "name": "Bolivia",
+        "code": "BO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 22,
     "fields": {
-        "name": "Bosnia and Herzegowina"
+        "name": "Bosnia and Herzegowina",
+        "code": "BA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 23,
     "fields": {
-        "name": "Botswana"
+        "name": "Botswana",
+        "code": "BW"
     }
 },
 {
     "model": "mardid.country",
     "pk": 24,
     "fields": {
-        "name": "Brazil"
+        "name": "Brazil",
+        "code": "BR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 25,
     "fields": {
-        "name": "Brunei Darussalam"
+        "name": "Brunei Darussalam",
+        "code": "BN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 26,
     "fields": {
-        "name": "Bulgaria"
+        "name": "Bulgaria",
+        "code": "BG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 27,
     "fields": {
-        "name": "Burkina Faso"
+        "name": "Burkina Faso",
+        "code": "BF"
     }
 },
 {
     "model": "mardid.country",
     "pk": 28,
     "fields": {
-        "name": "Burundi"
+        "name": "Burundi",
+        "code": "BI"
     }
 },
 {
     "model": "mardid.country",
     "pk": 29,
     "fields": {
-        "name": "Cambodia"
+        "name": "Cambodia",
+        "code": "KH"
     }
 },
 {
     "model": "mardid.country",
     "pk": 30,
     "fields": {
-        "name": "Cameroon"
+        "name": "Cameroon",
+        "code": "CM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 31,
     "fields": {
-        "name": "Canada"
+        "name": "Canada",
+        "code": "CA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 32,
     "fields": {
-        "name": "Cape Verde"
+        "name": "Cape Verde",
+        "code": "CV"
     }
 },
 {
     "model": "mardid.country",
     "pk": 33,
     "fields": {
-        "name": "Central African Republic"
+        "name": "Central African Republic",
+        "code": "CF"
     }
 },
 {
     "model": "mardid.country",
     "pk": 34,
     "fields": {
-        "name": "Chad"
+        "name": "Chad",
+        "code": "TD"
     }
 },
 {
     "model": "mardid.country",
     "pk": 35,
     "fields": {
-        "name": "Chile"
+        "name": "Chile",
+        "code": "CL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 36,
     "fields": {
-        "name": "China"
+        "name": "China",
+        "code": "CN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 37,
     "fields": {
-        "name": "Colombia"
+        "name": "Colombia",
+        "code": "CO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 38,
     "fields": {
-        "name": "Comoros"
+        "name": "Comoros",
+        "code": "KM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 39,
     "fields": {
-        "name": "Congo, Democratic Republic"
+        "name": "Congo, Democratic Republic",
+        "code": "CD"
     }
 },
 {
     "model": "mardid.country",
     "pk": 40,
     "fields": {
-        "name": "Congo, Peopleâ€™s Republic"
+        "name": "Congo, People’s Republic",
+        "code": "CG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 41,
     "fields": {
-        "name": "Costa Rica"
+        "name": "Costa Rica",
+        "code": "CR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 42,
     "fields": {
-        "name": "Cote d'Ivoire"
+        "name": "Cote d'Ivoire",
+        "code": "CI"
     }
 },
 {
     "model": "mardid.country",
     "pk": 43,
     "fields": {
-        "name": "Croatia (Local Name: Hrvatska)"
+        "name": "Croatia (Local Name: Hrvatska)",
+        "code": "HR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 44,
     "fields": {
-        "name": "Cuba"
+        "name": "Cuba",
+        "code": "CU"
     }
 },
 {
     "model": "mardid.country",
     "pk": 45,
     "fields": {
-        "name": "Cyprus"
+        "name": "Cyprus",
+        "code": "CY"
     }
 },
 {
     "model": "mardid.country",
     "pk": 46,
     "fields": {
-        "name": "Czech Republic"
+        "name": "Czech Republic",
+        "code": "CZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 47,
     "fields": {
-        "name": "Denmark"
+        "name": "Denmark",
+        "code": "DK"
     }
 },
 {
     "model": "mardid.country",
     "pk": 48,
     "fields": {
-        "name": "Djibouti"
+        "name": "Djibouti",
+        "code": "DJ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 49,
     "fields": {
-        "name": "Dominica"
+        "name": "Dominica",
+        "code": "DM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 50,
     "fields": {
-        "name": "Dominican Republic"
+        "name": "Dominican Republic",
+        "code": "DO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 51,
     "fields": {
-        "name": "East Timor"
+        "name": "East Timor",
+        "code": "TL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 52,
     "fields": {
-        "name": "Ecuador"
+        "name": "Ecuador",
+        "code": "EC"
     }
 },
 {
     "model": "mardid.country",
     "pk": 53,
     "fields": {
-        "name": "El Salvador"
+        "name": "El Salvador",
+        "code": "SV"
     }
 },
 {
     "model": "mardid.country",
     "pk": 54,
     "fields": {
-        "name": "Equatorial Guinea"
+        "name": "Equatorial Guinea",
+        "code": "GQ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 55,
     "fields": {
-        "name": "Eritrea"
+        "name": "Eritrea",
+        "code": "ER"
     }
 },
 {
     "model": "mardid.country",
     "pk": 56,
     "fields": {
-        "name": "Estonia"
+        "name": "Estonia",
+        "code": "EE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 57,
     "fields": {
-        "name": "Ethiopia"
+        "name": "Ethiopia",
+        "code": "ET"
     }
 },
 {
     "model": "mardid.country",
     "pk": 58,
     "fields": {
-        "name": "Fiji"
+        "name": "Fiji",
+        "code": "FJ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 59,
     "fields": {
-        "name": "Finland"
+        "name": "Finland",
+        "code": "FI"
     }
 },
 {
     "model": "mardid.country",
     "pk": 60,
     "fields": {
-        "name": "France"
+        "name": "France",
+        "code": "FR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 61,
     "fields": {
-        "name": "Gabon"
+        "name": "Gabon",
+        "code": "GA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 62,
     "fields": {
-        "name": "Gambia"
+        "name": "Gambia",
+        "code": "GM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 63,
     "fields": {
-        "name": "Georgia"
+        "name": "Georgia",
+        "code": "GE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 64,
     "fields": {
-        "name": "Germany"
+        "name": "Germany",
+        "code": "DE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 65,
     "fields": {
-        "name": "Ghana"
+        "name": "Ghana",
+        "code": "GH"
     }
 },
 {
     "model": "mardid.country",
     "pk": 66,
     "fields": {
-        "name": "Greece"
+        "name": "Greece",
+        "code": "GR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 67,
     "fields": {
-        "name": "Greenland"
+        "name": "Greenland",
+        "code": "GL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 68,
     "fields": {
-        "name": "Grenada"
+        "name": "Grenada",
+        "code": "GD"
     }
 },
 {
     "model": "mardid.country",
     "pk": 69,
     "fields": {
-        "name": "Guatemala"
+        "name": "Guatemala",
+        "code": "GT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 70,
     "fields": {
-        "name": "Guinea"
+        "name": "Guinea",
+        "code": "GN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 71,
     "fields": {
-        "name": "Guinea-Bissau"
+        "name": "Guinea-Bissau",
+        "code": "GW"
     }
 },
 {
     "model": "mardid.country",
     "pk": 72,
     "fields": {
-        "name": "Guyana"
+        "name": "Guyana",
+        "code": "GY"
     }
 },
 {
     "model": "mardid.country",
     "pk": 73,
     "fields": {
-        "name": "Haiti"
+        "name": "Haiti",
+        "code": "HT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 74,
     "fields": {
-        "name": "Honduras"
+        "name": "Honduras",
+        "code": "HN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 75,
     "fields": {
-        "name": "Hong Kong"
+        "name": "Hong Kong",
+        "code": "HK"
     }
 },
 {
     "model": "mardid.country",
     "pk": 76,
     "fields": {
-        "name": "Hungary"
+        "name": "Hungary",
+        "code": "HU"
     }
 },
 {
     "model": "mardid.country",
     "pk": 77,
     "fields": {
-        "name": "Iceland"
+        "name": "Iceland",
+        "code": "IS"
     }
 },
 {
     "model": "mardid.country",
     "pk": 78,
     "fields": {
-        "name": "India"
+        "name": "India",
+        "code": "IN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 79,
     "fields": {
-        "name": "Indonesia"
+        "name": "Indonesia",
+        "code": "ID"
     }
 },
 {
     "model": "mardid.country",
     "pk": 80,
     "fields": {
-        "name": "Iran"
+        "name": "Iran",
+        "code": "IR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 81,
     "fields": {
-        "name": "Iraq"
+        "name": "Iraq",
+        "code": "IQ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 82,
     "fields": {
-        "name": "Ireland"
+        "name": "Ireland",
+        "code": "IE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 83,
     "fields": {
-        "name": "Israel"
+        "name": "Israel",
+        "code": "IL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 84,
     "fields": {
-        "name": "Italy"
+        "name": "Italy",
+        "code": "IT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 85,
     "fields": {
-        "name": "Jamaica"
+        "name": "Jamaica",
+        "code": "JM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 86,
     "fields": {
-        "name": "Japan"
+        "name": "Japan",
+        "code": "JP"
     }
 },
 {
     "model": "mardid.country",
     "pk": 87,
     "fields": {
-        "name": "Jordan"
+        "name": "Jordan",
+        "code": "JO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 88,
     "fields": {
-        "name": "Kazakhstan"
+        "name": "Kazakhstan",
+        "code": "KZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 89,
     "fields": {
-        "name": "Kenya"
+        "name": "Kenya",
+        "code": "KE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 90,
     "fields": {
-        "name": "Kiribati"
+        "name": "Kiribati",
+        "code": "KI"
     }
 },
 {
     "model": "mardid.country",
     "pk": 91,
     "fields": {
-        "name": "Korea, Democratic People's Republic"
+        "name": "Korea, Democratic People's Republic",
+        "code": "KP"
     }
 },
 {
     "model": "mardid.country",
     "pk": 92,
     "fields": {
-        "name": "Korea, Republic"
+        "name": "Korea, Republic",
+        "code": "KR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 93,
     "fields": {
-        "name": "Kuwait"
+        "name": "Kuwait",
+        "code": "KW"
     }
 },
 {
     "model": "mardid.country",
     "pk": 94,
     "fields": {
-        "name": "Kyrgyzstan"
+        "name": "Kyrgyzstan",
+        "code": "KG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 95,
     "fields": {
-        "name": "Laos"
+        "name": "Laos",
+        "code": "LA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 96,
     "fields": {
-        "name": "Latvia"
+        "name": "Latvia",
+        "code": "LV"
     }
 },
 {
     "model": "mardid.country",
     "pk": 97,
     "fields": {
-        "name": "Lebanon"
+        "name": "Lebanon",
+        "code": "LB"
     }
 },
 {
     "model": "mardid.country",
     "pk": 98,
     "fields": {
-        "name": "Lesotho"
+        "name": "Lesotho",
+        "code": "LS"
     }
 },
 {
     "model": "mardid.country",
     "pk": 99,
     "fields": {
-        "name": "Liberia"
+        "name": "Liberia",
+        "code": "LR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 100,
     "fields": {
-        "name": "Libya"
+        "name": "Libya",
+        "code": "LY"
     }
 },
 {
     "model": "mardid.country",
     "pk": 101,
     "fields": {
-        "name": "Liechtenstein"
+        "name": "Liechtenstein",
+        "code": "LI"
     }
 },
 {
     "model": "mardid.country",
     "pk": 102,
     "fields": {
-        "name": "Lithuania"
+        "name": "Lithuania",
+        "code": "LT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 103,
     "fields": {
-        "name": "Luxembourg"
+        "name": "Luxembourg",
+        "code": "LU"
     }
 },
 {
     "model": "mardid.country",
     "pk": 104,
     "fields": {
-        "name": "Macedonia"
+        "name": "Macedonia",
+        "code": "MK"
     }
 },
 {
     "model": "mardid.country",
     "pk": 105,
     "fields": {
-        "name": "Madagascar"
+        "name": "Madagascar",
+        "code": "MG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 106,
     "fields": {
-        "name": "Malawi"
+        "name": "Malawi",
+        "code": "MW"
     }
 },
 {
     "model": "mardid.country",
     "pk": 107,
     "fields": {
-        "name": "Malaysia"
+        "name": "Malaysia",
+        "code": "MY"
     }
 },
 {
     "model": "mardid.country",
     "pk": 108,
     "fields": {
-        "name": "Maldives"
+        "name": "Maldives",
+        "code": "MV"
     }
 },
 {
     "model": "mardid.country",
     "pk": 109,
     "fields": {
-        "name": "Mali"
+        "name": "Mali",
+        "code": "ML"
     }
 },
 {
     "model": "mardid.country",
     "pk": 110,
     "fields": {
-        "name": "Malta"
+        "name": "Malta",
+        "code": "MT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 111,
     "fields": {
-        "name": "Marshall Islands"
+        "name": "Marshall Islands",
+        "code": "MH"
     }
 },
 {
     "model": "mardid.country",
     "pk": 112,
     "fields": {
-        "name": "Mauritania"
+        "name": "Mauritania",
+        "code": "MR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 113,
     "fields": {
-        "name": "Mauritius"
+        "name": "Mauritius",
+        "code": "MU"
     }
 },
 {
     "model": "mardid.country",
     "pk": 114,
     "fields": {
-        "name": "Mexico"
+        "name": "Mexico",
+        "code": "MX"
     }
 },
 {
     "model": "mardid.country",
     "pk": 115,
     "fields": {
-        "name": "Micronesia"
+        "name": "Micronesia",
+        "code": "FM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 116,
     "fields": {
-        "name": "Moldova"
+        "name": "Moldova",
+        "code": "MD"
     }
 },
 {
     "model": "mardid.country",
     "pk": 117,
     "fields": {
-        "name": "Monaco"
+        "name": "Monaco",
+        "code": "MC"
     }
 },
 {
     "model": "mardid.country",
     "pk": 118,
     "fields": {
-        "name": "Mongolia"
+        "name": "Mongolia",
+        "code": "MN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 119,
     "fields": {
-        "name": "Morocco"
+        "name": "Morocco",
+        "code": "MA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 120,
     "fields": {
-        "name": "Mozambique"
+        "name": "Mozambique",
+        "code": "MZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 121,
     "fields": {
-        "name": "Myanmar"
+        "name": "Myanmar",
+        "code": "MM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 122,
     "fields": {
-        "name": "Namibia"
+        "name": "Namibia",
+        "code": "NA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 123,
     "fields": {
-        "name": "Nauru"
+        "name": "Nauru",
+        "code": "NR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 124,
     "fields": {
-        "name": "Nepal"
+        "name": "Nepal",
+        "code": "NP"
     }
 },
 {
     "model": "mardid.country",
     "pk": 125,
     "fields": {
-        "name": "Netherlands"
+        "name": "Netherlands",
+        "code": "NL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 126,
     "fields": {
-        "name": "New Zealand"
+        "name": "New Zealand",
+        "code": "NZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 127,
     "fields": {
-        "name": "Nicaragua"
+        "name": "Nicaragua",
+        "code": "NI"
     }
 },
 {
     "model": "mardid.country",
     "pk": 128,
     "fields": {
-        "name": "Niger"
+        "name": "Niger",
+        "code": "NE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 129,
     "fields": {
-        "name": "Nigeria"
+        "name": "Nigeria",
+        "code": "NG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 130,
     "fields": {
-        "name": "Norway"
+        "name": "Norway",
+        "code": "NO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 131,
     "fields": {
-        "name": "Oman"
+        "name": "Oman",
+        "code": "OM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 132,
     "fields": {
-        "name": "Pakistan"
+        "name": "Pakistan",
+        "code": "PK"
     }
 },
 {
     "model": "mardid.country",
     "pk": 133,
     "fields": {
-        "name": "Palau"
+        "name": "Palau",
+        "code": "PW"
     }
 },
 {
     "model": "mardid.country",
     "pk": 134,
     "fields": {
-        "name": "Panama"
+        "name": "Panama",
+        "code": "PA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 135,
     "fields": {
-        "name": "Papua New Guinea"
+        "name": "Papua New Guinea",
+        "code": "PG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 136,
     "fields": {
-        "name": "Paraguay"
+        "name": "Paraguay",
+        "code": "PY"
     }
 },
 {
     "model": "mardid.country",
     "pk": 137,
     "fields": {
-        "name": "Peru"
+        "name": "Peru",
+        "code": "PE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 138,
     "fields": {
-        "name": "Philippines"
+        "name": "Philippines",
+        "code": "PH"
     }
 },
 {
     "model": "mardid.country",
     "pk": 139,
     "fields": {
-        "name": "Poland"
+        "name": "Poland",
+        "code": "PL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 140,
     "fields": {
-        "name": "Portugal"
+        "name": "Portugal",
+        "code": "PT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 141,
     "fields": {
-        "name": "Puerto Rico"
+        "name": "Puerto Rico",
+        "code": "PR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 142,
     "fields": {
-        "name": "Qatar"
+        "name": "Qatar",
+        "code": "QA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 143,
     "fields": {
-        "name": "Romania"
+        "name": "Romania",
+        "code": "RO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 144,
     "fields": {
-        "name": "Russian Federation"
+        "name": "Russian Federation",
+        "code": "RU"
     }
 },
 {
     "model": "mardid.country",
     "pk": 145,
     "fields": {
-        "name": "Rwanda"
+        "name": "Rwanda",
+        "code": "RW"
     }
 },
 {
     "model": "mardid.country",
     "pk": 146,
     "fields": {
-        "name": "Saint Kitts and Nevis"
+        "name": "Saint Kitts and Nevis",
+        "code": "KN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 147,
     "fields": {
-        "name": "Saint Lucia"
+        "name": "Saint Lucia",
+        "code": "LC"
     }
 },
 {
     "model": "mardid.country",
     "pk": 148,
     "fields": {
-        "name": "Saint Vincent and the Grenadines"
+        "name": "Saint Vincent and the Grenadines",
+        "code": "VC"
     }
 },
 {
     "model": "mardid.country",
     "pk": 149,
     "fields": {
-        "name": "Samoa"
+        "name": "Samoa",
+        "code": "WS"
     }
 },
 {
     "model": "mardid.country",
     "pk": 150,
     "fields": {
-        "name": "San Marino"
+        "name": "San Marino",
+        "code": "SM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 151,
     "fields": {
-        "name": "Sao Tome and PrÃ­ncipe"
+        "name": "Sao Tome and Príncipe",
+        "code": "ST"
     }
 },
 {
     "model": "mardid.country",
     "pk": 152,
     "fields": {
-        "name": "Saudi Arabia"
+        "name": "Saudi Arabia",
+        "code": "SA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 153,
     "fields": {
-        "name": "Senegal"
+        "name": "Senegal",
+        "code": "SN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 154,
     "fields": {
-        "name": "Serbia and Montenegro"
+        "name": "Serbia and Montenegro",
+        "code": "CS"
     }
 },
 {
     "model": "mardid.country",
     "pk": 155,
     "fields": {
-        "name": "Seychelles"
+        "name": "Seychelles",
+        "code": "SC"
     }
 },
 {
     "model": "mardid.country",
     "pk": 156,
     "fields": {
-        "name": "Sierra Leone"
+        "name": "Sierra Leone",
+        "code": "SL"
     }
 },
 {
     "model": "mardid.country",
     "pk": 157,
     "fields": {
-        "name": "Singapore"
+        "name": "Singapore",
+        "code": "SG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 158,
     "fields": {
-        "name": "Slovakia (Slovak Republic)"
+        "name": "Slovakia (Slovak Republic)",
+        "code": "SK"
     }
 },
 {
     "model": "mardid.country",
     "pk": 159,
     "fields": {
-        "name": "Slovenia"
+        "name": "Slovenia",
+        "code": "SI"
     }
 },
 {
     "model": "mardid.country",
     "pk": 160,
     "fields": {
-        "name": "Solomon Islands"
+        "name": "Solomon Islands",
+        "code": "SB"
     }
 },
 {
     "model": "mardid.country",
     "pk": 161,
     "fields": {
-        "name": "Somalia"
+        "name": "Somalia",
+        "code": "SO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 162,
     "fields": {
-        "name": "South Africa"
+        "name": "South Africa",
+        "code": "ZA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 163,
     "fields": {
-        "name": "Spain"
+        "name": "Spain",
+        "code": "ES"
     }
 },
 {
     "model": "mardid.country",
     "pk": 164,
     "fields": {
-        "name": "Sri Lanka"
+        "name": "Sri Lanka",
+        "code": "LK"
     }
 },
 {
     "model": "mardid.country",
     "pk": 165,
     "fields": {
-        "name": "Sudan"
+        "name": "Sudan",
+        "code": "SD"
     }
 },
 {
     "model": "mardid.country",
     "pk": 166,
     "fields": {
-        "name": "Suriname"
+        "name": "Suriname",
+        "code": "SR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 167,
     "fields": {
-        "name": "Swaziland"
+        "name": "Swaziland",
+        "code": "SZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 168,
     "fields": {
-        "name": "Sweden"
+        "name": "Sweden",
+        "code": "SE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 169,
     "fields": {
-        "name": "Switzerland"
+        "name": "Switzerland",
+        "code": "CH"
     }
 },
 {
     "model": "mardid.country",
     "pk": 170,
     "fields": {
-        "name": "Syrian Arab Republic"
+        "name": "Syrian Arab Republic",
+        "code": "SY"
     }
 },
 {
     "model": "mardid.country",
     "pk": 171,
     "fields": {
-        "name": "Taiwan"
+        "name": "Taiwan",
+        "code": "TW"
     }
 },
 {
     "model": "mardid.country",
     "pk": 172,
     "fields": {
-        "name": "Tajikistan"
+        "name": "Tajikistan",
+        "code": "TJ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 173,
     "fields": {
-        "name": "Tanzania"
+        "name": "Tanzania",
+        "code": "TZ"
     }
 },
 {
     "model": "mardid.country",
     "pk": 174,
     "fields": {
-        "name": "Tanzania"
+        "name": "Thailand",
+        "code": "TH"
     }
 },
 {
     "model": "mardid.country",
     "pk": 175,
     "fields": {
-        "name": "Thailand"
+        "name": "Togo",
+        "code": "TG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 176,
     "fields": {
-        "name": "Togo"
+        "name": "Tonga",
+        "code": "TO"
     }
 },
 {
     "model": "mardid.country",
     "pk": 177,
     "fields": {
-        "name": "Tonga"
+        "name": "Trinidad and Tobago",
+        "code": "TT"
     }
 },
 {
     "model": "mardid.country",
     "pk": 178,
     "fields": {
-        "name": "Trinidad and Tobago"
+        "name": "Tunisia",
+        "code": "TN"
     }
 },
 {
     "model": "mardid.country",
     "pk": 179,
     "fields": {
-        "name": "Tunisia"
+        "name": "Turkey",
+        "code": "TR"
     }
 },
 {
     "model": "mardid.country",
     "pk": 180,
     "fields": {
-        "name": "Turkey"
+        "name": "Turkmenistan",
+        "code": "TM"
     }
 },
 {
     "model": "mardid.country",
     "pk": 181,
     "fields": {
-        "name": "Turkmenistan"
+        "name": "Tuvalu",
+        "code": "TV"
     }
 },
 {
     "model": "mardid.country",
     "pk": 182,
     "fields": {
-        "name": "Tuvalu"
+        "name": "Uganda",
+        "code": "UG"
     }
 },
 {
     "model": "mardid.country",
     "pk": 183,
     "fields": {
-        "name": "Uganda"
+        "name": "Ukraine",
+        "code": "UA"
     }
 },
 {
     "model": "mardid.country",
     "pk": 184,
     "fields": {
-        "name": "Ukraine"
+        "name": "United Arab Emirates",
+        "code": "AE"
     }
 },
 {
     "model": "mardid.country",
     "pk": 185,
     "fields": {
-        "name": "United Arab Emirates"
+        "name": "United Kingdom",
+        "code": "GB"
     }
 },
 {
     "model": "mardid.country",
     "pk": 186,
     "fields": {
-        "name": "United Kingdom"
+        "name": "United States",
+        "code": "US"
     }
 },
 {
     "model": "mardid.country",
     "pk": 187,
     "fields": {
-        "name": "United States"
-    }
-},
-{
-    "model": "mardid.country",
-    "pk": 188,
-    "fields": {
-        "name": "Uruguay"
+        "name": "Uruguay",
+        "code": "UY"
     }
 }
 ]
