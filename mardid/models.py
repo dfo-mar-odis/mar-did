@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 ############################################################################################
 
 # MEDS uses a list of country codes that I think are from ICES
-# https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/meds_country_codes.json
+# https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/countries.json
 class Country(models.Model):
     id = models.AutoField(primary_key=True, db_column='COUNTRY_SEQ')
     name = models.CharField(max_length=35, db_column='COUNTRY_NAME')

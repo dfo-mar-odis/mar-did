@@ -16,7 +16,7 @@ lookup_model = models.Country
 # name key for the simple lookup table.
 app_name = 'mardid'
 name_key = 'country'
-columns = ['name']
+columns = ['name', 'code']
 
 ###### DO NOT CHANGE THESE #############
 name_get_form = f'lookup_form_{name_key}'
