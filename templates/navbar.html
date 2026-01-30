@@ -33,13 +33,23 @@
                             {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="/admin">{% trans 'Administrator' %}</a></li>
                             {% endif %}
-                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_country' %}">{% trans 'Countries' %}</a></li>
                             <li><hr/></li>
-                            <li><a class="dropdown-item" href="{% url 'core:contacts_view' %}">{% trans 'Contacts' %}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_geo_regions' %}">{% trans 'Geographic Regions' %}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_instruments' %}">{% trans 'Instruments' %}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_platforms' %}">{% trans 'Ships and Platforms' %}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_programs' %}">{% trans 'Programs' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_mar_contact' %}">{% trans 'Contacts' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_country' %}">{% trans 'Countries' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_division' %}">{% trans 'Divisions' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_equipment_type' %}">{% trans 'Equipment Types' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_file_type' %}">{% trans 'File Types' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_folder_path' %}">{% trans 'Folder Paths' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_group_role' %}">{% trans 'Group Roles' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_institute' %}">{% trans 'Institutes' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_instrument_type' %}">{% trans 'Instrument Types' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_organization' %}">{% trans 'Organizations' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_parameter_type' %}">{% trans 'Parameter Types' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_platform' %}">{% trans 'Platforms' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_processing_state' %}">{% trans 'Processing States' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_program' %}">{% trans 'Programs' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_program' %}">{% trans 'Projects' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mardid:lookup_view_region' %}">{% trans 'Regions' %}</a></li>
                         </ul>
                     {% endif %}
                 </li>
