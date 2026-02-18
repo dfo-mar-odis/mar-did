@@ -241,7 +241,6 @@ class Equipment(models.Model):
     id = models.AutoField(primary_key=True, db_column='EQUIPMENT_SEQ')
     equipment_type = models.ForeignKey(InstrumentType, related_name='equipment', on_delete=models.CASCADE, db_column='EQUIPMENT_TYPE')
     equipment_number = models.CharField(max_length=25, blank=True, null=True, db_column='EQUIPMENT_NUMBER')
-    serial_number = models.CharField(max_length=50, blank=True, null=True, db_column='SERIAL_NUMBER')
     metadata = models.ForeignKey(MissionMetadata, related_name='equipment', on_delete=models.CASCADE, db_column='MISSION_METADATA_SEQ')
     deployment_date = models.DateField(db_column='DEPLOYMENT_DATE')
     recovery_date = models.DateField(db_column='RECOVERY_DATE')
