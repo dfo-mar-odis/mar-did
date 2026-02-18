@@ -30,11 +30,15 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
 
     template_name = 'core/view_lookup.html'
     login_url = reverse_lazy('login')
+    title = None
     table_url = None
     form_url = None
 
     def test_func(self):
         return user_test(self.request.user)
+
+    def get_title(self):
+        return self.title
 
     def get_table_url(self):
         return self.table_url
@@ -46,6 +50,7 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['table_update_url'] = self.get_table_url()
         context['form_url'] = self.get_form_url()
+        context['page_title'] = self.get_title()
 
         return context
 
@@ -111,7 +116,7 @@ class SimpleLookupForm(forms.ModelForm):
         )
 
 
-def create_lookup_classes(lookup_model, name_key, app_name:str= 'core'):
+def create_lookup_classes(lookup_model, name_key, app_name:str= 'core', lookup_title:str = None):
     """Factory function to create lookup form and view classes dynamically"""
     # Generate names
     name_update_lookup = f'update_lookup_{name_key}'
@@ -131,6 +136,7 @@ def create_lookup_classes(lookup_model, name_key, app_name:str= 'core'):
     class DynamicLookupView(SimpleLookupView):
         table_url = reverse_lazy(f'{app_name}:{name_list_lookup}')
         form_url = reverse_lazy(f'{app_name}:{name_get_form}')
+        title = f'{lookup_title}' if lookup_title else None
 
     # Set proper names for better debugging and introspection
     DynamicLookupForm.__name__ = f"{lookup_model.__name__}Form"
