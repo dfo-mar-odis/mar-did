@@ -35,6 +35,9 @@
     <main id="content" class="{% if container %}{{ container }}{% else %}container{% endif %} mt-4">
         <span id="span_id_alerts"></span>
 
+        {% block title_content %}
+        {% endblock %}
+
         {% block content %}
         <div class="row">
             <div class="col-md-8">

@@ -15,6 +15,7 @@ lookup_model = models.Country
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
 app_name = 'mardid'
+lookup_title = _('Countries')
 name_key = 'country'
 columns = ['name', 'code']
 
@@ -25,7 +26,7 @@ name_get_view = f'lookup_view_{name_key}'
 name_update_lookup = f'update_lookup_{name_key}'
 name_delete_element = f'lookup_delete_{name_key}'
 
-model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key, app_name)
+model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key, app_name, lookup_title)
 
 field_lookup = {field.name: field for field in lookup_model._meta.fields if field.name in columns}
 labels = [(field_lookup[col_name].verbose_name if field_lookup[col_name].verbose_name else col_name) for col_name in columns]
