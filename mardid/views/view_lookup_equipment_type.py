@@ -17,7 +17,7 @@ lookup_model = models.EquipmentType
 app_name = 'mardid'
 lookup_title = _('Equipment Types')
 name_key = 'equipment_type'
-columns = ['type']
+columns = ['type', 'description']
 
 ###### DO NOT CHANGE THESE #############
 name_get_form = f'lookup_form_{name_key}'

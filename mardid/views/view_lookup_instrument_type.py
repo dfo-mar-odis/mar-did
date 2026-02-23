@@ -17,7 +17,7 @@ lookup_model = models.InstrumentType
 app_name = 'mardid'
 lookup_title = _('Instrument Types')
 name_key = 'instrument_type'
-columns = ['type']
+columns = ['type', 'description']
 
 ###### DO NOT CHANGE THESE #############
 name_get_form = f'lookup_form_{name_key}'
