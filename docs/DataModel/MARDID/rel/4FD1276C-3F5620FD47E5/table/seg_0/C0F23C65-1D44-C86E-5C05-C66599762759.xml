@@ -37,6 +37,18 @@ etc.]]></comment>
 <ownDataTypeParameters>35,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="EQUIPMENT_TYPE_DESCRIPTION" id="CA7CCE9A-D553-BF5B-4FB7-54B8C3C5E386">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-02-23 18:24:38 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="0B2C96BD-5498-7BC3-32F0-A4CEBA6991EE" name="LU_EQUIPMENT_TYPE_PK">

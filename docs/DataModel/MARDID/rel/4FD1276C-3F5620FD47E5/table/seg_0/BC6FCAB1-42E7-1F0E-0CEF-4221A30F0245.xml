@@ -41,6 +41,18 @@
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
+<Column name="FILE_TYPE_DESCRIPTION_1" id="20EDC02C-FC99-A3B4-9CDB-48C2B8428044">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-02-23 18:25:58 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="99C1947D-DB6C-0C32-C231-AA6014B4D7CF" name="LU_FILE_TYPE_PK">
