@@ -16,7 +16,7 @@ lookup_model = models.Institute
 # name key for the simple lookup table.
 app_name = 'mardid'
 name_key = 'institute'
-columns = ['name']
+columns = ['name', 'acronym', 'legacy_code']
 
 ###### DO NOT CHANGE THESE #############
 name_get_form = f'lookup_form_{name_key}'
