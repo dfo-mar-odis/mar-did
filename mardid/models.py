@@ -56,6 +56,8 @@ class GeographicRegion(models.Model):
 class Institute(models.Model):
     id = models.AutoField(primary_key=True, db_column='INSTITUTE_SEQ')
     name = models.CharField(max_length=50, db_column='INSTITUTE_NAME')
+    acronym = models.CharField(max_length=20, db_column='INSTITUTE_ACRONYM', blank=True, null=True)
+    legacy_code = models.CharField(max_length=60, db_column='INSTITUTE_LEGACY_CODE', blank=True, null=True)
 
     class Meta:
         db_table = 'LU_INSTITUTE'
@@ -94,6 +96,7 @@ class Project(models.Model):
 class EquipmentType(models.Model):
     id = models.AutoField(primary_key=True, db_column='EQUIPMENT_TYPE_SEQ')
     type = models.CharField(max_length=35, db_column='EQUIPMENT_TYPE')
+    description = models.CharField(max_length=200, db_column='EQUIPMENT_TYPE_DESCRIPTION', blank=True, null=True)
 
     class Meta:
         db_table = 'LU_EQUIPMENT_TYPE'
@@ -119,6 +122,7 @@ class ParameterType(models.Model):
 class InstrumentType(models.Model):
     id = models.AutoField(primary_key=True, db_column='INSTRUMENT_TYPE_SEQ')
     type = models.CharField(max_length=35, db_column='INSTRUMENT_TYPE')
+    description = models.CharField(max_length=200, db_column='INSTRUMENT_TYPE_DESCRIPTION', blank=True, null=True)
 
     class Meta:
         db_table = 'LU_INSTRUMENT_TYPE'
@@ -181,7 +185,7 @@ class FolderPath(models.Model):
 class FileType(models.Model):
     id = models.AutoField(primary_key=True, db_column='FILE_TYPE_SEQ')
     type = models.CharField(max_length=25, db_column='FILE_TYPE_NAME')
-    description = models.CharField(max_length=100, db_column='FILE_TYPE_DESCRIPTION')
+    description = models.CharField(max_length=200, db_column='FILE_TYPE_DESCRIPTION')
 
     class Meta:
         db_table = 'LU_FILE_TYPE'
