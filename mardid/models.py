@@ -156,7 +156,7 @@ class Organization(models.Model):
 
 class Division(models.Model):
     id = models.AutoField(primary_key=True, db_column='DIVISION_SEQ')
-    name = models.CharField(max_length=100, db_column='DIVISION_NAME')
+    name = models.CharField(max_length=200, db_column='DIVISION_NAME')
 
     class Meta:
         db_table = 'LU_DIVISION'
