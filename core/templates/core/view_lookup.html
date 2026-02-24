@@ -21,7 +21,7 @@
 
     </form>
     {% endif %}
-    <div class="bg-white"><div class="ms-1">{% trans 'Count' %} : {{ element_count }}</div></div>
+    <div class="bg-white"><div hx-get="{{ table_count_url }}" hx-trigger="load, update_table from:body" class="ms-1">{% trans 'Count' %} : {{ element_count }}</div></div>
 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 <table id="table_id_lookup_list" hx-swap="outerHTML" hx-get="{{ table_update_url }}" hx-trigger="load, update_table from:body" >
 

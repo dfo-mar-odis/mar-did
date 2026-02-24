@@ -20,12 +20,6 @@ name_key = 'program'
 columns = ['name', 'description']
 
 ###### DO NOT CHANGE THESE #############
-name_get_form = f'lookup_form_{name_key}'
-name_list_lookup = f'list_{name_key}'
-name_get_view = f'lookup_view_{name_key}'
-name_update_lookup = f'update_lookup_{name_key}'
-name_delete_element = f'lookup_delete_{name_key}'
-
 model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key, app_name, lookup_title)
 
 field_lookup = {field.name: field for field in lookup_model._meta.fields if field.name in columns}
@@ -43,9 +37,7 @@ def list_lookup(request):
     df.set_index('id', inplace=True)
     df.columns = labels
 
-    form_url_alias = f"{app_name}:{name_get_form}"
-    delete_url_alias = f"{app_name}:{name_delete_element}"
-    table = view_lookup_abstract.prep_table(request, df, form_url_alias, delete_url_alias)
+    table = view_lookup_abstract.prep_table(request, df, app_name, name_key)
     return HttpResponse(table)
 
 
@@ -54,18 +46,14 @@ def get_form(request, **kwargs):
     return HttpResponse(render_crispy_form(form))
 
 
-urlpatterns = [
-    path(f'lookup/{name_key}', model_view.as_view(), name=name_get_view),
-    path(f'lookup/{name_key}/form', get_form, name=name_get_form),
-    path(f'lookup/{name_key}/form/<int:pk>', get_form, name=name_get_form),
-    path(f'lookup/{name_key}/table/list', list_lookup, name=name_list_lookup),
+attrs = {
+    'name_key': name_key,
+    'lookup_model': lookup_model,
+    'model_form': model_form,
+    'model_view': model_view,
+    'get_form': get_form,
+    'list_lookup': list_lookup,
+}
 
-    path(f'lookup/{name_key}/add', view_lookup_abstract.update_lookup,
-         kwargs={'model_form': model_form}, name=name_update_lookup),
 
-    path(f'lookup/{name_key}/update/<int:pk>', view_lookup_abstract.update_lookup,
-         kwargs={'model_form': model_form}, name=name_update_lookup),
-
-    path(f'lookup/{name_key}/delete/<int:pk>', view_lookup_abstract.delete_element,
-         kwargs={'lookup_model': lookup_model}, name=name_delete_element)
-]
+urlpatterns = view_lookup_abstract.get_url_patterns(**attrs)
