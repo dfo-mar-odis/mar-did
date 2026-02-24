@@ -55,7 +55,7 @@ class GeographicRegion(models.Model):
 
 class Institute(models.Model):
     id = models.AutoField(primary_key=True, db_column='INSTITUTE_SEQ')
-    name = models.CharField(max_length=50, db_column='INSTITUTE_NAME')
+    name = models.CharField(max_length=100, db_column='INSTITUTE_NAME')
     acronym = models.CharField(max_length=20, db_column='INSTITUTE_ACRONYM', blank=True, null=True)
     legacy_code = models.CharField(max_length=60, db_column='INSTITUTE_LEGACY_CODE', blank=True, null=True)
 
