@@ -1,12 +1,14 @@
 import logging
+from typing import T
 
 from bs4 import BeautifulSoup
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.http import HttpResponse
 from django.http.response import HttpResponseForbidden
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, path
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
@@ -33,7 +35,7 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     title = None
     table_url = None
     form_url = None
-    model = None
+    element_count_url = None
 
     def test_func(self):
         return user_test(self.request.user)
@@ -47,15 +49,15 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     def get_form_url(self):
         return self.form_url
 
-    def get_model(self):
-        return self.model
+    def get_element_count_url(self):
+        return self.element_count_url
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['table_update_url'] = self.get_table_url()
+        context['table_count_url'] = self.get_element_count_url()
         context['form_url'] = self.get_form_url()
         context['page_title'] = self.get_title()
-        context['element_count'] = self.get_model().objects.count() if self.get_model() else None
 
         return context
 
@@ -121,12 +123,37 @@ class SimpleLookupForm(forms.ModelForm):
         )
 
 
+def get_form_alias(name_key):
+    return f'lookup_form_{name_key}'
+
+
+def get_list_lookup_alias(name_key):
+    return f'list_{name_key}'
+
+
+def get_view_alias(name_key):
+    return f'lookup_view_{name_key}'
+
+
+def get_count_elements_alias(name_key):
+    return f'lookup_count_{name_key}'
+
+
+def get_update_lookup_alias(name_key):
+    return f'update_lookup_{name_key}'
+
+
+def get_delete_element_alias(name_key):
+    return f'lookup_delete_{name_key}'
+
+
 def create_lookup_classes(lookup_model, name_key, app_name:str= 'core', lookup_title:str = None):
     """Factory function to create lookup form and view classes dynamically"""
     # Generate names
-    name_update_lookup = f'update_lookup_{name_key}'
-    name_get_form = f'lookup_form_{name_key}'
-    name_list_lookup = f'list_{name_key}'
+    name_update_lookup = get_update_lookup_alias(name_key)
+    name_get_form = get_form_alias(name_key)
+    name_list_lookup = get_list_lookup_alias(name_key)
+    name_count_elements = get_count_elements_alias(name_key)
 
     # Create form class dynamically
     class DynamicLookupForm(SimpleLookupForm):
@@ -140,9 +167,9 @@ def create_lookup_classes(lookup_model, name_key, app_name:str= 'core', lookup_t
     # Create view class dynamically
     class DynamicLookupView(SimpleLookupView):
         table_url = reverse_lazy(f'{app_name}:{name_list_lookup}')
+        element_count_url = reverse_lazy(f'{app_name}:{name_count_elements}')
         form_url = reverse_lazy(f'{app_name}:{name_get_form}')
         title = f'{lookup_title}' if lookup_title else None
-        model = lookup_model
 
     # Set proper names for better debugging and introspection
     DynamicLookupForm.__name__ = f"{lookup_model.__name__}Form"
@@ -151,7 +178,10 @@ def create_lookup_classes(lookup_model, name_key, app_name:str= 'core', lookup_t
     return DynamicLookupForm, DynamicLookupView
 
 
-def prep_table(request, dataframe, form_url, delete_url):
+def prep_table(request, dataframe, app_name, name_key):
+    form_url = f"{app_name}:{get_form_alias(name_key)}"
+    delete_url = f"{app_name}:{get_delete_element_alias(name_key)}"
+
     table_html = dataframe.to_html()
     df_soup = BeautifulSoup(f'{table_html}', 'html.parser')
 
@@ -263,3 +293,38 @@ def delete_element(request, pk, lookup_model):
     response = HttpResponse()
     response['HX-Trigger'] = 'update_table'
     return response
+
+
+def count_elements(request, lookup_model: models.Model):
+    count = lookup_model.objects.count()
+    count_str = f"{_("Count")} : {count}"
+    return HttpResponse(count_str)
+
+
+def get_url_patterns(name_key: str, lookup_model: models.Model, model_form, model_view, get_form, list_lookup) -> list:
+    name_get_form = get_form_alias(name_key)
+    name_list_lookup = get_list_lookup_alias(name_key)
+    name_get_view = get_view_alias(name_key)
+    name_count_elements = get_count_elements_alias(name_key)
+    name_update_lookup = get_update_lookup_alias(name_key)
+    name_delete_element = get_delete_element_alias(name_key)
+
+    url_patterns = [
+        path(f'lookup/{name_key}', model_view.as_view(), name=name_get_view),
+        path(f'lookup/{name_key}/form', get_form, name=name_get_form),
+        path(f'lookup/{name_key}/form/<int:pk>', get_form, name=name_get_form),
+        path(f'lookup/{name_key}/table/list', list_lookup, name=name_list_lookup),
+
+        path(f'lookup/{name_key}/count', count_elements,
+             kwargs={'lookup_model': lookup_model}, name=name_count_elements),
+
+        path(f'lookup/{name_key}/add', update_lookup,
+             kwargs={'model_form': model_form}, name=name_update_lookup),
+
+        path(f'lookup/{name_key}/update/<int:pk>', update_lookup,
+             kwargs={'model_form': model_form}, name=name_update_lookup),
+
+        path(f'lookup/{name_key}/delete/<int:pk>', delete_element,
+             kwargs={'lookup_model': lookup_model}, name=name_delete_element)
+    ]
+    return url_patterns
