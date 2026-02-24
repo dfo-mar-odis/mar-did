@@ -33,6 +33,7 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     title = None
     table_url = None
     form_url = None
+    model = None
 
     def test_func(self):
         return user_test(self.request.user)
@@ -46,11 +47,15 @@ class SimpleLookupView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     def get_form_url(self):
         return self.form_url
 
+    def get_model(self):
+        return self.model
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['table_update_url'] = self.get_table_url()
         context['form_url'] = self.get_form_url()
         context['page_title'] = self.get_title()
+        context['element_count'] = self.get_model().objects.count() if self.get_model() else None
 
         return context
 
@@ -137,6 +142,7 @@ def create_lookup_classes(lookup_model, name_key, app_name:str= 'core', lookup_t
         table_url = reverse_lazy(f'{app_name}:{name_list_lookup}')
         form_url = reverse_lazy(f'{app_name}:{name_get_form}')
         title = f'{lookup_title}' if lookup_title else None
+        model = lookup_model
 
     # Set proper names for better debugging and introspection
     DynamicLookupForm.__name__ = f"{lookup_model.__name__}Form"
