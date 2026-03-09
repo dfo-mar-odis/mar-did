@@ -17,7 +17,7 @@ lookup_model = models.Country
 app_name = 'mardid'
 lookup_title = _('Countries')
 name_key = 'country'
-columns = ['name', 'code']
+columns = ['name', 'short_name', 'code']
 
 ###### DO NOT CHANGE THESE #############
 model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key, app_name, lookup_title)

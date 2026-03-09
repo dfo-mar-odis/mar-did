@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="CBCF0DCF-3E1E-27C3-27AD-8E5289C686FA" containerWithKeyObject="F23E7805-DB82-C33D-F5CB-06B397B62561" localFKIndex="B4E53B4C-5CDC-9FE3-0B45-04CF4325D8DE" name="DATA_COLLECTED_LU_CONTACT_FKv2">
+<createdBy>UpsonP</createdBy>
+<createdTime>2026-02-26 19:15:17 UTC</createdTime>
+<ownerDesignName>MARDID</ownerDesignName>
+<referredTableLongName>LU_CONTACT</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>AD88C773-C760-69DC-C8DE-A167CF4C9C4B</referredTableID>
+<keyObject>0444C417-E90C-70C1-90F4-89698BFD8233</keyObject>
+<referredKeyID>0444C417-E90C-70C1-90F4-89698BFD8233</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>CONTACT_SEQ</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
