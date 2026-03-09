@@ -11,7 +11,8 @@ from django.utils.translation import gettext_lazy as _
 class Country(models.Model):
     id = models.AutoField(primary_key=True, db_column='COUNTRY_SEQ')
     name = models.CharField(max_length=35, db_column='COUNTRY_NAME')
-    code = models.CharField(max_length=2, db_column='COUNTRY_CODE', blank=True, null=True, help_text=_("2-character Country code"))
+    short_name = models.CharField(max_length=2, db_column='COUNTRY_SHORT_NAME', blank=True, null=True, help_text=_("2-character country code"))
+    code = models.IntegerField(db_column='COUNTRY_CODE', blank=True, null=True, help_text=_("2-digit country code"))
 
     class Meta:
         db_table = 'LU_COUNTRY'
