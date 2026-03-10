@@ -1,4 +1,4 @@
-from django.urls import path
+import pandas as pd
 from django.http import HttpResponse
 from django_pandas.io import read_frame
 from django.utils.translation import gettext as _
@@ -35,6 +35,7 @@ def list_lookup(request):
 
     df = read_frame(queryset_list)
     df.set_index('id', inplace=True)
+    df['code'] = df['code'].fillna('').apply(lambda x: int(x) if x != '' else x)
     df.columns = labels
 
     table = view_lookup_abstract.prep_table(request, df, app_name, name_key)
