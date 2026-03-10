@@ -30,7 +30,7 @@ class Platform(models.Model):
     platform = models.CharField(max_length=100, db_column='PLATFORM', help_text=_("Platform name or description"))
     country = models.ForeignKey(Country, related_name="platforms", on_delete=models.CASCADE, blank=True, null=True, db_column='COUNTRY_SEQ')
     call_sign = models.CharField(max_length=10, db_column='CALL_SIGN', blank=True, null=True, help_text=_("Platform call sign, if applicable"))
-    max_speed = models.IntegerField(db_column='MAXIMUM_SPEED', blank=True, null=True, help_text=_("Maximum speed of the platform in knots"))
+    max_speed = models.FloatField(db_column='MAXIMUM_SPEED', blank=True, null=True, help_text=_("Maximum speed of the platform in knots"))
     ices_code = models.CharField(db_column='ICES_CODE', max_length=4, blank=True, null=True, help_text=_("ICES code"))
     ship_code = models.CharField(db_column='SHIP_CODE', max_length=6, blank=True, null=True, help_text=_("OSCruise code"))
 
