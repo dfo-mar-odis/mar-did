@@ -1,0 +1,1721 @@
+[
+{
+    "model": "mardid.country",
+    "pk": 1,
+    "fields": {
+        "name": "AFGHANISTAN",
+        "short_name": "AF",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 2,
+    "fields": {
+        "name": "ALBANIA",
+        "short_name": "AL",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 3,
+    "fields": {
+        "name": "ALGERIA",
+        "short_name": "DZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 4,
+    "fields": {
+        "name": "ANDORRA",
+        "short_name": "AD",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 5,
+    "fields": {
+        "name": "ANGOLA",
+        "short_name": "AO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 6,
+    "fields": {
+        "name": "ANTIGUA AND BARBUDA",
+        "short_name": "AG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 7,
+    "fields": {
+        "name": "ARGENTINA",
+        "short_name": "AR",
+        "code": 8
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 8,
+    "fields": {
+        "name": "ARMENIA",
+        "short_name": "AM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 9,
+    "fields": {
+        "name": "AUSTRALIA",
+        "short_name": "AU",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 10,
+    "fields": {
+        "name": "AUSTRIA",
+        "short_name": "AT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 11,
+    "fields": {
+        "name": "AZERBAIJAN",
+        "short_name": "AZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 12,
+    "fields": {
+        "name": "BAHAMAS",
+        "short_name": "BS",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 13,
+    "fields": {
+        "name": "BAHRAIN",
+        "short_name": "BH",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 14,
+    "fields": {
+        "name": "BANGLADESH",
+        "short_name": "BD",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 15,
+    "fields": {
+        "name": "BARBADOS",
+        "short_name": "BB",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 16,
+    "fields": {
+        "name": "BELARUS",
+        "short_name": "BY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 17,
+    "fields": {
+        "name": "BELGIUM",
+        "short_name": "BE",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 18,
+    "fields": {
+        "name": "BELIZE",
+        "short_name": "BZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 19,
+    "fields": {
+        "name": "BENIN",
+        "short_name": "BJ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 20,
+    "fields": {
+        "name": "BHUTAN",
+        "short_name": "BT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 21,
+    "fields": {
+        "name": "BOLIVIA",
+        "short_name": "BO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 22,
+    "fields": {
+        "name": "BOSNIA AND HERZEGOWINA",
+        "short_name": "BA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 23,
+    "fields": {
+        "name": "BOTSWANA",
+        "short_name": "BW",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 24,
+    "fields": {
+        "name": "BRAZIL",
+        "short_name": "BR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 25,
+    "fields": {
+        "name": "BRUNEI DARUSSALAM",
+        "short_name": "BN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 26,
+    "fields": {
+        "name": "BULGARIA",
+        "short_name": "BG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 27,
+    "fields": {
+        "name": "BURKINA FASO",
+        "short_name": "BF",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 28,
+    "fields": {
+        "name": "BURUNDI",
+        "short_name": "BI",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 29,
+    "fields": {
+        "name": "CAMBODIA",
+        "short_name": "KH",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 30,
+    "fields": {
+        "name": "CAMEROON",
+        "short_name": "CM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 31,
+    "fields": {
+        "name": "CANADA",
+        "short_name": "CA",
+        "code": 18
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 32,
+    "fields": {
+        "name": "CAPE VERDE",
+        "short_name": "CV",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 33,
+    "fields": {
+        "name": "CENTRAL AFRICAN REPUBLIC",
+        "short_name": "CF",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 34,
+    "fields": {
+        "name": "CHAD",
+        "short_name": "TD",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 35,
+    "fields": {
+        "name": "CHILE",
+        "short_name": "CL",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 36,
+    "fields": {
+        "name": "CHINA",
+        "short_name": "CN",
+        "code": 76
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 37,
+    "fields": {
+        "name": "COLOMBIA",
+        "short_name": "CO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 38,
+    "fields": {
+        "name": "COMOROS",
+        "short_name": "KM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 39,
+    "fields": {
+        "name": "CONGO, DEMOCRATIC REPUBLIC",
+        "short_name": "CD",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 40,
+    "fields": {
+        "name": "CONGO, PEOPLE’S REPUBLIC",
+        "short_name": "CG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 41,
+    "fields": {
+        "name": "COSTA RICA",
+        "short_name": "CR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 42,
+    "fields": {
+        "name": "COTE D'IVOIRE",
+        "short_name": "CI",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 43,
+    "fields": {
+        "name": "CROATIA (LOCAL NAME: HRVATSKA)",
+        "short_name": "HR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 44,
+    "fields": {
+        "name": "CUBA",
+        "short_name": "CU",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 45,
+    "fields": {
+        "name": "CYPRUS",
+        "short_name": "CY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 46,
+    "fields": {
+        "name": "CZECH REPUBLIC",
+        "short_name": "CZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 47,
+    "fields": {
+        "name": "DENMARK",
+        "short_name": "DK",
+        "code": 26
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 48,
+    "fields": {
+        "name": "DJIBOUTI",
+        "short_name": "DJ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 49,
+    "fields": {
+        "name": "DOMINICA",
+        "short_name": "DM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 50,
+    "fields": {
+        "name": "DOMINICAN REPUBLIC",
+        "short_name": "DO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 51,
+    "fields": {
+        "name": "EAST TIMOR",
+        "short_name": "TL",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 52,
+    "fields": {
+        "name": "ECUADOR",
+        "short_name": "EC",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 53,
+    "fields": {
+        "name": "EL SALVADOR",
+        "short_name": "SV",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 54,
+    "fields": {
+        "name": "EQUATORIAL GUINEA",
+        "short_name": "GQ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 55,
+    "fields": {
+        "name": "ERITREA",
+        "short_name": "ER",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 56,
+    "fields": {
+        "name": "ESTONIA",
+        "short_name": "EE",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 57,
+    "fields": {
+        "name": "ETHIOPIA",
+        "short_name": "ET",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 58,
+    "fields": {
+        "name": "FIJI",
+        "short_name": "FJ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 59,
+    "fields": {
+        "name": "FINLAND",
+        "short_name": "FI",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 60,
+    "fields": {
+        "name": "FRANCE",
+        "short_name": "FR",
+        "code": 35
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 61,
+    "fields": {
+        "name": "GABON",
+        "short_name": "GA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 62,
+    "fields": {
+        "name": "GAMBIA",
+        "short_name": "GM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 63,
+    "fields": {
+        "name": "GEORGIA",
+        "short_name": "GE",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 64,
+    "fields": {
+        "name": "GERMANY, DEMO REP OF (DEPECRATED)",
+        "short_name": null,
+        "code": 7
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 65,
+    "fields": {
+        "name": "GERMANY",
+        "short_name": "DE",
+        "code": 6
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 66,
+    "fields": {
+        "name": "GHANA",
+        "short_name": "GH",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 67,
+    "fields": {
+        "name": "GREECE",
+        "short_name": "GR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 68,
+    "fields": {
+        "name": "GREENLAND",
+        "short_name": "GL",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 69,
+    "fields": {
+        "name": "GRENADA",
+        "short_name": "GD",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 70,
+    "fields": {
+        "name": "GUATEMALA",
+        "short_name": "GT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 71,
+    "fields": {
+        "name": "GUINEA",
+        "short_name": "GN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 72,
+    "fields": {
+        "name": "GUINEA-BISSAU",
+        "short_name": "GW",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 73,
+    "fields": {
+        "name": "GUYANA",
+        "short_name": "GY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 74,
+    "fields": {
+        "name": "HAITI",
+        "short_name": "HT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 75,
+    "fields": {
+        "name": "HONDURAS",
+        "short_name": "HN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 76,
+    "fields": {
+        "name": "HONG KONG",
+        "short_name": "HK",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 77,
+    "fields": {
+        "name": "HUNGARY",
+        "short_name": "HU",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 78,
+    "fields": {
+        "name": "ICELAND",
+        "short_name": "IS",
+        "code": 46
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 79,
+    "fields": {
+        "name": "INDIA",
+        "short_name": "IN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 80,
+    "fields": {
+        "name": "INDONESIA",
+        "short_name": "ID",
+        "code": 42
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 81,
+    "fields": {
+        "name": "IRAN",
+        "short_name": "IR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 82,
+    "fields": {
+        "name": "IRAQ",
+        "short_name": "IQ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 83,
+    "fields": {
+        "name": "IRELAND",
+        "short_name": "IE",
+        "code": 45
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 84,
+    "fields": {
+        "name": "ISRAEL",
+        "short_name": "IL",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 85,
+    "fields": {
+        "name": "ITALY",
+        "short_name": "IT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 86,
+    "fields": {
+        "name": "JAMAICA",
+        "short_name": "JM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 87,
+    "fields": {
+        "name": "JAPAN",
+        "short_name": "JP",
+        "code": 49
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 88,
+    "fields": {
+        "name": "JORDAN",
+        "short_name": "JO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 89,
+    "fields": {
+        "name": "KAZAKHSTAN",
+        "short_name": "KZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 90,
+    "fields": {
+        "name": "KENYA",
+        "short_name": "KE",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 91,
+    "fields": {
+        "name": "KIRIBATI",
+        "short_name": "KI",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 92,
+    "fields": {
+        "name": "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC",
+        "short_name": "KP",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 93,
+    "fields": {
+        "name": "KOREA, REPUBLIC",
+        "short_name": "KR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 94,
+    "fields": {
+        "name": "KUWAIT",
+        "short_name": "KW",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 95,
+    "fields": {
+        "name": "KYRGYZSTAN",
+        "short_name": "KG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 96,
+    "fields": {
+        "name": "LAOS",
+        "short_name": "LA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 97,
+    "fields": {
+        "name": "LATVIA",
+        "short_name": "LV",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 98,
+    "fields": {
+        "name": "LEBANON",
+        "short_name": "LB",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 99,
+    "fields": {
+        "name": "LESOTHO",
+        "short_name": "LS",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 100,
+    "fields": {
+        "name": "LIBERIA",
+        "short_name": "LR",
+        "code": 54
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 101,
+    "fields": {
+        "name": "LIBYA",
+        "short_name": "LY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 102,
+    "fields": {
+        "name": "LIECHTENSTEIN",
+        "short_name": "LI",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 103,
+    "fields": {
+        "name": "LITHUANIA",
+        "short_name": "LT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 104,
+    "fields": {
+        "name": "LUXEMBOURG",
+        "short_name": "LU",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 105,
+    "fields": {
+        "name": "MACEDONIA",
+        "short_name": "MK",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 106,
+    "fields": {
+        "name": "MADAGASCAR",
+        "short_name": "MG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 107,
+    "fields": {
+        "name": "MALAWI",
+        "short_name": "MW",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 108,
+    "fields": {
+        "name": "MALAYSIA",
+        "short_name": "MY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 109,
+    "fields": {
+        "name": "MALDIVES",
+        "short_name": "MV",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 110,
+    "fields": {
+        "name": "MALI",
+        "short_name": "ML",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 111,
+    "fields": {
+        "name": "MALTA",
+        "short_name": "MT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 112,
+    "fields": {
+        "name": "MARSHALL ISLANDS",
+        "short_name": "MH",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 113,
+    "fields": {
+        "name": "MAURITANIA",
+        "short_name": "MR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 114,
+    "fields": {
+        "name": "MAURITIUS",
+        "short_name": "MU",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 115,
+    "fields": {
+        "name": "MEXICO",
+        "short_name": "MX",
+        "code": 57
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 116,
+    "fields": {
+        "name": "MICRONESIA",
+        "short_name": "FM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 117,
+    "fields": {
+        "name": "MOLDOVA",
+        "short_name": "MD",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 118,
+    "fields": {
+        "name": "MONACO",
+        "short_name": "MC",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 119,
+    "fields": {
+        "name": "MONGOLIA",
+        "short_name": "MN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 120,
+    "fields": {
+        "name": "MOROCCO",
+        "short_name": "MA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 121,
+    "fields": {
+        "name": "MOZAMBIQUE",
+        "short_name": "MZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 122,
+    "fields": {
+        "name": "MYANMAR",
+        "short_name": "MM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 123,
+    "fields": {
+        "name": "NAURU",
+        "short_name": "NR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 124,
+    "fields": {
+        "name": "NEPAL",
+        "short_name": "NP",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 125,
+    "fields": {
+        "name": "NETHERLANDS",
+        "short_name": "NL",
+        "code": 64
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 126,
+    "fields": {
+        "name": "NEW ZEALAND",
+        "short_name": "NZ",
+        "code": 61
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 127,
+    "fields": {
+        "name": "NICARAGUA",
+        "short_name": "NI",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 128,
+    "fields": {
+        "name": "NIGER",
+        "short_name": "NE",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 129,
+    "fields": {
+        "name": "NIGERIA",
+        "short_name": "NG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 130,
+    "fields": {
+        "name": "NORWAY",
+        "short_name": "NO",
+        "code": 58
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 131,
+    "fields": {
+        "name": "OMAN",
+        "short_name": "OM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 132,
+    "fields": {
+        "name": "PAKISTAN",
+        "short_name": "PK",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 133,
+    "fields": {
+        "name": "PALAU",
+        "short_name": "PW",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 134,
+    "fields": {
+        "name": "PANAMA",
+        "short_name": "PA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 135,
+    "fields": {
+        "name": "PAPUA NEW GUINEA",
+        "short_name": "PG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 136,
+    "fields": {
+        "name": "PARAGUAY",
+        "short_name": "PY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 137,
+    "fields": {
+        "name": "PERU",
+        "short_name": "PE",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 138,
+    "fields": {
+        "name": "PHILIPPINES",
+        "short_name": "PH",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 139,
+    "fields": {
+        "name": "POLAND",
+        "short_name": "PL",
+        "code": 67
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 140,
+    "fields": {
+        "name": "PORTUGAL",
+        "short_name": "PT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 141,
+    "fields": {
+        "name": "PUERTO RICO",
+        "short_name": "PR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 142,
+    "fields": {
+        "name": "QATAR",
+        "short_name": "QA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 143,
+    "fields": {
+        "name": "ROMANIA",
+        "short_name": "RO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 144,
+    "fields": {
+        "name": "RUSSIAN FEDERATION",
+        "short_name": "RU",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 145,
+    "fields": {
+        "name": "RWANDA",
+        "short_name": "RW",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 146,
+    "fields": {
+        "name": "SAINT KITTS AND NEVIS",
+        "short_name": "KN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 147,
+    "fields": {
+        "name": "SAINT LUCIA",
+        "short_name": "LC",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 148,
+    "fields": {
+        "name": "SAINT VINCENT AND THE GRENADINES",
+        "short_name": "VC",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 149,
+    "fields": {
+        "name": "SAMOA",
+        "short_name": "WS",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 150,
+    "fields": {
+        "name": "SAN MARINO",
+        "short_name": "SM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 151,
+    "fields": {
+        "name": "SAO TOME AND PRÍNCIPE",
+        "short_name": "ST",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 152,
+    "fields": {
+        "name": "SAUDI ARABIA",
+        "short_name": "SA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 153,
+    "fields": {
+        "name": "SENEGAL",
+        "short_name": "SN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 154,
+    "fields": {
+        "name": "SERBIA AND MONTENEGRO",
+        "short_name": "CS",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 155,
+    "fields": {
+        "name": "SEYCHELLES",
+        "short_name": "SC",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 156,
+    "fields": {
+        "name": "SIERRA LEONE",
+        "short_name": "SL",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 157,
+    "fields": {
+        "name": "SINGAPORE",
+        "short_name": "SG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 158,
+    "fields": {
+        "name": "SLOVAKIA (SLOVAK REPUBLIC)",
+        "short_name": "SK",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 159,
+    "fields": {
+        "name": "SLOVENIA",
+        "short_name": "SI",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 160,
+    "fields": {
+        "name": "SOLOMON ISLANDS",
+        "short_name": "SB",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 161,
+    "fields": {
+        "name": "SOMALIA",
+        "short_name": "SO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 162,
+    "fields": {
+        "name": "SOUTH AFRICA",
+        "short_name": "ZA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 163,
+    "fields": {
+        "name": "SPAIN",
+        "short_name": "ES",
+        "code": 29
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 164,
+    "fields": {
+        "name": "SRI LANKA",
+        "short_name": "LK",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 165,
+    "fields": {
+        "name": "SUDAN",
+        "short_name": "SD",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 166,
+    "fields": {
+        "name": "SURINAME",
+        "short_name": "SR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 167,
+    "fields": {
+        "name": "SWAZILAND",
+        "short_name": "SZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 168,
+    "fields": {
+        "name": "SWEDEN",
+        "short_name": "SE",
+        "code": 77
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 169,
+    "fields": {
+        "name": "SWITZERLAND",
+        "short_name": "CH",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 170,
+    "fields": {
+        "name": "SYRIAN ARAB REPUBLIC",
+        "short_name": "SY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 171,
+    "fields": {
+        "name": "TAIWAN",
+        "short_name": "TW",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 172,
+    "fields": {
+        "name": "TAJIKISTAN",
+        "short_name": "TJ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 173,
+    "fields": {
+        "name": "TANZANIA",
+        "short_name": "TZ",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 174,
+    "fields": {
+        "name": "THAILAND",
+        "short_name": "TH",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 175,
+    "fields": {
+        "name": "TOGO",
+        "short_name": "TG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 176,
+    "fields": {
+        "name": "TONGA",
+        "short_name": "TO",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 177,
+    "fields": {
+        "name": "TRINIDAD AND TOBAGO",
+        "short_name": "TT",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 178,
+    "fields": {
+        "name": "TUNISIA",
+        "short_name": "TN",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 179,
+    "fields": {
+        "name": "TURKEY",
+        "short_name": "TR",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 180,
+    "fields": {
+        "name": "TURKMENISTAN",
+        "short_name": "TM",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 181,
+    "fields": {
+        "name": "TUVALU",
+        "short_name": "TV",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 182,
+    "fields": {
+        "name": "UGANDA",
+        "short_name": "UG",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 183,
+    "fields": {
+        "name": "UKRAINE",
+        "short_name": "UA",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 184,
+    "fields": {
+        "name": "UNITED ARAB EMIRATES",
+        "short_name": "AE",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 185,
+    "fields": {
+        "name": "UNITED KINGDOM",
+        "short_name": "GB",
+        "code": 74
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 186,
+    "fields": {
+        "name": "UNITED STATES",
+        "short_name": "US",
+        "code": 31
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 187,
+    "fields": {
+        "name": "UNITED STATES",
+        "short_name": "US",
+        "code": 32
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 188,
+    "fields": {
+        "name": "UNITED STATES",
+        "short_name": "US",
+        "code": 33
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 189,
+    "fields": {
+        "name": "URUGUAY",
+        "short_name": "UY",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 190,
+    "fields": {
+        "name": "UNKNOWN",
+        "short_name": "00",
+        "code": null
+    }
+},
+{
+    "model": "mardid.country",
+    "pk": 191,
+    "fields": {
+        "name": "USSR (DEPECRATED)",
+        "short_name": null,
+        "code": 90
+    }
+}
+]
