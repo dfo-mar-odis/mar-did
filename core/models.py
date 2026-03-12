@@ -4,15 +4,39 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
 
-class Platforms(models.Model):
-    name = models.CharField(verbose_name=_("Name"), max_length=200, unique=True)
-    ship_code = models.CharField(verbose_name=_("Ship Code"), max_length=4, null=True, help_text=_("ICES (https://vocab.ices.dk/) code consists of 2 character country code and a 2 character ship code for every unique vessel."))
-
-    def __str__(self):
-        return f'{self.name}'
+# MEDS uses a list of country codes that I think are from ICES
+# https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/countries.json
+class Country(models.Model):
+    id = models.AutoField(primary_key=True, db_column='COUNTRY_SEQ')
+    name = models.CharField(max_length=35, db_column='COUNTRY_NAME')
+    code = models.CharField(max_length=2, db_column='COUNTRY_CODE', blank=True, null=True, help_text=_("2-character Country code"))
 
     class Meta:
+        db_table = 'LU_COUNTRY'
         ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
+class Platforms(models.Model):
+    id = models.AutoField(primary_key=True, db_column='PLATFORM_SEQ')
+
+    # The description of the platform, for example the name of the vessel, or another
+    # meaningful collection method (ie glider) of the data.
+    platform = models.CharField(max_length=100, db_column='PLATFORM', help_text=_("Platform name or description"))
+    country = models.ForeignKey(Country, related_name="platforms", on_delete=models.CASCADE, blank=True, null=True, db_column='COUNTRY_SEQ')
+    call_sign = models.CharField(max_length=10, db_column='CALL_SIGN', blank=True, null=True, help_text=_("Platform call sign, if applicable"))
+    max_speed = models.IntegerField(db_column='MAXIMUM_SPEED', blank=True, null=True, help_text=_("Maximum speed of the platform in knots"))
+    ices_code = models.CharField(db_column='ICES_CODE', max_length=4, blank=True, null=True, help_text=_("ICES code"))
+    ship_code = models.CharField(db_column='SHIP_CODE', max_length=6, blank=True, null=True, help_text=_("OSCruise code"))
+
+    class Meta:
+        db_table = 'LU_PLATFORM'
+        ordering = ['platform']
+
+    def __str__(self):
+        return self.platform
 
 
 class DataTypes(models.Model):
@@ -97,30 +121,10 @@ class Cruises(models.Model):
         return f'{self.name} - {self.descriptor}'
 
 
-class Instruments(models.Model):
-    name = models.CharField(verbose_name=_("Name"), max_length=20)
-    serial_number = models.CharField(verbose_name=_("Serial Number"), max_length=255, blank=True, null=True,
-                                     help_text=_("Serial number of an instrument if it exists"), unique=True)
-    description = models.CharField(verbose_name=_("Description"), max_length=255)
-
-    def __str__(self):
-        return self.name + (f" - {self.description}" if self.description else "" ) + (f" - {self.serial_number}" if self.serial_number else "" )
-
-    class Meta:
-        ordering = ['name', 'serial_number']
-
-
-class MooredInstruments(models.Model):
-    descriptor = models.CharField(verbose_name=_("Name"), max_length=20, unique=True,
-                                  help_text=_("Serial Number or name given to the moored instrument"))
-    instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='moored_instruments')
-
-
 class Dataset(models.Model):
     cruise = models.ForeignKey(Cruises, on_delete=models.CASCADE, related_name="datasets")
     data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets")
     legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True)
-    instruments = models.ManyToManyField(Instruments, verbose_name=_("Instruments"), blank=True, related_name='instruments')
     status = models.ForeignKey(DataStatus, verbose_name=_("Process Status"), on_delete=models.PROTECT, related_name="datasets")
 
     @property
