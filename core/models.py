@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
@@ -8,8 +7,9 @@ from django.utils.translation import gettext as _
 # https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/countries.json
 class Country(models.Model):
     id = models.AutoField(primary_key=True, db_column='COUNTRY_SEQ')
-    name = models.CharField(max_length=35, db_column='COUNTRY_NAME')
-    code = models.CharField(max_length=2, db_column='COUNTRY_CODE', blank=True, null=True, help_text=_("2-character Country code"))
+    name = models.CharField(max_length=35, db_column='NAME')
+    short_name = models.CharField(max_length=2, db_column='SHORT_NAME', blank=True, null=True, help_text=_("2-character country code"))
+    code = models.CharField(max_length=2, db_column='CODE', blank=True, null=True, help_text=_("2-digit country code"))
 
     class Meta:
         db_table = 'LU_COUNTRY'
