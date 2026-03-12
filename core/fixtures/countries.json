@@ -1,6 +1,6 @@
 [
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 1,
     "fields": {
         "name": "Afghanistan",
@@ -8,7 +8,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 2,
     "fields": {
         "name": "Albania",
@@ -16,7 +16,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 3,
     "fields": {
         "name": "Algeria",
@@ -24,7 +24,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 4,
     "fields": {
         "name": "Andorra",
@@ -32,7 +32,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 5,
     "fields": {
         "name": "Angola",
@@ -40,7 +40,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 6,
     "fields": {
         "name": "Antigua and Barbuda",
@@ -48,7 +48,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 7,
     "fields": {
         "name": "Argentina",
@@ -56,7 +56,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 8,
     "fields": {
         "name": "Armenia",
@@ -64,7 +64,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 9,
     "fields": {
         "name": "Australia",
@@ -72,7 +72,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 10,
     "fields": {
         "name": "Austria",
@@ -80,7 +80,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 11,
     "fields": {
         "name": "Azerbaijan",
@@ -88,7 +88,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 12,
     "fields": {
         "name": "Bahamas",
@@ -96,7 +96,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 13,
     "fields": {
         "name": "Bahrain",
@@ -104,7 +104,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 14,
     "fields": {
         "name": "Bangladesh",
@@ -112,7 +112,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 15,
     "fields": {
         "name": "Barbados",
@@ -120,7 +120,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 16,
     "fields": {
         "name": "Belarus",
@@ -128,7 +128,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 17,
     "fields": {
         "name": "Belgium",
@@ -136,7 +136,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 18,
     "fields": {
         "name": "Belize",
@@ -144,7 +144,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 19,
     "fields": {
         "name": "Benin",
@@ -152,7 +152,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 20,
     "fields": {
         "name": "Bhutan",
@@ -160,7 +160,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 21,
     "fields": {
         "name": "Bolivia",
@@ -168,7 +168,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 22,
     "fields": {
         "name": "Bosnia and Herzegowina",
@@ -176,7 +176,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 23,
     "fields": {
         "name": "Botswana",
@@ -184,7 +184,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 24,
     "fields": {
         "name": "Brazil",
@@ -192,7 +192,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 25,
     "fields": {
         "name": "Brunei Darussalam",
@@ -200,7 +200,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 26,
     "fields": {
         "name": "Bulgaria",
@@ -208,7 +208,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 27,
     "fields": {
         "name": "Burkina Faso",
@@ -216,7 +216,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 28,
     "fields": {
         "name": "Burundi",
@@ -224,7 +224,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 29,
     "fields": {
         "name": "Cambodia",
@@ -232,7 +232,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 30,
     "fields": {
         "name": "Cameroon",
@@ -240,7 +240,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 31,
     "fields": {
         "name": "Canada",
@@ -248,7 +248,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 32,
     "fields": {
         "name": "Cape Verde",
@@ -256,7 +256,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 33,
     "fields": {
         "name": "Central African Republic",
@@ -264,7 +264,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 34,
     "fields": {
         "name": "Chad",
@@ -272,7 +272,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 35,
     "fields": {
         "name": "Chile",
@@ -280,7 +280,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 36,
     "fields": {
         "name": "China",
@@ -288,7 +288,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 37,
     "fields": {
         "name": "Colombia",
@@ -296,7 +296,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 38,
     "fields": {
         "name": "Comoros",
@@ -304,7 +304,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 39,
     "fields": {
         "name": "Congo, Democratic Republic",
@@ -312,7 +312,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 40,
     "fields": {
         "name": "Congo, People’s Republic",
@@ -320,7 +320,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 41,
     "fields": {
         "name": "Costa Rica",
@@ -328,7 +328,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 42,
     "fields": {
         "name": "Cote d'Ivoire",
@@ -336,7 +336,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 43,
     "fields": {
         "name": "Croatia (Local Name: Hrvatska)",
@@ -344,7 +344,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 44,
     "fields": {
         "name": "Cuba",
@@ -352,7 +352,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 45,
     "fields": {
         "name": "Cyprus",
@@ -360,7 +360,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 46,
     "fields": {
         "name": "Czech Republic",
@@ -368,7 +368,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 47,
     "fields": {
         "name": "Denmark",
@@ -376,7 +376,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 48,
     "fields": {
         "name": "Djibouti",
@@ -384,7 +384,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 49,
     "fields": {
         "name": "Dominica",
@@ -392,7 +392,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 50,
     "fields": {
         "name": "Dominican Republic",
@@ -400,7 +400,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 51,
     "fields": {
         "name": "East Timor",
@@ -408,7 +408,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 52,
     "fields": {
         "name": "Ecuador",
@@ -416,7 +416,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 53,
     "fields": {
         "name": "El Salvador",
@@ -424,7 +424,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 54,
     "fields": {
         "name": "Equatorial Guinea",
@@ -432,7 +432,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 55,
     "fields": {
         "name": "Eritrea",
@@ -440,7 +440,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 56,
     "fields": {
         "name": "Estonia",
@@ -448,7 +448,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 57,
     "fields": {
         "name": "Ethiopia",
@@ -456,7 +456,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 58,
     "fields": {
         "name": "Fiji",
@@ -464,7 +464,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 59,
     "fields": {
         "name": "Finland",
@@ -472,7 +472,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 60,
     "fields": {
         "name": "France",
@@ -480,7 +480,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 61,
     "fields": {
         "name": "Gabon",
@@ -488,7 +488,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 62,
     "fields": {
         "name": "Gambia",
@@ -496,7 +496,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 63,
     "fields": {
         "name": "Georgia",
@@ -504,7 +504,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 64,
     "fields": {
         "name": "Germany",
@@ -512,7 +512,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 65,
     "fields": {
         "name": "Ghana",
@@ -520,7 +520,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 66,
     "fields": {
         "name": "Greece",
@@ -528,7 +528,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 67,
     "fields": {
         "name": "Greenland",
@@ -536,7 +536,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 68,
     "fields": {
         "name": "Grenada",
@@ -544,7 +544,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 69,
     "fields": {
         "name": "Guatemala",
@@ -552,7 +552,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 70,
     "fields": {
         "name": "Guinea",
@@ -560,7 +560,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 71,
     "fields": {
         "name": "Guinea-Bissau",
@@ -568,7 +568,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 72,
     "fields": {
         "name": "Guyana",
@@ -576,7 +576,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 73,
     "fields": {
         "name": "Haiti",
@@ -584,7 +584,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 74,
     "fields": {
         "name": "Honduras",
@@ -592,7 +592,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 75,
     "fields": {
         "name": "Hong Kong",
@@ -600,7 +600,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 76,
     "fields": {
         "name": "Hungary",
@@ -608,7 +608,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 77,
     "fields": {
         "name": "Iceland",
@@ -616,7 +616,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 78,
     "fields": {
         "name": "India",
@@ -624,7 +624,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 79,
     "fields": {
         "name": "Indonesia",
@@ -632,7 +632,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 80,
     "fields": {
         "name": "Iran",
@@ -640,7 +640,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 81,
     "fields": {
         "name": "Iraq",
@@ -648,7 +648,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 82,
     "fields": {
         "name": "Ireland",
@@ -656,7 +656,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 83,
     "fields": {
         "name": "Israel",
@@ -664,7 +664,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 84,
     "fields": {
         "name": "Italy",
@@ -672,7 +672,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 85,
     "fields": {
         "name": "Jamaica",
@@ -680,7 +680,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 86,
     "fields": {
         "name": "Japan",
@@ -688,7 +688,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 87,
     "fields": {
         "name": "Jordan",
@@ -696,7 +696,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 88,
     "fields": {
         "name": "Kazakhstan",
@@ -704,7 +704,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 89,
     "fields": {
         "name": "Kenya",
@@ -712,7 +712,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 90,
     "fields": {
         "name": "Kiribati",
@@ -720,7 +720,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 91,
     "fields": {
         "name": "Korea, Democratic People's Republic",
@@ -728,7 +728,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 92,
     "fields": {
         "name": "Korea, Republic",
@@ -736,7 +736,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 93,
     "fields": {
         "name": "Kuwait",
@@ -744,7 +744,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 94,
     "fields": {
         "name": "Kyrgyzstan",
@@ -752,7 +752,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 95,
     "fields": {
         "name": "Laos",
@@ -760,7 +760,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 96,
     "fields": {
         "name": "Latvia",
@@ -768,7 +768,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 97,
     "fields": {
         "name": "Lebanon",
@@ -776,7 +776,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 98,
     "fields": {
         "name": "Lesotho",
@@ -784,7 +784,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 99,
     "fields": {
         "name": "Liberia",
@@ -792,7 +792,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 100,
     "fields": {
         "name": "Libya",
@@ -800,7 +800,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 101,
     "fields": {
         "name": "Liechtenstein",
@@ -808,7 +808,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 102,
     "fields": {
         "name": "Lithuania",
@@ -816,7 +816,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 103,
     "fields": {
         "name": "Luxembourg",
@@ -824,7 +824,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 104,
     "fields": {
         "name": "Macedonia",
@@ -832,7 +832,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 105,
     "fields": {
         "name": "Madagascar",
@@ -840,7 +840,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 106,
     "fields": {
         "name": "Malawi",
@@ -848,7 +848,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 107,
     "fields": {
         "name": "Malaysia",
@@ -856,7 +856,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 108,
     "fields": {
         "name": "Maldives",
@@ -864,7 +864,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 109,
     "fields": {
         "name": "Mali",
@@ -872,7 +872,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 110,
     "fields": {
         "name": "Malta",
@@ -880,7 +880,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 111,
     "fields": {
         "name": "Marshall Islands",
@@ -888,7 +888,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 112,
     "fields": {
         "name": "Mauritania",
@@ -896,7 +896,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 113,
     "fields": {
         "name": "Mauritius",
@@ -904,7 +904,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 114,
     "fields": {
         "name": "Mexico",
@@ -912,7 +912,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 115,
     "fields": {
         "name": "Micronesia",
@@ -920,7 +920,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 116,
     "fields": {
         "name": "Moldova",
@@ -928,7 +928,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 117,
     "fields": {
         "name": "Monaco",
@@ -936,7 +936,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 118,
     "fields": {
         "name": "Mongolia",
@@ -944,7 +944,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 119,
     "fields": {
         "name": "Morocco",
@@ -952,7 +952,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 120,
     "fields": {
         "name": "Mozambique",
@@ -960,7 +960,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 121,
     "fields": {
         "name": "Myanmar",
@@ -968,7 +968,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 122,
     "fields": {
         "name": "Namibia",
@@ -976,7 +976,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 123,
     "fields": {
         "name": "Nauru",
@@ -984,7 +984,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 124,
     "fields": {
         "name": "Nepal",
@@ -992,7 +992,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 125,
     "fields": {
         "name": "Netherlands",
@@ -1000,7 +1000,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 126,
     "fields": {
         "name": "New Zealand",
@@ -1008,7 +1008,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 127,
     "fields": {
         "name": "Nicaragua",
@@ -1016,7 +1016,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 128,
     "fields": {
         "name": "Niger",
@@ -1024,7 +1024,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 129,
     "fields": {
         "name": "Nigeria",
@@ -1032,7 +1032,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 130,
     "fields": {
         "name": "Norway",
@@ -1040,7 +1040,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 131,
     "fields": {
         "name": "Oman",
@@ -1048,7 +1048,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 132,
     "fields": {
         "name": "Pakistan",
@@ -1056,7 +1056,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 133,
     "fields": {
         "name": "Palau",
@@ -1064,7 +1064,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 134,
     "fields": {
         "name": "Panama",
@@ -1072,7 +1072,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 135,
     "fields": {
         "name": "Papua New Guinea",
@@ -1080,7 +1080,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 136,
     "fields": {
         "name": "Paraguay",
@@ -1088,7 +1088,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 137,
     "fields": {
         "name": "Peru",
@@ -1096,7 +1096,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 138,
     "fields": {
         "name": "Philippines",
@@ -1104,7 +1104,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 139,
     "fields": {
         "name": "Poland",
@@ -1112,7 +1112,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 140,
     "fields": {
         "name": "Portugal",
@@ -1120,7 +1120,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 141,
     "fields": {
         "name": "Puerto Rico",
@@ -1128,7 +1128,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 142,
     "fields": {
         "name": "Qatar",
@@ -1136,7 +1136,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 143,
     "fields": {
         "name": "Romania",
@@ -1144,7 +1144,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 144,
     "fields": {
         "name": "Russian Federation",
@@ -1152,7 +1152,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 145,
     "fields": {
         "name": "Rwanda",
@@ -1160,7 +1160,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 146,
     "fields": {
         "name": "Saint Kitts and Nevis",
@@ -1168,7 +1168,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 147,
     "fields": {
         "name": "Saint Lucia",
@@ -1176,7 +1176,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 148,
     "fields": {
         "name": "Saint Vincent and the Grenadines",
@@ -1184,7 +1184,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 149,
     "fields": {
         "name": "Samoa",
@@ -1192,7 +1192,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 150,
     "fields": {
         "name": "San Marino",
@@ -1200,7 +1200,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 151,
     "fields": {
         "name": "Sao Tome and Príncipe",
@@ -1208,7 +1208,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 152,
     "fields": {
         "name": "Saudi Arabia",
@@ -1216,7 +1216,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 153,
     "fields": {
         "name": "Senegal",
@@ -1224,7 +1224,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 154,
     "fields": {
         "name": "Serbia and Montenegro",
@@ -1232,7 +1232,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 155,
     "fields": {
         "name": "Seychelles",
@@ -1240,7 +1240,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 156,
     "fields": {
         "name": "Sierra Leone",
@@ -1248,7 +1248,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 157,
     "fields": {
         "name": "Singapore",
@@ -1256,7 +1256,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 158,
     "fields": {
         "name": "Slovakia (Slovak Republic)",
@@ -1264,7 +1264,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 159,
     "fields": {
         "name": "Slovenia",
@@ -1272,7 +1272,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 160,
     "fields": {
         "name": "Solomon Islands",
@@ -1280,7 +1280,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 161,
     "fields": {
         "name": "Somalia",
@@ -1288,7 +1288,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 162,
     "fields": {
         "name": "South Africa",
@@ -1296,7 +1296,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 163,
     "fields": {
         "name": "Spain",
@@ -1304,7 +1304,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 164,
     "fields": {
         "name": "Sri Lanka",
@@ -1312,7 +1312,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 165,
     "fields": {
         "name": "Sudan",
@@ -1320,7 +1320,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 166,
     "fields": {
         "name": "Suriname",
@@ -1328,7 +1328,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 167,
     "fields": {
         "name": "Swaziland",
@@ -1336,7 +1336,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 168,
     "fields": {
         "name": "Sweden",
@@ -1344,7 +1344,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 169,
     "fields": {
         "name": "Switzerland",
@@ -1352,7 +1352,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 170,
     "fields": {
         "name": "Syrian Arab Republic",
@@ -1360,7 +1360,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 171,
     "fields": {
         "name": "Taiwan",
@@ -1368,7 +1368,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 172,
     "fields": {
         "name": "Tajikistan",
@@ -1376,7 +1376,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 173,
     "fields": {
         "name": "Tanzania",
@@ -1384,7 +1384,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 174,
     "fields": {
         "name": "Thailand",
@@ -1392,7 +1392,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 175,
     "fields": {
         "name": "Togo",
@@ -1400,7 +1400,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 176,
     "fields": {
         "name": "Tonga",
@@ -1408,7 +1408,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 177,
     "fields": {
         "name": "Trinidad and Tobago",
@@ -1416,7 +1416,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 178,
     "fields": {
         "name": "Tunisia",
@@ -1424,7 +1424,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 179,
     "fields": {
         "name": "Turkey",
@@ -1432,7 +1432,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 180,
     "fields": {
         "name": "Turkmenistan",
@@ -1440,7 +1440,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 181,
     "fields": {
         "name": "Tuvalu",
@@ -1448,7 +1448,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 182,
     "fields": {
         "name": "Uganda",
@@ -1456,7 +1456,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 183,
     "fields": {
         "name": "Ukraine",
@@ -1464,7 +1464,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 184,
     "fields": {
         "name": "United Arab Emirates",
@@ -1472,7 +1472,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 185,
     "fields": {
         "name": "United Kingdom",
@@ -1480,7 +1480,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 186,
     "fields": {
         "name": "United States",
@@ -1488,7 +1488,7 @@
     }
 },
 {
-    "model": "mardid.country",
+    "model": "core.country",
     "pk": 187,
     "fields": {
         "name": "Uruguay",

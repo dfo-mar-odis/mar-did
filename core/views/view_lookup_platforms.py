@@ -1,23 +1,23 @@
-import pandas as pd
+from django.urls import path
 from django.http import HttpResponse
 from django_pandas.io import read_frame
 from django.utils.translation import gettext as _
 
 from crispy_forms.utils import render_crispy_form
 
-from mardid import models
+from core import models
 from core.views import view_lookup_abstract
 
 # If copy and pasting this module as a template, change the lookup model to match
 # the model of the simple look up class being extended
-lookup_model = models.Country
+lookup_model = models.Platforms
 
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
-app_name = 'mardid'
-lookup_title = _('Countries')
-name_key = 'country'
-columns = ['name', 'short_name', 'code']
+app_name = 'core'
+lookup_title = _('Platforms')
+name_key = 'platforms'
+columns = ['platform', 'country', 'call_sign', 'max_speed', 'ices_code', 'ship_code']
 
 ###### DO NOT CHANGE THESE #############
 model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key, app_name, lookup_title)
@@ -30,12 +30,11 @@ labels = [(field_lookup[col_name].verbose_name if field_lookup[col_name].verbose
 # id, name, description format most simple lookup tables follow.
 def list_lookup(request):
 
-    queryset = lookup_model.objects.all().order_by('name')
+    queryset = lookup_model.objects.all().order_by('platform')
     queryset_list = queryset.values_list('id', *columns)
 
     df = read_frame(queryset_list)
     df.set_index('id', inplace=True)
-    df['code'] = df['code'].fillna('').apply(lambda x: int(x) if x != '' else x)
     df.columns = labels
 
     table = view_lookup_abstract.prep_table(request, df, app_name, name_key)

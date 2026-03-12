@@ -47,13 +47,6 @@ class CruiseFilter(forms.Form):
         label=_('Cruise Name')
     )
 
-    program = forms.ModelChoiceField(
-        queryset=models.Programs.objects.all(),
-        empty_label=_("Select a program"),
-        widget=forms.Select(attrs={'class': 'form-select'}),
-        required=False
-    )
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -93,17 +86,12 @@ def list_cruises(request):
 
     table_soup = BeautifulSoup('', 'html.parser')
 
-    queryset = models.Cruises.objects.order_by('pk').prefetch_related('programs', 'chief_scientists', 'locations')
+    queryset = models.Cruises.objects.order_by('pk').prefetch_related('chief_scientists', 'locations')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 
     if descriptor:=request.GET.get('descriptor', None):
         queryset = queryset.filter(descriptor__icontains=descriptor)
-
-    if program:=request.GET.get('program', None):
-        program_id = int(program)
-        program = models.Programs.objects.get(pk=program_id)
-        queryset = queryset.filter(programs=program)
 
     queryset = queryset[page_start:page_end]
 

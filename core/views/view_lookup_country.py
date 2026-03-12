@@ -1,23 +1,23 @@
-from django.urls import path
+import pandas as pd
 from django.http import HttpResponse
 from django_pandas.io import read_frame
 from django.utils.translation import gettext as _
 
 from crispy_forms.utils import render_crispy_form
 
-from mardid import models
+from core import models
 from core.views import view_lookup_abstract
 
 # If copy and pasting this module as a template, change the lookup model to match
 # the model of the simple look up class being extended
-lookup_model = models.GeographicRegion
+lookup_model = models.Country
 
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
-app_name = 'mardid'
-lookup_title = _('Regions')
-name_key = 'region'
-columns = ['name']
+app_name = 'core'
+lookup_title = _('Countries')
+name_key = 'country'
+columns = ['name', 'short_name', 'code']
 
 ###### DO NOT CHANGE THESE #############
 model_form, model_view = view_lookup_abstract.create_lookup_classes(lookup_model, name_key, app_name, lookup_title)
@@ -35,6 +35,7 @@ def list_lookup(request):
 
     df = read_frame(queryset_list)
     df.set_index('id', inplace=True)
+    df['code'] = df['code'].fillna('').apply(lambda x: int(x) if x != '' else x)
     df.columns = labels
 
     table = view_lookup_abstract.prep_table(request, df, app_name, name_key)

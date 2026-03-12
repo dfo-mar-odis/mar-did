@@ -51,16 +51,6 @@ class CreateCruise(LoginRequiredMixin, TemplateView):
 
 
 class CruiseForm(forms.ModelForm):
-    programs_select = forms.ModelChoiceField(
-        queryset=models.Programs.objects.none(),
-        label=_("Select a program"),
-        required=False,
-        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
-    )
-    programs = forms.ModelMultipleChoiceField(
-        queryset=models.Programs.objects.none(),
-        label=_("Programs")
-    )
     chief_scientists_select = forms.ModelChoiceField(
         queryset=User.objects.none(),
         label=_("Select Chief Scientist"),
@@ -168,25 +158,6 @@ class CruiseForm(forms.ModelForm):
 
         return cleaned_locations
 
-    def clean_programs_field(self):
-        programs_select = self.data.get('programs_select')
-        programs = self.data.getlist('programs_bullet')
-
-        keys = [int(program) for program in programs]
-        if programs_select:
-            keys.append(int(programs_select))
-
-        cleaned_programs = models.Programs.objects.filter(pk__in=keys)
-
-        # Example validation: Ensure at least one chief scientist is selected
-        if not cleaned_programs.exists():
-            self.add_error('programs_select', _("At least one program must be added."))  # Non-field error
-            self.fields['programs_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
-
-        # Additional processing or validation logic can go here
-
-        return cleaned_programs
-
     def clean_chief_scientists(self):
         return self.clean_chief_scientists_field()
 
@@ -198,12 +169,6 @@ class CruiseForm(forms.ModelForm):
 
     def clean_locations(self):
         return self.clean_locations_field()
-
-    def clean_programs_select(self):
-        return self.clean_programs_field()
-
-    def clean_programs(self):
-        return self.clean_programs_field()
 
     def clean(self):
         cleaned_data = super().clean()
@@ -294,7 +259,6 @@ class CruiseForm(forms.ModelForm):
         scientists_container = self.init_contact_list('chief_scientists', 'chief scientists')
         data_manager_container = self.init_contact_list('data_managers', 'data managers')
         locations_container = self.init_lookup('locations', models.GeographicRegions)
-        programs_container = self.init_lookup('programs', models.Programs)
 
         submit_url = (reverse_lazy('core:update_cruise', args=[self.instance.pk])
                       if self.instance.pk else
@@ -334,7 +298,6 @@ class CruiseForm(forms.ModelForm):
                 Column(data_manager_container),
             ),
             Row(
-                Column(programs_container),
                 Column(locations_container),
             ),
             btn_submit
@@ -351,7 +314,7 @@ def update_cruise(request, **kwargs):
 
     # If one of the select lookups has a value but the hidden multi-select is empty,
     # add the selection to the multi-select
-    selects = ['locations', 'chief_scientists', 'data_managers', 'programs']
+    selects = ['locations', 'chief_scientists', 'data_managers']
     for select in selects:
         if (f'{select}_select' in post_data and
                 post_data.get(f'{select}_select') and not post_data.getlist(select)):
@@ -432,9 +395,6 @@ def add_to_list(request, prefix):
     if prefix == 'locations':
         get_bullet_func = get_lookup_bullet
         lookup_model = models.GeographicRegions
-    elif prefix == 'programs':
-        get_bullet_func = get_lookup_bullet
-        lookup_model = models.Programs
 
     new_pill = get_bullet_func(new_id, lookup_model, prefix, 'core:remove_from_list')
 
