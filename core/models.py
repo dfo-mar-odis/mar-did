@@ -79,17 +79,6 @@ class GroupProfiles(models.Model):
         return f"{self.group.name} - {self.description or _('No description')}"
 
 
-class Programs(models.Model):
-    name = models.CharField(_("Program name"), max_length=100, unique=True)
-    description = models.TextField(_("Program description"))
-
-    def __str__(self):
-        return f'{self.name} - {self.description}'
-
-    class Meta:
-        ordering = ['name']
-
-
 class GeographicRegions(models.Model):
     name = models.CharField(_('Name'), max_length=100, unique=True)
     description = models.CharField(_('Description'), blank=True, null=True, max_length=255)
@@ -114,7 +103,6 @@ class Cruises(models.Model):
     chief_scientists = models.ManyToManyField('auth.User', verbose_name=_("Chief Scientists"), related_name='chief_scientists')
     data_managers = models.ManyToManyField('auth.User', verbose_name=_("Data Managers"), related_name='data_managers')
     locations = models.ManyToManyField(GeographicRegions, verbose_name=_("Locations"), blank=True, related_name='locations')
-    programs = models.ManyToManyField(Programs, verbose_name=_("programs"), related_name='programs')
     platform = models.ForeignKey(Platforms, verbose_name=_("Ship/Platform"), on_delete=models.PROTECT, related_name='cruises')
 
     def __str__(self):
