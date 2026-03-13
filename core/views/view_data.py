@@ -49,7 +49,7 @@ class ExpectedDataForm(forms.ModelForm):
             query = Q(name__icontains=filter) | Q(description__icontains=filter)
             self.fields['data_type'].choices = [(obj.pk, f"{obj}") for obj in models.DataTypes.objects.filter(query)]
 
-        status = models.DataStatus.objects.get(name__iexact='Expected')
+        status = models.DatasetStatus.objects.get(name__iexact='Expected')
         self.fields['mission'].initial = cruise
         self.fields['status'].initial = status
 

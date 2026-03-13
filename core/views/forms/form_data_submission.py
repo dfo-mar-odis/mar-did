@@ -44,11 +44,11 @@ class DataSubmissionView(TemplateView):
 
 class ArchiveFileForm(forms.ModelForm):
     class Meta:
-        model = models.DataFileIssues
-        fields = ['issue', 'datafile', 'submitted_by']
+        model = models.DataFileComments
+        fields = ['comment', 'author']
         widgets = {
             'datafile': forms.HiddenInput(),
-            'submitted_by': forms.HiddenInput(),
+            'author': forms.HiddenInput(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -71,7 +71,7 @@ class DataSubmissionForm(forms.ModelForm):
         super().__init__(*args, files=files, **kwargs)
 
         if not self.instance.pk:
-            status = models.DataStatus.objects.get(name__iexact='expected')
+            status = models.DatasetStatus.objects.get(name__iexact='expected')
         else:
             status = self.instance.status
 
@@ -190,7 +190,7 @@ def submit_data(request, data_id, notify):
                 html = ""
                 # for now we're just printing an error saying the file couldn't be uploaded,
                 # But AI assures me we could send the file back in a form, which could include
-                # an issue text input for the DataFileIssues model, and have the file re-submitted
+                # an issue text input for the DataFileComments model, and have the file re-submitted
                 # if the user wanted to archive it.
                 for idx, file in enumerate(could_not_override):
                     context = {
@@ -209,10 +209,10 @@ def submit_data(request, data_id, notify):
 
         if notify:
             if int(notify) == 1:
-                data.status = models.DataStatus.objects.get(name__iexact='lab')
+                data.status = models.DatasetStatus.objects.get(name__iexact='lab')
                 data.save()
             elif int(notify) == 2:
-                data.status = models.DataStatus.objects.get(name__iexact='submitted')
+                data.status = models.DatasetStatus.objects.get(name__iexact='submitted')
                 data.save()
                 group = auth_models.Group.objects.get(name__iexact='Datashop Processors')
                 users = auth_models.User.objects.filter(groups=group)

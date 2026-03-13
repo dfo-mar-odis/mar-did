@@ -13,7 +13,7 @@ class LandingView(TemplateView):
         # datastatus = models.DataStatus.objects.get(name__iexact="Submitted")
         # context['dataset_submitted'] = models.Dataset.objects.filter(status=datastatus).count()
 
-        context['dataset_assigned'] = models.Processing.objects.all().count()
+        context['dataset_assigned'] = models.ProcessingStatus.objects.all().count()
         return context
 
 urlpatterns = [
