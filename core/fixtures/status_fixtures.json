@@ -1,6 +1,6 @@
 [
   {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Unknown",
             "id": 1,
@@ -8,7 +8,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Expected",
             "id": 2,
@@ -16,7 +16,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Submitted",
             "id": 3,
@@ -24,7 +24,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Received",
             "id": 4,
@@ -32,7 +32,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Processing",
             "id": 5,
@@ -40,7 +40,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Processed",
             "id": 6,
@@ -48,7 +48,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Loading",
             "id": 7,
@@ -56,7 +56,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Loaded",
             "id": 8,
@@ -64,7 +64,7 @@
         }
     },
     {
-        "model": "core.datastatus",
+        "model": "core.datasetstatus",
         "fields": {
             "name": "Lab",
             "id": 9,
