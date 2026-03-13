@@ -1,7 +1,6 @@
 [
 {
-    "model": "core.country",
-    "pk": 84,
+    "model": "core.countries",
     "fields": {
         "name": "AFGHANISTAN",
         "short_name": "AF",
@@ -9,8 +8,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 85,
+    "model": "core.countries",
     "fields": {
         "name": "ALBANIA",
         "short_name": "AL",
@@ -18,8 +16,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 86,
+    "model": "core.countries",
     "fields": {
         "name": "ALGERIA",
         "short_name": "DZ",
@@ -27,8 +24,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 87,
+    "model": "core.countries",
     "fields": {
         "name": "ANDORRA",
         "short_name": "AD",
@@ -36,8 +32,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 88,
+    "model": "core.countries",
     "fields": {
         "name": "ANGOLA",
         "short_name": "AO",
@@ -45,8 +40,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 89,
+    "model": "core.countries",
     "fields": {
         "name": "ANTIGUA AND BARBUDA",
         "short_name": "AG",
@@ -54,8 +48,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 90,
+    "model": "core.countries",
     "fields": {
         "name": "ARGENTINA",
         "short_name": "AR",
@@ -63,8 +56,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 91,
+    "model": "core.countries",
     "fields": {
         "name": "ARMENIA",
         "short_name": "AM",
@@ -72,8 +64,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 92,
+    "model": "core.countries",
     "fields": {
         "name": "AUSTRALIA",
         "short_name": "AU",
@@ -81,8 +72,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 93,
+    "model": "core.countries",
     "fields": {
         "name": "AUSTRIA",
         "short_name": "AT",
@@ -90,8 +80,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 94,
+    "model": "core.countries",
     "fields": {
         "name": "AZERBAIJAN",
         "short_name": "AZ",
@@ -99,8 +88,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 95,
+    "model": "core.countries",
     "fields": {
         "name": "BAHAMAS",
         "short_name": "BS",
@@ -108,8 +96,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 96,
+    "model": "core.countries",
     "fields": {
         "name": "BAHRAIN",
         "short_name": "BH",
@@ -117,8 +104,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 97,
+    "model": "core.countries",
     "fields": {
         "name": "BANGLADESH",
         "short_name": "BD",
@@ -126,8 +112,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 98,
+    "model": "core.countries",
     "fields": {
         "name": "BARBADOS",
         "short_name": "BB",
@@ -135,8 +120,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 99,
+    "model": "core.countries",
     "fields": {
         "name": "BELARUS",
         "short_name": "BY",
@@ -144,8 +128,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 100,
+    "model": "core.countries",
     "fields": {
         "name": "BELGIUM",
         "short_name": "BE",
@@ -153,8 +136,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 101,
+    "model": "core.countries",
     "fields": {
         "name": "BELIZE",
         "short_name": "BZ",
@@ -162,8 +144,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 102,
+    "model": "core.countries",
     "fields": {
         "name": "BENIN",
         "short_name": "BJ",
@@ -171,8 +152,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 103,
+    "model": "core.countries",
     "fields": {
         "name": "BHUTAN",
         "short_name": "BT",
@@ -180,8 +160,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 104,
+    "model": "core.countries",
     "fields": {
         "name": "BOLIVIA",
         "short_name": "BO",
@@ -189,8 +168,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 105,
+    "model": "core.countries",
     "fields": {
         "name": "BOSNIA AND HERZEGOWINA",
         "short_name": "BA",
@@ -198,8 +176,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 106,
+    "model": "core.countries",
     "fields": {
         "name": "BOTSWANA",
         "short_name": "BW",
@@ -207,8 +184,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 107,
+    "model": "core.countries",
     "fields": {
         "name": "BRAZIL",
         "short_name": "BR",
@@ -216,8 +192,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 108,
+    "model": "core.countries",
     "fields": {
         "name": "BRUNEI DARUSSALAM",
         "short_name": "BN",
@@ -225,8 +200,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 109,
+    "model": "core.countries",
     "fields": {
         "name": "BULGARIA",
         "short_name": "BG",
@@ -234,8 +208,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 110,
+    "model": "core.countries",
     "fields": {
         "name": "BURKINA FASO",
         "short_name": "BF",
@@ -243,8 +216,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 111,
+    "model": "core.countries",
     "fields": {
         "name": "BURUNDI",
         "short_name": "BI",
@@ -252,8 +224,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 112,
+    "model": "core.countries",
     "fields": {
         "name": "CAMBODIA",
         "short_name": "KH",
@@ -261,8 +232,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 113,
+    "model": "core.countries",
     "fields": {
         "name": "CAMEROON",
         "short_name": "CM",
@@ -270,8 +240,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 114,
+    "model": "core.countries",
     "fields": {
         "name": "CANADA",
         "short_name": "CA",
@@ -279,8 +248,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 115,
+    "model": "core.countries",
     "fields": {
         "name": "CAPE VERDE",
         "short_name": "CV",
@@ -288,8 +256,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 116,
+    "model": "core.countries",
     "fields": {
         "name": "CENTRAL AFRICAN REPUBLIC",
         "short_name": "CF",
@@ -297,8 +264,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 117,
+    "model": "core.countries",
     "fields": {
         "name": "CHAD",
         "short_name": "TD",
@@ -306,8 +272,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 118,
+    "model": "core.countries",
     "fields": {
         "name": "CHILE",
         "short_name": "CL",
@@ -315,8 +280,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 119,
+    "model": "core.countries",
     "fields": {
         "name": "CHINA",
         "short_name": "CN",
@@ -324,8 +288,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 120,
+    "model": "core.countries",
     "fields": {
         "name": "COLOMBIA",
         "short_name": "CO",
@@ -333,8 +296,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 121,
+    "model": "core.countries",
     "fields": {
         "name": "COMOROS",
         "short_name": "KM",
@@ -342,8 +304,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 122,
+    "model": "core.countries",
     "fields": {
         "name": "CONGO, DEMOCRATIC REPUBLIC",
         "short_name": "CD",
@@ -351,8 +312,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 123,
+    "model": "core.countries",
     "fields": {
         "name": "CONGO, PEOPLE’S REPUBLIC",
         "short_name": "CG",
@@ -360,8 +320,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 124,
+    "model": "core.countries",
     "fields": {
         "name": "COSTA RICA",
         "short_name": "CR",
@@ -369,8 +328,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 125,
+    "model": "core.countries",
     "fields": {
         "name": "COTE D'IVOIRE",
         "short_name": "CI",
@@ -378,8 +336,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 126,
+    "model": "core.countries",
     "fields": {
         "name": "CROATIA (LOCAL NAME: HRVATSKA)",
         "short_name": "HR",
@@ -387,8 +344,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 127,
+    "model": "core.countries",
     "fields": {
         "name": "CUBA",
         "short_name": "CU",
@@ -396,8 +352,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 128,
+    "model": "core.countries",
     "fields": {
         "name": "CYPRUS",
         "short_name": "CY",
@@ -405,8 +360,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 129,
+    "model": "core.countries",
     "fields": {
         "name": "CZECH REPUBLIC",
         "short_name": "CZ",
@@ -414,8 +368,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 130,
+    "model": "core.countries",
     "fields": {
         "name": "DENMARK",
         "short_name": "DK",
@@ -423,8 +376,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 131,
+    "model": "core.countries",
     "fields": {
         "name": "DJIBOUTI",
         "short_name": "DJ",
@@ -432,8 +384,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 132,
+    "model": "core.countries",
     "fields": {
         "name": "DOMINICA",
         "short_name": "DM",
@@ -441,8 +392,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 133,
+    "model": "core.countries",
     "fields": {
         "name": "DOMINICAN REPUBLIC",
         "short_name": "DO",
@@ -450,8 +400,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 134,
+    "model": "core.countries",
     "fields": {
         "name": "EAST TIMOR",
         "short_name": "TL",
@@ -459,8 +408,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 135,
+    "model": "core.countries",
     "fields": {
         "name": "ECUADOR",
         "short_name": "EC",
@@ -468,8 +416,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 136,
+    "model": "core.countries",
     "fields": {
         "name": "EL SALVADOR",
         "short_name": "SV",
@@ -477,8 +424,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 137,
+    "model": "core.countries",
     "fields": {
         "name": "EQUATORIAL GUINEA",
         "short_name": "GQ",
@@ -486,8 +432,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 138,
+    "model": "core.countries",
     "fields": {
         "name": "ERITREA",
         "short_name": "ER",
@@ -495,8 +440,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 139,
+    "model": "core.countries",
     "fields": {
         "name": "ESTONIA",
         "short_name": "EE",
@@ -504,8 +448,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 140,
+    "model": "core.countries",
     "fields": {
         "name": "ETHIOPIA",
         "short_name": "ET",
@@ -513,8 +456,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 141,
+    "model": "core.countries",
     "fields": {
         "name": "FIJI",
         "short_name": "FJ",
@@ -522,8 +464,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 142,
+    "model": "core.countries",
     "fields": {
         "name": "FINLAND",
         "short_name": "FI",
@@ -531,8 +472,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 143,
+    "model": "core.countries",
     "fields": {
         "name": "FRANCE",
         "short_name": "FR",
@@ -540,8 +480,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 144,
+    "model": "core.countries",
     "fields": {
         "name": "GABON",
         "short_name": "GA",
@@ -549,8 +488,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 145,
+    "model": "core.countries",
     "fields": {
         "name": "GAMBIA",
         "short_name": "GM",
@@ -558,8 +496,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 146,
+    "model": "core.countries",
     "fields": {
         "name": "GEORGIA",
         "short_name": "GE",
@@ -567,17 +504,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 147,
-    "fields": {
-        "name": "GERMANY, DEMO REP OF (DEPECRATED)",
-        "short_name": null,
-        "code": 7
-    }
-},
-{
-    "model": "core.country",
-    "pk": 148,
+    "model": "core.countries",
     "fields": {
         "name": "GERMANY",
         "short_name": "DE",
@@ -585,8 +512,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 149,
+    "model": "core.countries",
     "fields": {
         "name": "GHANA",
         "short_name": "GH",
@@ -594,8 +520,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 150,
+    "model": "core.countries",
     "fields": {
         "name": "GREECE",
         "short_name": "GR",
@@ -603,8 +528,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 151,
+    "model": "core.countries",
     "fields": {
         "name": "GREENLAND",
         "short_name": "GL",
@@ -612,8 +536,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 152,
+    "model": "core.countries",
     "fields": {
         "name": "GRENADA",
         "short_name": "GD",
@@ -621,8 +544,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 153,
+    "model": "core.countries",
     "fields": {
         "name": "GUATEMALA",
         "short_name": "GT",
@@ -630,8 +552,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 154,
+    "model": "core.countries",
     "fields": {
         "name": "GUINEA",
         "short_name": "GN",
@@ -639,8 +560,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 155,
+    "model": "core.countries",
     "fields": {
         "name": "GUINEA-BISSAU",
         "short_name": "GW",
@@ -648,8 +568,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 156,
+    "model": "core.countries",
     "fields": {
         "name": "GUYANA",
         "short_name": "GY",
@@ -657,8 +576,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 157,
+    "model": "core.countries",
     "fields": {
         "name": "HAITI",
         "short_name": "HT",
@@ -666,8 +584,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 158,
+    "model": "core.countries",
     "fields": {
         "name": "HONDURAS",
         "short_name": "HN",
@@ -675,8 +592,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 159,
+    "model": "core.countries",
     "fields": {
         "name": "HONG KONG",
         "short_name": "HK",
@@ -684,8 +600,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 160,
+    "model": "core.countries",
     "fields": {
         "name": "HUNGARY",
         "short_name": "HU",
@@ -693,8 +608,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 161,
+    "model": "core.countries",
     "fields": {
         "name": "ICELAND",
         "short_name": "IS",
@@ -702,8 +616,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 162,
+    "model": "core.countries",
     "fields": {
         "name": "INDIA",
         "short_name": "IN",
@@ -711,8 +624,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 163,
+    "model": "core.countries",
     "fields": {
         "name": "INDONESIA",
         "short_name": "ID",
@@ -720,8 +632,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 164,
+    "model": "core.countries",
     "fields": {
         "name": "IRAN",
         "short_name": "IR",
@@ -729,8 +640,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 165,
+    "model": "core.countries",
     "fields": {
         "name": "IRAQ",
         "short_name": "IQ",
@@ -738,8 +648,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 166,
+    "model": "core.countries",
     "fields": {
         "name": "IRELAND",
         "short_name": "IE",
@@ -747,8 +656,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 167,
+    "model": "core.countries",
     "fields": {
         "name": "ISRAEL",
         "short_name": "IL",
@@ -756,8 +664,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 168,
+    "model": "core.countries",
     "fields": {
         "name": "ITALY",
         "short_name": "IT",
@@ -765,8 +672,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 169,
+    "model": "core.countries",
     "fields": {
         "name": "JAMAICA",
         "short_name": "JM",
@@ -774,8 +680,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 170,
+    "model": "core.countries",
     "fields": {
         "name": "JAPAN",
         "short_name": "JP",
@@ -783,8 +688,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 171,
+    "model": "core.countries",
     "fields": {
         "name": "JORDAN",
         "short_name": "JO",
@@ -792,8 +696,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 172,
+    "model": "core.countries",
     "fields": {
         "name": "KAZAKHSTAN",
         "short_name": "KZ",
@@ -801,8 +704,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 173,
+    "model": "core.countries",
     "fields": {
         "name": "KENYA",
         "short_name": "KE",
@@ -810,8 +712,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 174,
+    "model": "core.countries",
     "fields": {
         "name": "KIRIBATI",
         "short_name": "KI",
@@ -819,8 +720,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 175,
+    "model": "core.countries",
     "fields": {
         "name": "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC",
         "short_name": "KP",
@@ -828,8 +728,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 176,
+    "model": "core.countries",
     "fields": {
         "name": "KOREA, REPUBLIC",
         "short_name": "KR",
@@ -837,8 +736,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 177,
+    "model": "core.countries",
     "fields": {
         "name": "KUWAIT",
         "short_name": "KW",
@@ -846,8 +744,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 178,
+    "model": "core.countries",
     "fields": {
         "name": "KYRGYZSTAN",
         "short_name": "KG",
@@ -855,8 +752,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 179,
+    "model": "core.countries",
     "fields": {
         "name": "LAOS",
         "short_name": "LA",
@@ -864,8 +760,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 180,
+    "model": "core.countries",
     "fields": {
         "name": "LATVIA",
         "short_name": "LV",
@@ -873,8 +768,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 181,
+    "model": "core.countries",
     "fields": {
         "name": "LEBANON",
         "short_name": "LB",
@@ -882,8 +776,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 182,
+    "model": "core.countries",
     "fields": {
         "name": "LESOTHO",
         "short_name": "LS",
@@ -891,8 +784,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 183,
+    "model": "core.countries",
     "fields": {
         "name": "LIBERIA",
         "short_name": "LR",
@@ -900,8 +792,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 184,
+    "model": "core.countries",
     "fields": {
         "name": "LIBYA",
         "short_name": "LY",
@@ -909,8 +800,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 185,
+    "model": "core.countries",
     "fields": {
         "name": "LIECHTENSTEIN",
         "short_name": "LI",
@@ -918,8 +808,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 186,
+    "model": "core.countries",
     "fields": {
         "name": "LITHUANIA",
         "short_name": "LT",
@@ -927,8 +816,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 187,
+    "model": "core.countries",
     "fields": {
         "name": "LUXEMBOURG",
         "short_name": "LU",
@@ -936,8 +824,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 188,
+    "model": "core.countries",
     "fields": {
         "name": "MACEDONIA",
         "short_name": "MK",
@@ -945,8 +832,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 189,
+    "model": "core.countries",
     "fields": {
         "name": "MADAGASCAR",
         "short_name": "MG",
@@ -954,8 +840,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 190,
+    "model": "core.countries",
     "fields": {
         "name": "MALAWI",
         "short_name": "MW",
@@ -963,8 +848,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 191,
+    "model": "core.countries",
     "fields": {
         "name": "MALAYSIA",
         "short_name": "MY",
@@ -972,8 +856,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 192,
+    "model": "core.countries",
     "fields": {
         "name": "MALDIVES",
         "short_name": "MV",
@@ -981,8 +864,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 193,
+    "model": "core.countries",
     "fields": {
         "name": "MALI",
         "short_name": "ML",
@@ -990,8 +872,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 194,
+    "model": "core.countries",
     "fields": {
         "name": "MALTA",
         "short_name": "MT",
@@ -999,8 +880,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 195,
+    "model": "core.countries",
     "fields": {
         "name": "MARSHALL ISLANDS",
         "short_name": "MH",
@@ -1008,8 +888,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 196,
+    "model": "core.countries",
     "fields": {
         "name": "MAURITANIA",
         "short_name": "MR",
@@ -1017,8 +896,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 197,
+    "model": "core.countries",
     "fields": {
         "name": "MAURITIUS",
         "short_name": "MU",
@@ -1026,8 +904,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 198,
+    "model": "core.countries",
     "fields": {
         "name": "MEXICO",
         "short_name": "MX",
@@ -1035,8 +912,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 199,
+    "model": "core.countries",
     "fields": {
         "name": "MICRONESIA",
         "short_name": "FM",
@@ -1044,8 +920,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 200,
+    "model": "core.countries",
     "fields": {
         "name": "MOLDOVA",
         "short_name": "MD",
@@ -1053,8 +928,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 201,
+    "model": "core.countries",
     "fields": {
         "name": "MONACO",
         "short_name": "MC",
@@ -1062,8 +936,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 202,
+    "model": "core.countries",
     "fields": {
         "name": "MONGOLIA",
         "short_name": "MN",
@@ -1071,8 +944,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 203,
+    "model": "core.countries",
     "fields": {
         "name": "MOROCCO",
         "short_name": "MA",
@@ -1080,8 +952,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 204,
+    "model": "core.countries",
     "fields": {
         "name": "MOZAMBIQUE",
         "short_name": "MZ",
@@ -1089,8 +960,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 205,
+    "model": "core.countries",
     "fields": {
         "name": "MYANMAR",
         "short_name": "MM",
@@ -1098,8 +968,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 206,
+    "model": "core.countries",
     "fields": {
         "name": "NAURU",
         "short_name": "NR",
@@ -1107,8 +976,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 207,
+    "model": "core.countries",
     "fields": {
         "name": "NEPAL",
         "short_name": "NP",
@@ -1116,8 +984,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 208,
+    "model": "core.countries",
     "fields": {
         "name": "NETHERLANDS",
         "short_name": "NL",
@@ -1125,8 +992,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 209,
+    "model": "core.countries",
     "fields": {
         "name": "NEW ZEALAND",
         "short_name": "NZ",
@@ -1134,8 +1000,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 210,
+    "model": "core.countries",
     "fields": {
         "name": "NICARAGUA",
         "short_name": "NI",
@@ -1143,8 +1008,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 211,
+    "model": "core.countries",
     "fields": {
         "name": "NIGER",
         "short_name": "NE",
@@ -1152,8 +1016,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 212,
+    "model": "core.countries",
     "fields": {
         "name": "NIGERIA",
         "short_name": "NG",
@@ -1161,8 +1024,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 213,
+    "model": "core.countries",
     "fields": {
         "name": "NORWAY",
         "short_name": "NO",
@@ -1170,8 +1032,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 214,
+    "model": "core.countries",
     "fields": {
         "name": "OMAN",
         "short_name": "OM",
@@ -1179,8 +1040,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 215,
+    "model": "core.countries",
     "fields": {
         "name": "PAKISTAN",
         "short_name": "PK",
@@ -1188,8 +1048,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 216,
+    "model": "core.countries",
     "fields": {
         "name": "PALAU",
         "short_name": "PW",
@@ -1197,8 +1056,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 217,
+    "model": "core.countries",
     "fields": {
         "name": "PANAMA",
         "short_name": "PA",
@@ -1206,8 +1064,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 218,
+    "model": "core.countries",
     "fields": {
         "name": "PAPUA NEW GUINEA",
         "short_name": "PG",
@@ -1215,8 +1072,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 219,
+    "model": "core.countries",
     "fields": {
         "name": "PARAGUAY",
         "short_name": "PY",
@@ -1224,8 +1080,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 220,
+    "model": "core.countries",
     "fields": {
         "name": "PERU",
         "short_name": "PE",
@@ -1233,8 +1088,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 221,
+    "model": "core.countries",
     "fields": {
         "name": "PHILIPPINES",
         "short_name": "PH",
@@ -1242,8 +1096,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 222,
+    "model": "core.countries",
     "fields": {
         "name": "POLAND",
         "short_name": "PL",
@@ -1251,8 +1104,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 223,
+    "model": "core.countries",
     "fields": {
         "name": "PORTUGAL",
         "short_name": "PT",
@@ -1260,8 +1112,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 224,
+    "model": "core.countries",
     "fields": {
         "name": "PUERTO RICO",
         "short_name": "PR",
@@ -1269,8 +1120,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 225,
+    "model": "core.countries",
     "fields": {
         "name": "QATAR",
         "short_name": "QA",
@@ -1278,8 +1128,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 226,
+    "model": "core.countries",
     "fields": {
         "name": "ROMANIA",
         "short_name": "RO",
@@ -1287,8 +1136,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 227,
+    "model": "core.countries",
     "fields": {
         "name": "RUSSIAN FEDERATION",
         "short_name": "RU",
@@ -1296,8 +1144,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 228,
+    "model": "core.countries",
     "fields": {
         "name": "RWANDA",
         "short_name": "RW",
@@ -1305,8 +1152,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 229,
+    "model": "core.countries",
     "fields": {
         "name": "SAINT KITTS AND NEVIS",
         "short_name": "KN",
@@ -1314,8 +1160,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 230,
+    "model": "core.countries",
     "fields": {
         "name": "SAINT LUCIA",
         "short_name": "LC",
@@ -1323,8 +1168,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 231,
+    "model": "core.countries",
     "fields": {
         "name": "SAINT VINCENT AND THE GRENADINES",
         "short_name": "VC",
@@ -1332,8 +1176,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 232,
+    "model": "core.countries",
     "fields": {
         "name": "SAMOA",
         "short_name": "WS",
@@ -1341,8 +1184,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 233,
+    "model": "core.countries",
     "fields": {
         "name": "SAN MARINO",
         "short_name": "SM",
@@ -1350,8 +1192,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 234,
+    "model": "core.countries",
     "fields": {
         "name": "SAO TOME AND PRÍNCIPE",
         "short_name": "ST",
@@ -1359,8 +1200,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 235,
+    "model": "core.countries",
     "fields": {
         "name": "SAUDI ARABIA",
         "short_name": "SA",
@@ -1368,8 +1208,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 236,
+    "model": "core.countries",
     "fields": {
         "name": "SENEGAL",
         "short_name": "SN",
@@ -1377,8 +1216,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 237,
+    "model": "core.countries",
     "fields": {
         "name": "SERBIA AND MONTENEGRO",
         "short_name": "CS",
@@ -1386,8 +1224,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 238,
+    "model": "core.countries",
     "fields": {
         "name": "SEYCHELLES",
         "short_name": "SC",
@@ -1395,8 +1232,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 239,
+    "model": "core.countries",
     "fields": {
         "name": "SIERRA LEONE",
         "short_name": "SL",
@@ -1404,8 +1240,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 240,
+    "model": "core.countries",
     "fields": {
         "name": "SINGAPORE",
         "short_name": "SG",
@@ -1413,8 +1248,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 241,
+    "model": "core.countries",
     "fields": {
         "name": "SLOVAKIA (SLOVAK REPUBLIC)",
         "short_name": "SK",
@@ -1422,8 +1256,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 242,
+    "model": "core.countries",
     "fields": {
         "name": "SLOVENIA",
         "short_name": "SI",
@@ -1431,8 +1264,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 243,
+    "model": "core.countries",
     "fields": {
         "name": "SOLOMON ISLANDS",
         "short_name": "SB",
@@ -1440,8 +1272,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 244,
+    "model": "core.countries",
     "fields": {
         "name": "SOMALIA",
         "short_name": "SO",
@@ -1449,8 +1280,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 245,
+    "model": "core.countries",
     "fields": {
         "name": "SOUTH AFRICA",
         "short_name": "ZA",
@@ -1458,8 +1288,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 246,
+    "model": "core.countries",
     "fields": {
         "name": "SPAIN",
         "short_name": "ES",
@@ -1467,8 +1296,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 247,
+    "model": "core.countries",
     "fields": {
         "name": "SRI LANKA",
         "short_name": "LK",
@@ -1476,8 +1304,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 248,
+    "model": "core.countries",
     "fields": {
         "name": "SUDAN",
         "short_name": "SD",
@@ -1485,8 +1312,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 249,
+    "model": "core.countries",
     "fields": {
         "name": "SURINAME",
         "short_name": "SR",
@@ -1494,8 +1320,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 250,
+    "model": "core.countries",
     "fields": {
         "name": "SWAZILAND",
         "short_name": "SZ",
@@ -1503,8 +1328,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 251,
+    "model": "core.countries",
     "fields": {
         "name": "SWEDEN",
         "short_name": "SE",
@@ -1512,8 +1336,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 252,
+    "model": "core.countries",
     "fields": {
         "name": "SWITZERLAND",
         "short_name": "CH",
@@ -1521,8 +1344,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 253,
+    "model": "core.countries",
     "fields": {
         "name": "SYRIAN ARAB REPUBLIC",
         "short_name": "SY",
@@ -1530,8 +1352,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 254,
+    "model": "core.countries",
     "fields": {
         "name": "TAIWAN",
         "short_name": "TW",
@@ -1539,8 +1360,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 255,
+    "model": "core.countries",
     "fields": {
         "name": "TAJIKISTAN",
         "short_name": "TJ",
@@ -1548,8 +1368,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 256,
+    "model": "core.countries",
     "fields": {
         "name": "TANZANIA",
         "short_name": "TZ",
@@ -1557,8 +1376,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 257,
+    "model": "core.countries",
     "fields": {
         "name": "THAILAND",
         "short_name": "TH",
@@ -1566,8 +1384,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 258,
+    "model": "core.countries",
     "fields": {
         "name": "TOGO",
         "short_name": "TG",
@@ -1575,8 +1392,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 259,
+    "model": "core.countries",
     "fields": {
         "name": "TONGA",
         "short_name": "TO",
@@ -1584,8 +1400,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 260,
+    "model": "core.countries",
     "fields": {
         "name": "TRINIDAD AND TOBAGO",
         "short_name": "TT",
@@ -1593,8 +1408,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 261,
+    "model": "core.countries",
     "fields": {
         "name": "TUNISIA",
         "short_name": "TN",
@@ -1602,8 +1416,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 262,
+    "model": "core.countries",
     "fields": {
         "name": "TURKEY",
         "short_name": "TR",
@@ -1611,8 +1424,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 263,
+    "model": "core.countries",
     "fields": {
         "name": "TURKMENISTAN",
         "short_name": "TM",
@@ -1620,8 +1432,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 264,
+    "model": "core.countries",
     "fields": {
         "name": "TUVALU",
         "short_name": "TV",
@@ -1629,8 +1440,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 265,
+    "model": "core.countries",
     "fields": {
         "name": "UGANDA",
         "short_name": "UG",
@@ -1638,8 +1448,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 266,
+    "model": "core.countries",
     "fields": {
         "name": "UKRAINE",
         "short_name": "UA",
@@ -1647,8 +1456,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 267,
+    "model": "core.countries",
     "fields": {
         "name": "UNITED ARAB EMIRATES",
         "short_name": "AE",
@@ -1656,8 +1464,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 268,
+    "model": "core.countries",
     "fields": {
         "name": "UNITED KINGDOM",
         "short_name": "GB",
@@ -1665,8 +1472,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 269,
+    "model": "core.countries",
     "fields": {
         "name": "UNITED STATES",
         "short_name": "US",
@@ -1674,8 +1480,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 270,
+    "model": "core.countries",
     "fields": {
         "name": "UNITED STATES",
         "short_name": "US",
@@ -1683,8 +1488,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 271,
+    "model": "core.countries",
     "fields": {
         "name": "UNITED STATES",
         "short_name": "US",
@@ -1692,8 +1496,7 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 272,
+    "model": "core.countries",
     "fields": {
         "name": "URUGUAY",
         "short_name": "UY",
@@ -1701,21 +1504,11 @@
     }
 },
 {
-    "model": "core.country",
-    "pk": 273,
+    "model": "core.countries",
     "fields": {
         "name": "UNKNOWN",
         "short_name": "00",
         "code": null
-    }
-},
-{
-    "model": "core.country",
-    "pk": 274,
-    "fields": {
-        "name": "USSR (DEPECRATED)",
-        "short_name": null,
-        "code": 90
     }
 }
 ]

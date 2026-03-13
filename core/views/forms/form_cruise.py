@@ -41,7 +41,7 @@ class CreateCruise(LoginRequiredMixin, TemplateView):
 
         context['title'] = _('Create Cruise')
         if 'cruise_id' in self.kwargs:
-            context['object'] = models.Cruises.objects.get(pk=self.kwargs['cruise_id'])
+            context['object'] = models.Missions.objects.get(pk=self.kwargs['cruise_id'])
             context['cruise_form'] = CruiseForm(instance=context['object'])
             context['data_form'] = ExpectedDataForm(cruise=context['object'])
         else:
@@ -84,7 +84,7 @@ class CruiseForm(forms.ModelForm):
     )
 
     class Meta:
-        model = models.Cruises
+        model = models.Missions
         fields = '__all__'
 
         ##########################################################################################
@@ -323,7 +323,7 @@ def update_cruise(request, **kwargs):
 
     if 'cruise_id' in kwargs:
         cruise_id = int(kwargs.get('cruise_id'))
-        cruise = models.Cruises.objects.get(pk=cruise_id)
+        cruise = models.Missions.objects.get(pk=cruise_id)
         form = CruiseForm(post_data, instance=cruise)
     else:
         form = CruiseForm(post_data)

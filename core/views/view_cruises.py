@@ -72,7 +72,6 @@ class CruiseFilter(forms.Form):
             Row(
                 Column(Field('name', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
                 Column(Field('descriptor', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
-                Column(Field('program', css_class="form-select form-select-sm", **select_attrs), css_class="col-2"),
             ),
         )
 
@@ -86,7 +85,7 @@ def list_cruises(request):
 
     table_soup = BeautifulSoup('', 'html.parser')
 
-    queryset = models.Cruises.objects.order_by('pk').prefetch_related('chief_scientists', 'locations')
+    queryset = models.Missions.objects.order_by('pk').prefetch_related('chief_scientists', 'locations')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 
@@ -200,7 +199,7 @@ def delete_cruise(request, cruise_id):
         response['HX-Redirect'] = login_url
         return response
 
-    cruise = models.Cruises.objects.get(pk=cruise_id)
+    cruise = models.Missions.objects.get(pk=cruise_id)
     cruise.delete()
 
     response = HttpResponse()
