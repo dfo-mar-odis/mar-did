@@ -9,13 +9,13 @@ from core.views.lookups import view_lookup_abstract
 
 # If copy and pasting this module as a template, change the lookup model to match
 # the model of the simple look up class being extended
-lookup_model = models.DataStatus
+lookup_model = models.DatasetStatus
 
 # These are the url aliases. If copy and pasting this module as a template, just change the
 # name key for the simple lookup table.
 app_name = 'core'
-lookup_title = _('Data Status')
-name_key = 'data_status'
+lookup_title = _('Dataset Status')
+name_key = 'dataset_status'
 columns = [field.name for field in lookup_model._meta.fields if field.name != 'id']
 
 ###### DO NOT CHANGE THESE #############

@@ -160,12 +160,12 @@ class CruiseForm(forms.ModelForm):
                                     css_class='btn btn-sm btn-primary mb-1',
                                     **btn_add_location_attrs)
 
-        submit_url = (reverse_lazy('core:update_cruise', args=[self.instance.pk])
+        submit_url = (reverse_lazy('core:update_mission', args=[self.instance.pk])
                       if self.instance.pk else
-                      reverse_lazy('core:add_cruise'))
+                      reverse_lazy('core:add_mission'))
         btn_submit_attrs = {
             'title': _("Submit"),
-            'hx-target': "#form_id_cruise",
+            'hx-target': "#form_id_mission",
             'hx-post': submit_url
         }
 
@@ -216,17 +216,17 @@ class CruiseForm(forms.ModelForm):
 
 
 class CreateCruise(LoginRequiredMixin, TemplateView):
-    template_name = 'core/form_cruise.html'
+    template_name = 'core/form_mission.html'
     login_url = reverse_lazy('login')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context['title'] = _('Create Cruise')
-        if 'cruise_id' in self.kwargs:
-            context['object'] = models.Missions.objects.get(pk=self.kwargs['cruise_id'])
-            context['cruise_form'] = CruiseForm(instance=context['object'])
+        if 'mission_id' in self.kwargs:
+            context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
+            context['mission_form'] = CruiseForm(instance=context['object'])
         else:
-            context['cruise_form'] = CruiseForm()
+            context['mission_form'] = CruiseForm()
 
         return context
 
@@ -344,7 +344,7 @@ def remove_location(request, location_id):
 
 
 @login_required
-def update_cruise(request, **kwargs):
+def update_mission(request, **kwargs):
     if not request.user.is_authenticated:
         return redirect(reverse_lazy('login'))
 
@@ -361,21 +361,21 @@ def update_cruise(request, **kwargs):
         location_id = post_data.get('chief_scientists_select')
         post_data.setlist('chief_scientists', [location_id])
 
-    if 'cruise_id' in kwargs:
-        cruise_id = int(kwargs.get('cruise_id'))
-        cruise = models.Missions.objects.get(pk=cruise_id)
-        form = CruiseForm(post_data, instance=cruise)
+    if 'mission_id' in kwargs:
+        mission_id = int(kwargs.get('mission_id'))
+        mission = models.Missions.objects.get(pk=mission_id)
+        form = CruiseForm(post_data, instance=mission)
     else:
         form = CruiseForm(post_data)
 
     if form.is_valid():
         try:
-            cruise = form.save()
+            mission = form.save()
             response = HttpResponse()
-            response['HX-Redirect'] = reverse_lazy('core:update_cruise_view', args=[cruise.id])
+            response['HX-Redirect'] = reverse_lazy('core:update_mission_view', args=[mission.id])
             return response
         except Exception as ex:
-            logger.error("Failed to save the cruise form.")
+            logger.error("Failed to save the mission form.")
             logger.exception(ex)
             form.add_error(None, _("An unexpected error occurred while saving the form."))
             crispy = render_crispy_form(form)
@@ -387,12 +387,12 @@ def update_cruise(request, **kwargs):
 
 
 urlpatterns = [
-    path('cruise/new', CreateCruise.as_view(), name='new_cruise_view'),
-    path('cruise/<int:cruise_id>', CreateCruise.as_view(), name='update_cruise_view'),
-    path('cruise/add-cruise', update_cruise, name='add_cruise'),
-    path('cruise/update/<int:cruise_id>', update_cruise, name='update_cruise'),
-    path('cruise/add-chief-scientist', add_chief_scientist, name='add_chief_scientist'),
-    path('cruise/remove-chief-scientist/<int:scientist_id>', remove_chief_scientist, name='remove_chief_scientist'),
-    path('cruise/add-location', add_location, name='add_location'),
-    path('cruise/remove-location/<int:location_id>', remove_location, name='remove_location'),
+    path('mission/new', CreateCruise.as_view(), name='new_mission_view'),
+    path('mission/<int:mission_id>', CreateCruise.as_view(), name='update_mission_view'),
+    path('mission/add-mission', update_mission, name='add_mission'),
+    path('mission/update/<int:mission_id>', update_mission, name='update_mission'),
+    path('mission/add-chief-scientist', add_chief_scientist, name='add_chief_scientist'),
+    path('mission/remove-chief-scientist/<int:scientist_id>', remove_chief_scientist, name='remove_chief_scientist'),
+    path('mission/add-location', add_location, name='add_location'),
+    path('mission/remove-location/<int:location_id>', remove_location, name='remove_location'),
 ]
