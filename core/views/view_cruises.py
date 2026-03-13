@@ -47,13 +47,6 @@ class CruiseFilter(forms.Form):
         label=_('Cruise Name')
     )
 
-    program = forms.ModelChoiceField(
-        queryset=models.Programs.objects.all(),
-        empty_label=_("Select a program"),
-        widget=forms.Select(attrs={'class': 'form-select'}),
-        required=False
-    )
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -79,7 +72,6 @@ class CruiseFilter(forms.Form):
             Row(
                 Column(Field('name', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
                 Column(Field('descriptor', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
-                Column(Field('program', css_class="form-select form-select-sm", **select_attrs), css_class="col-2"),
             ),
         )
 
@@ -93,17 +85,12 @@ def list_cruises(request):
 
     table_soup = BeautifulSoup('', 'html.parser')
 
-    queryset = models.Cruises.objects.order_by('pk').prefetch_related('programs', 'chief_scientists', 'locations')
+    queryset = models.Missions.objects.order_by('pk').prefetch_related('chief_scientists', 'locations')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 
     if descriptor:=request.GET.get('descriptor', None):
         queryset = queryset.filter(descriptor__icontains=descriptor)
-
-    if program:=request.GET.get('program', None):
-        program_id = int(program)
-        program = models.Programs.objects.get(pk=program_id)
-        queryset = queryset.filter(programs=program)
 
     queryset = queryset[page_start:page_end]
 
@@ -212,7 +199,7 @@ def delete_cruise(request, cruise_id):
         response['HX-Redirect'] = login_url
         return response
 
-    cruise = models.Cruises.objects.get(pk=cruise_id)
+    cruise = models.Missions.objects.get(pk=cruise_id)
     cruise.delete()
 
     response = HttpResponse()

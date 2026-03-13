@@ -38,7 +38,7 @@ class DataSubmissionView(TemplateView):
         data_object = models.Dataset.objects.get(pk=self.kwargs['data_id'])
         context['data_form'] = DataSubmissionForm(data_object=data_object)
         context['dataset'] = data_object
-        context['title'] = _("Cruise") + " " + str(data_object.cruise) + " " + _("Data Submission")
+        context['title'] = _("Cruise") + " " + str(data_object.mission) + " " + _("Data Submission")
         return context
 
 
@@ -76,11 +76,11 @@ class DataSubmissionForm(forms.ModelForm):
             status = self.instance.status
 
         self.initial['instruments'] = data_object.instruments.all()
-        self.initial['cruise'] = data_object.cruise
+        self.initial['cruise'] = data_object.mission
         self.initial['data_type'] = data_object.data_type
         self.initial['status'] = status
 
-        self.fields['cruise'].widget = forms.HiddenInput()
+        self.fields['mission'].widget = forms.HiddenInput()
         self.fields['data_type'].widget = forms.HiddenInput()
         self.fields['status'].widget = forms.HiddenInput()
 
@@ -90,7 +90,7 @@ class DataSubmissionForm(forms.ModelForm):
 
 
 def get_target_directory(dataset, archive: bool = False):
-    cruise = dataset.cruise
+    cruise = dataset.mission
     cruise_year = cruise.start_date.strftime('%Y')
     decade_folder = cruise_year[:3] + '0'
     path_elements = [decade_folder, cruise_year, cruise.name]
@@ -219,14 +219,14 @@ def submit_data(request, data_id, notify):
 
                 notifiers = {request.user.email}
                 notifiers = {user.email for user in users}
-                notifiers.update(user.email for user in data.cruise.data_managers.all())
-                notifiers.update(user.email for user in data.cruise.chief_scientists.all())
+                notifiers.update(user.email for user in data.mission.data_managers.all())
+                notifiers.update(user.email for user in data.mission.chief_scientists.all())
                 # remove blanks for ppl that didn't have an email
                 if '' in notifiers:
                     notifiers.remove('')
                 send_mail(
                     _("Cruise update: Files added"),
-                    f"{data.data_type.name} " + _("Files have been submitted for cruise") + f" [{data.cruise}]",
+                    f"{data.data_type.name} " + _("Files have been submitted for cruise") + f" [{data.mission}]",
                     _("Do.Not.Reply@mar-did.dfo-mpo.gc.ca"),
                     notifiers
                 )

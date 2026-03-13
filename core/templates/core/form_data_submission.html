@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <span class="h4">{{ dataset.cruise.name }} - {% if dataset.cruise.descriptor %}{{ dataset.cruise.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {{ dataset.data_type.name }} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
+    <span class="h4">{{ dataset.mission.name }} - {% if dataset.mission.descriptor %}{{ dataset.mission.descriptor }}{% else %}{% trans "Missing Descriptor" %}{% endif %} - {{ dataset.data_type.name }} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-select-oob="true" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></span>
     {% if user.is_authenticated and data_form %}
     <form id="form_id_data" class="mt-2" enctype="multipart/form-data"
           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'

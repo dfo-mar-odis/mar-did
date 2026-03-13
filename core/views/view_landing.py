@@ -10,8 +10,8 @@ class LandingView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        datastatus = models.DataStatus.objects.get(name__iexact="Submitted")
-        context['dataset_submitted'] = models.Dataset.objects.filter(status=datastatus).count()
+        # datastatus = models.DataStatus.objects.get(name__iexact="Submitted")
+        # context['dataset_submitted'] = models.Dataset.objects.filter(status=datastatus).count()
 
         context['dataset_assigned'] = models.Processing.objects.all().count()
         return context
