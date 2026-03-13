@@ -15,7 +15,6 @@
             <th class="text-start">{% trans 'Name' %}</th>
             <th class="text-start">{% trans 'Descriptor' %}</th>
             <th class="text-start">{% trans 'Platform' %}</th>
-            <th class="text-start">{% trans 'Projects' %}</th>
             <th class="text-start">{% trans 'Start Date' %}</th>
             <th class="text-start">{% trans 'End Date' %}</th>
             <th class="text-start">{% trans 'Chief Scientists' %}</th>
@@ -29,9 +28,6 @@
             <td class="text-start">{{ cruise.name }}</td>
             <td class="text-start">{{ cruise.descriptor }}</td>
             <td class="text-start">{{ cruise.platform }}</td>
-            <td class="text-start">{% for program in cruise.programs.all %}
-                <button type="button" class="btn btn-sm btn-outline-dark" title="{{program.description}}">{{program.name}}</button>
-                {% endfor %}</td>
             <td class="text-start">{{ cruise.start_date }}</td>
             <td class="text-start">{{ cruise.end_date }}</td>
             <td class="text-start">{% for cs in cruise.chief_scientists.all %}

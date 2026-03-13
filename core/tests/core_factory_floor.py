@@ -19,7 +19,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 class CruiseFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = models.Cruises
+        model = models.Missions
         exclude = ('leg', 'year',)
 
     start_date = factory.LazyFunction(lambda: Faker().date_object())

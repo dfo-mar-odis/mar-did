@@ -24,7 +24,7 @@ class DataListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Data List'
-        context['object'] = models.Cruises.objects.get(pk=self.kwargs['pk'])
+        context['object'] = models.Missions.objects.get(pk=self.kwargs['pk'])
         context['data_form'] = ExpectedDataForm(cruise=context['object'])
         context['container'] = 'container-fluid'
         return context
@@ -35,7 +35,7 @@ class ExpectedDataForm(forms.ModelForm):
     data_type_filter = forms.CharField(label=_("Filter Data Types"), required=False)
 
     class Meta:
-        fields = ["cruise", "data_type", "status"]
+        fields = ["mission", "data_type", "status"]
         model = models.Dataset
 
     def __init__(self, *args, cruise, **kwargs):
@@ -50,10 +50,10 @@ class ExpectedDataForm(forms.ModelForm):
             self.fields['data_type'].choices = [(obj.pk, f"{obj}") for obj in models.DataTypes.objects.filter(query)]
 
         status = models.DataStatus.objects.get(name__iexact='Expected')
-        self.fields['cruise'].initial = cruise
+        self.fields['mission'].initial = cruise
         self.fields['status'].initial = status
 
-        self.fields['cruise'].widget = forms.HiddenInput()
+        self.fields['mission'].widget = forms.HiddenInput()
         self.fields['status'].widget = forms.HiddenInput()
 
         btn_submit = None
@@ -102,7 +102,7 @@ class ExpectedDataForm(forms.ModelForm):
 
 
 def list_data(request, cruise_id):
-    cruise = models.Cruises.objects.get(pk=cruise_id)
+    cruise = models.Missions.objects.get(pk=cruise_id)
     context = {
         'cruise': cruise,
         'user': request.user,
@@ -129,7 +129,7 @@ def get_data_form(request, cruise_id):
         response['HX-Redirect'] = login_url
         return response
 
-    cruise = models.Cruises.objects.get(pk=cruise_id)
+    cruise = models.Missions.objects.get(pk=cruise_id)
     form = ExpectedDataForm(cruise=cruise)
     html = render_crispy_form(form)
 
@@ -144,7 +144,7 @@ def update_cruise_data(request, cruise_id):
         response['HX-Redirect'] = login_url
         return HttpResponse(response)
 
-    cruise = models.Cruises.objects.get(pk=cruise_id)
+    cruise = models.Missions.objects.get(pk=cruise_id)
 
     form = ExpectedDataForm(request.POST, cruise=cruise)
     if form.is_valid():
