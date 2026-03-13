@@ -34,7 +34,7 @@ class DatasetStatusFilter(forms.Form):
     )
 
     status = forms.ModelChoiceField(
-        queryset=models.DataStatus.objects.all(),
+        queryset=models.DatasetStatus.objects.all(),
         empty_label=_("Select a status"),
         widget=forms.Select(attrs={'class': 'form-select'}),
         required=False
@@ -75,7 +75,7 @@ class DatasetStatusView(TemplateView):
 
         group = Group.objects.get(name__iexact="Datashop Processors")
         context['title'] = "Dataset Status"
-        submitted = models.DataStatus.objects.get(name__iexact='Submitted')
+        submitted = models.DatasetStatus.objects.get(name__iexact='Submitted')
         context['filter_form'] = DatasetStatusFilter(initial={'status': submitted})
 
         # context['datasets'] = models.Dataset.objects.all().order_by('-cruise__start_date')
@@ -98,7 +98,7 @@ def list_datasets(request):
         datasets = datasets.filter(cruise__descriptor__icontains=ident)
 
     if status_id:=request.GET.get('status', None):
-        status = models.DataStatus(pk=status_id)
+        status = models.DatasetStatus(pk=status_id)
         datasets = datasets.filter(status=status)
 
     limit = 25
@@ -144,7 +144,7 @@ def assign_datasets(request, dataset_id):
     user_id = request.POST.get('assigned_to', None)
     if user_id:
         assign_to = User.objects.get(pk=user_id)
-        dataset.status = models.DataStatus.objects.get(name__iexact="Received")
+        dataset.status = models.DatasetStatus.objects.get(name__iexact="Received")
         dataset.save()
 
         if not dataset.processing.exists():
@@ -154,7 +154,7 @@ def assign_datasets(request, dataset_id):
             processing.assigned_to = assign_to
             processing.save()
     else:
-        dataset.status = models.DataStatus.objects.get(name__iexact="Unknown")
+        dataset.status = models.DatasetStatus.objects.get(name__iexact="Unknown")
         dataset.save()
 
         dataset.processing.delete()

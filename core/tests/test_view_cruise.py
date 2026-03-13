@@ -1,5 +1,5 @@
 from django.test import tag, TestCase, RequestFactory
-from core.views import view_cruises
+from core.views import view_missions
 
 class TestCruiseView(TestCase):
 
@@ -7,7 +7,7 @@ class TestCruiseView(TestCase):
         factory = RequestFactory()
 
     def test_init(self):
-        view = view_cruises.CruiseListView.as_view()
+        view = view_cruises.MissionListView.as_view()
 
         self.assertIsNotNone(view)
 

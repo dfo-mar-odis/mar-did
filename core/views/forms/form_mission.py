@@ -27,8 +27,8 @@ logger = logging.getLogger('mardid')
 
 
 
-class CreateCruise(LoginRequiredMixin, TemplateView):
-    template_name = 'core/form_cruise.html'
+class CreateMission(LoginRequiredMixin, TemplateView):
+    template_name = 'core/form_mission.html'
     login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
@@ -39,18 +39,18 @@ class CreateCruise(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['title'] = _('Create Cruise')
-        if 'cruise_id' in self.kwargs:
-            context['object'] = models.Missions.objects.get(pk=self.kwargs['cruise_id'])
-            context['cruise_form'] = CruiseForm(instance=context['object'])
-            context['data_form'] = ExpectedDataForm(cruise=context['object'])
+        context['title'] = _('Create Mission')
+        if 'mission_id' in self.kwargs:
+            context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
+            context['mission_form'] = MissionForm(instance=context['object'])
+            context['data_form'] = ExpectedDataForm(mission=context['object'])
         else:
-            context['cruise_form'] = CruiseForm()
+            context['mission_form'] = MissionForm()
 
         return context
 
 
-class CruiseForm(forms.ModelForm):
+class MissionForm(forms.ModelForm):
     chief_scientists_select = forms.ModelChoiceField(
         queryset=User.objects.none(),
         label=_("Select Chief Scientist"),
@@ -254,18 +254,18 @@ class CruiseForm(forms.ModelForm):
 
 
     def __init__(self, *args, **kwargs):
-        super(CruiseForm, self).__init__(*args, **kwargs)
+        super(MissionForm, self).__init__(*args, **kwargs)
 
         scientists_container = self.init_contact_list('chief_scientists', 'chief scientists')
         data_manager_container = self.init_contact_list('data_managers', 'data managers')
         locations_container = self.init_lookup('locations', models.GeographicRegions)
 
-        submit_url = (reverse_lazy('core:update_cruise', args=[self.instance.pk])
+        submit_url = (reverse_lazy('core:update_mission', args=[self.instance.pk])
                       if self.instance.pk else
-                      reverse_lazy('core:add_cruise'))
+                      reverse_lazy('core:add_mission'))
         btn_submit_attrs = {
             'title': _("Submit"),
-            'hx-target': "#form_id_cruise",
+            'hx-target': "#form_id_mission",
             'hx-post': submit_url
         }
 
@@ -305,7 +305,7 @@ class CruiseForm(forms.ModelForm):
 
 
 @login_required
-def update_cruise(request, **kwargs):
+def update_mission(request, **kwargs):
     if not request.user.is_authenticated:
         return redirect(reverse_lazy('login'))
 
@@ -321,21 +321,21 @@ def update_cruise(request, **kwargs):
             select_id = post_data.get(f'{select}_select')
             post_data.setlist(select, [select_id])
 
-    if 'cruise_id' in kwargs:
-        cruise_id = int(kwargs.get('cruise_id'))
-        cruise = models.Missions.objects.get(pk=cruise_id)
-        form = CruiseForm(post_data, instance=cruise)
+    if 'mission_id' in kwargs:
+        mission_id = int(kwargs.get('mission_id'))
+        mission = models.Missions.objects.get(pk=mission_id)
+        form = MissionForm(post_data, instance=mission)
     else:
-        form = CruiseForm(post_data)
+        form = MissionForm(post_data)
 
     if form.is_valid():
         try:
-            cruise = form.save()
+            mission = form.save()
             response = HttpResponse()
-            response['HX-Redirect'] = reverse_lazy('core:update_cruise_view', args=[cruise.id])
+            response['HX-Redirect'] = reverse_lazy('core:update_mission_view', args=[mission.id])
             return response
         except Exception as ex:
-            logger.error("Failed to save the cruise form.")
+            logger.error("Failed to save the mission form.")
             logger.exception(ex)
             form.add_error(None, _("An unexpected error occurred while saving the form."))
             crispy = render_crispy_form(form)
@@ -371,7 +371,7 @@ def get_lookup_bullet(id, lookup_model, prefix, post_remove_url_alias):
 
 
 def get_updated_list(contact_ids: [int], prefix):
-    form = CruiseForm(initial={prefix: contact_ids})
+    form = MissionForm(initial={prefix: contact_ids})
     crispy = render_crispy_form(form)
     form_soup = BeautifulSoup(crispy, 'html.parser')
     form_select = form_soup.find(id=f"id_{prefix}")
@@ -421,11 +421,11 @@ def remove_from_list(request, contact_id, prefix):
 
 
 urlpatterns = [
-    path('cruise/new', CreateCruise.as_view(), name='new_cruise_view'),
-    path('cruise/<int:cruise_id>', CreateCruise.as_view(), name='update_cruise_view'),
-    path('cruise/add-cruise', update_cruise, name='add_cruise'),
-    path('cruise/update/<int:cruise_id>', update_cruise, name='update_cruise'),
+    path('mission/new', CreateMission.as_view(), name='new_mission_view'),
+    path('mission/<int:mission_id>', CreateMission.as_view(), name='update_mission_view'),
+    path('mission/add-mission', update_mission, name='add_mission'),
+    path('mission/update/<int:mission_id>', update_mission, name='update_mission'),
 
-    path('cruise/add/<str:prefix>', add_to_list, name='add_to_list'),
-    path('cruise/remove/<str:prefix>/<int:contact_id>', remove_from_list, name='remove_from_list'),
+    path('mission/add/<str:prefix>', add_to_list, name='add_to_list'),
+    path('mission/remove/<str:prefix>/<int:contact_id>', remove_from_list, name='remove_from_list'),
 ]
