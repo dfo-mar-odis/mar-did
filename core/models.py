@@ -4,12 +4,12 @@ from django.utils.translation import gettext as _
 
 
 # MEDS uses a list of country codes that I think are from ICES
-# https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/countries.json
+# https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/test_countries.json
 class Countries(models.Model):
     id = models.AutoField(primary_key=True, db_column='country_seq')
     name = models.CharField(verbose_name=_("Name"), max_length=45, db_column='name')
-    short_name = models.CharField(verbose_name=_("Short Name"), max_length=2, db_column='short_name', help_text=_("2-character country code"))
-    code = models.IntegerField(verbose_name=_("Code"), blank=True, null=True, help_text=_("2-digit country code"))
+    short_name = models.CharField(verbose_name=_("Short Name"), max_length=2, help_text=_("2-character country code"), db_column='short_name')
+    code = models.IntegerField(verbose_name=_("Code"), blank=True, null=True, help_text=_("2-digit country code"), db_column='code')
 
     class Meta:
         db_table = 'lu_countries'
@@ -108,14 +108,19 @@ class Participants(models.Model):
         return f"{self.last_name}, {self.first_name}"
 
 
+def get_default_platform_country():
+    country, created = Countries.objects.get_or_create(name='UNKNOWN', short_name='00')
+    return country.pk
+
+
 class Platforms(models.Model):
     id = models.AutoField(primary_key=True, db_column='platform_seq')
 
     # The description of the platform, for example the name of the vessel, or another
     # meaningful collection method (ie glider) of the data.
     name = models.CharField(verbose_name=_("Name"), max_length=100, db_column='name', help_text=_("Platform name or description"), default='Unknown')
-    country = models.ForeignKey(Countries, verbose_name=_("Country"), db_column='country_seq', related_name="platforms", on_delete=models.PROTECT)
-    call_sign = models.CharField(verbose_name=_("Call Sign"), max_length=10, db_column='call_sign', help_text=_("Platform call sign, if applicable"), default="Unknown")
+    country = models.ForeignKey(Countries, verbose_name=_("Country"), db_column='country_seq', default=get_default_platform_country, related_name="platforms", on_delete=models.PROTECT)
+    call_sign = models.CharField(verbose_name=_("Call Sign"), max_length=10, db_column='call_sign', help_text=_("Platform call sign, if applicable"), default="------")
     max_speed = models.FloatField(verbose_name=_("Max Speed"), db_column='maximum_speed', help_text=_("Maximum speed of the platform in knots"), default=-999)
     ices_code = models.CharField(verbose_name=_("ICES Code"), db_column='ices_code', max_length=4, blank=True, null=True, help_text=_("ICES code"))
     ship_code = models.CharField(verbose_name=_("Ship Code"), db_column='ship_code', max_length=6, blank=True, null=True, help_text=_("OSCruise code"))
