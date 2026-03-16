@@ -1,0 +1,2294 @@
+[
+{
+    "model": "core.platforms",
+    "pk": 1,
+    "fields": {
+        "name": "ALERT (UK)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74AL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 2,
+    "fields": {
+        "name": "ANTON DOHRN (GER)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "06AD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 3,
+    "fields": {
+        "name": "ANTON DOHRN (GER) ",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "06DA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 4,
+    "fields": {
+        "name": "DANA (A choice)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "26DA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 5,
+    "fields": {
+        "name": "DANA (1 choice)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "26D1"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 6,
+    "fields": {
+        "name": "DANA (2 choice)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "26D2"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 7,
+    "fields": {
+        "name": "DANA (3 choice)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "26D3"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 8,
+    "fields": {
+        "name": "DANA (4 choice)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "26D4"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 9,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 2)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74DI"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 10,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 1) - current 2023",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74EQ"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 11,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 4)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74E3"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 12,
+    "fields": {
+        "name": "ENDEAVOR (US) (Choice 2)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "33EN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 13,
+    "fields": {
+        "name": "EXPLORER (UK)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74EX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 14,
+    "fields": {
+        "name": "EXPLORER (BAHAMAS)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "BHAB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 15,
+    "fields": {
+        "name": "FREDERICK G CREED (Call Sign: CB6099) OBSOLETE",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18FC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 16,
+    "fields": {
+        "name": "ICE ISLAND (US) (Choice 2)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "314K"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 17,
+    "fields": {
+        "name": "LANCE (NORWAY)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "58LA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 18,
+    "fields": {
+        "name": "LANCE (JAPAN)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "49L2"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 19,
+    "fields": {
+        "name": "POLAR CIRCLE (NORWAY)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "58PC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 20,
+    "fields": {
+        "name": "WESTPORT (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "32Y9"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 21,
+    "fields": {
+        "name": "A H CHEVARIE (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "AHC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 22,
+    "fields": {
+        "name": "A T CAMERON",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "ATC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 23,
+    "fields": {
+        "name": "ACADIA",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "ACD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 24,
+    "fields": {
+        "name": "ALFRED NEEDLER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "NED"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 25,
+    "fields": {
+        "name": "ANN HARVEY (18AV OR 18AH)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "AHV"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 26,
+    "fields": {
+        "name": "AQUARIEL (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "AQU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 27,
+    "fields": {
+        "name": "ARCADIE (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "ARC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 28,
+    "fields": {
+        "name": "BAFFIN CSS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "BAF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 29,
+    "fields": {
+        "name": "BICKERTON (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "BIK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 30,
+    "fields": {
+        "name": "BIO CRUISE DATA (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "BCD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 31,
+    "fields": {
+        "name": "CAPE LIGHT (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "CLT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 32,
+    "fields": {
+        "name": "CLARKS HARBOUR (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "CHB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 33,
+    "fields": {
+        "name": "COURTNEY BAY (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "CBY"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 34,
+    "fields": {
+        "name": "CUMELLA (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "CUM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 35,
+    "fields": {
+        "name": "CYGNUS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "CYG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 36,
+    "fields": {
+        "name": "DAWSON",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "DAW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 37,
+    "fields": {
+        "name": "DES GROSEILLIERS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "DGR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 38,
+    "fields": {
+        "name": "DOMINION VICTORY (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "VIC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 39,
+    "fields": {
+        "name": "E E PRINCE",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "PRN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 40,
+    "fields": {
+        "name": "EARL GREY",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "EGR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 41,
+    "fields": {
+        "name": "ECOSYSTEM PROGRAM (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "IEP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 42,
+    "fields": {
+        "name": "EDWARD CORNWALLIS (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "ECW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 43,
+    "fields": {
+        "name": "ERD PACKCAT (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "EPK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 44,
+    "fields": {
+        "name": "FRANK M WESTON",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "WES"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 45,
+    "fields": {
+        "name": "FUNDY SPRAY",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "FSP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 46,
+    "fields": {
+        "name": "GEOLOGICAL SURVEY OF CANADA (ATLANTIC) (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "GSC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 47,
+    "fields": {
+        "name": "HARENGUS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HAR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 48,
+    "fields": {
+        "name": "HENRY LARSEN",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 49,
+    "fields": {
+        "name": "HOWE POINT (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HPT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 50,
+    "fields": {
+        "name": "HUDSON",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HUD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 51,
+    "fields": {
+        "name": "IBMF BARGE (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "IBM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 52,
+    "fields": {
+        "name": "ISLES DE BARQUES (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "IDB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 53,
+    "fields": {
+        "name": "J J COWIE (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "JJC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 54,
+    "fields": {
+        "name": "J L HART",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HRT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 55,
+    "fields": {
+        "name": "LADY HAMMOND",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HAM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 56,
+    "fields": {
+        "name": "LOUIS S ST LAURENT",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "LSL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 57,
+    "fields": {
+        "name": "MARINE FISH DIVISION (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "MFD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 58,
+    "fields": {
+        "name": "MARTHA L BLACK",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "MLB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 59,
+    "fields": {
+        "name": "MATTHEW",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "MAT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 60,
+    "fields": {
+        "name": "NAVICULA",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "NAV"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 61,
+    "fields": {
+        "name": "NORTH BAR (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "NBR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 62,
+    "fields": {
+        "name": "OCEAN SCIENCES DIVISION (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "OSD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 63,
+    "fields": {
+        "name": "OPILIO",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "OPL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 64,
+    "fields": {
+        "name": "PANDALUS 3 (PANDALUS)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "PAN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 65,
+    "fields": {
+        "name": "PARIZEAU CCGS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "PAR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 66,
+    "fields": {
+        "name": "PARTRIDGE ISLAND (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "PIS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 67,
+    "fields": {
+        "name": "PROVO WALLIS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "PRW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 68,
+    "fields": {
+        "name": "SACKVILLE",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SCK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 69,
+    "fields": {
+        "name": "SAMBRO",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SAM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 70,
+    "fields": {
+        "name": "SHIPPEGAN (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SHP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 71,
+    "fields": {
+        "name": "SIR WILLIAM ALEXANDER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SWA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 72,
+    "fields": {
+        "name": "SOURIS (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SOU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 73,
+    "fields": {
+        "name": "SPINDRIFT (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SPN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 74,
+    "fields": {
+        "name": "SPRAY CCGS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SPR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 75,
+    "fields": {
+        "name": "TERRY FOX (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "TFX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 76,
+    "fields": {
+        "name": "VIGILANCE (UK)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "VIG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 77,
+    "fields": {
+        "name": "WESTPORT (CANADA) (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "WEST"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 78,
+    "fields": {
+        "name": "WILFRED TEMPLEMAN",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "TEM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 79,
+    "fields": {
+        "name": "SIMON FRASER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SIMF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 80,
+    "fields": {
+        "name": "UNKNOWN",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "UNK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 81,
+    "fields": {
+        "name": "KAPUSKASING",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18KP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 82,
+    "fields": {
+        "name": "A C D HOWE (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HOWE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 83,
+    "fields": {
+        "name": "AKADEMIK KNIPOVICH",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "90KN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 84,
+    "fields": {
+        "name": "AEGIR",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "46AE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 85,
+    "fields": {
+        "name": "AKPATOK",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18AA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 86,
+    "fields": {
+        "name": "ALERT (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "319L"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 87,
+    "fields": {
+        "name": "AMBROSE FOOTE",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18FO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 88,
+    "fields": {
+        "name": "ANDERSON",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18ND"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 89,
+    "fields": {
+        "name": "ANTON DOHRN (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "31AD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 90,
+    "fields": {
+        "name": "ARGUS (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "90A3"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 91,
+    "fields": {
+        "name": "BAYFIELD",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18BY"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 92,
+    "fields": {
+        "name": "BEDEQUE",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18BQ"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 93,
+    "fields": {
+        "name": "BLUE THROAT",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18BT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 94,
+    "fields": {
+        "name": "ANN BRENDA (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "BREN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 95,
+    "fields": {
+        "name": "BONNIE BRAE (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "BRAE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 96,
+    "fields": {
+        "name": "BRANDAL",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18BR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 97,
+    "fields": {
+        "name": "RED HEAD C.S.L.",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18RH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 98,
+    "fields": {
+        "name": "CANSO CONDOR",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18CC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 99,
+    "fields": {
+        "name": "CANSO LIGHT",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18CX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 100,
+    "fields": {
+        "name": "PRINCESS CGS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18PS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 101,
+    "fields": {
+        "name": "ALUMINUM BOAT (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "ALUM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 102,
+    "fields": {
+        "name": "BOSTON WHALER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18BW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 103,
+    "fields": {
+        "name": "MARY HICHINS CCG (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HICH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 104,
+    "fields": {
+        "name": "SCAMP CDL (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SCAM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 105,
+    "fields": {
+        "name": "VARIOUS CHARTERED VESSELS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "1888"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 106,
+    "fields": {
+        "name": "CHEBUCTO",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18CH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 107,
+    "fields": {
+        "name": "FREDERICK G CREED (Call Sign: CG3198) ",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18FH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 108,
+    "fields": {
+        "name": "EIDER MS (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "33ED"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 109,
+    "fields": {
+        "name": "EKLIPTIKA (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "90EL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 110,
+    "fields": {
+        "name": "ENDEAVOR RV (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "32EV"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 111,
+    "fields": {
+        "name": "ERNEST HOLT (UK)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74EH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 112,
+    "fields": {
+        "name": "EXPLORER (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "31EX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 113,
+    "fields": {
+        "name": "FAIRMORSE",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18FA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 114,
+    "fields": {
+        "name": "SMITH FCG",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18SF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 115,
+    "fields": {
+        "name": "FISHING BOAT (CANADA) (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "FISH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 116,
+    "fields": {
+        "name": "FORT FRANCIS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18FF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 117,
+    "fields": {
+        "name": "FOTON (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "906F"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 118,
+    "fields": {
+        "name": "GECO TRITON (PANAMA)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "PAGT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 119,
+    "fields": {
+        "name": "GEOLOG FERSMAN (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "19GG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 120,
+    "fields": {
+        "name": "GEORGE R PEARKES",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18GP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 121,
+    "fields": {
+        "name": "GALWAY BLAZER CHARTER (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "GALW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 122,
+    "fields": {
+        "name": "GOSARS (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "GOSA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 123,
+    "fields": {
+        "name": "GULF STAR (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "GULF"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 124,
+    "fields": {
+        "name": "HELICOPTER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18HE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 125,
+    "fields": {
+        "name": "IBIS (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "IBIS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 126,
+    "fields": {
+        "name": "ICE ISLAND (US) (Choice 1)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "313T"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 127,
+    "fields": {
+        "name": "HUDSON BARGE (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HUDB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 128,
+    "fields": {
+        "name": "JOHN A MACDONALD",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18MC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 129,
+    "fields": {
+        "name": "LABRADOR",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18LA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 130,
+    "fields": {
+        "name": "LACUNA",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18LC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 131,
+    "fields": {
+        "name": "LADY MOOD",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18LM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 132,
+    "fields": {
+        "name": "LANCE (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "909N"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 133,
+    "fields": {
+        "name": "MALLOTUS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18MA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 134,
+    "fields": {
+        "name": "MARGARET AND ROBERT",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18PG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 135,
+    "fields": {
+        "name": "MAXWELL",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18MX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 136,
+    "fields": {
+        "name": "CALANUS II",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18CN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 137,
+    "fields": {
+        "name": "PETREL V",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18PT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 138,
+    "fields": {
+        "name": "NARWHAL",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18NR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 139,
+    "fields": {
+        "name": "OCEANUS (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "32OC"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 140,
+    "fields": {
+        "name": "ODEN (SWEDEN)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "77DN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 141,
+    "fields": {
+        "name": "POLAR CIRCLE (UK)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74P6"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 142,
+    "fields": {
+        "name": "POLARSTERN (GER)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "06AQ"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 143,
+    "fields": {
+        "name": "PRINCE 1916-1923",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18PN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 144,
+    "fields": {
+        "name": "QUADRA",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18QA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 145,
+    "fields": {
+        "name": "QUEST",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18QU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 146,
+    "fields": {
+        "name": "CHARLES DARWIN (UK)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74AB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 147,
+    "fields": {
+        "name": "KNORR (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "316N"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 148,
+    "fields": {
+        "name": "DISCOVERY (UK) (Choice 1)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "74DS"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 149,
+    "fields": {
+        "name": "SIGMA-T 2008",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18SG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 150,
+    "fields": {
+        "name": "TUDLIK CSL",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18TU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 151,
+    "fields": {
+        "name": "SONNE (GER)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "06BE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 152,
+    "fields": {
+        "name": "TELEOST",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "TEL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 153,
+    "fields": {
+        "name": "THALASSA (FRANCE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "35HT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 154,
+    "fields": {
+        "name": "THERON",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18TE"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 155,
+    "fields": {
+        "name": "THETA",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18TH"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 156,
+    "fields": {
+        "name": "TOPSEDA (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "90TP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 157,
+    "fields": {
+        "name": "TYDEMAN (NETHERLANDS)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "64TM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 158,
+    "fields": {
+        "name": "TYRO (NETHERLANDS)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "64TO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 159,
+    "fields": {
+        "name": "VIANDRA (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "905C"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 160,
+    "fields": {
+        "name": "VILMA",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18VL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 161,
+    "fields": {
+        "name": "VYKHMA (USSR)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "906G"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 162,
+    "fields": {
+        "name": "WHIP THE WIND",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18WW"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 163,
+    "fields": {
+        "name": "ZODIAC LAUNCH (NO ICES CODE)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "ZODI"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 164,
+    "fields": {
+        "name": "VIOLA M DAVIDSON CCGS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18AU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 165,
+    "fields": {
+        "name": "VLADYKOV",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18VD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 166,
+    "fields": {
+        "name": "SANNA R/V",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SAN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 167,
+    "fields": {
+        "name": "M PERLEY",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18MU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 168,
+    "fields": {
+        "name": "PANDORA II (PANDORA)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18P2"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 169,
+    "fields": {
+        "name": "BELUGA II",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18BP"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 170,
+    "fields": {
+        "name": "PIERRE RADISSON CCGS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "PRD"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 171,
+    "fields": {
+        "name": "VARIOUS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18VA"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 172,
+    "fields": {
+        "name": "CAP BRETON",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18BO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 173,
+    "fields": {
+        "name": "CAP ROGER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18CG"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 174,
+    "fields": {
+        "name": "AMUNDSEN",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18DL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 175,
+    "fields": {
+        "name": "SIR WILFRED GRENFELL",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18GN"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 176,
+    "fields": {
+        "name": "FIXED STATIONS CANADA",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18FX"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 177,
+    "fields": {
+        "name": "J P TULLY",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "TULL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 178,
+    "fields": {
+        "name": "LEIM",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18LO"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 179,
+    "fields": {
+        "name": "SHAMOOK",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18OK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 180,
+    "fields": {
+        "name": "SIR WILFRED LAURIER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18LU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 181,
+    "fields": {
+        "name": "TANU",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "TANU"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 182,
+    "fields": {
+        "name": "VECTOR",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18VT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 183,
+    "fields": {
+        "name": "W E RICKER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18RK"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 184,
+    "fields": {
+        "name": "SIGMA T PRE2008",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SIGM"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 185,
+    "fields": {
+        "name": "HENRY BIGELOW",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "HB"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 186,
+    "fields": {
+        "name": "RV ENDEAVOR (US)",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": null
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 187,
+    "fields": {
+        "name": "CARTIER",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "18CR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 188,
+    "fields": {
+        "name": "ATLANTIS",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "32AT"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 189,
+    "fields": {
+        "name": "SERVICE LEADER M/V",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "SL"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 190,
+    "fields": {
+        "name": "CORIOLIS II RV",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "COR"
+    }
+},
+{
+    "model": "core.platforms",
+    "pk": 191,
+    "fields": {
+        "name": "VIKING BUOY",
+        "country": 1,
+        "call_sign": "Unknown",
+        "max_speed": -999.0,
+        "ices_code": null,
+        "ship_code": "VIKB"
+    }
+}
+]

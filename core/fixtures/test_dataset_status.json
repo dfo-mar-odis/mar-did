@@ -1,0 +1,74 @@
+[
+{
+    "model": "core.datasetstatus",
+    "pk": 1,
+    "fields": {
+        "name": "UNKNOWN",
+        "description": "The status of the data is unknown."
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 2,
+    "fields": {
+        "name": "EXPECTED",
+        "description": "The data is expected but not yet received."
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 3,
+    "fields": {
+        "name": "SUBMITTED",
+        "description": "Some data has been submitted. Follow up with the data provider and if all the data has been provided, mark it as received"
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 4,
+    "fields": {
+        "name": "RECEIVED",
+        "description": "The data has been received and is ready to be processed."
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 5,
+    "fields": {
+        "name": "PROCESSING",
+        "description": "The data is currently being processed."
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 6,
+    "fields": {
+        "name": "PROCESSED",
+        "description": "The data has been processed, and is ready for biochem loading"
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 7,
+    "fields": {
+        "name": "LOADING",
+        "description": "The data has been processed, and is ready for biochem validation and loading"
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 8,
+    "fields": {
+        "name": "LOADED",
+        "description": "The data has been loaded to Biochem."
+    }
+},
+{
+    "model": "core.datasetstatus",
+    "pk": 9,
+    "fields": {
+        "name": "LAB",
+        "description": "Samples are being processed in the lab."
+    }
+}
+]
