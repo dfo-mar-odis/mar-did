@@ -69,18 +69,6 @@ class FileTypes(models.Model):
         ordering = ['extension']
 
 
-class GeographicRegions(models.Model):
-    name = models.CharField(verbose_name=_('Name'), max_length=50, unique=True, db_column='name')
-    description = models.CharField(verbose_name=_('Description'), max_length=255, blank=True, null=True, db_column='description')
-
-    def __str__(self):
-        return f'{self.name}'
-
-    class Meta:
-        db_table='lu_geographic_regions'
-        ordering = ['name']
-
-
 class Organizations(models.Model):
     name = models.CharField(verbose_name=_("Name"), db_column='name', max_length=50, unique=True)
     acronym = models.CharField(verbose_name=_("Acronym"), db_column='acronym', blank=True, null=True, max_length=25)
@@ -208,6 +196,8 @@ class Legs(models.Model):
     end_date = models.DateField(verbose_name=_("End Date"), db_column='end_date')
     description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True, db_column='description')
 
+    regions = models.ManyToManyField('GeographicRegions', verbose_name=_("Geographic Regions"), through='MissionRegions')
+
     class Meta:
         db_table = 'legs'
         ordering = ['number']
@@ -226,10 +216,22 @@ class MissionParticipants(models.Model):
         ordering = ['leg', 'position']
 
 
+class GeographicRegions(models.Model):
+    name = models.CharField(verbose_name=_('Name'), max_length=50, unique=True, db_column='name')
+    description = models.CharField(verbose_name=_('Description'), max_length=255, blank=True, null=True, db_column='description')
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        db_table='lu_geographic_regions'
+        ordering = ['name']
+
+
 class MissionRegions(models.Model):
     id = models.AutoField(primary_key=True, db_column='mission_region_seq')
 
-    leg = models.ForeignKey(Legs, verbose_name=_("Leg"), on_delete=models.CASCADE, related_name='regions', db_column='leg_seq')
+    leg = models.ForeignKey(Legs, verbose_name=_("Leg"), on_delete=models.CASCADE, db_column='leg_seq')
     region = models.ForeignKey(GeographicRegions, verbose_name=_("Region"), on_delete=models.PROTECT,
                                     related_name='missions', db_column='geographic_region_seq')
 

@@ -2,12 +2,22 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_cruise">
-        {% crispy cruise_form %}
+    <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission">
+        {% crispy mission_form %}
     </form>
 
     {% if object %}
-        {% include 'core/partials/table_data_list.html' with cruise=object%}
+        {# We need to include the leg form here if the object is a mission #}
+        <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_leg">
+            {% crispy mission_leg_form %}
+        </form>
+        {# and print the table for existing legs object.legs.all #}
+        {% include 'core/partials/table_mission_legs.html' with mission=object%}
+
+        {# Todo: include a form here to add Data Types to the mission #}
+{#        {% crispy mission_datatype_form %}#}
+        {# Todo: include a list of datatypes provided for this misison #}
+{#        {% include 'core/partials/table_data_list.html' with cruise=object%}#}
     {% endif %}
 {% endblock %}
 

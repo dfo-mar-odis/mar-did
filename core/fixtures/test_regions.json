@@ -1,0 +1,66 @@
+[
+{
+    "model": "core.geographicregions",
+    "pk": 1,
+    "fields": {
+        "name": "ARCTIC",
+        "description": "Covers Canada’s Arctic Ocean Arctic Archipelago and northern coastal waters"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 2,
+    "fields": {
+        "name": "GULF",
+        "description": "Covers the Gulf of St. Lawrence including surrounding coastal and offshore waters"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 3,
+    "fields": {
+        "name": "MARITIMES",
+        "description": "Covers the Scotian Shelf Bay of Fundy and offshore Atlantic waters east of Nova Scotia"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 4,
+    "fields": {
+        "name": "NATIONAL",
+        "description": "Covers all Canadian regions for national coordination and pan‑Canadian activities"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 5,
+    "fields": {
+        "name": "NEWFOUNDLAND & LABRADOR",
+        "description": "Covers Newfoundland and Labrador coastal and offshore Atlantic waters"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 6,
+    "fields": {
+        "name": "ONTARIO AND PRAIRIE",
+        "description": "Covers the Great Lakes and inland freshwater systems of central Canada"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 7,
+    "fields": {
+        "name": "PACIFIC",
+        "description": "Covers British Columbia coastal and offshore waters in the Pacific Ocean"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 8,
+    "fields": {
+        "name": "QUEBEC",
+        "description": "Covers Quebec’s marine waters including the St. Lawrence River and estuary"
+    }
+}
+]

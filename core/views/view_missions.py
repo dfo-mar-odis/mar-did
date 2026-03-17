@@ -85,7 +85,7 @@ def list_missions(request):
 
     table_soup = BeautifulSoup('', 'html.parser')
 
-    queryset = models.Missions.objects.order_by('pk').prefetch_related('chief_scientists', 'locations')
+    queryset = models.Missions.objects.order_by('pk')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 
