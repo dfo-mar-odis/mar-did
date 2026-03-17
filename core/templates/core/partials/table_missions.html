@@ -17,8 +17,6 @@
             <th class="text-start">{% trans 'Platform' %}</th>
             <th class="text-start">{% trans 'Start Date' %}</th>
             <th class="text-start">{% trans 'End Date' %}</th>
-            <th class="text-start">{% trans 'Chief Scientists' %}</th>
-            <th class="text-start">{% trans 'Geographic Regions' %}</th>
         </tr>
     </thead>
     <tbody>
@@ -30,12 +28,6 @@
             <td class="text-start">{{ mission.platform }}</td>
             <td class="text-start">{{ mission.start_date }}</td>
             <td class="text-start">{{ mission.end_date }}</td>
-            <td class="text-start">{% for cs in mission.chief_scientists.all %}
-                <button type="button" class="btn btn-sm btn-outline-dark">{{cs.last_name}}, {{cs.first_name}}</button>
-                {% endfor %}</td>
-            <td class="text-start">{% for location in mission.locations.all %}
-                <button type="button" class="btn btn-sm btn-outline-dark">{{ location.name }}</button>
-                {% endfor %}</td>
         </tr>
         {% endfor %}
     </tbody>
