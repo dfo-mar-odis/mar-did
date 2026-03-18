@@ -70,6 +70,8 @@ class CreateMission(LoginRequiredMixin, TemplateView):
 
 
 class MissionLegForm(forms.ModelForm):
+    chief_scientist = forms.Select(attrs={'class': 'form-select form-select-sm'})
+
     regions_select = forms.ModelChoiceField(
         queryset=models.GeographicRegions.objects.none(),
         label=_("Select Geographic Locations"),

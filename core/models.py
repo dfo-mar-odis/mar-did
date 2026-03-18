@@ -201,6 +201,7 @@ class Legs(models.Model):
     class Meta:
         db_table = 'legs'
         ordering = ['number']
+        unique_together = ('mission', 'number')
 
 
 class MissionParticipants(models.Model):

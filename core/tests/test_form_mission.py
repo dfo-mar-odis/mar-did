@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from crispy_forms.utils import render_crispy_form
+from django.test import tag
 
 from core.tests.core_factory_floor import MardidTestCase, MissionFactory, MissionLegFactory
 from core.views.forms import form_mission
@@ -35,10 +36,12 @@ class TestFormMissionLegs(MardidTestCase):
         self.assertTrue(leg_elm is not None)
         self.assertEqual(leg_elm.attrs['value'], str(expected_leg))
 
+    @tag('test_mission_legs_form_with_existing_legs')
     def test_mission_legs_form_with_existing_legs(self):
         # provided a mission that has existing legs, we should get a mission form with the leg's initial value
         # set to the number of existing legs + 1
         batch = 3
+        MissionLegFactory.reset_sequence(0)
         MissionLegFactory.create_batch(batch, mission=self.mission)
 
         form = form_mission.MissionLegForm(self.mission)

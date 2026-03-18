@@ -4,9 +4,10 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 from django import forms
+from django.contrib.auth.decorators import login_required
 from django.urls import path, reverse_lazy
 from django.utils.translation import gettext as _
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic.base import TemplateView
 from django.template.loader import render_to_string
 
@@ -15,6 +16,7 @@ from crispy_forms.layout import Layout, Row, Column, Field
 
 from urllib.parse import urlencode, parse_qs
 
+from core.utils import redirect_if_not_superuser
 from core.views.forms import form_mission
 from core import models
 
@@ -143,7 +145,7 @@ def list_missions(request):
             update_btn.attrs['title'] = _('Update mission')
             span.attrs['class'] = "bi bi-pencil-square"
 
-            if request.user.groups.filter(name__iexact="MarDID Maintainers").exists():
+            if request.user.is_superuser:
                 row_id = f"tr_id_mission_{id}"
                 tr.attrs['id'] = row_id
                 first_th.append(del_btn := table_soup.new_tag('a'))
@@ -183,20 +185,9 @@ def list_missions(request):
     return HttpResponse(table_soup)
 
 
-def authenticated(request):
-    # Check if user belongs to MarDID Maintainers or Chief Scientists groups
-    if request.user.groups.filter(name__in=['MarDID Maintainers']).exists():
-        return True
-
-    return False
-
-
 def delete_mission(request, mission_id):
-    if not authenticated(request):
-        next_page = reverse_lazy('core:data_view', args=[mission_id])
-        login_url = f"{reverse_lazy('login')}?next={next_page}"
-        response = HttpResponse()
-        response['HX-Redirect'] = login_url
+    next_page = reverse_lazy('core:mission_view')
+    if response:=redirect_if_not_superuser(request, next_page):
         return response
 
     mission = models.Missions.objects.get(pk=mission_id)

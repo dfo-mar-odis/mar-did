@@ -26,8 +26,8 @@
             <td class="text-start">{{ mission.name }}</td>
             <td class="text-start">{{ mission.descriptor }}</td>
             <td class="text-start">{{ mission.platform }}</td>
-            <td class="text-start">{{ mission.start_date }}</td>
-            <td class="text-start">{{ mission.end_date }}</td>
+            <td class="text-start">{{ mission.legs.first.start_date }}</td>
+            <td class="text-start">{{ mission.legs.last.end_date }}</td>
         </tr>
         {% endfor %}
     </tbody>
