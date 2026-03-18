@@ -22,18 +22,16 @@
         {% for leg in mission.legs.all %}
         <tr id="tr_id_mission_leg_{{ leg.pk }}">
             <th class="text-start" width="5%" style="white-space: nowrap;">
-                <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                <button hx-get="{% url 'core:mission_leg_form' mission.pk leg.pk %}"
+                <button type="button" hx-get="{% url 'core:mission_leg_form' mission.pk leg.pk %}"
                         hx-target="#form_id_mission_leg" hx-swap="innerHTML"
                         class="btn btn-sm btn-outline-secondary" title="{% trans 'Edit this leg' %}">
                     <span class="bi bi-pencil-square"></span>
                 </button>
-                <button hx-delete="{% url 'core:mission_leg_delete' mission.pk leg.pk %}"
+                <button type="button" hx-delete="{% url 'core:mission_leg_delete' mission.pk leg.pk %}"
                         hx-target="#tr_id_mission_leg_{{ leg.pk }}" hx-swap="delete" hx-confirm="{% trans "Are you sure?" %}"
-                        class="btn btn-sm btn-danger ms-1" title="{% trans 'Remove leg from mission' %}">
+                        class="btn btn-sm btn-danger ms-1" title="{% trans 'Remove leg from mission' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
                     <span class="bi bi-x-square"></span>
                 </button>
-                </form>
             </th> {# this ID column will get replaced with a button that uses the ID #}
             <td class="text-start">{{ leg.number }}</td>
             <td class="text-start">{{ leg.start_date }}</td>

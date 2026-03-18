@@ -85,6 +85,8 @@ class Organizations(models.Model):
 
 
 class Participants(models.Model):
+    id = models.AutoField(primary_key=True, db_column='participant_seq')
+
     last_name = models.CharField(verbose_name=_("Last Name"), max_length=50, db_column='last_name')
     first_name = models.CharField(verbose_name=_("First Name"), max_length=50, db_column='first_name')
 

@@ -70,12 +70,15 @@ class CreateMission(LoginRequiredMixin, TemplateView):
 
 
 class MissionLegForm(forms.ModelForm):
-    chief_scientist = forms.Select(attrs={'class': 'form-select form-select-sm'})
+    chief_scientist = forms.ModelChoiceField(
+        queryset=models.Participants.objects.all(),
+        label=_("Chief Scientist"),
+        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
+    )
 
     regions_select = forms.ModelChoiceField(
         queryset=models.GeographicRegions.objects.none(),
         label=_("Select Geographic Locations"),
-        required=False,
         widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     regions = forms.ModelMultipleChoiceField(
@@ -93,8 +96,9 @@ class MissionLegForm(forms.ModelForm):
         }
 
     def clean_regions_field(self):
-        regions_select = self.data.get('regions_select')
-        regions = self.data.getlist('regions_bullet')
+        prefix = 'regions'
+        regions_select = self.data.get(f'{prefix}_select')
+        regions = self.data.getlist(f'{prefix}_bullet')
 
         keys = [int(location) for location in regions]
         if regions_select:
@@ -104,14 +108,17 @@ class MissionLegForm(forms.ModelForm):
 
         # Example validation: Ensure at least one chief scientist is selected
         if not cleaned_regions.exists():
-            self.add_error('regions_select', _("At least one geographic location must be added."))  # Non-field error
-            self.fields['regions_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
+            self.add_error(f'{prefix}_select', _("At least one geographic region must be added."))  # Non-field error
+            self.fields[f'{prefix}_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
 
         # Additional processing or validation logic can go here
 
         return cleaned_regions
 
     def clean_regions_select(self):
+        return self.clean_regions_field()
+
+    def clean_regions(self):
         return self.clean_regions_field()
 
     def get_list_add_btn(self, prefix):
@@ -201,6 +208,9 @@ class MissionLegForm(forms.ModelForm):
                     Column(Field('description'), css_class='form-control-sm'),
                 ),
                 Row(
+                    Column(Field('chief_scientist'), css_class='form-select-sm'),
+                ),
+                Row(
                     Column(regions_container),
                 ),
                 css_class="card card-body mb-2 border border-dark bg-light"
@@ -215,6 +225,7 @@ class MissionLegForm(forms.ModelForm):
             else:
                 submit_url = reverse_lazy('core:add_mission_leg', args=[mission_id])
 
+            button_div = Div()
             btn_submit_attrs = {
                 'title': _("Submit"),
                 'hx-target': "#form_id_mission_leg",
@@ -225,8 +236,19 @@ class MissionLegForm(forms.ModelForm):
             btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
                                       css_class='btn btn-sm btn-primary mb-1',
                                       **btn_submit_attrs)
+            button_div.append(btn_submit)
 
-            self.helper.layout.fields[0].fields.append(Div(btn_submit))
+            btn_new_leg_attrs = {
+                'hx-target': "#form_id_mission_leg",
+                'hx-get': reverse_lazy('core:mission_leg_form_clear', args=[mission_id]),
+            }
+            btn_label_new = _("New Leg")
+            btn_new = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label_new}',
+                                      css_class='btn btn-sm btn-secondary mb-1',
+                                      **btn_new_leg_attrs)
+            button_div.append(btn_new)
+            self.helper.layout.fields[0].fields.append(button_div)
+
 
     def save(self, commit=True):
         leg = super(MissionLegForm, self).save(commit=False)
@@ -300,7 +322,6 @@ class MissionForm(forms.ModelForm):
         )
 
 
-@login_required
 def update_mission(request, **kwargs):
     if not request.user.is_authenticated:
         return redirect(reverse_lazy('login'))
@@ -450,13 +471,14 @@ def mission_leg_list(request, mission_id):
 
 
 def mission_leg_form(request, mission_id, **kwargs):
-    mission = models.Missions.objects.get(pk=mission_id)
 
     if 'leg_id' in kwargs:
         leg_id = int(kwargs.get('leg_id'))
         leg = models.Legs.objects.get(pk=leg_id)
+        mission = leg.mission
         form = MissionLegForm(mission, instance=leg)
     else:
+        mission = models.Missions.objects.get(pk=mission_id)
         form = MissionLegForm(mission)
 
     html = render_crispy_form(form)
@@ -479,6 +501,7 @@ urlpatterns = [
     path('mission/add/<str:prefix>', add_to_list, name='add_to_list'),
     path('mission/remove/<str:prefix>/<int:element_id>', remove_from_list, name='remove_from_list'),
 
+    path('mission/leg/new/<int:mission_id>/', mission_leg_form, name='mission_leg_form_clear'),
     path('mission/leg/new/<int:mission_id>/<int:leg_id>', mission_leg_form, name='mission_leg_form'),
     path('mission/leg/list/<int:mission_id>', mission_leg_list, name='mission_leg_list'),
     path('mission/leg/add-mission/<int:mission_id>', mission_leg_update, name='add_mission_leg'),
