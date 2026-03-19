@@ -31,11 +31,11 @@ logger = logging.getLogger('mardid')
 
 
 class DataSubmissionView(TemplateView):
-    template_name = 'core/form_data_submission.html'
+    template_name = 'core/forms/form_data_submission.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        data_object = models.Dataset.objects.get(pk=self.kwargs['data_id'])
+        data_object = models.Datasets.objects.get(pk=self.kwargs['data_id'])
         context['data_form'] = DataSubmissionForm(data_object=data_object)
         context['dataset'] = data_object
         context['title'] = _("Cruise") + " " + str(data_object.mission) + " " + _("Data Submission")
@@ -64,7 +64,7 @@ class ArchiveFileForm(forms.ModelForm):
 class DataSubmissionForm(forms.ModelForm):
     class Meta:
         exclude = ['legacy_file_location']
-        model = models.Dataset
+        model = models.Datasets
 
     def __init__(self, *args, data_object, files=None, **kwargs):
         self.files = files
@@ -162,7 +162,7 @@ def submit_data(request, data_id, notify):
         response['HX-Trigger'] = 'submit_form'
         return response
 
-    data_object = models.Dataset.objects.get(pk=data_id)
+    data_object = models.Datasets.objects.get(pk=data_id)
 
     form = DataSubmissionForm(
         request.POST,
@@ -178,7 +178,7 @@ def submit_data(request, data_id, notify):
 
     if form.is_valid():
         data = form.save()
-        html = render_to_string('core/form_data_submission.html', context, request)
+        html = render_to_string('core/forms/form_data_submission.html', context, request)
         soup = BeautifulSoup(html, 'html.parser')
 
         files = request.FILES.getlist('files')
@@ -240,7 +240,7 @@ def submit_data(request, data_id, notify):
 
     logger.error(form.errors)
 
-    html = render_to_string('core/form_data_submission.html', context, request)
+    html = render_to_string('core/forms/form_data_submission.html', context, request)
     soup = BeautifulSoup(html, 'html.parser')
     form = soup.find('form', id='form_id_data')
     form.attrs['hx-swap-oob'] = 'true'
@@ -252,14 +252,14 @@ def submit_data(request, data_id, notify):
 
 
 def list_files(request, data_id):
-    data_object = models.Dataset.objects.get(pk=data_id)
+    data_object = models.Datasets.objects.get(pk=data_id)
     context = {'archive_table': False, 'files': data_object.current_files}
     html = render_to_string('core/partials/table_dataset_files.html', context)
     return HttpResponse(html)
 
 
 def list_archive_files(request, data_id):
-    data_object = models.Dataset.objects.get(pk=data_id)
+    data_object = models.Datasets.objects.get(pk=data_id)
     context = {'archive_table': True, 'files': data_object.archived_files}
     html = render_to_string('core/partials/table_dataset_files.html', context)
     return HttpResponse(html)

@@ -5,7 +5,9 @@
       hx-trigger="load, update_mission_list from:body">
     <div class="card-header">
         <div class="card-title">
-            <button type="button" class="btn btn-sm btn-outline-dark" title="{% trans 'Clear Filters' %}" hx-swap="outerHTML" hx-get="{% url 'core:clear_mission_filter_form' %}" hx-target="#form_id_mission_filter_form"><span class="bi bi-eraser" style="font-size: 1.5em;"> {% trans 'Filter' %}</span></button>
+            <button type="button" class="btn btn-sm btn-outline-dark" title="{% trans 'Clear Filters' %}"
+                    hx-swap="outerHTML" hx-get="{% url 'core:clear_mission_filter_form' %}"
+                    hx-target="#form_id_mission_filter_form"><span class="bi bi-eraser" style="font-size: 1.5em;"> {% trans 'Filter' %}</span></button>
         </div>
     </div>
     <div class="card-body mb-2">

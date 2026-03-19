@@ -84,7 +84,7 @@ class DatasetStatusView(TemplateView):
 
 
 def list_datasets(request):
-    datasets = models.Dataset.objects.all().order_by('pk')
+    datasets = models.Datasets.objects.all().order_by('pk')
 
     if request.method == 'GET' and 'submit' not in request.GET:
         response = HttpResponse()
@@ -138,7 +138,7 @@ def list_datasets(request):
 
 
 def assign_datasets(request, dataset_id):
-    datasets = models.Dataset.objects.filter(pk=dataset_id)
+    datasets = models.Datasets.objects.filter(pk=dataset_id)
     dataset = datasets.first()
 
     user_id = request.POST.get('assigned_to', None)
