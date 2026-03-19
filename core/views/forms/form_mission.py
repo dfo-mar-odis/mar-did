@@ -168,7 +168,7 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             button_div = Div()
             btn_submit_attrs = {
                 'title': _("Submit"),
-                'hx-target': "#form_id_mission_leg",
+                'hx-target': "#form_id_mission_legs",
                 'hx-post': submit_url
             }
 
@@ -179,7 +179,7 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             button_div.append(btn_submit)
 
             btn_new_leg_attrs = {
-                'hx-target': "#form_id_mission_leg",
+                'hx-target': "#form_id_mission_legs",
                 'hx-get': reverse_lazy('core:mission_leg_form_clear', args=[mission_id]),
             }
             btn_label_new = _("New Leg")
@@ -201,7 +201,7 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             # Handle the chief scientist
             chief_scientist = self.cleaned_data.get('chief_scientist')
             if chief_scientist:
-                position = models.Positions.objects.get(name="Chief Scientist")
+                position = models.Positions.objects.get(name__iexact="Chief Scientist")
 
                 # Remove any existing chief scientist for this leg
                 models.MissionParticipants.objects.filter(leg=leg, position=position).delete()
