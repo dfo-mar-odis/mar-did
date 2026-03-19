@@ -70,7 +70,6 @@ class Migration(migrations.Migration):
                 ('status', models.ForeignKey(db_column='dataset_status_seq', on_delete=django.db.models.deletion.PROTECT, related_name='datasets', to='core.datasetstatus', verbose_name='Dataset Status')),
             ],
             options={
-                'db_table': 'datasets',
                 'ordering': ['mission', 'data_type'],
             },
         ),
