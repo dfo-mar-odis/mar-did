@@ -24,7 +24,7 @@ from core.views.forms import form_multiselect
 logger = logging.getLogger('mardid')
 
 class CreateMission(LoginRequiredMixin, TemplateView):
-    template_name = 'core/form_mission.html'
+    template_name = 'core/forms/form_mission.html'
     login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
@@ -39,7 +39,7 @@ class CreateMission(LoginRequiredMixin, TemplateView):
         if 'mission_id' in self.kwargs:
             context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
             context['mission_form'] = MissionForm(instance=context['object'])
-            context['mission_leg_form'] = MissionLegForm(context['object'], initial={'mission': context['object']})
+            context['mission_legs_form'] = MissionLegForm(context['object'], initial={'mission': context['object']})
         else:
             context['mission_form'] = MissionForm()
 

@@ -30,7 +30,7 @@
                 </button>
                 <button type="button" hx-delete="{% url 'core:mission_leg_delete' mission.pk leg.pk %}"
                         hx-target="#tr_id_mission_leg_{{ leg.pk }}" hx-swap="delete" hx-confirm="{% trans "Are you sure?" %}"
-                        class="btn btn-sm btn-danger ms-1" title="{% trans 'Remove leg from mission' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                        class="btn btn-sm btn-danger ms-1" title="{% trans 'Remove leg from mission' %}">
                     <span class="bi bi-x-square"></span>
                 </button>
             </th> {# this ID column will get replaced with a button that uses the ID #}
