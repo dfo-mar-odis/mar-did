@@ -8,8 +8,10 @@ from django.utils.translation import gettext as _
 class Countries(models.Model):
     id = models.AutoField(primary_key=True, db_column='country_seq')
     name = models.CharField(verbose_name=_("Name"), max_length=45, db_column='name')
-    short_name = models.CharField(verbose_name=_("Short Name"), max_length=2, help_text=_("2-character country code"), db_column='short_name')
-    code = models.IntegerField(verbose_name=_("Code"), blank=True, null=True, help_text=_("2-digit country code"), db_column='code')
+    short_name = models.CharField(verbose_name=_("Short Name"), max_length=2, help_text=_("2-character country code"),
+                                  db_column='short_name')
+    code = models.IntegerField(verbose_name=_("Code"), blank=True, null=True, help_text=_("2-digit country code"),
+                               db_column='code')
 
     class Meta:
         db_table = 'lu_countries'
@@ -21,7 +23,8 @@ class Countries(models.Model):
 
 class DatasetStatus(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=20, unique=True, db_column='name')
-    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True, db_column='description')
+    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
+                                   db_column='description')
 
     class Meta:
         db_table = 'lu_dataset_status'
@@ -47,7 +50,8 @@ class DatasetStatus(models.Model):
 
 class DataTypes(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=25, unique=True, db_column='name')
-    description = models.CharField(verbose_name=_("Description"), blank=True, null=True, max_length=255, db_column='description')
+    description = models.CharField(verbose_name=_("Description"), blank=True, null=True, max_length=255,
+                                   db_column='description')
 
     def __str__(self):
         return f'{self.name} - {self.description}'
@@ -73,8 +77,10 @@ class Organizations(models.Model):
     name = models.CharField(verbose_name=_("Name"), db_column='name', max_length=50, unique=True)
     acronym = models.CharField(verbose_name=_("Acronym"), db_column='acronym', blank=True, null=True, max_length=25)
     code = models.IntegerField(verbose_name=_("Code"), db_column='code', blank=True, null=True)
-    description = models.CharField(verbose_name=_("Description"), db_column='description', blank=True, null=True, max_length=255)
-    country = models.ForeignKey(Countries, verbose_name=_("Country"), db_column='country_seq', related_name="organizations", on_delete=models.PROTECT)
+    description = models.CharField(verbose_name=_("Description"), db_column='description', blank=True, null=True,
+                                   max_length=255)
+    country = models.ForeignKey(Countries, verbose_name=_("Country"), db_column='country_seq',
+                                related_name="organizations", on_delete=models.PROTECT)
 
     def __str__(self):
         return f'{self.name} - {self.description}'
@@ -108,12 +114,19 @@ class Platforms(models.Model):
 
     # The description of the platform, for example the name of the vessel, or another
     # meaningful collection method (ie glider) of the data.
-    name = models.CharField(verbose_name=_("Name"), max_length=100, db_column='name', help_text=_("Platform name or description"), default='Unknown')
-    country = models.ForeignKey(Countries, verbose_name=_("Country"), db_column='country_seq', default=get_default_platform_country, related_name="platforms", on_delete=models.PROTECT)
-    call_sign = models.CharField(verbose_name=_("Call Sign"), max_length=10, db_column='call_sign', help_text=_("Platform call sign, if applicable"), default="------")
-    max_speed = models.FloatField(verbose_name=_("Max Speed"), db_column='maximum_speed', help_text=_("Maximum speed of the platform in knots"), default=-999)
-    ices_code = models.CharField(verbose_name=_("ICES Code"), db_column='ices_code', max_length=4, blank=True, null=True, help_text=_("ICES code"))
-    ship_code = models.CharField(verbose_name=_("Ship Code"), db_column='ship_code', max_length=6, blank=True, null=True, help_text=_("OSCruise code"))
+    name = models.CharField(verbose_name=_("Name"), max_length=100, db_column='name',
+                            help_text=_("Platform name or description"), default='Unknown')
+    country = models.ForeignKey(Countries, verbose_name=_("Country"), db_column='country_seq',
+                                default=get_default_platform_country, related_name="platforms",
+                                on_delete=models.PROTECT)
+    call_sign = models.CharField(verbose_name=_("Call Sign"), max_length=10, db_column='call_sign',
+                                 help_text=_("Platform call sign, if applicable"), default="------")
+    max_speed = models.FloatField(verbose_name=_("Max Speed"), db_column='maximum_speed',
+                                  help_text=_("Maximum speed of the platform in knots"), default=-999)
+    ices_code = models.CharField(verbose_name=_("ICES Code"), db_column='ices_code', max_length=4, blank=True,
+                                 null=True, help_text=_("ICES code"))
+    ship_code = models.CharField(verbose_name=_("Ship Code"), db_column='ship_code', max_length=6, blank=True,
+                                 null=True, help_text=_("OSCruise code"))
 
     class Meta:
         db_table = 'lu_platforms'
@@ -137,7 +150,8 @@ class Positions(models.Model):
 
 class Programs(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=45, unique=True, db_column='name')
-    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True, db_column='description')
+    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
+                                   db_column='description')
 
     class Meta:
         db_table = 'lu_programs'
@@ -149,7 +163,8 @@ class Programs(models.Model):
 
 class Status(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=45, unique=True, db_column='name')
-    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True, db_column='description')
+    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
+                                   db_column='description')
 
     class Meta:
         db_table = 'lu_status'
@@ -160,19 +175,39 @@ class Status(models.Model):
 
 
 class Missions(models.Model):
-    name = models.CharField(verbose_name=_("Name"), max_length=20, help_text=_("The name of the cruise e.g 'CAR2025002'"), db_column='name')
-    descriptor = models.CharField(verbose_name=_("Descriptor"), max_length=20, blank=True, null=True, help_text=_("MEDS assigned description of the cruise e.g '18QL25002'"), db_column='meds_descriptor')
-    platform = models.ForeignKey(Platforms, verbose_name=_("Ship/Platform"), on_delete=models.PROTECT, related_name='cruises', db_column='platform_seq')
-    program = models.ForeignKey(Programs, verbose_name=_("Program"), on_delete=models.PROTECT, related_name='missions', db_column='program_seq')
-    ppt_id = models.IntegerField(verbose_name=_("PPT id"), blank=True, null=True, help_text=_("Project Planning Tool ID to link to project details"), db_column='ppt_id')
+    name = models.CharField(verbose_name=_("Name"), max_length=20,
+                            help_text=_("The name of the cruise e.g 'CAR2025002'"), db_column='name')
+    descriptor = models.CharField(verbose_name=_("Descriptor"), max_length=20, blank=True, null=True,
+                                  help_text=_("MEDS assigned description of the cruise e.g '18QL25002'"),
+                                  db_column='meds_descriptor')
+    platform = models.ForeignKey(Platforms, verbose_name=_("Ship/Platform"), on_delete=models.PROTECT,
+                                 related_name='cruises', db_column='platform_seq')
+    program = models.ForeignKey(Programs, verbose_name=_("Program"), on_delete=models.PROTECT, related_name='missions',
+                                db_column='program_seq')
+    ppt_id = models.IntegerField(verbose_name=_("PPT id"), blank=True, null=True,
+                                 help_text=_("Project Planning Tool ID to link to project details"), db_column='ppt_id')
+
+    organizations = models.ManyToManyField(Organizations, verbose_name=_("Organizations"),
+                                           through='MissionOrganizations')
 
     class Meta:
         db_table = 'missions'
         ordering = ['name']
 
-    # Todo: We'll add a 'mission_date' property to mission to get the first leg of the mission and use the start date
-    #       as the mission date. This will allow us to sort missions by date and also filter by date in the future
-    #       when we add that functionality.
+    @property
+    def start_date(self):
+        first_leg = self.legs.order_by('start_date').first()
+        return first_leg.start_date if first_leg else None
+
+    @property
+    def end_date(self):
+        last_leg = self.legs.order_by('-end_date').first()
+        return last_leg.end_date if last_leg else None
+
+    @property
+    def cheif_scientist(self):
+        chief = self.legs.filter(participants__position__name__iexact='chief scientist')
+        return ', '.join([chief]) if chief else None
 
     def __str__(self):
         return f'{self.name} - {self.descriptor}'
@@ -181,8 +216,10 @@ class Missions(models.Model):
 class MissionOrganizations(models.Model):
     id = models.AutoField(primary_key=True, db_column='mission_organization_seq')
 
-    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='organizations', db_column='mission_seq')
-    organization = models.ForeignKey(Organizations, verbose_name=_("Organization"), on_delete=models.PROTECT, related_name='missions', db_column='organization_seq')
+    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE,
+                                related_name='mission_organizations', db_column='mission_seq')
+    organization = models.ForeignKey(Organizations, verbose_name=_("Organization"), on_delete=models.PROTECT,
+                                     related_name='organization_missions', db_column='organization_seq')
 
     class Meta:
         db_table = 'mission_organizations'
@@ -192,51 +229,69 @@ class MissionOrganizations(models.Model):
 class Legs(models.Model):
     id = models.AutoField(primary_key=True, db_column='leg_seq')
 
-    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='legs', db_column='mission_seq')
+    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='legs',
+                                db_column='mission_seq')
     number = models.IntegerField(verbose_name=_("Leg Number"), db_column='number')
     start_date = models.DateField(verbose_name=_("Start Date"), db_column='start_date')
     end_date = models.DateField(verbose_name=_("End Date"), db_column='end_date')
-    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True, db_column='description')
+    description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
+                                   db_column='description')
 
-    regions = models.ManyToManyField('GeographicRegions', verbose_name=_("Geographic Regions"), through='MissionRegions')
+    regions = models.ManyToManyField('GeographicRegions', verbose_name=_("Geographic Regions"),
+                                     through='MissionRegions')
 
     class Meta:
         db_table = 'legs'
         ordering = ['number']
         unique_together = ('mission', 'number')
 
+    @property
+    def chief_scientist(self):
+        chief = self.leg_participants.filter(position__name__iexact='chief scientist').first()
+        return f'{chief.participant}' if chief else None
+
+    def __str__(self):
+        return f'{self.mission.name} - Leg {self.number} ({self.start_date} to {self.end_date})'
+
 
 class MissionParticipants(models.Model):
     id = models.AutoField(primary_key=True, db_column='mission_participant_seq')
 
-    leg = models.ForeignKey(Legs, verbose_name=_("Leg"), on_delete=models.CASCADE, related_name='participants', db_column='leg_seq')
-    participant = models.ForeignKey(Participants, verbose_name=_("Participant"), on_delete=models.PROTECT, related_name='missions', db_column='participant_seq')
+    leg = models.ForeignKey(Legs, verbose_name=_("Leg"), on_delete=models.CASCADE,
+                            related_name='leg_participants', db_column='leg_seq')
+    participant = models.ForeignKey(Participants, verbose_name=_("Participant"), on_delete=models.PROTECT,
+                                    related_name='participant_legs', db_column='participant_seq')
     position = models.ForeignKey(Positions, verbose_name=_("Position"), on_delete=models.PROTECT,
-                                    related_name='missions', db_column='position_seq')
+                                 related_name='position_legs', db_column='position_seq')
 
     class Meta:
         db_table = 'mission_participants'
         ordering = ['leg', 'position']
 
+    def __str__(self):
+        return f'{self.participant} - {self.position} on {self.leg}'
+
 
 class GeographicRegions(models.Model):
     name = models.CharField(verbose_name=_('Name'), max_length=50, unique=True, db_column='name')
-    description = models.CharField(verbose_name=_('Description'), max_length=255, blank=True, null=True, db_column='description')
+    description = models.CharField(verbose_name=_('Description'), max_length=255, blank=True, null=True,
+                                   db_column='description')
 
     def __str__(self):
         return f'{self.name}'
 
     class Meta:
-        db_table='lu_geographic_regions'
+        db_table = 'lu_geographic_regions'
         ordering = ['name']
 
 
 class MissionRegions(models.Model):
     id = models.AutoField(primary_key=True, db_column='mission_region_seq')
 
-    leg = models.ForeignKey(Legs, verbose_name=_("Leg"), on_delete=models.CASCADE, db_column='leg_seq')
+    leg = models.ForeignKey(Legs, verbose_name=_("Leg"), on_delete=models.CASCADE, db_column='leg_seq'
+                            , related_name='leg_regions')
     region = models.ForeignKey(GeographicRegions, verbose_name=_("Region"), on_delete=models.PROTECT,
-                                    related_name='missions', db_column='geographic_region_seq')
+                               related_name='region_legs', db_column='geographic_region_seq')
 
     class Meta:
         db_table = 'mission_regions'
@@ -247,9 +302,12 @@ class Dataset(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_seq')
 
     mission = models.ForeignKey(Missions, on_delete=models.CASCADE, related_name="datasets", db_column='mission_seq')
-    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets", db_column='data_type_seq')
-    legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True, db_column='legacy_file_location')
-    status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT, related_name="datasets", db_column='dataset_status_seq')
+    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets",
+                                  db_column='data_type_seq')
+    legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True,
+                                            db_column='legacy_file_location')
+    status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT,
+                               related_name="datasets", db_column='dataset_status_seq')
 
     @property
     def current_files(self):
@@ -288,7 +346,8 @@ class DataFiles(models.Model):
 class DataFileComments(models.Model):
     id = models.AutoField(primary_key=True, db_column='file_comment_seq')
 
-    datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE, related_name='comments', db_column='file_seq')
+    datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE,
+                                 related_name='comments', db_column='file_seq')
     author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
     comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
     comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
@@ -301,7 +360,8 @@ class DataFileComments(models.Model):
 class DatasetComments(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_comment_seq')
 
-    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='comments', db_column='dataset_seq')
+    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='comments',
+                                db_column='dataset_seq')
     author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
     comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
     comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
@@ -314,7 +374,8 @@ class DatasetComments(models.Model):
 class MissionComments(models.Model):
     id = models.AutoField(primary_key=True, db_column='mission_comment_seq')
 
-    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='comments', db_column='mission_seq')
+    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='comments',
+                                db_column='mission_seq')
     author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
     comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
     comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
@@ -327,11 +388,13 @@ class MissionComments(models.Model):
 class ProcessingStatus(models.Model):
     id = models.AutoField(primary_key=True, db_column='processing_seq')
 
-    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing', db_column='dataset_seq')
-    assigned_to = models.ForeignKey('auth.User', verbose_name=_("Assigned"), on_delete=models.PROTECT, related_name='processing', db_column='assigned_to')
+    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing',
+                                db_column='dataset_seq')
+    assigned_to = models.ForeignKey('auth.User', verbose_name=_("Assigned"), on_delete=models.PROTECT,
+                                    related_name='processing', db_column='assigned_to')
     assigned_date = models.DateTimeField(auto_now=True, db_column='assigned_date')
-    status = models.ForeignKey(Status, verbose_name=_("Status"), on_delete=models.PROTECT, related_name='processing', db_column='status_seq')
-
+    status = models.ForeignKey(Status, verbose_name=_("Status"), on_delete=models.PROTECT, related_name='processing',
+                               db_column='status_seq')
 
 
 class GroupProfiles(models.Model):

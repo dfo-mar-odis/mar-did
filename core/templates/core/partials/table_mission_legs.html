@@ -12,6 +12,7 @@
                 </div>
             </th>
             <th class="text-start">{% trans 'Leg' %}</th>
+            <th class="text-start">{% trans 'Chief Scientist' %}</th>
             <th class="text-start">{% trans 'Start Date' %}</th>
             <th class="text-start">{% trans 'End Date' %}</th>
             <th class="text-start">{% trans 'Description' %}</th>
@@ -34,6 +35,7 @@
                 </button>
             </th> {# this ID column will get replaced with a button that uses the ID #}
             <td class="text-start">{{ leg.number }}</td>
+            <td class="text-start">{{ leg.chief_scientist }}</td>
             <td class="text-start">{{ leg.start_date }}</td>
             <td class="text-start">{{ leg.end_date }}</td>
             <td class="text-start">{{ leg.description }}</td>
