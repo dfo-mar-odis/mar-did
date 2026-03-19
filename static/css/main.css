@@ -18,3 +18,38 @@ body {
 #dropzone-upload .dz-preview {
     display: none !important;
 }
+
+/* Style for the tab navigation */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.nav-tabs .nav-item .nav-link {
+    border: 1px solid transparent;
+    border-radius: 0.25rem 0.25rem 0 0;
+    color: #fff;
+    background-color: #6c757d; /* Matches btn-secondary background */
+    border-color: #6c757d #6c757d #f8f9fa;
+    padding: 0.5rem 1rem;
+    margin-right: 0.2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-tabs .nav-item .nav-link:hover {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    color: #495057;
+    background-color: #f8f9fa;
+}
+
+/* Style for the tab content */
+.tab-content {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0 0 0.25rem 0.25rem;
+}

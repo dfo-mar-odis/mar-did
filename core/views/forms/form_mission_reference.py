@@ -31,7 +31,7 @@ logger = logging.getLogger('mardid')
 
 
 class CreateMission(LoginRequiredMixin, TemplateView):
-    template_name = 'core/form_mission.html'
+    template_name = 'core/forms/form_mission.html'
     login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):

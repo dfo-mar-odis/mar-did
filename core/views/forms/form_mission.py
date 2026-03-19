@@ -1,58 +1,35 @@
 from bs4 import BeautifulSoup
 
 from django import forms
-from django.urls import path, reverse_lazy
+from django.urls import path, reverse_lazy, reverse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.http.response import HttpResponse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
-from django.contrib.auth.models import User, Group
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Row, Column, Field, HTML, Hidden
-from crispy_forms.bootstrap import StrictButton, FieldWithButtons
+from crispy_forms.layout import Layout, Div, Row, Column, Field, Hidden
+from crispy_forms.bootstrap import StrictButton
 from crispy_forms.utils import render_crispy_form
 
 from core import models
 
 import logging
 
-from core.views.view_data import ExpectedDataForm
+from core.views.forms import form_multiselect
 
 logger = logging.getLogger('mardid')
 
-# Registered functions for controlling multi-select UI components.
-BULLET_LIST_FUNCTION_REGISTER = {
-    'regions': {
-        # specify what function is used to manage the bullet list, get_list_bullet is generic
-        # and will work in most common cases, but a custom function can be supplied
-        'bullet_function': 'get_list_bullet',
-
-        # lookup model that's to be used to populate dropdowns
-        'lookup_model': models.GeographicRegions,
-
-        # Function to render an element, this allows control over what parts and how an element is displayed
-        # could be something like: f'{element.last_name}, {element.first_name} - {element.phone_number}'
-        'render_function': lambda element: f"{element}",
-
-        # url to call when adding an element to the list
-        'add_url': 'core:add_to_list',
-
-        # url to call when removing an element from the list
-        'remove_url': 'core:remove_from_list'
-    }
-}
-
 class CreateMission(LoginRequiredMixin, TemplateView):
-    template_name = 'core/form_mission.html'
+    template_name = 'core/forms/form_mission.html'
     login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
-            return redirect(reverse_lazy('login'))
+            return redirect(self.login_url)
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -62,22 +39,56 @@ class CreateMission(LoginRequiredMixin, TemplateView):
         if 'mission_id' in self.kwargs:
             context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
             context['mission_form'] = MissionForm(instance=context['object'])
-            context['mission_leg_form'] = MissionLegForm(context['object'], initial={'mission': context['object']})
+            context['mission_legs_form'] = MissionLegForm(context['object'])
+            context['mission_datasets_form'] = MissionDatasetsForm(context['object'])
         else:
             context['mission_form'] = MissionForm()
 
         return context
 
 
-class MissionLegForm(forms.ModelForm):
+class MissionDatasetsForm(forms.ModelForm):
+    class Meta:
+        model = models.Datasets
+        fields = '__all__'
+
+    # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
+    def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
+        mission_id = mission.pk if mission is not None else -1
+        initial = kwargs.pop('initial') if 'initial' in kwargs else {}
+
+        super(MissionDatasetsForm, self).__init__(initial=initial, *args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            Hidden('mission', mission_id),
+            Row(
+                Column(Field('data_type'), css_class='form-control-sm'),
+                Column(Field('status'), css_class='form-control-sm'),
+            ),
+            Row(
+                Column(Field('legacy_file_location'), css_class='form-control-sm'),
+            )
+        )
+
+class MissionLegForm(form_multiselect.MultiselectFieldForm):
+    chief_scientist = forms.ModelChoiceField(
+        queryset=models.Participants.objects.all(),
+        label=_("Chief Scientist"),
+        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
+    )
+
     regions_select = forms.ModelChoiceField(
         queryset=models.GeographicRegions.objects.none(),
-        label=_("Select Geographic Locations"),
+        label=_("Select Geographic Locations*"),
         required=False,
         widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     regions = forms.ModelMultipleChoiceField(
         queryset=models.GeographicRegions.objects.none(),
+        required=False,
         label=_("Geographic Locations")
     )
 
@@ -90,99 +101,37 @@ class MissionLegForm(forms.ModelForm):
             'end_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
         }
 
-    def clean_regions_field(self):
-        regions_select = self.data.get('regions_select')
-        regions = self.data.getlist('regions_bullet')
+    def get_multiselect_context(self, prefix) -> form_multiselect.MultiselectContext | None:
+        return MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
 
-        keys = [int(location) for location in regions]
-        if regions_select:
-            keys.append(int(regions_select))
+    def clean_regions_select(self):
+        return self.clean_multiselect_field('regions', models.GeographicRegions)
 
-        cleaned_regions = models.GeographicRegions.objects.filter(pk__in=keys)
-
-        # Example validation: Ensure at least one chief scientist is selected
-        if not cleaned_regions.exists():
-            self.add_error('regions_select', _("At least one geographic location must be added."))  # Non-field error
-            self.fields['regions_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
-
-        # Additional processing or validation logic can go here
+    def clean_regions(self):
+        prefix = 'regions'
+        cleaned_regions = self.clean_multiselect_field(prefix, models.GeographicRegions)
+        if not cleaned_regions:
+            self.add_error(f'{prefix}_select', _("At least one geographic region must be added."))  # Non-field error
+            self.fields[f'{prefix}_select'].widget.attrs.update({'class': 'is-invalid'})  # Highlight field
 
         return cleaned_regions
 
-    def clean_regions_select(self):
-        return self.clean_regions_field()
-
-    def get_list_add_btn(self, prefix):
-        registered_multi_select = BULLET_LIST_FUNCTION_REGISTER.get(prefix, None)
-        if registered_multi_select is None:
-            raise Exception(f"No bullet function registered for prefix {prefix}")
-
-        btn_add_attrs = {
-            'hx-target': f"#div_id_{prefix}",
-            'hx-post': reverse_lazy(registered_multi_select['add_url'], args=[prefix]),
-            'hx-swap': "beforeend"
-        }
-
-        btn_add = StrictButton('<span class="bi bi-plus-square"></span>',
-                               css_class='btn btn-sm btn-primary',
-                               **btn_add_attrs)
-
-        return btn_add
-
-    def get_list_container(self, prefix, _list):
-        btn_add = self.get_list_add_btn(prefix)
-        select_field = FieldWithButtons(
-            Field(f'{prefix}_select', css_class='form-select-sm'),
-            btn_add,
-            css_class='input-group-sm'
-        )
-        component = Div(
-            select_field,
-            Row(
-                Field(prefix, wrapper_class="d-none"),
-                HTML(_list),
-                id=f'div_id_{prefix}',
-            ),
-            css_class='card card-body border border-dark mb-2'
-        )
-        return component
-
-    def init_lookup(self, prefix):
-        _list = ""
-        lookups = []
-
-        register_multi_select = BULLET_LIST_FUNCTION_REGISTER.get(prefix, None)
-        if register_multi_select is None:
-            raise Exception(f"No bullet function registered for prefix {prefix}")
-
-        model = register_multi_select['lookup_model']
-        if self.instance.pk:
-            lookup_list = getattr(self.instance, prefix)
-            lookups = [lu.id for lu in lookup_list.all()] if self.instance.pk else []
-
-        if not lookups:
-            if self.data and f'{prefix}_bullet' in self.data:
-                lookups = self.data.getlist(f'{prefix}_bullet')
-
-        for lu_id in lookups:
-            _list += get_list_bullet(lu_id, prefix)
-
-        self.fields[f'{prefix}_select'].queryset = model.objects.all()
-        self.fields[prefix].queryset = model.objects.all()
-
-        return self.get_list_container(prefix, _list)
-
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
-    def __init__(self, mission: models.Missions|None, *args, **kwargs):
+    def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
         mission_id = mission.pk if mission is not None else -1
-        if mission is not None and 'instance' not in kwargs:
+        initial = kwargs.pop('initial') if 'initial' in kwargs else {}
+        if 'instance' in kwargs:
+            leg = kwargs['instance']
+            chief_scientist = leg.leg_participants.filter(position__name="Chief Scientist")
+            if chief_scientist.exists():
+                chief_scientist = chief_scientist.first()
+                initial = kwargs.pop('initial') if 'initial' in kwargs else {}
+                initial['chief_scientist'] = chief_scientist.participant.pk
+        elif mission is not None:
             leg_number = mission.legs.order_by('-number').first().number + 1 if mission.legs.exists() else 1
-            initial = kwargs.pop('initial') if 'initial' in kwargs else {}
             initial['number'] = leg_number
 
-            super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
-        else:
-            super(MissionLegForm, self).__init__(*args, **kwargs)
+        super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
 
         regions_container = self.init_lookup('regions')
 
@@ -199,6 +148,9 @@ class MissionLegForm(forms.ModelForm):
                     Column(Field('description'), css_class='form-control-sm'),
                 ),
                 Row(
+                    Column(Field('chief_scientist'), css_class='form-select-sm'),
+                ),
+                Row(
                     Column(regions_container),
                 ),
                 css_class="card card-body mb-2 border border-dark bg-light"
@@ -213,6 +165,7 @@ class MissionLegForm(forms.ModelForm):
             else:
                 submit_url = reverse_lazy('core:add_mission_leg', args=[mission_id])
 
+            button_div = Div()
             btn_submit_attrs = {
                 'title': _("Submit"),
                 'hx-target': "#form_id_mission_leg",
@@ -223,8 +176,18 @@ class MissionLegForm(forms.ModelForm):
             btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
                                       css_class='btn btn-sm btn-primary mb-1',
                                       **btn_submit_attrs)
+            button_div.append(btn_submit)
 
-            self.helper.layout.fields[0].fields.append(Div(btn_submit))
+            btn_new_leg_attrs = {
+                'hx-target': "#form_id_mission_leg",
+                'hx-get': reverse_lazy('core:mission_leg_form_clear', args=[mission_id]),
+            }
+            btn_label_new = _("New Leg")
+            btn_new = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label_new}',
+                                   css_class='btn btn-sm btn-secondary mb-1',
+                                   **btn_new_leg_attrs)
+            button_div.append(btn_new)
+            self.helper.layout.fields[0].fields.append(button_div)
 
     def save(self, commit=True):
         leg = super(MissionLegForm, self).save(commit=False)
@@ -232,12 +195,40 @@ class MissionLegForm(forms.ModelForm):
         if commit:
             leg.save()
 
-            regions = self.clean_regions_field()
+            regions = self.cleaned_data['regions']
             leg.regions.set(regions)
+
+            # Handle the chief scientist
+            chief_scientist = self.cleaned_data.get('chief_scientist')
+            if chief_scientist:
+                position = models.Positions.objects.get(name="Chief Scientist")
+
+                # Remove any existing chief scientist for this leg
+                models.MissionParticipants.objects.filter(leg=leg, position=position).delete()
+
+                # Add the new chief scientist for this leg
+                models.MissionParticipants.objects.update_or_create(
+                    leg=leg,
+                    position=position,
+                    defaults={'participant': chief_scientist}
+                )
 
         return leg
 
-class MissionForm(forms.ModelForm):
+
+class MissionForm(form_multiselect.MultiselectFieldForm):
+    organizations_select = forms.ModelChoiceField(
+        queryset=models.Organizations.objects.none(),
+        label=_("Select Organizations"),
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
+    )
+    organizations = forms.ModelMultipleChoiceField(
+        queryset=models.Organizations.objects.none(),
+        required=False,
+        label=_("Organizations")
+    )
+
     class Meta:
         model = models.Missions
         fields = '__all__'
@@ -257,8 +248,22 @@ class MissionForm(forms.ModelForm):
         #     'end_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
         # }
 
+    def get_multiselect_context(self, prefix) -> form_multiselect.MultiselectContext | None:
+        return MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
+
+    def clean_organizations_select(self):
+        return self.clean_multiselect_field('organizations', models.Organizations)
+
+    def clean_organizations(self):
+        prefix = 'organizations'
+        cleaned_regions = self.clean_multiselect_field(prefix, models.Organizations)
+
+        return cleaned_regions
+
     def __init__(self, *args, **kwargs):
         super(MissionForm, self).__init__(*args, **kwargs)
+
+        organizations_container = self.init_lookup('organizations')
 
         # if an instant is present then we're going to use the 'update_mission' url, otherwise we'll use the url
         # to create a new mission
@@ -289,6 +294,9 @@ class MissionForm(forms.ModelForm):
                     Column(Field('platform'), css_class='form-select-sm'),
                     Column(Field('program'), css_class='form-select-sm'),
                 ),
+                Row(
+                    Column(organizations_container),
+                ),
                 Div(
                     btn_submit
                 ),
@@ -297,8 +305,21 @@ class MissionForm(forms.ModelForm):
 
         )
 
+    def save(self, commit=True):
+        mission = super(MissionForm, self).save(commit=False)
 
-@login_required
+        if commit:
+            mission.save()
+
+            organizations = self.cleaned_data['organizations']
+            if organizations:
+                mission.organizations.set(organizations)
+            else:
+                mission.organizations.clear()
+
+        return mission
+
+
 def update_mission(request, **kwargs):
     if not request.user.is_authenticated:
         return redirect(reverse_lazy('login'))
@@ -320,7 +341,7 @@ def update_mission(request, **kwargs):
         try:
             mission = form.save()
             response = HttpResponse()
-            response['HX-Redirect'] = reverse_lazy('core:update_mission_view', args=[mission.id])
+            response['HX-Redirect'] = reverse('core:update_mission_view', args=[mission.id])
             return response
         except Exception as ex:
             logger.error("Failed to save the mission form.")
@@ -375,68 +396,6 @@ def mission_leg_update(request, mission_id, **kwargs):
     return HttpResponse(soup)
 
 
-def get_list_bullet(element_id, prefix):
-    registered_multi_select = BULLET_LIST_FUNCTION_REGISTER[prefix]
-    element = registered_multi_select['lookup_model'].objects.get(pk=element_id)
-
-    context = {
-        'input_name': f'{prefix}_bullet',
-        'value_id': element.pk,
-        'value_label': registered_multi_select['render_function'](element),
-        'post_url': reverse_lazy(registered_multi_select['remove_url'], args=[prefix, element.pk]),
-    }
-    return render_to_string('core/partials/components/multi_select_bullet.html', context=context)
-
-
-def get_updated_list(element_ids: list[int], prefix):
-    form = MissionLegForm(mission=None, initial={prefix: element_ids})
-    crispy = render_crispy_form(form)
-    form_soup = BeautifulSoup(crispy, 'html.parser')
-    form_select = form_soup.find(id=f"id_{prefix}")
-    form_select.attrs['hx-swap'] = 'outerHTML'
-    form_select.attrs['hx-swap-oob'] = 'true'
-
-    return form_select
-
-def add_to_list(request, prefix):
-
-    registered_multi_select = BULLET_LIST_FUNCTION_REGISTER.get(prefix, None)
-    if registered_multi_select is None:
-        raise Exception(f"No bullet function registered for prefix {prefix}")
-
-    new_id = request.POST.get(f'{prefix}_select')
-
-    existing = request.POST.getlist(f'{prefix}_bullet')
-    if new_id in existing:
-        return HttpResponse()
-
-    soup = BeautifulSoup()
-
-    get_bullet_func = globals()[registered_multi_select['bullet_function']]
-    new_pill = get_bullet_func(new_id, prefix)
-
-    existing_ids = [int(pk) for pk in existing if pk.isdigit()]
-    existing_ids.append(int(new_id))
-
-    soup.append(get_updated_list(existing_ids, prefix))
-    soup.append(BeautifulSoup(new_pill, 'html.parser'))
-
-    return HttpResponse(soup)
-
-
-def remove_from_list(request, element_id: int, prefix):
-    existing_ids = [int(id) for id in request.POST.getlist(prefix)]
-    if element_id not in existing_ids:
-        return HttpResponse()
-
-    soup = BeautifulSoup()
-
-    existing_ids.remove(element_id)
-    soup.append(get_updated_list(existing_ids, prefix))
-
-    return HttpResponse(soup)
-
-
 def mission_leg_list(request, mission_id):
     mission = models.Missions.objects.get(pk=mission_id)
 
@@ -448,13 +407,13 @@ def mission_leg_list(request, mission_id):
 
 
 def mission_leg_form(request, mission_id, **kwargs):
-    mission = models.Missions.objects.get(pk=mission_id)
-
     if 'leg_id' in kwargs:
         leg_id = int(kwargs.get('leg_id'))
         leg = models.Legs.objects.get(pk=leg_id)
+        mission = leg.mission
         form = MissionLegForm(mission, instance=leg)
     else:
+        mission = models.Missions.objects.get(pk=mission_id)
         form = MissionLegForm(mission)
 
     html = render_crispy_form(form)
@@ -468,6 +427,59 @@ def mission_leg_delete(request, mission_id, leg_id):
     return HttpResponse()
 
 
+# Registered functions for controlling multi-select UI components.
+MULTISELECT_CONTEXT_REGISTER = {
+    'regions': form_multiselect.MultiselectContext(
+        prefix='regions',
+        lookup_model=models.GeographicRegions,
+        form_class=MissionLegForm,
+        render_function=lambda element: f"{element.name}",
+        add_url='core:add_to_list',
+        remove_url='core:remove_from_list'
+    ),
+    'organizations': form_multiselect.MultiselectContext(
+        prefix='organizations',
+        lookup_model=models.Organizations,
+        form_class=MissionForm,
+        render_function=lambda element: f"{element.acronym}",
+        add_url='core:add_to_list',
+        remove_url='core:remove_from_list'
+    ),
+}
+
+def add_to_list(request, prefix):
+    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
+    if not multiselect_context:
+        return HttpResponse(status=400)
+
+    if soup := form_multiselect.add_to_list(request, multiselect_context, prefix):
+        return HttpResponse(soup)
+
+    return HttpResponse()
+
+
+def remove_from_list(request, prefix, element_id):
+    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
+    if not multiselect_context:
+        return HttpResponse(status=400)
+
+    if soup := form_multiselect.remove_from_list(request,multiselect_context, element_id):
+        return HttpResponse(soup)
+
+    return HttpResponse()
+
+
+def get_updated_list(request, prefix):
+    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
+    if not multiselect_context:
+        return HttpResponse(status=400)
+
+    if soup := form_multiselect.get_updated_list(request, multiselect_context):
+        return HttpResponse(soup)
+
+    return HttpResponse()
+
+
 urlpatterns = [
     path('mission/new', CreateMission.as_view(), name='new_mission_view'),
     path('mission/<int:mission_id>', CreateMission.as_view(), name='update_mission_view'),
@@ -477,6 +489,7 @@ urlpatterns = [
     path('mission/add/<str:prefix>', add_to_list, name='add_to_list'),
     path('mission/remove/<str:prefix>/<int:element_id>', remove_from_list, name='remove_from_list'),
 
+    path('mission/leg/new/<int:mission_id>/', mission_leg_form, name='mission_leg_form_clear'),
     path('mission/leg/new/<int:mission_id>/<int:leg_id>', mission_leg_form, name='mission_leg_form'),
     path('mission/leg/list/<int:mission_id>', mission_leg_list, name='mission_leg_list'),
     path('mission/leg/add-mission/<int:mission_id>', mission_leg_update, name='add_mission_leg'),

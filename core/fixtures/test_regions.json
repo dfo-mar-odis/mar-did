@@ -3,64 +3,2280 @@
     "model": "core.geographicregions",
     "pk": 1,
     "fields": {
-        "name": "ARCTIC",
-        "description": "Covers Canada’s Arctic Ocean Arctic Archipelago and northern coastal waters"
+        "name": "ABEGWEIT PASSAGE",
+        "description": null
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 2,
     "fields": {
-        "name": "GULF",
-        "description": "Covers the Gulf of St. Lawrence including surrounding coastal and offshore waters"
+        "name": "ABEGWEIT PASSAGE NORTHUMBERLAND STRAIT",
+        "description": null
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 3,
     "fields": {
-        "name": "MARITIMES",
-        "description": "Covers the Scotian Shelf Bay of Fundy and offshore Atlantic waters east of Nova Scotia"
+        "name": "ABEQUAT PASSAGE",
+        "description": null
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 4,
     "fields": {
-        "name": "NATIONAL",
-        "description": "Covers all Canadian regions for national coordination and pan‑Canadian activities"
+        "name": "ALEXANDRIUM BAY OF FUNDY",
+        "description": null
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 5,
     "fields": {
-        "name": "NEWFOUNDLAND & LABRADOR",
-        "description": "Covers Newfoundland and Labrador coastal and offshore Atlantic waters"
+        "name": "ALMA WELLSITE",
+        "description": null
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 6,
     "fields": {
-        "name": "ONTARIO AND PRAIRIE",
-        "description": "Covers the Great Lakes and inland freshwater systems of central Canada"
+        "name": "AMERICAN BANK",
+        "description": "DFO Oceans Act Areas of Interest (AOIs)"
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 7,
     "fields": {
-        "name": "PACIFIC",
-        "description": "Covers British Columbia coastal and offshore waters in the Pacific Ocean"
+        "name": "AMOCO WEST BONNE BAY C-23",
+        "description": null
     }
 },
 {
     "model": "core.geographicregions",
     "pk": 8,
     "fields": {
-        "name": "QUEBEC",
-        "description": "Covers Quebec’s marine waters including the St. Lawrence River and estuary"
+        "name": "ANGUNIAQVIA NIQIQYUAM",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Arctic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 9,
+    "fields": {
+        "name": "ANNOPOLIS BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 10,
+    "fields": {
+        "name": "ANTARCTIC",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 11,
+    "fields": {
+        "name": "ANTICOSTI",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 12,
+    "fields": {
+        "name": "AP COASTAL ZONE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 13,
+    "fields": {
+        "name": "APPROACHES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 14,
+    "fields": {
+        "name": "APPROACHES EASTERN GULF OF MAINE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 15,
+    "fields": {
+        "name": "ASPY BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 16,
+    "fields": {
+        "name": "ATLANTIC CANADA-WIDE FISHERIES",
+        "description": "NAFO Subareas 2–4"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 17,
+    "fields": {
+        "name": "AVALON",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 18,
+    "fields": {
+        "name": "AVON RIVER",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 19,
+    "fields": {
+        "name": "AZMP",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 20,
+    "fields": {
+        "name": "AZMP STN. 2",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 21,
+    "fields": {
+        "name": "AZOMP MONITORING LOCATIONS (OVER MANY MISSIONS)",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 22,
+    "fields": {
+        "name": "BACK BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 23,
+    "fields": {
+        "name": "BADDECK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 24,
+    "fields": {
+        "name": "BAFFIN BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 25,
+    "fields": {
+        "name": "BAIE COMEAU",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 26,
+    "fields": {
+        "name": "BAIE DE MAGPIE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 27,
+    "fields": {
+        "name": "BAIE DE MOISIE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 28,
+    "fields": {
+        "name": "BAIE DES CHALEURS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 29,
+    "fields": {
+        "name": "BAIE JOHAN BEETS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 30,
+    "fields": {
+        "name": "BALLANTYNE COVE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 31,
+    "fields": {
+        "name": "BALMORAL M-32",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 32,
+    "fields": {
+        "name": "BALVENIE B-79",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 33,
+    "fields": {
+        "name": "BANC‑DES‑AMÉRICAINS",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 34,
+    "fields": {
+        "name": "BANQUERAUE BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 35,
+    "fields": {
+        "name": "BARENTS KARA SEA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 36,
+    "fields": {
+        "name": "BARROW STRAIT",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 37,
+    "fields": {
+        "name": "BASIN HEAD",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 38,
+    "fields": {
+        "name": "BAY DE CHALEUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 39,
+    "fields": {
+        "name": "BAY OF FUNDY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 40,
+    "fields": {
+        "name": "BAY OF ISLES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 41,
+    "fields": {
+        "name": "BEAVER HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 42,
+    "fields": {
+        "name": "BEDFORD BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 43,
+    "fields": {
+        "name": "BELLE ISLE STRAIT",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 44,
+    "fields": {
+        "name": "BIG GLACE BAY LAKE MIGRATORY BIRD SANCTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 45,
+    "fields": {
+        "name": "BIRD ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 46,
+    "fields": {
+        "name": "BLISS HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 47,
+    "fields": {
+        "name": "BONAVISTA BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 48,
+    "fields": {
+        "name": "BONAVISTA LINE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 49,
+    "fields": {
+        "name": "BONNE BAY  NFLD",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 50,
+    "fields": {
+        "name": "BOOT ISLAND NATIONAL WILDLIFE AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 51,
+    "fields": {
+        "name": "BOTWOOD G-89",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 52,
+    "fields": {
+        "name": "BRAS D'OR LAKES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 53,
+    "fields": {
+        "name": "BRIER ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 54,
+    "fields": {
+        "name": "BROWN BANK AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 55,
+    "fields": {
+        "name": "BRUDENELL RIVER",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 56,
+    "fields": {
+        "name": "BURNT COAT NS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 57,
+    "fields": {
+        "name": "CANARY BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 58,
+    "fields": {
+        "name": "CANSO BANK AND CHANNELS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 59,
+    "fields": {
+        "name": "CAPE BRETON",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 60,
+    "fields": {
+        "name": "CAPE FREELS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 61,
+    "fields": {
+        "name": "CAPE HARRISON LABRADOR COAST",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 62,
+    "fields": {
+        "name": "CAPE NORTH",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 63,
+    "fields": {
+        "name": "CAPE PENINSULA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 64,
+    "fields": {
+        "name": "CAPE SABLE ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 65,
+    "fields": {
+        "name": "CAPE TORMENTINE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 66,
+    "fields": {
+        "name": "CARAQUET AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 67,
+    "fields": {
+        "name": "CARAQUET HARBOUR NB",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 68,
+    "fields": {
+        "name": "CARDIGAN BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 69,
+    "fields": {
+        "name": "CARDIGAN RIVER",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 70,
+    "fields": {
+        "name": "CHALEUR BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 71,
+    "fields": {
+        "name": "CHARLOTTETOWN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 72,
+    "fields": {
+        "name": "CHEDABUCTO BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 73,
+    "fields": {
+        "name": "COASTAL SEA URCHIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 74,
+    "fields": {
+        "name": "CONCEPTION BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 75,
+    "fields": {
+        "name": "CONTINENTAL SHELF OFF NFLD.",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 76,
+    "fields": {
+        "name": "CORSAIR AND GEORGES CANYONS MARINE REFUGE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 77,
+    "fields": {
+        "name": "COUNTRY HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 78,
+    "fields": {
+        "name": "DAVIS STRAIT",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 79,
+    "fields": {
+        "name": "DND BARGE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 80,
+    "fields": {
+        "name": "DND JETTY HALIFAX HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 81,
+    "fields": {
+        "name": "EASTPORT",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 82,
+    "fields": {
+        "name": "EEL BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 83,
+    "fields": {
+        "name": "EMERALD BANKS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 84,
+    "fields": {
+        "name": "EMERALD BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 85,
+    "fields": {
+        "name": "ERNST ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 86,
+    "fields": {
+        "name": "FISHERMANS BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 87,
+    "fields": {
+        "name": "FLEUR DE LIS COAST",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 88,
+    "fields": {
+        "name": "FOGO ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 89,
+    "fields": {
+        "name": "GEORGE BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 90,
+    "fields": {
+        "name": "GEORGES BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 91,
+    "fields": {
+        "name": "GEORGES BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 92,
+    "fields": {
+        "name": "GERMAN BANK TO GULF OF MAINE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 93,
+    "fields": {
+        "name": "GILBERT BAY",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 94,
+    "fields": {
+        "name": "GILBERT BAY SOUTH LABRADOR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 95,
+    "fields": {
+        "name": "GRAND BANKS STOCKS",
+        "description": "Combined NAFO Area (3LNO)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 96,
+    "fields": {
+        "name": "GRAND MANAN AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 97,
+    "fields": {
+        "name": "GRAND MANAN BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 98,
+    "fields": {
+        "name": "GRAND MANAN BIRD SANCTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 99,
+    "fields": {
+        "name": "GREENLAND SEA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 100,
+    "fields": {
+        "name": "GULF MAINE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 101,
+    "fields": {
+        "name": "GULF OF ST. LAWRENCE",
+        "description": "Combined NAFO Area (4RST)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 102,
+    "fields": {
+        "name": "HALIFAX HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 103,
+    "fields": {
+        "name": "HALIFAX HARBOUR  BEDFORD BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 104,
+    "fields": {
+        "name": "HALIFAX STATION 2",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 105,
+    "fields": {
+        "name": "HALIFAX TO MID ATLANTIC RIDGE 7 BERMUDA WATER",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 106,
+    "fields": {
+        "name": "HALIFAX WEST TO THE BAY OF FUNDY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 107,
+    "fields": {
+        "name": "HAMILTON BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 108,
+    "fields": {
+        "name": "HARVE SAINT PIERRE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 109,
+    "fields": {
+        "name": "HATTON BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 110,
+    "fields": {
+        "name": "HEBRON D-94",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 111,
+    "fields": {
+        "name": "HEBRON M-04 WELL  GRAND BANKS NFLD",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 112,
+    "fields": {
+        "name": "HECATE STRAIT & QUEEN CHARLOTTE SOUND GLASS SPONGE",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Pacific"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 113,
+    "fields": {
+        "name": "HIBERNIA PLATFORM",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 114,
+    "fields": {
+        "name": "HUDSON BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 115,
+    "fields": {
+        "name": "HUDSON STRAIT",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 116,
+    "fields": {
+        "name": "INNER SHELF SEA PEN FIELD",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 117,
+    "fields": {
+        "name": "IRVING WHALE FOOTPRINT SITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 118,
+    "fields": {
+        "name": "ISLE A LACHASSE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 119,
+    "fields": {
+        "name": "JOHN LUSBY MARSH NATIONAL WILDLIFE AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 120,
+    "fields": {
+        "name": "JORDAN BASIN MARINE REFUGE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 121,
+    "fields": {
+        "name": "KEJIMKUJIK SEASIDE NATIONAL PARK AND HISTORIC SITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 122,
+    "fields": {
+        "name": "KELLY COVE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 123,
+    "fields": {
+        "name": "KELP HABITATS BETWEEN SHELBURNE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 124,
+    "fields": {
+        "name": "KENAMU-LAKE MELVILLE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 125,
+    "fields": {
+        "name": "KETCH HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 126,
+    "fields": {
+        "name": "LABRADOR SEA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 127,
+    "fields": {
+        "name": "LABRADOR SHELF",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 128,
+    "fields": {
+        "name": "LABRADOR SHELVES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 129,
+    "fields": {
+        "name": "LAHAVE BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 130,
+    "fields": {
+        "name": "LAHAVE ISLANDS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 131,
+    "fields": {
+        "name": "LAURENTIAN CHANNEL",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 132,
+    "fields": {
+        "name": "LEHAVE BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 133,
+    "fields": {
+        "name": "LEHAVE BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 134,
+    "fields": {
+        "name": "LETANG ESTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 135,
+    "fields": {
+        "name": "LIVERPOOL HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 136,
+    "fields": {
+        "name": "LOBSTER BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 137,
+    "fields": {
+        "name": "LOCH BRAS D'OR SALMON FARMS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 138,
+    "fields": {
+        "name": "LOGAN CANYON",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 139,
+    "fields": {
+        "name": "LONG EDDY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 140,
+    "fields": {
+        "name": "LONG ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 141,
+    "fields": {
+        "name": "LOUISBOURG AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 142,
+    "fields": {
+        "name": "LTTM DFO GULF REGION VARIOUS SITES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 143,
+    "fields": {
+        "name": "LTTMP BIO VARIOUS SITES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 144,
+    "fields": {
+        "name": "LTTMP FSRS VARIOUS SITES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 145,
+    "fields": {
+        "name": "LTTMP LOBSTER SETTLEMENT COLLECTORS VARIOUS SITES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 146,
+    "fields": {
+        "name": "LUNEBURG BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 147,
+    "fields": {
+        "name": "LURCHER AREAS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 148,
+    "fields": {
+        "name": "M105-NEAR HALIFAX HARBOUR MOUTH",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 149,
+    "fields": {
+        "name": "M72-SE OF KETCH HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 150,
+    "fields": {
+        "name": "M73-NNE OF BONAVISTA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 151,
+    "fields": {
+        "name": "MACHIAS SEAL ISLAND BIRD SANCTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 152,
+    "fields": {
+        "name": "MACNAMARAS ISLANDS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 153,
+    "fields": {
+        "name": "MAGDALEN ISLANDS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 154,
+    "fields": {
+        "name": "MAHONE BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 155,
+    "fields": {
+        "name": "MAINE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 156,
+    "fields": {
+        "name": "MAKKOVIK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 157,
+    "fields": {
+        "name": "MAKKOVIK BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 158,
+    "fields": {
+        "name": "MARCOH D-44",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 159,
+    "fields": {
+        "name": "MARGAREE F-70",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 160,
+    "fields": {
+        "name": "MARINER I-85 WELLSITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 161,
+    "fields": {
+        "name": "MARQUIS L-35 EXPLORATION WELLSITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 162,
+    "fields": {
+        "name": "MARTINIQUE BEACH",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 163,
+    "fields": {
+        "name": "MCNUTTS ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 164,
+    "fields": {
+        "name": "MINAS BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 165,
+    "fields": {
+        "name": "MIRAMICHI AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 166,
+    "fields": {
+        "name": "MIRAMICHI BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 167,
+    "fields": {
+        "name": "MIRAMICHI RIVER",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 168,
+    "fields": {
+        "name": "MISAINE BANK AND LAURENTIAN CHANNEL",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 169,
+    "fields": {
+        "name": "MUSQUASH ESTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 170,
+    "fields": {
+        "name": "MUSQUODOBOIT HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 171,
+    "fields": {
+        "name": "NAFO DIVISION 0A",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 172,
+    "fields": {
+        "name": "NAFO DIVISION 0B",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 173,
+    "fields": {
+        "name": "NAFO DIVISION 1A",
+        "description": "Within NAFO Subarea 0 (Arctic /Davis Strait)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 174,
+    "fields": {
+        "name": "NAFO DIVISION 1B",
+        "description": "Within NAFO Subarea 0 (Arctic /Davis Strait)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 175,
+    "fields": {
+        "name": "NAFO DIVISION 1C",
+        "description": "Within NAFO Subarea 1 (Greenland/Labrador Sea)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 176,
+    "fields": {
+        "name": "NAFO DIVISION 1D",
+        "description": "Within NAFO Subarea 1 (Greenland/Labrador Sea)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 177,
+    "fields": {
+        "name": "NAFO DIVISION 1E",
+        "description": "Within NAFO Subarea 1 (Greenland/Labrador Sea)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 178,
+    "fields": {
+        "name": "NAFO DIVISION 1F",
+        "description": "Within NAFO Subarea 1 (Greenland/Labrador Sea)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 179,
+    "fields": {
+        "name": "NAFO DIVISION 2G",
+        "description": "Within NAFO Subarea 1 (Greenland/Labrador Sea)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 180,
+    "fields": {
+        "name": "NAFO DIVISION 2H",
+        "description": "Within NAFO Subarea 1 (Greenland/Labrador Sea)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 181,
+    "fields": {
+        "name": "NAFO DIVISION 2J",
+        "description": "Within NAFO Subarea 2 (Labrador Shelf)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 182,
+    "fields": {
+        "name": "NAFO DIVISION 2J3KL",
+        "description": "Within NAFO Subarea 2 (Labrador Shelf)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 183,
+    "fields": {
+        "name": "NAFO DIVISION 3K",
+        "description": "Within NAFO Subarea 2 (Labrador Shelf)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 184,
+    "fields": {
+        "name": "NAFO DIVISION 3L",
+        "description": "Within NAFO Subarea 2 (Labrador Shelf)-  stock areas"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 185,
+    "fields": {
+        "name": "NAFO DIVISION 3M ",
+        "description": "Within NAFO Subarea 3 (Newfoundland & Grand Banks)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 186,
+    "fields": {
+        "name": "NAFO DIVISION 3N",
+        "description": "Within NAFO Subarea 3 (Newfoundland & Grand Banks)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 187,
+    "fields": {
+        "name": "NAFO DIVISION 3O",
+        "description": "Within NAFO Subarea 3 (Newfoundland & Grand Banks)- (Flemish Cap – outside EEZ)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 188,
+    "fields": {
+        "name": "NAFO DIVISION 3P",
+        "description": "Within NAFO Subarea 3 (Newfoundland & Grand Banks)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 189,
+    "fields": {
+        "name": "NAFO DIVISION 4R",
+        "description": "Within NAFO Subarea 3 (Newfoundland & Grand Banks)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 190,
+    "fields": {
+        "name": "NAFO DIVISION 4S",
+        "description": "Within NAFO Subarea 3 (Newfoundland & Grand Banks)-  (often split into 3Ps)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 191,
+    "fields": {
+        "name": "NAFO DIVISION 4T",
+        "description": "Within NAFO Subarea 4 (Gulf of St. Lawrence)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 192,
+    "fields": {
+        "name": "NAFO DIVISION 4V ",
+        "description": "Within NAFO Subarea 4 (Gulf of St. Lawrence)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 193,
+    "fields": {
+        "name": "NAFO DIVISION 4W",
+        "description": "Within NAFO Subarea 4 (Gulf of St. Lawrence)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 194,
+    "fields": {
+        "name": "NAFO DIVISION 4X",
+        "description": "Within NAFO Subarea 4 (Gulf of St. Lawrence ) - (often split into 4Vn, 4Vs)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 195,
+    "fields": {
+        "name": "NAFO DIVISION 5Y",
+        "description": "Within NAFO Subarea 4 (Gulf of St. Lawrence)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 196,
+    "fields": {
+        "name": "NAFO DIVISION 5Z",
+        "description": "Within NAFO Subarea 4 (Gulf of St. Lawrence)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 197,
+    "fields": {
+        "name": "NAFO DIVISION 6A",
+        "description": "Within NAFO Subarea 5 (Scotian Shelf / Georges Bank)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 198,
+    "fields": {
+        "name": "NAFO DIVISION 6B",
+        "description": "Within NAFO Subarea 5 (Scotian Shelf / Georges Bank)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 199,
+    "fields": {
+        "name": "NAIN BANK",
+        "description": "Within NAFO Subarea 6 (Mid‑Atlantic - southern area)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 200,
+    "fields": {
+        "name": "NATASHQUAN",
+        "description": "Within NAFO Subarea 6 (Mid‑Atlantic - southern area)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 201,
+    "fields": {
+        "name": "NORTH TRIUMPH WELLSITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 202,
+    "fields": {
+        "name": "NORTHERN COD STOCK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 203,
+    "fields": {
+        "name": "NORWEGIAN BASIN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 204,
+    "fields": {
+        "name": "NOTRE DAM BAY",
+        "description": "Combined NAFO Area (2J3KL)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 205,
+    "fields": {
+        "name": "OKAK BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 206,
+    "fields": {
+        "name": "ONONDAGA B-84",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 207,
+    "fields": {
+        "name": "ORPHAN BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 208,
+    "fields": {
+        "name": "PASSAMAQUODDY BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 209,
+    "fields": {
+        "name": "PETITCODIAC RIVER",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 210,
+    "fields": {
+        "name": "PORT HAWKESBURY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 211,
+    "fields": {
+        "name": "PORT HEBERT BIRD SANCTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 212,
+    "fields": {
+        "name": "PORT JOLI BIRD SANCTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 213,
+    "fields": {
+        "name": "PORTUGUESE COVE AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 214,
+    "fields": {
+        "name": "PT. ACONI STATION G",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 215,
+    "fields": {
+        "name": "QUEENSLAND M-88",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 216,
+    "fields": {
+        "name": "RACE ROCKS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 217,
+    "fields": {
+        "name": "RICHIBUCTO HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 218,
+    "fields": {
+        "name": "RISE AND ABYSS",
+        "description": "DFO Oceans Act Areas of Interest (AOIs)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 219,
+    "fields": {
+        "name": "SABLE BANKS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 220,
+    "fields": {
+        "name": "SABLE ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 221,
+    "fields": {
+        "name": "SABLE RIVER BIRD SANCTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 222,
+    "fields": {
+        "name": "SAGLEK AREAS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 223,
+    "fields": {
+        "name": "SAGUENARY MARINE PARK TO MATANE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 224,
+    "fields": {
+        "name": "SAGUENAY RIVER",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 225,
+    "fields": {
+        "name": "SAMBRO BANK SPONGE MARINE REFUGE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 226,
+    "fields": {
+        "name": "SAMBRO HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 227,
+    "fields": {
+        "name": "SAMBRO LEDGES",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 228,
+    "fields": {
+        "name": "SARGASSO SEA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 229,
+    "fields": {
+        "name": "SCOTIAN SHELF",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 230,
+    "fields": {
+        "name": "SEAL ISLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 231,
+    "fields": {
+        "name": "SEELEY'S COVE NB",
+        "description": "Combined NAFO Area (4VWX)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 232,
+    "fields": {
+        "name": "SG̲ÁAN K̲ÍNGHLAS–BOWIE SEAMOUNT",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 233,
+    "fields": {
+        "name": "SHALE COVE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 234,
+    "fields": {
+        "name": "SHEDABUCTO BAY",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Pacific"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 235,
+    "fields": {
+        "name": "SHEDIAC AREA",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 236,
+    "fields": {
+        "name": "SHEDIAC VALLEY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 237,
+    "fields": {
+        "name": "SHELF FUNDIAN CHANNEL TO CABOT STRAIT",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 238,
+    "fields": {
+        "name": "SOUTH MERASHEET K-55",
+        "description": "DFO Oceans Act Areas of Interest (AOIs)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 239,
+    "fields": {
+        "name": "SOUTH OF GRAND MANAN",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 240,
+    "fields": {
+        "name": "SOUTH OF LEHAVE BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 241,
+    "fields": {
+        "name": "SOUTH SABLE B-44",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 242,
+    "fields": {
+        "name": "SOUTHERN GULF",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 243,
+    "fields": {
+        "name": "SOUTHERN NEWFOUNDLAND",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 244,
+    "fields": {
+        "name": "ST MARGARETS BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 245,
+    "fields": {
+        "name": "ST. ANNS BANK",
+        "description": "Combined NAFO Areas (3Ps)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 246,
+    "fields": {
+        "name": "ST. GEORGES BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 247,
+    "fields": {
+        "name": "ST. GEORGES BAY A-36",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 248,
+    "fields": {
+        "name": "ST. LAWRENCE ESTUARY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 249,
+    "fields": {
+        "name": "ST. PIERRE BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 250,
+    "fields": {
+        "name": "SUGAR HARBOUR ISLANDS",
+        "description": "DFO Oceans Act Areas of Interest (AOIs)"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 251,
+    "fields": {
+        "name": "SWISSAIR CRASH SITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 252,
+    "fields": {
+        "name": "SYDNEY BIGHT ICYCLER PROGRAM",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 253,
+    "fields": {
+        "name": "TANG.ɢ̱WAN – ḤAČXWIQAK – TSIG̱IS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 254,
+    "fields": {
+        "name": "TARIUM NIRYUTAIT",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 255,
+    "fields": {
+        "name": "TERRA NOVA C-09",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Pacific"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 256,
+    "fields": {
+        "name": "TERRA NOVA E-79",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Arctic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 257,
+    "fields": {
+        "name": "TERRA NOVA FPSO",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 258,
+    "fields": {
+        "name": "THE GULLY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 259,
+    "fields": {
+        "name": "THE PATCH (OBSERVER TRAINING)",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 260,
+    "fields": {
+        "name": "THE WOLVES AREA",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Atlantic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 261,
+    "fields": {
+        "name": "THEBAUD SITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 262,
+    "fields": {
+        "name": "TIVERTON",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 263,
+    "fields": {
+        "name": "TORBROOK C-15 EXPLORATION WELLSITE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 264,
+    "fields": {
+        "name": "TRINITY BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 265,
+    "fields": {
+        "name": "TROMSO",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 266,
+    "fields": {
+        "name": "TUVAIJUITTUQ",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 267,
+    "fields": {
+        "name": "UNGAVA BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 268,
+    "fields": {
+        "name": "VENTURE FIELD",
+        "description": "DFO Oceans Act Marine Protected Areas (MPAs) in Arctic"
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 269,
+    "fields": {
+        "name": "VICINITY 44",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 270,
+    "fields": {
+        "name": "VICINITY NORTH OF NAIN LABRADOR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 271,
+    "fields": {
+        "name": "VICINITY OF CONFEDEREATION BRIDGE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 272,
+    "fields": {
+        "name": "VICINITY OF MISCOUR IS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 273,
+    "fields": {
+        "name": "VICINITY SHOAL TICKLE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 274,
+    "fields": {
+        "name": "VIRGIN ROCKS",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 275,
+    "fields": {
+        "name": "WESTERN BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 276,
+    "fields": {
+        "name": "WESTERN SHELF",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 277,
+    "fields": {
+        "name": "WESTWARD ALONG SCOTIAN SLOPE",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 278,
+    "fields": {
+        "name": "WEYMOUTH A-45",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 279,
+    "fields": {
+        "name": "WHALE BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 280,
+    "fields": {
+        "name": "WHITE BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 281,
+    "fields": {
+        "name": "WHYCOCOMAGH BAY",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 282,
+    "fields": {
+        "name": "WOODS HARBOUR",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 283,
+    "fields": {
+        "name": "WOOLFALL BANK",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 284,
+    "fields": {
+        "name": "YARMOUTH",
+        "description": null
+    }
+},
+{
+    "model": "core.geographicregions",
+    "pk": 285,
+    "fields": {
+        "name": "YUCATAN CHANNEL",
+        "description": null
     }
 }
 ]

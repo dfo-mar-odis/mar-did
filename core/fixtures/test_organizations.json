@@ -1,0 +1,1861 @@
+[
+{
+    "model": "core.organizations",
+    "pk": 1,
+    "fields": {
+        "name": "AMAX OF CANADA LIMITED",
+        "acronym": "AMAX",
+        "code": null,
+        "description": "Canadian subsidiaries operated in mining and oil exploration",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 2,
+    "fields": {
+        "name": "AMEC CANADA",
+        "acronym": null,
+        "code": null,
+        "description": "Global engineering and consultancy firm ",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 3,
+    "fields": {
+        "name": "AMOCO OIL CO.",
+        "acronym": null,
+        "code": null,
+        "description": "Major American energy company that merged with BP in 1998",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 4,
+    "fields": {
+        "name": "ANTARCTIC ECOSYSTEM RESEARCH DIVISION",
+        "acronym": "AERD",
+        "code": null,
+        "description": "AERD is part of NOAA and one of the world’s leading groups studying Antarctic marine ecosystems",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 5,
+    "fields": {
+        "name": "ARCTIC BIOLOGICAL STATION",
+        "acronym": "ABS",
+        "code": 4,
+        "description": "A long‑standing Canadian federal research facility DFO & one of Canada’s oldest centres for Arctic marine science",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 6,
+    "fields": {
+        "name": "ARCTIC INSTITUTE OF NORTH AMERICA",
+        "acronym": "AINA",
+        "code": 23,
+        "description": "Arctic Institute Of North America (University Of Calgary)",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 7,
+    "fields": {
+        "name": "ARCTIC SCIENCES LTD.",
+        "acronym": "ARCTIC SCI",
+        "code": 36,
+        "description": "Historic no‑longer‑active federal corporation that operated in the mid‑20th century",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 8,
+    "fields": {
+        "name": "ASA CONSULTING",
+        "acronym": null,
+        "code": null,
+        "description": "Applied Science Associates (ASA) specialized global environmental consulting firm",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 9,
+    "fields": {
+        "name": "ASSEMBLY OF FIRST NATIONS",
+        "acronym": "AFN",
+        "code": null,
+        "description": "DFO partners with Indigenous communities",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 10,
+    "fields": {
+        "name": "ATLANTIC GROUNDFISH COUNCIL",
+        "acronym": "AGC",
+        "code": null,
+        "description": "AGC is the industry association representing Canada’s Atlantic groundfish harvesters and processors",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 11,
+    "fields": {
+        "name": "ATLANTIC OCEANOGRAPHIC GROUP",
+        "acronym": "AOG",
+        "code": 1,
+        "description": "Historical Canadian federal science unit that operated under FRB and later within DFO",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 12,
+    "fields": {
+        "name": "ATLANTIC OCEANOGRAPHIC LABORATORY",
+        "acronym": "AOL",
+        "code": 10,
+        "description": "Atlantic Oceanographic Laboratory (AOL) BIO specializes in physical and chemical oceanography",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 13,
+    "fields": {
+        "name": "ATLANTIC POLICY CONGRESS OF FIRST NATIONS CHIEFS",
+        "acronym": null,
+        "code": null,
+        "description": "Indigenous fisheries organizations",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 14,
+    "fields": {
+        "name": "ATLANTIC SALMON FEDERATION",
+        "acronym": "ASF",
+        "code": null,
+        "description": "ASF acts as a delivery partner science contributor and policy advocate within DFO‑led frameworks",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 15,
+    "fields": {
+        "name": "ATLANTIC VETERINARY COLLEGE",
+        "acronym": "AVC ",
+        "code": null,
+        "description": "AVC  works closely with DFO Science and regulatory programs",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 16,
+    "fields": {
+        "name": "BAYFIELD INSTITUTE CANADA CENTRE FOR INLAND WATERS",
+        "acronym": "CCIW",
+        "code": 22,
+        "description": "A large federal freshwater research complex established in 1967",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 17,
+    "fields": {
+        "name": "BEDFORD INSTITUTE OF OCEANOGRAPHY",
+        "acronym": "BIO",
+        "code": 1,
+        "description": "Located in Dartmouth NS it is Canada's largest center for ocean research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 18,
+    "fields": {
+        "name": "BIO USA",
+        "acronym": "BIO US",
+        "code": null,
+        "description": "Extensive cross-border scientific partnerships between Canada and the US for North Atlantic research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 19,
+    "fields": {
+        "name": "BIOLOGICAL SCIENCES BRANCH ",
+        "acronym": "BSB",
+        "code": null,
+        "description": "Biological Sciences Branch of DFO Bedford Institute of Oceanography Dartmouth Nova Scotia",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 20,
+    "fields": {
+        "name": "BOWDOIN COLLEGE OF BRUNSWICK - SCIENTIFIC STATION",
+        "acronym": null,
+        "code": null,
+        "description": "Located on Kent Island several miles off the mainland in the Bay of Fundy",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 21,
+    "fields": {
+        "name": "BP p.lc.  ",
+        "acronym": "BP",
+        "code": null,
+        "description": "A major multinational energy company engaged in the exploration, production, refining, and marketing of oil and natural gas worldwide",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 22,
+    "fields": {
+        "name": "BSB at ST. ANDREWS",
+        "acronym": "BSB-SABS",
+        "code": null,
+        "description": "DFO BSB (Biological Sciences Branch) & St. Andrews Biological Station (SABS) in New Brunswick",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 23,
+    "fields": {
+        "name": "CANADIAN COAST GUARD",
+        "acronym": "CCG",
+        "code": null,
+        "description": "Core Federal & Government Partners & Canada’s national safety and response agency",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 24,
+    "fields": {
+        "name": "CANADIAN FOOD INSPECTION AGENCY",
+        "acronym": "CFIA",
+        "code": null,
+        "description": "Science‑based federal regulatory agency responsible for safeguarding food safety animal health and plant health in Canada",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 25,
+    "fields": {
+        "name": "CANADIAN FORCES MARITIME EXPERIMENTAL AND TEST RAN",
+        "acronym": "CFMETR",
+        "code": null,
+        "description": "CFMETR is a DND maritime test and evaluation facility on the east coast of Vancouver Island",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 26,
+    "fields": {
+        "name": "CANADIAN HYDOGRAPHIC SERVICE",
+        "acronym": "CHS",
+        "code": 7,
+        "description": "CHS is responsible for providing authoritative hydrographic and nautical information to ensure safe navigation in Canadian waters",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 27,
+    "fields": {
+        "name": "CANADIAN MARINE DRILLING LTD.",
+        "acronym": "CANMAR",
+        "code": null,
+        "description": "Support offshore Arctic oil exploration owned subsidiary of Dome Petroleum Limited",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 28,
+    "fields": {
+        "name": "CANADIAN NATIONAL OCEANOGRAPHIC DATA CENTRE",
+        "acronym": "CNODC",
+        "code": null,
+        "description": "CNODC or former CODC is Canada’s national ocean data repository operated by DFO through MEDS ",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 29,
+    "fields": {
+        "name": "CANADIAN NATURAL RESOURCES LIMITED",
+        "acronym": "CNRL",
+        "code": null,
+        "description": "Canadian oil and gas company engaged in the exploration, development, and production of crude oil, natural gas, and oil sands resources in Canada and internationally",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 30,
+    "fields": {
+        "name": "CANADIAN RIVERS INSTITUTE",
+        "acronym": "CRI",
+        "code": null,
+        "description": "University‑based centre of excellence in river science headquartered at the University of New Brunswick (UNB)",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 31,
+    "fields": {
+        "name": "CANADIAN SPACE AGENCY",
+        "acronym": "CSA",
+        "code": null,
+        "description": "Canada’s national space agency located at John H. Chapman Space Centre in Longueuil Québec",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 32,
+    "fields": {
+        "name": "CANADIAN WILDLIFE FEDERATION",
+        "acronym": "CWF",
+        "code": null,
+        "description": "CWF is a national non‑profit non‑governmental conservation organization (NGO)",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 33,
+    "fields": {
+        "name": "CAPE BRETON UNIVERSITY ",
+        "acronym": "CBU",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 34,
+    "fields": {
+        "name": "CENTRE FOR AQUATIC HEALTH SCIENCES",
+        "acronym": "CAHS",
+        "code": null,
+        "description": "Provide epidemiology‑based aquatic animal health research supporting both government and industry decision‑making",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 35,
+    "fields": {
+        "name": "CHAMPLAIN CENTER FOR MARINE SCIENCE AND SURVEYS",
+        "acronym": "CCSM",
+        "code": 41,
+        "description": "CCMSS was a Canadian federal marine science and survey facility no longer exists as a distinct organization",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 36,
+    "fields": {
+        "name": "CHEVRON OIL",
+        "acronym": null,
+        "code": null,
+        "description": "A major multinational energy company engaged in the exploration, production, refining, and marketing of oil and natural gas worldwide",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 37,
+    "fields": {
+        "name": "COASTAL ECOSYSTEM SCIENCE DIVISION",
+        "acronym": "CESD",
+        "code": null,
+        "description": "Coastal Ecosystem Science Division is part of DFO’s Ecosystems and Oceans Science (EOS) ",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 38,
+    "fields": {
+        "name": "COASTAL OCEAN RESEARCH INSTITUTE",
+        "acronym": "CORI",
+        "code": null,
+        "description": "Non‑profit marine science research institute established to measure monitor and assess the health of coastal ocean ecosystems",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 39,
+    "fields": {
+        "name": "CONCORDIA UNIVERSITY",
+        "acronym": "CONCORDIAU",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 40,
+    "fields": {
+        "name": "COOGER",
+        "acronym": "COOGER",
+        "code": null,
+        "description": "DFO-BIO Centre for Offshore Oil Gas and Energy Research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 41,
+    "fields": {
+        "name": "DALHOUSIE UNIVERSITY",
+        "acronym": "DAL",
+        "code": 14,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 42,
+    "fields": {
+        "name": "DEPARTMENT OF FISHERIES AND OCEANS CANADA",
+        "acronym": "DFO",
+        "code": null,
+        "description": "DFO is a federal department of the Government of Canada responsible for the stewardship of Canada’s fisheries oceans and freshwater resources",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 43,
+    "fields": {
+        "name": "DEPARTMENT OF NATIONAL DEFENCE",
+        "acronym": "DND",
+        "code": null,
+        "description": "DND is a federal department of the Government of Canada responsible for supporting and administering the Canadian Armed Forces (CAF)",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 44,
+    "fields": {
+        "name": "DFO GULF FISHERIES CENTRE",
+        "acronym": "DFO-GFC",
+        "code": null,
+        "description": "DFO Gulf Fisheries Centre (GFC) located in Moncton NB",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 45,
+    "fields": {
+        "name": "DOME PETROLEUM LIMITED",
+        "acronym": "DOMEPETRO.",
+        "code": 35,
+        "description": "Dome Petroleum Limited was a calgary‑based oil and gas company collapsed in 1986 and acquired by Amoco in 1988",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 46,
+    "fields": {
+        "name": "DRDC: DEFENCE RESEARCH AND DEVELOPMENT CANADA ATLA",
+        "acronym": "DREA",
+        "code": 8,
+        "description": "DRDC is the science and technology organization of the DND & it provides defence and security science technology analysis and innovation to support the CAF",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 47,
+    "fields": {
+        "name": "DRDC: DEFENCE RESEARCH AND DEVELOPMENT CANADA OTTA",
+        "acronym": "DREO",
+        "code": 27,
+        "description": "DRDC is the science and technology organization of the DND & it provides defence and security science technology analysis and innovation to support the CAF",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 48,
+    "fields": {
+        "name": "DRDC: DEFENCE RESEARCH AND DEVELOPMENT CANADA PACI",
+        "acronym": "DREP",
+        "code": 9,
+        "description": "DRDC is the science and technology organization of the DND & it provides defence and security science technology analysis and innovation to support the CAF",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 49,
+    "fields": {
+        "name": "DUCKS UNLIMITED CANADA",
+        "acronym": null,
+        "code": null,
+        "description": "Ducks Canada is a national non‑profit non‑governmental conservation organization (NGO)",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 50,
+    "fields": {
+        "name": "ECOSYSTEMS AND OCEANS SCIENCE",
+        "acronym": "EOS",
+        "code": null,
+        "description": "EOS is the national science sector within DFO",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 51,
+    "fields": {
+        "name": "ENCANA CORPORATION",
+        "acronym": null,
+        "code": null,
+        "description": "A major  energy company engaged in the exploration, production, refining, and marketing of oil and natural gas worldwide",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 52,
+    "fields": {
+        "name": "ENVIRONMENT AND CLIMATE CHANGE CANADA",
+        "acronym": "ECCC",
+        "code": null,
+        "description": "ECCC is a federal department of the Government of Canada responsible for environmental protection climate change policy weather and climate services and conservation of nature",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 53,
+    "fields": {
+        "name": "ESSO",
+        "acronym": null,
+        "code": null,
+        "description": "A major multinational energy company engaged in the exploration, production, refining, and marketing of oil and natural gas worldwide",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 54,
+    "fields": {
+        "name": "EXXONMOBIL",
+        "acronym": null,
+        "code": null,
+        "description": "A major multinational energy company engaged in the exploration, production, refining, and marketing of oil and natural gas worldwide",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 55,
+    "fields": {
+        "name": "FAR EASTERN REGIONAL HYDROMETEOROLOGICAL RESEARCH ",
+        "acronym": "FERHRI",
+        "code": null,
+        "description": "Russian research institute conducting hydrometeorological and climate studies in the Far Eastern and North Pacific regions",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 56,
+    "fields": {
+        "name": "FEDERAL MARITIME AND HYDROGRAPHIC AGENCY OF GERMAN",
+        "acronym": "BSH",
+        "code": null,
+        "description": "Germany’s federal authority responsible for marine navigation hydrography oceanography and maritime environmental monitoring",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 57,
+    "fields": {
+        "name": "FISHERIES RESEARCH BOARD OF CANADA",
+        "acronym": "FRB",
+        "code": null,
+        "description": "A former Canadian federal agency that conducted fisheries and oceanographic research prior to its integration into DFO",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 58,
+    "fields": {
+        "name": "FISHERMEN AND SCIENTISTS RESEARCH SOCIETY",
+        "acronym": "FSRS",
+        "code": null,
+        "description": "FSRS and DFO work together on data-collection and research initiatives",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 59,
+    "fields": {
+        "name": "FISHERY AND AQUACULTURE SCIENCE BRANCH",
+        "acronym": "DSHA",
+        "code": null,
+        "description": "DSHA branch in DFO is one of the major science divisions operating at IML",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 60,
+    "fields": {
+        "name": "FOOD AND AGRICULTURE ORGANIZATION",
+        "acronym": "FAO",
+        "code": null,
+        "description": "A United Nations agency leading international efforts to improve food security fisheries agriculture and sustainable resource use",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 61,
+    "fields": {
+        "name": "FRENCH RESEARCH INSTITUTE FOR EXPLOITATION OF THE ",
+        "acronym": "IFREMER",
+        "code": null,
+        "description": "France’s national institute for marine science technology and sustainable use of ocean resources",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 62,
+    "fields": {
+        "name": "FRESHWATER INSTITUTE",
+        "acronym": "FWI",
+        "code": 40,
+        "description": " Canadian federal research centre specializing in freshwater ecosystems fisheries science and inland water studies",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 63,
+    "fields": {
+        "name": "GEOLOGICAL SURVEY OF CANADA ",
+        "acronym": "GSC",
+        "code": 28,
+        "description": "Canada’s national geoscience organization providing research and data on geology geophysics natural resources and hazards",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 64,
+    "fields": {
+        "name": "GEOMAR",
+        "acronym": "GEOMAR",
+        "code": null,
+        "description": "Bedford Institute of Oceanography (BIO) & GEOMAR are key partners in North Atlantic Ocean & Climate Observatory",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 65,
+    "fields": {
+        "name": "GOVERNMENT OF BRITISH COLUMBIA",
+        "acronym": null,
+        "code": null,
+        "description": "DFO collaborates with regional governments for fisheries and habitat management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 66,
+    "fields": {
+        "name": "GOVERNMENT OF NEWFOUNDLAND AND LABRADOR",
+        "acronym": null,
+        "code": null,
+        "description": "DFO collaborates with regional governments for fisheries and habitat management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 67,
+    "fields": {
+        "name": "GOVERNMENT OF NOVA SCOTIA",
+        "acronym": null,
+        "code": null,
+        "description": "DFO collaborates with regional governments for fisheries and habitat management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 68,
+    "fields": {
+        "name": "GOVERNMENT OF NUNAVUT",
+        "acronym": null,
+        "code": null,
+        "description": "DFO collaborates with regional governments for fisheries and habitat management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 69,
+    "fields": {
+        "name": "GOVERNMENT OF QUEBEC",
+        "acronym": null,
+        "code": null,
+        "description": "DFO collaborates with regional governments for fisheries and habitat management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 70,
+    "fields": {
+        "name": "GROUPE INTERUNIVERSITAIRE DE RECHERCHES OCÉANOGRAP",
+        "acronym": "GIROQ",
+        "code": 24,
+        "description": "Quebec‑based interuniversity consortium coordinating oceanographic research and training",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 71,
+    "fields": {
+        "name": "GULF FISHERIES CENTRE MONCTON NB",
+        "acronym": "GFC",
+        "code": 34,
+        "description": "DFO research centre focused on fisheries ecosystems and oceanography in the Gulf of St. Lawrence",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 72,
+    "fields": {
+        "name": "HALIFAX FISHERIES RESEARCH LABORATORY NS",
+        "acronym": "HFRL",
+        "code": 31,
+        "description": "A former federal fisheries science laboratory supporting marine research in Atlantic Canada",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 73,
+    "fields": {
+        "name": "HUSKY OIL",
+        "acronym": null,
+        "code": null,
+        "description": "An integrated energy company",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 74,
+    "fields": {
+        "name": "INSTITUT DE RECHERCHE POUR LE DÉVELOPPMENT",
+        "acronym": null,
+        "code": null,
+        "description": "A French public research institute conducting interdisciplinary research on sustainable development in partnership with developing countries",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 75,
+    "fields": {
+        "name": "INSTITUTE OF OCEAN SCIENCES",
+        "acronym": "IOS",
+        "code": 2,
+        "description": "A major Canadian federal oceanographic research institute specializing in Pacific and Arctic marine science",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 76,
+    "fields": {
+        "name": "INSTITUTE OF OCEANOGRAPHY UNIVERSITY OF HAMBURG",
+        "acronym": null,
+        "code": null,
+        "description": "A German academic institute conducting research and education in physical chemical and climate oceanography",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 77,
+    "fields": {
+        "name": "INTER-AMERICAN TROPICAL TUNA COMMISSION ",
+        "acronym": "IATTC",
+        "code": null,
+        "description": "An international organization responsible for the conservation and management of tuna and related species in the eastern Pacific Ocean",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 78,
+    "fields": {
+        "name": "INTERNATIONAL COMMISSION FOR THE CONSERVATION OF A",
+        "acronym": "ICCAT",
+        "code": null,
+        "description": "An intergovernmental body managing the conservation of tuna and tuna‑like species in the Atlantic Ocean and adjacent seas",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 79,
+    "fields": {
+        "name": "INTERNATIONAL COUNCIL FOR THE EXPLORATION OF THE S",
+        "acronym": "ICES",
+        "code": null,
+        "description": "A global scientific organization providing advice and coordination for marine research and ecosystem management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 80,
+    "fields": {
+        "name": "INUIT TAPIRIIT KANATAMI",
+        "acronym": "ITK",
+        "code": null,
+        "description": "The national representative organization for Inuit in Canada",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 81,
+    "fields": {
+        "name": "JAPANESE METEOROLOGICAL AGENCY",
+        "acronym": "JMA",
+        "code": null,
+        "description": "Japan’s national authority for weather forecasting climate monitoring oceanography and seismic hazard assessment",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 82,
+    "fields": {
+        "name": "KNIPOVICH POLAR RESEARCH INSTITUTE OF MARINE FISHE",
+        "acronym": "PINRO",
+        "code": null,
+        "description": "A Russian research institute specializing in Arctic and North Atlantic fisheries and oceanographic science",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 83,
+    "fields": {
+        "name": "LA TABATIÈRE EXPERIMENTAL FISHERIES STATION",
+        "acronym": null,
+        "code": null,
+        "description": "A former Canadian fisheries research station supporting experimental and applied fisheries studies in the Gulf of St. Lawrence",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 84,
+    "fields": {
+        "name": "LASMO",
+        "acronym": null,
+        "code": null,
+        "description": "A former British oil and gas exploration and production company with significant international offshore operations, later acquired by ENI",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 85,
+    "fields": {
+        "name": "LGL LIMITED ENVIRONMENTAL RESEARCH ASSOCIATES",
+        "acronym": "LGL",
+        "code": null,
+        "description": "A Canadian consulting firm providing environmental research and impact assessment services particularly in Arctic and marine regions",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 86,
+    "fields": {
+        "name": "MACLAREN",
+        "acronym": null,
+        "code": null,
+        "description": "Canadian engineering and environmental consulting firm",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 87,
+    "fields": {
+        "name": "MARINE ECOLOGY LABORATORY",
+        "acronym": "MEL",
+        "code": 1,
+        "description": "Canada’s principal federal marine science labs at BIO",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 88,
+    "fields": {
+        "name": "MARINE ECOSYSTEMS AND AQUACULTURE DIVISION PBS",
+        "acronym": "MEAD_PBS",
+        "code": null,
+        "description": "DFO division at the Pacific Biological Station focused on marine ecosystems and aquaculture science",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 89,
+    "fields": {
+        "name": "MARINE ECOSYSTEMS AND AQUACULTURE DIVISION WVL",
+        "acronym": "MEAD_WVL",
+        "code": null,
+        "description": "DFO research division at the West Vancouver Laboratory specializing in coastal ecosystems and aquaculture",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 90,
+    "fields": {
+        "name": "MARINE ENVIRONMENT AND HABITAT SCIENCE DIVISION WV",
+        "acronym": "MEHS_WVL",
+        "code": null,
+        "description": "DFO division conducting research on marine habitats and environmental processes",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 91,
+    "fields": {
+        "name": "MARINE ENVIRONMENTAL DATA SECTION",
+        "acronym": "MEDS",
+        "code": null,
+        "description": "Marine Environmental Data Section (MEDS) DFO program for managing and archiving oceanographic data.",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 92,
+    "fields": {
+        "name": "MARINE ENVIRONMENTAL SCIENCES DIVISION",
+        "acronym": "MESD",
+        "code": null,
+        "description": "Marine Environmental Sciences Division (MESD) DFO science branch at BIO Dartmouth NS.",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 93,
+    "fields": {
+        "name": "MARINE FISH DIVISION",
+        "acronym": "MFD",
+        "code": null,
+        "description": "Marine Fish Division (MFD) at DFO-BIO manage fish stocks sustainably in the Northwest Atlantic",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 94,
+    "fields": {
+        "name": "MARINE SCIENCES CENTER AT McGILL UnIVERSITY",
+        "acronym": "MSC",
+        "code": 17,
+        "description": "An interdisciplinary research and training center at McGill University supporting marine and aquatic science, including oceanography, ecology, and environmental research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 95,
+    "fields": {
+        "name": "MAURICE LAMONTAGNE INSTITUTE",
+        "acronym": "IML",
+        "code": 41,
+        "description": "IML Located in Mont-Joli Quebec DFO’s primary French-language marine science centre",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 96,
+    "fields": {
+        "name": "MCGILL UNIVERSITY",
+        "acronym": "McG",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 97,
+    "fields": {
+        "name": "MEMORIAL UNIVERSITY OF NEWFOUNDLAND",
+        "acronym": "MUN",
+        "code": 25,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 98,
+    "fields": {
+        "name": "METEOROLOGY AND OCEANOGRAPHY CENTRE EAST COAST",
+        "acronym": "METOCE",
+        "code": 18,
+        "description": "Meteorology And Oceanography Centre East Coast (Canadian Navy)",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 99,
+    "fields": {
+        "name": "METEOROLOGY AND OCEANOGRAPHY CENTRE WEST COAST",
+        "acronym": "METOCW",
+        "code": 19,
+        "description": "Meteorology And Oceanography Centre West Coast (Canadian Navy)",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 100,
+    "fields": {
+        "name": "MÉTIS NATIONAL COUNCIL",
+        "acronym": "MNC",
+        "code": null,
+        "description": "The national representative organization of the Métis Nation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 101,
+    "fields": {
+        "name": "MOBIL OIL",
+        "acronym": null,
+        "code": null,
+        "description": "An integrated energy company",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 102,
+    "fields": {
+        "name": "NATIONAL INSTITUTE OF SCIENTIFIC RESEARCH",
+        "acronym": "INRS",
+        "code": null,
+        "description": "A Quebec university‑level research institution dedicated exclusively to graduate studies and applied scientific research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 103,
+    "fields": {
+        "name": "NATIONAL OCEANIC AND ATMOSPHERIC ADMINISTRATION",
+        "acronym": "NOAA",
+        "code": null,
+        "description": "US federal agency responsible for weather forecasting climate monitoring ocean and coastal science fisheries management and the stewardship of marine and atmospheric resources",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 104,
+    "fields": {
+        "name": "NATIONAL OCEANOGRAPHY CENTRE SOUTHAMPTON",
+        "acronym": null,
+        "code": null,
+        "description": "The United Kingdom’s leading centre for oceanographic research technology development and marine observation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 105,
+    "fields": {
+        "name": "NATIONAL RESEARCH COUNCIL CANADA",
+        "acronym": "NRC",
+        "code": null,
+        "description": "Canada’s primary federal research organization supporting science innovation and industrial development",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 106,
+    "fields": {
+        "name": "NATIONAL WEATHER SERVICE",
+        "acronym": "NWS",
+        "code": null,
+        "description": "U.S. federal agency within NOAA responsible for weather forecasting severe weather warnings climate data and hydrologic services",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 107,
+    "fields": {
+        "name": "NATURAL RESOURCES CANADA",
+        "acronym": "NRCan",
+        "code": null,
+        "description": "A federal department responsible for natural resources science energy minerals forests earth sciences and mapping",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 108,
+    "fields": {
+        "name": "NATURE CANADA",
+        "acronym": null,
+        "code": null,
+        "description": "A Canadian conservation organization advocating for the protection of wildlife, habitats, and biodiversity through research, education, and policy engagement",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 109,
+    "fields": {
+        "name": "NATURE CONSERVANCY OF CANADA",
+        "acronym": null,
+        "code": null,
+        "description": "A national non‑profit organization dedicated to conserving Canada’s natural landscapes and biodiversity through land protection and stewardship",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 110,
+    "fields": {
+        "name": "NEWFOUNDLAND / ST. JOHN'S BIOLOGICAL STATION",
+        "acronym": null,
+        "code": 5,
+        "description": "A former Canadian federal marine research facility in St. John’sNL conducting fisheries and oceanographic science in support of Atlantic fisheries management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 111,
+    "fields": {
+        "name": "NEWFOUNDLAND HUNT OIL COMPANY INC.",
+        "acronym": null,
+        "code": null,
+        "description": "A former oil and gas exploration company involved in offshore petroleum exploration activities off the coast of Newfoundland and Labrador",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 112,
+    "fields": {
+        "name": "NORTH ATLANTIC SALMON CONSERVATION ORGANIZATION",
+        "acronym": "NASCO",
+        "code": null,
+        "description": "An intergovernmental organization dedicated to the conservation restoration and sustainable management of wild Atlantic salmon",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 113,
+    "fields": {
+        "name": "NORTH PACIFIC ANADROMOUS FISH COMMISSION",
+        "acronym": "NPAFC",
+        "code": null,
+        "description": "An international body promoting cooperation in research and conservation of anadromous fish stocks in the North Pacific Ocean",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 114,
+    "fields": {
+        "name": "NORTH PACIFIC FISHERIES COMMISSION",
+        "acronym": "NPFC",
+        "code": null,
+        "description": "An intergovernmental organization responsible for the conservation and management of fisheries resources in the high seas of the North Pacific",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 115,
+    "fields": {
+        "name": "NORTHCOR ENERGY LTD.",
+        "acronym": null,
+        "code": null,
+        "description": "An integrated energy company",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 116,
+    "fields": {
+        "name": "NORTHWEST ATLANTIC FISHERIES CENTRE",
+        "acronym": "NAFC",
+        "code": 5,
+        "description": "A former Canadian federal fisheries research centre supporting marine science and stock assessment in the Northwest Atlantic",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 117,
+    "fields": {
+        "name": "NORTHWEST ATLANTIC FISHERIES ORGANIZATION",
+        "acronym": "NAFO",
+        "code": null,
+        "description": "An international fisheries management organization responsible for conserving and managing fishery resources in the Northwest Atlantic Ocean",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 118,
+    "fields": {
+        "name": "NOVA SCOTIA RESEARCH FOUNDATION",
+        "acronym": "NSRR",
+        "code": null,
+        "description": "Nova Scotia Research Foundation provincial research organization",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 119,
+    "fields": {
+        "name": "NUNATSIAVUT GOVERNMENT",
+        "acronym": null,
+        "code": null,
+        "description": "The Inuit regional government representing Nunatsiavut in northern Labrador",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 120,
+    "fields": {
+        "name": "OCEAN AND ECOSYSTEM SCIENCES DIVISION ",
+        "acronym": "OESD",
+        "code": null,
+        "description": "Ocean and Ecosystem Sciences Division (OESD)  DFO-BIO Science sector for oceanography ",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 121,
+    "fields": {
+        "name": "OCEAN AND ENVIRONMENTAL SCIENCE BRANCH IML",
+        "acronym": "DSOE",
+        "code": null,
+        "description": "DFO science branch at the Institut Maurice‑Lamontagne conducting oceanographic and environmental research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 122,
+    "fields": {
+        "name": "OCEAN DATA SERVICES",
+        "acronym": "ODS",
+        "code": null,
+        "description": "DFO ODS supports the storage processing and sharing of ocean science data",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 123,
+    "fields": {
+        "name": "OCEAN FRONTIER INSTITUTE",
+        "acronym": "OFI",
+        "code": null,
+        "description": "A Canadian research institute advancing interdisciplinary ocean science focused on climate change sustainable oceans and societal impacts",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 124,
+    "fields": {
+        "name": "OCEAN NETWORKS CANADA",
+        "acronym": "ONC",
+        "code": null,
+        "description": "A Canadian organization operating cabled ocean observatories that provide continuous real‑time ocean data for research and monitoring",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 125,
+    "fields": {
+        "name": "OCEAN SCIENCE AND PRODUCTIVITY DIVISION IOS",
+        "acronym": "OSAP",
+        "code": null,
+        "description": "DFO science division at the Institute of Ocean Sciences focused on ocean productivity and ecosystem processes",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 126,
+    "fields": {
+        "name": "OCEAN SCIENCE AND PRODUCTIVITY DIVISION PBS",
+        "acronym": "OSP_PBS",
+        "code": null,
+        "description": "DFO division at the Pacific Biological Station studying ocean productivity and ecosystem dynamics",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 127,
+    "fields": {
+        "name": "OCEAN SCIENCES DIVISION IOS",
+        "acronym": "OSD_IOS",
+        "code": null,
+        "description": "DFO division conducting physical chemical and biological oceanographic research at the Institute of Ocean Sciences",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 128,
+    "fields": {
+        "name": "PACIFIC BIOLOGICAL STATION",
+        "acronym": "PBS",
+        "code": 32,
+        "description": "A major DFO research facility conducting fisheries and marine ecosystem science on Canada’s Pacific coast",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 129,
+    "fields": {
+        "name": "PACIFIC GEOSCIENCE CENTRE",
+        "acronym": null,
+        "code": null,
+        "description": "A Canadian federal geoscience facility specializing in earthquakes marine geology and natural hazard research on the Pacific margin",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 130,
+    "fields": {
+        "name": "PACIFIC OCEANOGRAPHIC GROUP",
+        "acronym": "POG",
+        "code": 2,
+        "description": "POG was a canadian federal oceanographic research group based in BC and was one of the foundational organizations for physical oceanography on Canada’s Pacific coast",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 131,
+    "fields": {
+        "name": "PANCANADIAN ENERGY CORP.",
+        "acronym": null,
+        "code": null,
+        "description": "PanCanadian Energy Corporation Merged with Ovintiv Inc.",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 132,
+    "fields": {
+        "name": "PELAGIC AND ECOSYSTEM SCIENCE BRANCH IML",
+        "acronym": "DSPE",
+        "code": null,
+        "description": "IML’s core science divisions focusing on pelagic ecosystems oceanographic processes and ecosystem‑based research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 133,
+    "fields": {
+        "name": "PETRO CANADA",
+        "acronym": null,
+        "code": null,
+        "description": "A major canadian energy company engaged in the exploration, production, refining, and marketing of oil and natural gas worldwide",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 134,
+    "fields": {
+        "name": "PLANSEARCH",
+        "acronym": null,
+        "code": null,
+        "description": "A prominent Canadian engineering and environmental consulting firm",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 135,
+    "fields": {
+        "name": "POLAR CONTINENTAL SHELF PROGRAM",
+        "acronym": null,
+        "code": 11,
+        "description": "A Canadian federal program providing logistics and support for scientific research in Canada’s Arctic regions",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 136,
+    "fields": {
+        "name": "POPULATION ECOLOGY DIVISION GFC",
+        "acronym": "PED_GFC",
+        "code": null,
+        "description": "A DFO science division at the Gulf Fisheries Centre focused on fish population dynamics and stock assessment",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 137,
+    "fields": {
+        "name": "POPULATION ECOLOGY DIVISION SABS",
+        "acronym": "PED_SABS",
+        "code": null,
+        "description": "DFO division at the St. Andrews Biological Station specializing in population ecology and fisheries science",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 138,
+    "fields": {
+        "name": "QUEENS UNIVERSITY",
+        "acronym": "QU ",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 139,
+    "fields": {
+        "name": "ROMBERG TIBURON CENTER FOR ENVIRONMENTAL STUDIES",
+        "acronym": null,
+        "code": null,
+        "description": "A research and education center of San Francisco State University focused on coastal and estuarine ecosystems of San Francisco Bay",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 140,
+    "fields": {
+        "name": "SABLE OFFSHORE ENERGY INC.",
+        "acronym": null,
+        "code": null,
+        "description": " A Canadian offshore energy company formed to acquire and redevelop the Sable Offshore Energy Project, producing natural gas off the coast of Nova Scotia",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 141,
+    "fields": {
+        "name": "SAGUENAY-ST. LAWRENCE MARINE PARK",
+        "acronym": "PSSL",
+        "code": null,
+        "description": "A federally protected marine park managed by Parks Canada",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 142,
+    "fields": {
+        "name": "SALMON AND FRESHWATER ECOSYSTEMS DIVISION PBS",
+        "acronym": "SFE_PBS",
+        "code": null,
+        "description": "DFO science division at the Pacific Biological Station focused on salmon biology and freshwater ecosystem research",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 143,
+    "fields": {
+        "name": "SCHOOL OF EARTH AND OCEAN SCIENCES UVIC",
+        "acronym": "SEOS",
+        "code": null,
+        "description": "An academic unit conducting research and education in earth sciences oceanography climate and environmental geoscience",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 144,
+    "fields": {
+        "name": "SCIENCE ADVICE INFORMATION AND SUPPORT BRANCH IML",
+        "acronym": "DAISS",
+        "code": null,
+        "description": "DFO branch at the IML providing scientific advice data support and coordination for marine management",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 145,
+    "fields": {
+        "name": "SCRIPPS INSTITUTE OF OCEANOGRAPHY",
+        "acronym": null,
+        "code": null,
+        "description": "A world‑leading research institution at the University of California San Diego specializing in ocean earth and climate sciences",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 146,
+    "fields": {
+        "name": "SHELL CANADA LIMITED",
+        "acronym": null,
+        "code": null,
+        "description": "A former Canadian subsidiary of Royal Dutch Shell engaged in oil, gas, and energy development, whose assets were later acquired by Canadian Natural Resources Limited",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 147,
+    "fields": {
+        "name": "SPANISH OCEANOGRAPHIC INSTITUTE",
+        "acronym": "IEO",
+        "code": null,
+        "description": "Spain’s national public research institute conducting marine science and fisheries research to support sustainable management of marine resources",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 148,
+    "fields": {
+        "name": "ST. ANDREWS BIOLOGICAL STATION",
+        "acronym": "SABS",
+        "code": 3,
+        "description": "DFO maritime research facility at St. Andrews Biological Station in New Brunswick",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 149,
+    "fields": {
+        "name": "ST. LAWRENCE GLOBAL OBSERVATORY",
+        "acronym": null,
+        "code": null,
+        "description": "A regional research and observation initiative focused on monitoring understanding and communicating environmental and socio‑ecological changes in the St. Lawrence system",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 150,
+    "fields": {
+        "name": "STATION BIOLOGIQUE DU SAINT-LAURENT",
+        "acronym": "STNBIO3PIS",
+        "code": null,
+        "description": " A Quebec‑based marine research station conducting biological and ecological studies in the St. Lawrence River and estuary",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 151,
+    "fields": {
+        "name": "STATION DE BIOLOGIE MARINE DE GRANDE-RIVIÈRE",
+        "acronym": null,
+        "code": 6,
+        "description": "A marine research station in Gaspésie dedicated to coastal and marine biological research in the Gulf of St. Lawrence",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 152,
+    "fields": {
+        "name": "TEXACO",
+        "acronym": null,
+        "code": null,
+        "description": "A major independent American oil company",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 153,
+    "fields": {
+        "name": "TRANSPORT CANADA",
+        "acronym": "TC",
+        "code": null,
+        "description": "A federal department responsible for regulating all transportation in Canada",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 154,
+    "fields": {
+        "name": "U.S. COAST GUARD",
+        "acronym": null,
+        "code": null,
+        "description": "US armed service and federal maritime agency responsible for maritime safety security environmental protection search and rescue and the enforcement of maritime law",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 155,
+    "fields": {
+        "name": "UNIVERSITÉ DU QUÉBEC À MONTRÉAL",
+        "acronym": "UQAM",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 156,
+    "fields": {
+        "name": "UNIVERSITÉ DU QUÉBEC À RIMOUSKI",
+        "acronym": "UQAR",
+        "code": 29,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 157,
+    "fields": {
+        "name": "UNIVERSITÉ LAVAL",
+        "acronym": "Ulaval",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 158,
+    "fields": {
+        "name": "UNIVERSITY OF ALBERTA",
+        "acronym": "U of A",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 159,
+    "fields": {
+        "name": "UNIVERSITY OF BRITISH COLUMBIA",
+        "acronym": "UBC",
+        "code": 13,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 160,
+    "fields": {
+        "name": "UNIVERSITY OF CALGARY",
+        "acronym": "U of C",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 161,
+    "fields": {
+        "name": "UNIVERSITY OF NEW BRUNSWICK",
+        "acronym": "UNB",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 162,
+    "fields": {
+        "name": "UNIVERSITY OF TORONTO",
+        "acronym": "U of T",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 163,
+    "fields": {
+        "name": "UNIVERSITY OF VICTORIA",
+        "acronym": "UVic",
+        "code": 26,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 164,
+    "fields": {
+        "name": "UNIVERSITY OF WASHINGTON",
+        "acronym": "UNIV.WASH.",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 165,
+    "fields": {
+        "name": "WEST VANCOUVER LABORATORY",
+        "acronym": "WVL",
+        "code": null,
+        "description": "DFO collaborates with universities through partnerships in research data sharing and innovation to advance ocean science fisheries management and marine conservation",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 166,
+    "fields": {
+        "name": "WESTERN AND CENTRAL PACIFIC FISHERIES COMMISSION",
+        "acronym": "WCPFC",
+        "code": null,
+        "description": "World’s largest tuna fishery and close to the Pacific Island nations",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 167,
+    "fields": {
+        "name": "WOODS HOLE OCEANOGRAPHIC INSTITUTE",
+        "acronym": "WHOI",
+        "code": null,
+        "description": "Woods Hole Oceanographic Institution non-profit ocean research institution in US",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 168,
+    "fields": {
+        "name": "WORLD OCEAN CIRCULATION EXPERIMENT",
+        "acronym": "WOCE",
+        "code": null,
+        "description": "WOCE was a major international oceanographic program during 1990–1998",
+        "country": 189
+    }
+},
+{
+    "model": "core.organizations",
+    "pk": 169,
+    "fields": {
+        "name": "WORLD WILDLIFE FUND",
+        "acronym": "WWF",
+        "code": null,
+        "description": "An international conservation organization working to protect biodiversity, reduce human impacts on nature, and promote sustainable use of natural resources",
+        "country": 189
+    }
+}
+]
