@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.db.models import Min
 from django.urls import path, reverse_lazy
 from django.utils.translation import gettext as _
 from django.http import HttpResponse, HttpResponseForbidden
@@ -87,7 +88,8 @@ def list_missions(request):
 
     table_soup = BeautifulSoup('', 'html.parser')
 
-    queryset = models.Missions.objects.order_by('pk')
+    # Example query to order missions by the start_date of their first leg
+    queryset = models.Missions.objects.annotate(first_leg_start_date=Min('legs__start_date')).order_by('first_leg_start_date')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 

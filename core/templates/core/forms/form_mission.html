@@ -26,14 +26,17 @@
             <div class="tab-pane fade show active" id="mission_legs" role="tabpanel" aria-labelledby="mission_tabs_legs">
                 <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_legs">
                     {% crispy mission_legs_form %}
-
-                    {# and print the table for existing legs object.legs.all #}
-                    {% include 'core/partials/table_mission_legs.html' with mission=object %}
                 </form>
+
+                <div class="card card-body mb-2 border border-dark bg-light">
+                {% include 'core/partials/table_mission_legs.html' with mission=object %}
+                </div>
             </div>
 
             <div class="tab-pane fade" id="mission_datasets" role="tabpanel" aria-labelledby="mission_tabs_datasets">
-                TEST
+                <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_datasets">
+                    {% crispy mission_datasets_form %}
+                </form>
             </div>
         </div>
 

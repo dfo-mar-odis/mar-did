@@ -27,8 +27,9 @@ body {
 .nav-tabs .nav-item .nav-link {
     border: 1px solid transparent;
     border-radius: 0.25rem 0.25rem 0 0;
-    color: #495057;
-    background-color: #f8f9fa;
+    color: #fff;
+    background-color: #6c757d; /* Matches btn-secondary background */
+    border-color: #6c757d #6c757d #f8f9fa;
     padding: 0.5rem 1rem;
     margin-right: 0.2rem;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -40,9 +41,8 @@ body {
 }
 
 .nav-tabs .nav-item .nav-link.active {
-    color: #fff;
-    background-color: #6c757d; /* Matches btn-secondary background */
-    border-color: #6c757d #6c757d #f8f9fa;
+    color: #495057;
+    background-color: #f8f9fa;
 }
 
 /* Style for the tab content */

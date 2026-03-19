@@ -39,12 +39,39 @@ class CreateMission(LoginRequiredMixin, TemplateView):
         if 'mission_id' in self.kwargs:
             context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
             context['mission_form'] = MissionForm(instance=context['object'])
-            context['mission_legs_form'] = MissionLegForm(context['object'], initial={'mission': context['object']})
+            context['mission_legs_form'] = MissionLegForm(context['object'])
+            context['mission_datasets_form'] = MissionDatasetsForm(context['object'])
         else:
             context['mission_form'] = MissionForm()
 
         return context
 
+
+class MissionDatasetsForm(forms.ModelForm):
+    class Meta:
+        model = models.Datasets
+        fields = '__all__'
+
+    # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
+    def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
+        mission_id = mission.pk if mission is not None else -1
+        initial = kwargs.pop('initial') if 'initial' in kwargs else {}
+
+        super(MissionDatasetsForm, self).__init__(initial=initial, *args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            Hidden('mission', mission_id),
+            Row(
+                Column(Field('data_type'), css_class='form-control-sm'),
+                Column(Field('status'), css_class='form-control-sm'),
+            ),
+            Row(
+                Column(Field('legacy_file_location'), css_class='form-control-sm'),
+            )
+        )
 
 class MissionLegForm(form_multiselect.MultiselectFieldForm):
     chief_scientist = forms.ModelChoiceField(
@@ -92,25 +119,19 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
         mission_id = mission.pk if mission is not None else -1
-        if mission is not None and 'instance' not in kwargs:
-            leg_number = mission.legs.order_by('-number').first().number + 1 if mission.legs.exists() else 1
-            initial = kwargs.pop('initial') if 'initial' in kwargs else {}
-            initial['number'] = leg_number
-
-            super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
-        elif 'instance' in kwargs:
+        initial = kwargs.pop('initial') if 'initial' in kwargs else {}
+        if 'instance' in kwargs:
             leg = kwargs['instance']
             chief_scientist = leg.leg_participants.filter(position__name="Chief Scientist")
             if chief_scientist.exists():
                 chief_scientist = chief_scientist.first()
                 initial = kwargs.pop('initial') if 'initial' in kwargs else {}
                 initial['chief_scientist'] = chief_scientist.participant.pk
+        elif mission is not None:
+            leg_number = mission.legs.order_by('-number').first().number + 1 if mission.legs.exists() else 1
+            initial['number'] = leg_number
 
-                super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
-            else:
-                super(MissionLegForm, self).__init__(*args, **kwargs)
-        else:
-            super(MissionLegForm, self).__init__(*args, **kwargs)
+        super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
 
         regions_container = self.init_lookup('regions')
 

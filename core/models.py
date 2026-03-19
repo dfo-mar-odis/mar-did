@@ -298,13 +298,15 @@ class MissionRegions(models.Model):
         ordering = ['leg', 'region']
 
 
-class Dataset(models.Model):
+class Datasets(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_seq')
 
     mission = models.ForeignKey(Missions, on_delete=models.CASCADE, related_name="datasets", db_column='mission_seq')
     data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets",
                                   db_column='data_type_seq')
-    legacy_file_location = models.CharField(verbose_name=_("File location"), max_length=255, blank=True, null=True,
+    legacy_file_location = models.CharField(max_length=255, blank=True, null=True,
+                                            verbose_name=_("Legacy File location"),
+                                            help_text=_("The location of the files in the legacy system, if applicable"),
                                             db_column='legacy_file_location')
     status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT,
                                related_name="datasets", db_column='dataset_status_seq')
@@ -328,7 +330,7 @@ class Dataset(models.Model):
 class DataFiles(models.Model):
     id = models.AutoField(primary_key=True, db_column='file_seq')
 
-    data = models.ForeignKey(Dataset, on_delete=models.CASCADE, related_name='files', db_column='dataset_seq')
+    data = models.ForeignKey(Datasets, on_delete=models.CASCADE, related_name='files', db_column='dataset_seq')
     file_name = models.CharField(verbose_name=_("File Name"), max_length=50, db_column='file_name')
     file_type = models.ForeignKey(FileTypes, on_delete=models.PROTECT, related_name='files', db_column='file_type_seq')
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')
@@ -360,7 +362,7 @@ class DataFileComments(models.Model):
 class DatasetComments(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_comment_seq')
 
-    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='comments',
+    dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='comments',
                                 db_column='dataset_seq')
     author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
     comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
@@ -388,7 +390,7 @@ class MissionComments(models.Model):
 class ProcessingStatus(models.Model):
     id = models.AutoField(primary_key=True, db_column='processing_seq')
 
-    dataset = models.ForeignKey(Dataset, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing',
+    dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing',
                                 db_column='dataset_seq')
     assigned_to = models.ForeignKey('auth.User', verbose_name=_("Assigned"), on_delete=models.PROTECT,
                                     related_name='processing', db_column='assigned_to')

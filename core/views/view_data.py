@@ -36,7 +36,7 @@ class ExpectedDataForm(forms.ModelForm):
 
     class Meta:
         fields = ["mission", "data_type", "status"]
-        model = models.Dataset
+        model = models.Datasets
 
     def __init__(self, *args, cruise, **kwargs):
         filter = None
@@ -165,7 +165,7 @@ def remove_expected(request, data_id):
         response['HX-Redirect'] = login_url
         return HttpResponse(response)
 
-    data = models.Dataset.objects.get(pk=data_id)
+    data = models.Datasets.objects.get(pk=data_id)
     data.delete()
 
     return HttpResponse()
