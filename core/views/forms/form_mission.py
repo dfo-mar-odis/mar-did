@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
 from django import forms
+from django.http import Http404
 from django.urls import path, reverse_lazy, reverse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -23,20 +24,40 @@ from core.views.forms import form_multiselect
 
 logger = logging.getLogger('mardid')
 
-class CreateMission(TemplateView):
+class CreateMission(LoginRequiredMixin, TemplateView):
     template_name = 'core/forms/form_mission.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if response:=utils.redirect_if_not_authenticated(request):
+            return response
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context['title'] = _('Create Mission')
-        if 'mission_id' in self.kwargs:
+        context['mission_form'] = MissionForm()
+
+        return context
+
+
+class UpdateMission(TemplateView):
+    template_name = 'core/forms/form_mission.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['title'] = _('Updated Mission')
+
+        try:
             context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
-            context['mission_form'] = MissionForm(instance=context['object'])
-            context['mission_legs_form'] = MissionLegForm(context['object'])
-            context['mission_datasets_form'] = MissionDatasetsForm(context['object'])
-        else:
-            context['mission_form'] = MissionForm()
+        except models.Missions.DoesNotExist:
+            raise Http404(_("Mission not found."))
+
+        context['mission_form'] = MissionForm(instance=context['object'])
+        context['mission_legs_form'] = MissionLegForm(context['object'])
+        context['mission_datasets_form'] = MissionDatasetsForm(context['object'])
 
         return context
 
@@ -353,8 +374,8 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
 
 def update_mission(request, **kwargs):
-    if not request.user.is_authenticated:
-        return redirect(reverse_lazy('login'))
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
     # to handle the select and multi-select fields together in this view
@@ -574,7 +595,7 @@ def get_updated_list(request, prefix):
 
 urlpatterns = [
     path('mission/new', CreateMission.as_view(), name='new_mission_view'),
-    path('mission/<int:mission_id>', CreateMission.as_view(), name='update_mission_view'),
+    path('mission/<int:mission_id>', UpdateMission.as_view(), name='update_mission_view'),
     path('mission/add-mission', update_mission, name='add_mission'),
     path('mission/update/<int:mission_id>', update_mission, name='update_mission'),
 

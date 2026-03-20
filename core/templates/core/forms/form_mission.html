@@ -3,50 +3,57 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+    {% if user.is_authenticated %}
     <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission">
         {% crispy mission_form %}
     </form>
+    {% else %}
+    <div class="card card-body mb-2 border border-dark bg-light" id="div_id_mission_details">
+        <h5 class="card-title">{{ object.name }} - {% if object.descriptor %}{{ object.descriptor }}{% else %}&lt; {% trans 'No Mission Descriptor Provided' %} &gt;{% endif %}</h5>
+        <p class="card-text">{{ object.description }}</p>
+
+    </div>
+    {% endif %}
 
     {% if object %}
         {# We need to include the leg form here if the object is a mission #}
         <ul class="nav nav-tabs" id="missionTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="mission_tabs_legs" data-bs-toggle="tab" data-bs-target="#mission_legs" type="button" role="tab" aria-controls="mission_legs" aria-selected="true">
+                <button class="nav-link{% if object.legs.count <= 0 %} active{% endif %}" id="mission_tabs_legs" data-bs-toggle="tab" data-bs-target="#mission_legs" type="button" role="tab" aria-controls="mission_legs" aria-selected="true">
                     {% trans 'Mission Legs' %}
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="mission_tabs_datasets" data-bs-toggle="tab" data-bs-target="#mission_datasets" type="button" role="tab" aria-controls="mission_datasets">
+                <button class="nav-link{% if object.legs.count > 0 %} active{% endif %}" id="mission_tabs_datasets" data-bs-toggle="tab" data-bs-target="#mission_datasets" type="button" role="tab" aria-controls="mission_datasets">
                     {% trans 'Datasets' %}
                 </button>
             </li>
         </ul>
 
         <div class="tab-content" id="mission_tabs_legs">
-            <div class="tab-pane fade show active" id="mission_legs" role="tabpanel" aria-labelledby="mission_tabs_legs">
+            <div class="tab-pane fade{% if object.legs.count <= 0 %} show active{% endif %}" id="mission_legs" role="tabpanel" aria-labelledby="mission_tabs_legs">
+                {% if user.is_authenticated %}
                 <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_legs">
                     {% crispy mission_legs_form %}
                 </form>
-
+                {% endif %}
                 <div class="card card-body mb-2 border border-dark bg-light">
                 {% include 'core/partials/table_mission_legs.html' with mission=object %}
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="mission_datasets" role="tabpanel" aria-labelledby="mission_tabs_datasets">
+            <div class="tab-pane fade{% if object.legs.count > 0 %} show active{% endif %}" id="mission_datasets" role="tabpanel" aria-labelledby="mission_tabs_datasets">
+                {% if user.is_authenticated %}
                 <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_datasets">
                     {% crispy mission_datasets_form %}
                 </form>
+                {% endif %}
                 <div class="card card-body mb-2 border border-dark bg-light">
                 {% include 'core/partials/table_mission_datasets.html' with mission=object %}
                 </div>
             </div>
         </div>
 
-        {# Todo: include a form here to add Data Types to the mission #}
-{#        {% crispy mission_datatype_form %}#}
-        {# Todo: include a list of datatypes provided for this misison #}
-{#        {% include 'core/partials/table_data_list.html' with cruise=object%}#}
     {% endif %}
 {% endblock %}
 

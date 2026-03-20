@@ -1,0 +1,18 @@
+[
+{
+    "model": "core.datatypes",
+    "pk": 1,
+    "fields": {
+        "name": "Events",
+        "description": "Data related to mission events"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 2,
+    "fields": {
+        "name": "Logs",
+        "description": "Scanned log sheets used for manually verifying mission events and data"
+    }
+}
+]

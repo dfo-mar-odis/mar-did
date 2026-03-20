@@ -23,8 +23,6 @@ from core import models
 
 import logging
 
-from core.views.view_dataset_list import ExpectedDataForm
-
 logger = logging.getLogger('mardid')
 
 

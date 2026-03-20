@@ -1,31 +1,34 @@
 {% load i18n %}
 
 <table class="table table-striped table-bordered" hx-trigger="mission_dataset_updated from:body"
-    hx-get="{% url 'core:list_mission_datasets' mission.pk %}">
+    hx-get="{% url 'core:list_mission_datasets' mission.pk %}" id="table_id_mission_dataset_list">
     <thead>
         <tr>
-            {% if user.is_authenticated %}
             <th scope="col" width="2%">{# button column #}</th>
-            {% endif %}
             <th scope="col">{% trans "Dataset" %}</th>
             <th scope="col">{% trans "Status" %}</th>
+            <th scope="col">{% trans "File Count" %}</th>
         </tr>
     </thead>
     <tbody>
         {% for dataset in mission.datasets.all %}
             <tr>
-                {% if user.is_authenticated %}
-                <td>
+                <td style="width: 2%; white-space: nowrap;">
+                    <a href="" class="btn btn-sm btn-dark ms-2" title="{% trans "View Dataset Files" %}">
+                        <span class="bi bi-search"></span>
+                    </a>
+                {% if request.user.is_authenticated %}
                     <button type="button" class="btn btn-sm btn-danger" title="{% trans 'Delete' %}"
                             hx-delete="{% url 'core:delete_mission_dataset' mission.pk dataset.pk %}"
                             hx-confirm="{% trans 'Are you sure?' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                     hx-target="closest tr" hx-swap="delete">
                         <span class="bi bi-x-square"></span>
                     </button>
-                </td>
                 {% endif %}
+                </td>
                 <td><div class="btn btn-outline-secondary" title="{{ dataset.data_type.description }}">{{ dataset.data_type.name }}</div></td>
                 <td><div class="btn {{dataset.status.get_button_colour}}" title="{{ dataset.status.description }}" >{{ dataset.status.name }}</div></td>
+                <td>{{ dataset.files.count }}</td>
             </tr>
         {% endfor %}
     </tbody>
