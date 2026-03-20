@@ -56,6 +56,7 @@ class MissionDatasetsForm(forms.ModelForm):
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
         mission_id = mission.pk if mission is not None else -1
         initial = kwargs.pop('initial') if 'initial' in kwargs else {}
+        initial['status'] = models.DatasetStatus.objects.get(name__iexact='expected')
 
         super(MissionDatasetsForm, self).__init__(initial=initial, *args, **kwargs)
 
@@ -63,15 +64,39 @@ class MissionDatasetsForm(forms.ModelForm):
         self.helper.form_tag = False
 
         self.helper.layout = Layout(
-            Hidden('mission', mission_id),
-            Row(
-                Column(Field('data_type'), css_class='form-control-sm'),
-                Column(Field('status'), css_class='form-control-sm'),
-            ),
-            Row(
-                Column(Field('legacy_file_location'), css_class='form-control-sm'),
+            Div(
+                Hidden('mission', mission_id),
+                Row(
+                    Column(Field('data_type'), css_class='form-control-sm'),
+                    Column(Field('status'), css_class='form-control-sm'),
+                ),
+                Row(
+                    Column(Field('legacy_file_location'), css_class='form-control-sm'),
+                ),
+                css_class="card card-body mb-2 border border-dark bg-light"
             )
         )
+
+        if mission_id > 0:
+            # if an instant is present then we're going to use the 'update_mission' url, otherwise we'll use the url
+            # to create a new mission
+
+            submit_url = reverse_lazy('core:add_mission_dataset', args=[mission_id])
+
+            button_div = Div()
+            btn_submit_attrs = {
+                'title': _("Add Dataset"),
+                'hx-target': "#form_id_mission_datasets",
+                'hx-post': submit_url
+            }
+
+            btn_label = _("Add Dataset")
+            btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
+                                      css_class='btn btn-sm btn-primary mb-1',
+                                      **btn_submit_attrs)
+            button_div.append(btn_submit)
+            self.helper.layout.fields[0].fields.append(button_div)
+
 
 class MissionLegForm(form_multiselect.MultiselectFieldForm):
     chief_scientist = forms.ModelChoiceField(
@@ -447,6 +472,42 @@ MULTISELECT_CONTEXT_REGISTER = {
     ),
 }
 
+@login_required
+def mission_dataset_update(request, mission_id, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect(reverse_lazy('login'))
+
+    # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
+    # to handle the select and multi-select fields together in this view
+
+    # Create a mutable copy of the POST data
+    post_data = request.POST.copy()
+
+    mission = models.Missions.objects.get(pk=mission_id)
+    form = MissionDatasetsForm(mission, post_data)
+
+    if form.is_valid():
+        try:
+            dataset = form.save()
+            form = MissionDatasetsForm(mission)
+            crispy = render_crispy_form(form)
+            soup = BeautifulSoup(crispy, 'html.parser')
+
+            response = HttpResponse(soup)
+            response['HX-Trigger'] = 'mission_dataset_updated'
+            return response
+        except Exception as ex:
+            logger.error("Failed to save the mission dataset form.")
+            logger.exception(ex)
+            form.add_error(None, _("An unexpected error occurred while saving the form."))
+            crispy = render_crispy_form(form)
+            return HttpResponse(crispy)
+
+    crispy = render_crispy_form(form)
+    soup = BeautifulSoup(crispy, 'html.parser')
+    return HttpResponse(soup)
+
+
 def add_to_list(request, prefix):
     multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
     if not multiselect_context:
@@ -495,4 +556,6 @@ urlpatterns = [
     path('mission/leg/add-mission/<int:mission_id>', mission_leg_update, name='add_mission_leg'),
     path('mission/leg/update/<int:mission_id>/<int:leg_id>', mission_leg_update, name='update_mission_leg'),
     path('mission/leg/add-mission/<int:mission_id>/<int:leg_id>', mission_leg_delete, name='mission_leg_delete'),
+
+    path('mission/dataset/add-mission/<int:mission_id>', mission_dataset_update, name='add_mission_dataset'),
 ]
