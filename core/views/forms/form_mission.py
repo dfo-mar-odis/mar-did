@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 
+from functools import partial
+
 from django import forms
 from django.http import Http404
 from django.urls import path, reverse_lazy, reverse
@@ -21,6 +23,7 @@ from core import models, utils
 import logging
 
 from core.views.forms import form_multiselect
+from core.views.forms.form_multiselect import remove_from_list, add_to_list
 
 logger = logging.getLogger('mardid')
 
@@ -491,16 +494,16 @@ MULTISELECT_CONTEXT_REGISTER = {
         lookup_model=models.GeographicRegions,
         form_class=MissionLegForm,
         render_function=lambda element: f"{element.name}",
-        add_url='core:add_to_list',
-        remove_url='core:remove_from_list'
+        add_url='core:mission_add_to_list',
+        remove_url='core:mission_remove_from_list'
     ),
     'organizations': form_multiselect.MultiselectContext(
         prefix='organizations',
         lookup_model=models.Organizations,
         form_class=MissionForm,
         render_function=lambda element: f"{element.acronym}",
-        add_url='core:add_to_list',
-        remove_url='core:remove_from_list'
+        add_url='core:mission_add_to_list',
+        remove_url='core:mission_remove_from_list'
     ),
 }
 
@@ -546,7 +549,7 @@ def mission_dataset_list(request, mission_id):
         'mission': mission,
         'user': request.user
     }
-    html = render_to_string('core/partials/table_mission_datasets.html', context=context)
+    html = render_to_string('core/partials/table_mission_datasets.html', context=context, request=request)
     return HttpResponse(html)
 
 
@@ -560,47 +563,16 @@ def mission_dataset_delete(request, mission_id, dataset_id):
     return HttpResponse()
 
 
-def add_to_list(request, prefix):
-    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
-    if not multiselect_context:
-        return HttpResponse(status=400)
-
-    if soup := form_multiselect.add_to_list(request, multiselect_context, prefix):
-        return HttpResponse(soup)
-
-    return HttpResponse()
-
-
-def remove_from_list(request, prefix, element_id):
-    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
-    if not multiselect_context:
-        return HttpResponse(status=400)
-
-    if soup := form_multiselect.remove_from_list(request,multiselect_context, element_id):
-        return HttpResponse(soup)
-
-    return HttpResponse()
-
-
-def get_updated_list(request, prefix):
-    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
-    if not multiselect_context:
-        return HttpResponse(status=400)
-
-    if soup := form_multiselect.get_updated_list(request, multiselect_context):
-        return HttpResponse(soup)
-
-    return HttpResponse()
-
-
 urlpatterns = [
     path('mission/new', CreateMission.as_view(), name='new_mission_view'),
     path('mission/<int:mission_id>', UpdateMission.as_view(), name='update_mission_view'),
     path('mission/add-mission', update_mission, name='add_mission'),
     path('mission/update/<int:mission_id>', update_mission, name='update_mission'),
 
-    path('mission/add/<str:prefix>', add_to_list, name='add_to_list'),
-    path('mission/remove/<str:prefix>/<int:element_id>', remove_from_list, name='remove_from_list'),
+    path('mission/add/<str:prefix>',
+         partial(add_to_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_add_to_list'),
+    path('mission/remove/<str:prefix>/<int:element_id>',
+         partial(remove_from_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_remove_from_list'),
 
     path('mission/leg/new/<int:mission_id>/', mission_leg_form, name='mission_leg_form_clear'),
     path('mission/leg/new/<int:mission_id>/<int:leg_id>', mission_leg_form, name='mission_leg_form'),
