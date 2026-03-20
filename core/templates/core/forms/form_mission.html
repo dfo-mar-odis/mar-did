@@ -37,6 +37,9 @@
                 <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_datasets">
                     {% crispy mission_datasets_form %}
                 </form>
+                <div class="card card-body mb-2 border border-dark bg-light">
+                {% include 'core/partials/table_mission_datasets.html' with mission=object %}
+                </div>
             </div>
         </div>
 
