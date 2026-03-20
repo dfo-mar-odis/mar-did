@@ -87,7 +87,7 @@ def list_missions(request):
     page_end = page_start + page_limit
 
     # Example query to order missions by the start_date of their first leg
-    queryset = models.Missions.objects.annotate(first_leg_start_date=Min('legs__number')).order_by('-first_leg_start_date')
+    queryset = models.Missions.objects.annotate(first_leg_start_date=Min('legs__start_date')).order_by('-first_leg_start_date')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 

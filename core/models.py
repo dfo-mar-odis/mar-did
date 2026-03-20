@@ -242,7 +242,7 @@ class Legs(models.Model):
 
     class Meta:
         db_table = 'legs'
-        ordering = ['number']
+        ordering = ['start_date']
         unique_together = ('mission', 'number')
 
     @property
