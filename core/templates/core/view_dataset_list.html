@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="mb-2 h4">{% if user.is_authenticated %}
+    <a class="btn btn-secondary" href="{% url 'core:update_mission_view' object.pk %}"><span class="bi bi-gear-fill"></span></a>
+{% endif %}{{ object.name }} - {% if object.descriptor %}{{ object.descriptor }}{% else %}&lt; {% trans 'No Mission Descriptor Provided' %} &gt;{% endif %}</div>
+
+{% include 'core/partials/table_data_list.html' with cruise=object %}
+{% endblock %}

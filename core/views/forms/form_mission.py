@@ -15,7 +15,7 @@ from crispy_forms.layout import Layout, Div, Row, Column, Field, Hidden
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.utils import render_crispy_form
 
-from core import models
+from core import models, utils
 
 import logging
 
@@ -23,14 +23,8 @@ from core.views.forms import form_multiselect
 
 logger = logging.getLogger('mardid')
 
-class CreateMission(LoginRequiredMixin, TemplateView):
+class CreateMission(TemplateView):
     template_name = 'core/forms/form_mission.html'
-    login_url = reverse_lazy('login')
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
-            return redirect(self.login_url)
-        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,6 +45,19 @@ class MissionDatasetsForm(forms.ModelForm):
     class Meta:
         model = models.Datasets
         fields = '__all__'
+
+    def clean(self):
+        cleaned_data = super().clean()
+        mission = cleaned_data.get('mission')
+        data_type = cleaned_data.get('data_type')
+
+        if mission and data_type:
+            if models.Datasets.objects.filter(mission=mission, data_type=data_type).exists():
+                raise forms.ValidationError(
+                    _("A dataset with this type already exists in the mission.")
+                )
+
+        return cleaned_data
 
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
@@ -425,7 +432,8 @@ def mission_leg_list(request, mission_id):
     mission = models.Missions.objects.get(pk=mission_id)
 
     context = {
-        'mission': mission
+        'mission': mission,
+        'user': request.user
     }
     html = render_to_string('core/partials/table_mission_legs.html', context=context)
     return HttpResponse(html)
@@ -446,6 +454,9 @@ def mission_leg_form(request, mission_id, **kwargs):
 
 
 def mission_leg_delete(request, mission_id, leg_id):
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
+
     leg = models.Legs.objects.get(pk=leg_id)
     leg.delete()
 
@@ -472,10 +483,9 @@ MULTISELECT_CONTEXT_REGISTER = {
     ),
 }
 
-@login_required
 def mission_dataset_update(request, mission_id, **kwargs):
-    if not request.user.is_authenticated:
-        return redirect(reverse_lazy('login'))
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
     # to handle the select and multi-select fields together in this view
@@ -506,6 +516,27 @@ def mission_dataset_update(request, mission_id, **kwargs):
     crispy = render_crispy_form(form)
     soup = BeautifulSoup(crispy, 'html.parser')
     return HttpResponse(soup)
+
+
+def mission_dataset_list(request, mission_id):
+    mission = models.Missions.objects.get(pk=mission_id)
+
+    context = {
+        'mission': mission,
+        'user': request.user
+    }
+    html = render_to_string('core/partials/table_mission_datasets.html', context=context)
+    return HttpResponse(html)
+
+
+def mission_dataset_delete(request, mission_id, dataset_id):
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
+
+    dataset = models.Datasets.objects.get(pk=dataset_id)
+    dataset.delete()
+
+    return HttpResponse()
 
 
 def add_to_list(request, prefix):
@@ -557,5 +588,7 @@ urlpatterns = [
     path('mission/leg/update/<int:mission_id>/<int:leg_id>', mission_leg_update, name='update_mission_leg'),
     path('mission/leg/add-mission/<int:mission_id>/<int:leg_id>', mission_leg_delete, name='mission_leg_delete'),
 
-    path('mission/dataset/add-mission/<int:mission_id>', mission_dataset_update, name='add_mission_dataset'),
+    path('mission/dataset/add-dataset/<int:mission_id>', mission_dataset_update, name='add_mission_dataset'),
+    path('mission/dataset/remove-dataset/<int:mission_id>/<int:dataset_id>', mission_dataset_delete, name='delete_mission_dataset'),
+    path('mission/dataset/list-datasets/<int:mission_id>', mission_dataset_list, name='list_mission_datasets'),
 ]

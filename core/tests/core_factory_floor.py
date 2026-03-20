@@ -11,7 +11,7 @@ from core import models
 fake = Faker()
 
 class MardidTestCase(TestCase):
-    fixtures = ['test_countries', 'test_platforms', 'test_programs', 'test_regions']
+    fixtures = ['init_programs', 'init_regions', 'init_countries', 'init_platforms', 'init_organizations', 'init_group_fixtures', 'init_dataset_status']
 
 class MissionFactory(factory.django.DjangoModelFactory):
     class Meta:

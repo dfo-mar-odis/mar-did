@@ -60,20 +60,6 @@ class Migration(migrations.Migration):
             name='legs',
             unique_together={('mission', 'number')},
         ),
-        migrations.CreateModel(
-            name='Datasets',
-            fields=[
-                ('id', models.AutoField(db_column='dataset_seq', primary_key=True, serialize=False)),
-                ('legacy_file_location', models.CharField(blank=True, db_column='legacy_file_location', help_text='The location of the files in the legacy system, if applicable', max_length=255, null=True, verbose_name='Legacy File location')),
-                ('data_type', models.ForeignKey(db_column='data_type_seq', on_delete=django.db.models.deletion.PROTECT, related_name='datasets', to='core.datatypes')),
-                ('mission', models.ForeignKey(db_column='mission_seq', on_delete=django.db.models.deletion.CASCADE, related_name='datasets', to='core.missions')),
-                ('status', models.ForeignKey(db_column='dataset_status_seq', on_delete=django.db.models.deletion.PROTECT, related_name='datasets', to='core.datasetstatus', verbose_name='Dataset Status')),
-            ],
-            options={
-                'db_table': 'datasets',
-                'ordering': ['mission', 'data_type'],
-            },
-        ),
         migrations.AlterField(
             model_name='datafiles',
             name='data',
@@ -88,8 +74,5 @@ class Migration(migrations.Migration):
             model_name='processingstatus',
             name='dataset',
             field=models.ForeignKey(db_column='dataset_seq', on_delete=django.db.models.deletion.CASCADE, related_name='processing', to='core.datasets', verbose_name='Dataset'),
-        ),
-        migrations.DeleteModel(
-            name='Dataset',
         ),
     ]

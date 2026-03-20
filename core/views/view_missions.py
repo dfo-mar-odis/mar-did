@@ -139,14 +139,14 @@ def list_missions(request):
         data_btn.attrs['title'] = _('mission Data')
         span.attrs['class'] = "bi bi-bar-chart"
 
-        if request.user.groups.filter(name__in=["Chief Scientists", "MarDID Maintainers"]):
-            first_th.append(update_btn:=table_soup.new_tag('a'))
-            update_btn.append(span := table_soup.new_tag("span"))
-            update_btn.attrs['class'] = "btn btn-sm btn-dark ms-2"
-            update_btn.attrs['href'] = reverse_lazy('core:update_mission_view', args=[int(id)])
-            update_btn.attrs['title'] = _('Update mission')
-            span.attrs['class'] = "bi bi-pencil-square"
+        first_th.append(update_btn := table_soup.new_tag('a'))
+        update_btn.append(span := table_soup.new_tag("span"))
+        update_btn.attrs['class'] = "btn btn-sm btn-dark ms-2"
+        update_btn.attrs['href'] = reverse_lazy('core:update_mission_view', args=[int(id)])
+        update_btn.attrs['title'] = _('Update mission')
+        span.attrs['class'] = "bi bi-search"
 
+        if request.user.groups.filter(name__in=["Chief Scientists", "MarDID Maintainers"]):
             if request.user.is_superuser:
                 row_id = f"tr_id_mission_{id}"
                 tr.attrs['id'] = row_id

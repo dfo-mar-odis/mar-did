@@ -19,11 +19,11 @@ from core.views.forms import form_data_submission
 
 
 class DataListView(TemplateView):
-    template_name = "core/view_data_list.html"
+    template_name = "core/view_dataset_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Data List'
+        context['title'] = 'Dataset List'
         context['object'] = models.Missions.objects.get(pk=self.kwargs['pk'])
         context['data_form'] = ExpectedDataForm(cruise=context['object'])
         context['container'] = 'container-fluid'
