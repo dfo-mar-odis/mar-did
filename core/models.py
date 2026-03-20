@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 
 
 # MEDS uses a list of country codes that I think are from ICES
-# https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/test_countries.json
+# https://www.ncbi.nlm.nih.gov/books/NBK7249/table/appd.T1/ dumped to mardid/fixtures/init_countries.json
 class Countries(models.Model):
     id = models.AutoField(primary_key=True, db_column='country_seq')
     name = models.CharField(verbose_name=_("Name"), max_length=45, db_column='name')

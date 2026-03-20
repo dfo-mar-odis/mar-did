@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">{% trans "Dataset" %}</th>
+            <th scope="col">{% trans "Status" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dataset in mission.datasets.all %}
+            <tr>
+                <td>{{ dataset.data_type.name }}</td>
+                <td>{{ dataset.status }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
