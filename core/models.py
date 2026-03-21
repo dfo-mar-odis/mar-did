@@ -396,7 +396,7 @@ class MissionComments(models.Model):
 
     class Meta:
         db_table = 'mission_comments'
-        ordering = ['comment_date']
+        ordering = ['-comment_date']
 
 
 class ProcessingStatus(models.Model):

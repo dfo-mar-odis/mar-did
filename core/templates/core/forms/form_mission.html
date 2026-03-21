@@ -28,6 +28,11 @@
                     {% trans 'Datasets' %}
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="mission_tabs_comments" data-bs-toggle="tab" data-bs-target="#mission_comments" type="button" role="tab" aria-controls="mission_comments">
+                    {% trans 'Comments' %}
+                </button>
+            </li>
         </ul>
 
         <div class="tab-content" id="mission_tabs_legs">
@@ -50,6 +55,17 @@
                 {% endif %}
                 <div class="card card-body mb-2 border border-dark bg-light">
                 {% include 'core/partials/table_mission_datasets.html' with mission=object %}
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="mission_comments" role="tabpanel" aria-labelledby="mission_tabs_comments">
+                {% if user.is_authenticated %}
+                <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_comments">
+                    {% crispy mission_comments_form %}
+                </form>
+                {% endif %}
+                <div class="card card-body mb-2 border border-dark bg-light">
+                {% include 'core/partials/table_mission_comments.html' with mission=object %}
                 </div>
             </div>
         </div>

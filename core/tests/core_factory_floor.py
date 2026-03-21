@@ -59,3 +59,13 @@ class MissionDatasetFactory(factory.django.DjangoModelFactory):
     status = factory.LazyFunction(
         lambda: models.DatasetStatus.objects.get(name__iexact="EXPECTED")
     )
+
+
+class MissionCommentFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = models.MissionComments
+
+    mission = factory.SubFactory(MissionFactory)
+    author = factory.SelfAttribute('author')
+    comment = factory.Faker('paragraph')
