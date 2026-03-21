@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 from django import forms
 from django.contrib.auth.decorators import login_required
-from django.db.models import Min
+from django.db.models import Min, Q
 from django.urls import path, reverse_lazy
 from django.utils.translation import gettext as _
 from django.http import HttpResponse, HttpResponseForbidden
@@ -40,14 +40,20 @@ class MissionFilter(forms.Form):
         max_length=50,
         required=False,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        label=_('Mission Descriptor')
+        label=_('Descriptor')
     )
 
     name = forms.CharField(
         max_length=50,
         required=False,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        label=_('Mission Name')
+        label=_('Name')
+    )
+
+    year = forms.IntegerField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label=_('Year')
     )
 
     def __init__(self, *args, **kwargs):
@@ -75,6 +81,7 @@ class MissionFilter(forms.Form):
             Row(
                 Column(Field('name', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
                 Column(Field('descriptor', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
+                Column(Field('year', css_class="form-control form-control-sm", **text_attrs), css_class="col-1"),
             ),
         )
 
@@ -93,6 +100,11 @@ def list_missions(request):
 
     if descriptor:=request.GET.get('descriptor', None):
         queryset = queryset.filter(descriptor__icontains=descriptor)
+
+    if year:=request.GET.get('year', None):
+        queryset = queryset.filter(
+            Q(legs__start_date__year=year) | Q(legs__end_date__year=year)
+        )
 
     queryset = queryset[page_start:page_end]
 
