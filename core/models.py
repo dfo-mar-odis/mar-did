@@ -37,13 +37,15 @@ class DatasetStatus(models.Model):
     def get_button_colour(self):
         name = self.name.upper()
         if name == 'EXPECTED':
-            return 'btn-warning'
+            return 'btn-danger'
         elif name == 'LAB':
             return 'btn-outline-danger'
         elif name == 'SUBMITTED':
-            return 'btn-success'
+            return 'btn-warning'
         elif name == 'RECEIVED':
-            return 'btn-outline-success'
+            return 'btn-outline-warning'
+        elif name == 'COMPLETE':
+            return 'btn-success'
 
         return 'btn-outline-dark'
 
@@ -208,6 +210,16 @@ class Missions(models.Model):
     def cheif_scientist(self):
         chief = self.legs.filter(participants__position__name__iexact='chief scientist')
         return ', '.join([chief]) if chief else None
+
+    @property
+    def dataset_completion(self):
+        datasets = self.datasets.all()
+        if not datasets:
+            return 0
+
+        completed = datasets.filter(status__name__iexact='complete').count()
+        return int((completed / datasets.count()) * 100)
+
 
     def __str__(self):
         return f'{self.name} - {self.descriptor}'

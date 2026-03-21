@@ -16,6 +16,7 @@
             <th class="text-start">{% trans 'Name' %}</th>
             <th class="text-start">{% trans 'Descriptor' %}</th>
             <th class="text-start">{% trans 'Platform' %}</th>
+            <th class="text-start">{% trans 'Completion' %}</th>
             <th class="text-start">{% trans 'Start Date' %}</th>
             <th class="text-start">{% trans 'End Date' %}</th>
         </tr>
@@ -39,6 +40,7 @@
             <td class="text-start">{{ mission.name }}</td>
             <td class="text-start">{{ mission.descriptor }}</td>
             <td class="text-start">{{ mission.platform }}</td>
+            <td class="text-start">{{ mission.dataset_completion }}</td>
             <td class="text-start">{{ mission.legs.first.start_date }}</td>
             <td class="text-start">{{ mission.legs.last.end_date }}</td>
         </tr>
