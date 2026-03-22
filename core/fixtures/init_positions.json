@@ -3,8 +3,120 @@
     "model": "core.positions",
     "pk": 1,
     "fields": {
-        "name": "Chief Scientist",
-        "description": "The Big Wing"
+        "name": "DATA MANAGER",
+        "description": "Manages and archives collected data"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 2,
+    "fields": {
+        "name": "LAB TECHNICIAN",
+        "description": "Processes analyzes and manages laboratory samples to support oceanographic research and data quality"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 3,
+    "fields": {
+        "name": "RESEARCH SCIENTIST",
+        "description": "Leads the scientific objectives of the mission"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 4,
+    "fields": {
+        "name": "CTD TECHNICIAN",
+        "description": "Deploys operates and maintains CTD systems to collect water‑column data"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 5,
+    "fields": {
+        "name": "MOORING TECHNICIAN",
+        "description": "Deploys recovers and services oceanographic moorings and instruments"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 6,
+    "fields": {
+        "name": "WILDLIFE OBSERVER",
+        "description": "Monitors and records marine mammal and seabird activity during operations"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 7,
+    "fields": {
+        "name": "STUDENT",
+        "description": "Assists with data collection processing and basic analysis under supervision"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 8,
+    "fields": {
+        "name": "CHIEF SCIENTIST",
+        "description": "Overall responsibility for scientific program ensuring objectives methods and data quality"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 9,
+    "fields": {
+        "name": "PRINCIPAL INVESTIGATOR",
+        "description": "Leads scientific design execution and accountability of research mission"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 10,
+    "fields": {
+        "name": "PROJECT LEAD",
+        "description": "Oversees projects timelines deliverables and scientific quality"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 11,
+    "fields": {
+        "name": "PHYSICAL OCEANOGRAPHER",
+        "description": "Analyzes ocean physical properties such as temperature salinity  circulation and mixing"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 12,
+    "fields": {
+        "name": "BIOLOGICAL OCEANOGRAPHER",
+        "description": "Studies marine organisms and ecosystem responses to ocean conditions"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 13,
+    "fields": {
+        "name": "CHEMICAL OCEANOGRAPHER",
+        "description": "Examines ocean chemistry including nutrients gases and biogeochemical cycles"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 14,
+    "fields": {
+        "name": "DATA SCIENTIST",
+        "description": "Analyzes and models complex data using statistics programming and machine learning to generate actionable insights that support decision‑making"
+    }
+},
+{
+    "model": "core.positions",
+    "pk": 15,
+    "fields": {
+        "name": "PHYSICAL SCIENTIST",
+        "description": "Conducts research and analysis of physical systems (e.g. ocean atmosphere geophysics) to understand processes interpret data and support scientific and operational decision‑making"
     }
 }
 ]

@@ -3,16 +3,632 @@
     "model": "core.datatypes",
     "pk": 1,
     "fields": {
-        "name": "Events",
-        "description": "Data related to mission events"
+        "name": "ADCP",
+        "description": "Acoustic Doppler Current Profiler (manufactured by RDI, Ametek, etc.)"
     }
 },
 {
     "model": "core.datatypes",
     "pk": 2,
     "fields": {
-        "name": "Logs",
-        "description": "Scanned log sheets used for manually verifying mission events and data"
+        "name": "AMAR",
+        "description": "Autonomous Multichannel Acoustic Recorder"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 3,
+    "fields": {
+        "name": "AMMONIA",
+        "description": "Ammonia NH4 Analysis"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 4,
+    "fields": {
+        "name": "ANDES",
+        "description": "Event Logging System"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 5,
+    "fields": {
+        "name": "AZMP_DAL",
+        "description": "Total Dissolved Inorganic Carbon (TIC) and Total Alkalinity (TA) (µmol/kg) collected by Dalhousie University"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 6,
+    "fields": {
+        "name": "AZMP_TEMPL",
+        "description": "AZMP Entry Template"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 7,
+    "fields": {
+        "name": "BATF",
+        "description": "Batfish (A Towed Underwater Vehicle)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 8,
+    "fields": {
+        "name": "BENTH",
+        "description": "Benthic Sampling"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 9,
+    "fields": {
+        "name": "BIOLSUM",
+        "description": "Summary of Biological and Chemical Bottle Data (AZMP / AZOMP)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 10,
+    "fields": {
+        "name": "BOTLNUTS",
+        "description": "Bottle Nutrients and Chlorophyll Profiles (AZOMP)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 11,
+    "fields": {
+        "name": "BOTPHOT",
+        "description": "Bottom Photography"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 12,
+    "fields": {
+        "name": "BPR",
+        "description": "Bottom Pressure Recorder"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 13,
+    "fields": {
+        "name": "BTL",
+        "description": "Sea-Bird Bottle File"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 14,
+    "fields": {
+        "name": "CASTCTD",
+        "description": "Castaway Conductivity Temperature Depth Profiler"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 15,
+    "fields": {
+        "name": "CFC",
+        "description": "Chloroflouro Carbon"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 16,
+    "fields": {
+        "name": "CHN",
+        "description": "Carbon Hydrogen Nitrogen (micrograms/l)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 17,
+    "fields": {
+        "name": "CO2_SYS",
+        "description": "Lab Carbonate (CO2) System which measures Discrete Total Alkalinity (µmol/kg); Total Inorganic Carbon (µmol/kg); pH_25 (25 °C); PCO2 (µatm) measurements"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 18,
+    "fields": {
+        "name": "CO2_SYS_FT",
+        "description": "Flow-Through Carbonate (CO2) System which measures Discrete Total Alkalinity (µmol/kg); Total Inorganic Carbon (µmol/kg); pH_25 (25 °C); PCO2 (µatm) measurements"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 19,
+    "fields": {
+        "name": "CPHL",
+        "description": "Chlorophyll-a Content (mg/m**3) measured using Holm-Hansen Calculation Method"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 20,
+    "fields": {
+        "name": "CTD",
+        "description": "Conductivity Temperature Depth Profiler"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 21,
+    "fields": {
+        "name": "CYTO",
+        "description": "Cytometry"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 22,
+    "fields": {
+        "name": "DBT",
+        "description": "Digital Mechanical Bathythermograph"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 23,
+    "fields": {
+        "name": "DRIB_MAB",
+        "description": "Drifting or Moored Argos Buoy"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 24,
+    "fields": {
+        "name": "DRIFTS",
+        "description": "Satellite Tracked Drifting Barrel (Produced by Seimac Ltd.)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 25,
+    "fields": {
+        "name": "DTNTR",
+        "description": "Demersal Trawl Net Temperature Recorder"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 26,
+    "fields": {
+        "name": "ECHO_KNUD",
+        "description": "Echosounder manufactured by Knudsen"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 27,
+    "fields": {
+        "name": "ELOG",
+        "description": "Electronic Log (Automated)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 28,
+    "fields": {
+        "name": "GLD",
+        "description": "Glider"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 29,
+    "fields": {
+        "name": "HPLC",
+        "description": "High Performance Liquid Chromatograph (µg/l)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 30,
+    "fields": {
+        "name": "HUB",
+        "description": "Hub Subsurface Mooring"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 31,
+    "fields": {
+        "name": "ICYCLER",
+        "description": "Ice-Cycler is a Oceanographic Profiler that is Moored Under Mobile Pack Ice"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 32,
+    "fields": {
+        "name": "IGNORE",
+        "description": "Duplicate Data Record that can be Ignored"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 33,
+    "fields": {
+        "name": "IPS",
+        "description": "Ice Profiling Sonar Instrument (Creates Uls Data Type)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 34,
+    "fields": {
+        "name": "LADCP",
+        "description": "Lowered Acoustic Doppler Current Profiler"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 35,
+    "fields": {
+        "name": "LEMCM",
+        "description": "Lowered Electromagnetic Current Meter"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 36,
+    "fields": {
+        "name": "LOPC",
+        "description": "Laser Optical Particle (Plankton) Counter (Normally Attached To Moving Vessel Conductivity Temperature Depth Profiler)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 37,
+    "fields": {
+        "name": "MAB",
+        "description": "Moored Argos Buoy"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 38,
+    "fields": {
+        "name": "MADCP",
+        "description": "Moored Acoustic Doppler Current Profiler"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 39,
+    "fields": {
+        "name": "MCM",
+        "description": "Moored Current Meter"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 40,
+    "fields": {
+        "name": "MCO2",
+        "description": "Moored Cardon Dioxide (CO2) Recorder"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 41,
+    "fields": {
+        "name": "MCTD",
+        "description": "Moored Conductivity Temperature Depth Profiler"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 42,
+    "fields": {
+        "name": "MET",
+        "description": "Meteorological Information"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 43,
+    "fields": {
+        "name": "MMB",
+        "description": "Moored Meteorlogical Buoy (Minimet)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 44,
+    "fields": {
+        "name": "MTC",
+        "description": "Moored Temperature Chain"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 45,
+    "fields": {
+        "name": "MTG",
+        "description": "Moored Tide Gauge"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 46,
+    "fields": {
+        "name": "MTR",
+        "description": "Moored Temperature Recorder"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 47,
+    "fields": {
+        "name": "MVCTD",
+        "description": "Moving Vessel Conductivity Temperature Depth Profiler (a.k.a. Moving Vessel Profiler MVP)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 48,
+    "fields": {
+        "name": "NUTS",
+        "description": "Bottle Nutrient Data"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 49,
+    "fields": {
+        "name": "O2ELECTROD",
+        "description": "Bench Probe Oxygen (O2) Concentration in Percent Saturation (%) and Temperature Of Analysis (i.e. Hach Hq40D Portable)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 50,
+    "fields": {
+        "name": "O2METER",
+        "description": "Bench Probe Oxygen (O2) Concentration (ml/l) (i.e. Hach Hq40D Portable)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 51,
+    "fields": {
+        "name": "ORGNUT_DAL",
+        "description": "Organic Nutrient Concentration (Erin Bertrand Lab at Dalhousie University)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 52,
+    "fields": {
+        "name": "PAM",
+        "description": "Passive Acoustic Mooring"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 53,
+    "fields": {
+        "name": "PCO2_FT",
+        "description": "Partial Pressure of CO2 (PCO2) Measured Using Underway Flow-Through System"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 54,
+    "fields": {
+        "name": "PH25",
+        "description": "pH Measurements At 25 °C"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 55,
+    "fields": {
+        "name": "PHPH",
+        "description": "In Situ Calculated Hydrogen Ion Concentration (pH)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 56,
+    "fields": {
+        "name": "PPLANK",
+        "description": "Phytoplankton from Bottle Samples"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 57,
+    "fields": {
+        "name": "PSAL",
+        "description": "Practical Salinity (PSU) Measured by a Salinometer"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 58,
+    "fields": {
+        "name": "RBR",
+        "description": "RBR Global Instrument"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 59,
+    "fields": {
+        "name": "SAT",
+        "description": "Satellite Data"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 60,
+    "fields": {
+        "name": "SCS",
+        "description": "Scientific Computer System Data Merging Program By NOAA"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 61,
+    "fields": {
+        "name": "SEAH",
+        "description": "Seahorse Moored Ocean Profiling System"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 62,
+    "fields": {
+        "name": "SF6",
+        "description": "Sulfur Hexafluoride (SF6)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 63,
+    "fields": {
+        "name": "SUNA",
+        "description": "Sea-Bird Suna V2 Nitrate Sensor"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 64,
+    "fields": {
+        "name": "SURF",
+        "description": "Surface and Upper Air Measurements"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 65,
+    "fields": {
+        "name": "TICTA",
+        "description": "Total Inorganic Carbon (TIC) and Total Alkalinity (TA)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 66,
+    "fields": {
+        "name": "TSG",
+        "description": "Thermosalinograph Underway Flow-Through System"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 67,
+    "fields": {
+        "name": "ULS",
+        "description": "Upward Ice Profiling Sonar Instrument"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 68,
+    "fields": {
+        "name": "UNKNOWN",
+        "description": "Unknown Dataset Type"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 69,
+    "fields": {
+        "name": "VADCP",
+        "description": "Vessel-mounted Acoustic Doppler Current Profiler"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 70,
+    "fields": {
+        "name": "VLOPC",
+        "description": "Vertical Laser Optical Particle (Plankton) Counter (attached to a Conductivity Temperature Depth Profiler or Net)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 71,
+    "fields": {
+        "name": "WATM",
+        "description": "Moored Water Sampler"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 72,
+    "fields": {
+        "name": "WAVM",
+        "description": "Wave Measurements"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 73,
+    "fields": {
+        "name": "WB",
+        "description": "Wave Bouy"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 74,
+    "fields": {
+        "name": "WINK",
+        "description": "Winkler Titrations of Oxygen (ml/l)"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 75,
+    "fields": {
+        "name": "XBT",
+        "description": "Expendable Bathythermograph"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 76,
+    "fields": {
+        "name": "ZPLANK",
+        "description": "Zooplankton collected using Ring Net"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 77,
+    "fields": {
+        "name": "ZPLANKBION",
+        "description": "Zooplankton collected using Bioness"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 78,
+    "fields": {
+        "name": "ZPLANKMANT",
+        "description": "Zooplankton collected using Manta Net"
+    }
+},
+{
+    "model": "core.datatypes",
+    "pk": 79,
+    "fields": {
+        "name": "ZPLANKMULT",
+        "description": "Zooplankton collected using Multinet"
     }
 }
 ]
