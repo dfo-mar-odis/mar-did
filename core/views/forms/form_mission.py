@@ -1,12 +1,16 @@
 from bs4 import BeautifulSoup
 
+from functools import partial
+
 from django import forms
-from django.urls import path, reverse_lazy, reverse
+from django.http import Http404
 from django.shortcuts import redirect
-from django.template.loader import render_to_string
+from django.contrib.auth.models import User
 from django.http.response import HttpResponse
-from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
+from django.urls import path, reverse_lazy, reverse
+from django.template.loader import render_to_string
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -15,42 +19,120 @@ from crispy_forms.layout import Layout, Div, Row, Column, Field, Hidden
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.utils import render_crispy_form
 
-from core import models
+from core import models, utils
 
 import logging
 
 from core.views.forms import form_multiselect
+from core.views.forms.form_multiselect import remove_from_list, add_to_list
 
 logger = logging.getLogger('mardid')
 
 class CreateMission(LoginRequiredMixin, TemplateView):
     template_name = 'core/forms/form_mission.html'
-    login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.groups.filter(name__in=['Chief Scientists', 'MarDID Maintainers']).exists():
-            return redirect(self.login_url)
+        if response:=utils.redirect_if_not_authenticated(request):
+            return response
+
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context['title'] = _('Create Mission')
-        if 'mission_id' in self.kwargs:
-            context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
-            context['mission_form'] = MissionForm(instance=context['object'])
-            context['mission_legs_form'] = MissionLegForm(context['object'])
-            context['mission_datasets_form'] = MissionDatasetsForm(context['object'])
-        else:
-            context['mission_form'] = MissionForm()
+        context['mission_form'] = MissionForm()
 
         return context
+
+
+class UpdateMission(TemplateView):
+    template_name = 'core/forms/form_mission.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['title'] = _('Updated Mission')
+
+        try:
+            context['object'] = models.Missions.objects.get(pk=self.kwargs['mission_id'])
+        except models.Missions.DoesNotExist:
+            raise Http404(_("Mission not found."))
+
+        context['mission_form'] = MissionForm(instance=context['object'])
+        context['mission_legs_form'] = MissionLegForm(context['object'])
+        context['mission_datasets_form'] = MissionDatasetsForm(context['object'])
+        if self.request.user:
+            context['mission_comments_form'] = MissionCommentsForm(context['object'], self.request.user)
+
+        return context
+
+
+class MissionCommentsForm(forms.ModelForm):
+    class Meta:
+        model = models.MissionComments
+        fields = '__all__'
+
+    def __init__(self, mission: models.Missions, author: User, *args, **kwargs):
+        mission_id = mission.pk if mission is not None else -1
+
+        initial = kwargs.pop('initial') if 'initial' in kwargs else {}
+
+        super(MissionCommentsForm, self).__init__(initial=initial, *args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            Div(
+                Hidden('mission', mission_id),
+                Hidden('author', author.pk),
+                Row(
+                    Column(Field('comment'), css_class='form-control-sm'),
+                ),
+                css_class="card card-body mb-2 border border-dark bg-light"
+            )
+        )
+
+        if mission_id > 0:
+            if self.instance.pk:
+                submit_url = reverse_lazy('core:update_mission_comment', args=[mission_id, self.instance.pk])
+            else:
+                submit_url = reverse_lazy('core:add_mission_comment', args=[mission_id])
+
+            button_div = Div()
+            btn_submit_attrs = {
+                'title': _("Add Comment"),
+                'hx-target': "#form_id_mission_comments",
+                'hx-post': submit_url
+            }
+
+            btn_label = _("Add Comment")
+            btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
+                                      css_class='btn btn-sm btn-primary mb-1',
+                                      **btn_submit_attrs)
+            button_div.append(btn_submit)
+            self.helper.layout.fields[0].fields.append(button_div)
+
 
 
 class MissionDatasetsForm(forms.ModelForm):
     class Meta:
         model = models.Datasets
         fields = '__all__'
+
+    def clean(self):
+        cleaned_data = super().clean()
+        mission = cleaned_data.get('mission')
+        data_type = cleaned_data.get('data_type')
+
+        if mission and data_type:
+            if models.Datasets.objects.filter(mission=mission, data_type=data_type).exists():
+                raise forms.ValidationError(
+                    _("A dataset with this type already exists in the mission.")
+                )
+
+        return cleaned_data
 
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
@@ -78,9 +160,6 @@ class MissionDatasetsForm(forms.ModelForm):
         )
 
         if mission_id > 0:
-            # if an instant is present then we're going to use the 'update_mission' url, otherwise we'll use the url
-            # to create a new mission
-
             submit_url = reverse_lazy('core:add_mission_dataset', args=[mission_id])
 
             button_div = Div()
@@ -295,7 +374,7 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
         if self.instance.pk:
             submit_url = reverse_lazy('core:update_mission', args=[self.instance.pk])
         else:
-            submit_url = reverse_lazy('core:add_mission')
+            submit_url = reverse_lazy('core:new_mission')
 
         btn_submit_attrs = {
             'title': _("Submit"),
@@ -346,8 +425,8 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
 
 def update_mission(request, **kwargs):
-    if not request.user.is_authenticated:
-        return redirect(reverse_lazy('login'))
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
     # to handle the select and multi-select fields together in this view
@@ -379,11 +458,25 @@ def update_mission(request, **kwargs):
     soup = BeautifulSoup(crispy, 'html.parser')
     return HttpResponse(soup)
 
+# used to clear or populate a form
+def mission_leg_form(request, mission_id, **kwargs):
+    if 'leg_id' in kwargs:
+        leg_id = int(kwargs.get('leg_id'))
+        leg = models.Legs.objects.get(pk=leg_id)
+        mission = leg.mission
+        form = MissionLegForm(mission, instance=leg)
+    else:
+        mission = models.Missions.objects.get(pk=mission_id)
+        form = MissionLegForm(mission)
 
-@login_required
+    html = render_crispy_form(form)
+    return HttpResponse(html)
+
+
+#used to submit a new or updated leg
 def mission_leg_update(request, mission_id, **kwargs):
-    if not request.user.is_authenticated:
-        return redirect(reverse_lazy('login'))
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
     # to handle the select and multi-select fields together in this view
@@ -425,57 +518,26 @@ def mission_leg_list(request, mission_id):
     mission = models.Missions.objects.get(pk=mission_id)
 
     context = {
-        'mission': mission
+        'mission': mission,
+        'user': request.user
     }
     html = render_to_string('core/partials/table_mission_legs.html', context=context)
     return HttpResponse(html)
 
 
-def mission_leg_form(request, mission_id, **kwargs):
-    if 'leg_id' in kwargs:
-        leg_id = int(kwargs.get('leg_id'))
-        leg = models.Legs.objects.get(pk=leg_id)
-        mission = leg.mission
-        form = MissionLegForm(mission, instance=leg)
-    else:
-        mission = models.Missions.objects.get(pk=mission_id)
-        form = MissionLegForm(mission)
-
-    html = render_crispy_form(form)
-    return HttpResponse(html)
-
-
 def mission_leg_delete(request, mission_id, leg_id):
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
+
     leg = models.Legs.objects.get(pk=leg_id)
     leg.delete()
 
     return HttpResponse()
 
 
-# Registered functions for controlling multi-select UI components.
-MULTISELECT_CONTEXT_REGISTER = {
-    'regions': form_multiselect.MultiselectContext(
-        prefix='regions',
-        lookup_model=models.GeographicRegions,
-        form_class=MissionLegForm,
-        render_function=lambda element: f"{element.name}",
-        add_url='core:add_to_list',
-        remove_url='core:remove_from_list'
-    ),
-    'organizations': form_multiselect.MultiselectContext(
-        prefix='organizations',
-        lookup_model=models.Organizations,
-        form_class=MissionForm,
-        render_function=lambda element: f"{element.acronym}",
-        add_url='core:add_to_list',
-        remove_url='core:remove_from_list'
-    ),
-}
-
-@login_required
 def mission_dataset_update(request, mission_id, **kwargs):
-    if not request.user.is_authenticated:
-        return redirect(reverse_lazy('login'))
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
     # to handle the select and multi-select fields together in this view
@@ -508,54 +570,147 @@ def mission_dataset_update(request, mission_id, **kwargs):
     return HttpResponse(soup)
 
 
-def add_to_list(request, prefix):
-    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
-    if not multiselect_context:
-        return HttpResponse(status=400)
+def mission_dataset_list(request, mission_id):
+    mission = models.Missions.objects.get(pk=mission_id)
 
-    if soup := form_multiselect.add_to_list(request, multiselect_context, prefix):
-        return HttpResponse(soup)
+    context = {
+        'mission': mission,
+        'user': request.user
+    }
+    html = render_to_string('core/partials/table_mission_datasets.html', context=context, request=request)
+    return HttpResponse(html)
+
+
+def mission_dataset_delete(request, mission_id, dataset_id):
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
+
+    dataset = models.Datasets.objects.get(pk=dataset_id)
+    dataset.delete()
+
+    return HttpResponse()
+
+
+# used to clear or populate a form
+def mission_comment_form(request, mission_id, **kwargs):
+    if 'comment_id' in kwargs:
+        comment_id = int(kwargs.get('comment_id'))
+        comment = models.MissionComments.objects.get(pk=comment_id)
+        mission = comment.mission
+        form = MissionCommentsForm(mission, request.user, instance=comment)
+    else:
+        mission = models.Missions.objects.get(pk=mission_id)
+        form = MissionCommentsForm(mission, request.user)
+
+    html = render_crispy_form(form)
+    return HttpResponse(html)
+
+
+def mission_comment_update(request, mission_id, **kwargs):
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
+
+    # Create a mutable copy of the POST data
+    post_data = request.POST.copy()
+
+    mission = models.Missions.objects.get(pk=mission_id)
+    if 'comment_id' in kwargs:
+        comment_id = int(kwargs.get('comment_id'))
+        mission_comment = models.MissionComments.objects.get(pk=comment_id)
+        form = MissionCommentsForm(mission, request.user, post_data, instance=mission_comment)
+    else:
+        form = MissionCommentsForm(mission, request.user, post_data)
+
+    if form.is_valid():
+        try:
+            form.save()
+            form = MissionCommentsForm(mission, request.user)
+            crispy = render_crispy_form(form)
+            soup = BeautifulSoup(crispy, 'html.parser')
+
+            response = HttpResponse(soup)
+            response['HX-Trigger'] = 'mission_comment_updated'
+            return response
+        except Exception as ex:
+            logger.error("Failed to save the mission comment form.")
+            logger.exception(ex)
+            form.add_error(None, _("An unexpected error occurred while saving the form."))
+            crispy = render_crispy_form(form)
+            return HttpResponse(crispy)
+
+    crispy = render_crispy_form(form)
+    soup = BeautifulSoup(crispy, 'html.parser')
+    return HttpResponse(soup)
+
+
+def mission_comment_list(request, mission_id):
+    mission = models.Missions.objects.get(pk=mission_id)
+
+    context = {
+        'mission': mission,
+        'user': request.user
+    }
+    html = render_to_string('core/partials/table_mission_comments.html', context=context, request=request)
+    return HttpResponse(html)
+
+
+def mission_comment_delete(request, mission_id, comment_id):
+    if response := utils.redirect_if_not_authenticated(request):
+        return response
+
+    comment = models.MissionComments.objects.get(pk=comment_id)
+    comment.delete()
 
     return HttpResponse()
 
 
-def remove_from_list(request, prefix, element_id):
-    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
-    if not multiselect_context:
-        return HttpResponse(status=400)
-
-    if soup := form_multiselect.remove_from_list(request,multiselect_context, element_id):
-        return HttpResponse(soup)
-
-    return HttpResponse()
-
-
-def get_updated_list(request, prefix):
-    multiselect_context = MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
-    if not multiselect_context:
-        return HttpResponse(status=400)
-
-    if soup := form_multiselect.get_updated_list(request, multiselect_context):
-        return HttpResponse(soup)
-
-    return HttpResponse()
+# Registered functions for controlling multi-select UI components.
+MULTISELECT_CONTEXT_REGISTER = {
+    'regions': form_multiselect.MultiselectContext(
+        prefix='regions',
+        lookup_model=models.GeographicRegions,
+        form_class=MissionLegForm,
+        render_function=lambda element: f"{element.name}",
+        add_url='core:mission_add_to_list',
+        remove_url='core:mission_remove_from_list'
+    ),
+    'organizations': form_multiselect.MultiselectContext(
+        prefix='organizations',
+        lookup_model=models.Organizations,
+        form_class=MissionForm,
+        render_function=lambda element: f"{element.acronym}",
+        add_url='core:mission_add_to_list',
+        remove_url='core:mission_remove_from_list'
+    ),
+}
 
 
 urlpatterns = [
-    path('mission/new', CreateMission.as_view(), name='new_mission_view'),
-    path('mission/<int:mission_id>', CreateMission.as_view(), name='update_mission_view'),
-    path('mission/add-mission', update_mission, name='add_mission'),
+    path('mission/view', CreateMission.as_view(), name='new_mission_view'),
+    path('mission/view/<int:mission_id>', UpdateMission.as_view(), name='update_mission_view'),
+    path('mission/new', update_mission, name='new_mission'),
     path('mission/update/<int:mission_id>', update_mission, name='update_mission'),
 
-    path('mission/add/<str:prefix>', add_to_list, name='add_to_list'),
-    path('mission/remove/<str:prefix>/<int:element_id>', remove_from_list, name='remove_from_list'),
+    path('mission/add/<str:prefix>',
+         partial(add_to_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_add_to_list'),
+    path('mission/remove/<str:prefix>/<int:element_id>',
+         partial(remove_from_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_remove_from_list'),
 
-    path('mission/leg/new/<int:mission_id>/', mission_leg_form, name='mission_leg_form_clear'),
-    path('mission/leg/new/<int:mission_id>/<int:leg_id>', mission_leg_form, name='mission_leg_form'),
+    path('mission/leg/clear/<int:mission_id>', mission_leg_form, name='mission_leg_form_clear'),
+    path('mission/leg/clear/<int:mission_id>/<int:leg_id>', mission_leg_form, name='mission_leg_form'),
     path('mission/leg/list/<int:mission_id>', mission_leg_list, name='mission_leg_list'),
-    path('mission/leg/add-mission/<int:mission_id>', mission_leg_update, name='add_mission_leg'),
+    path('mission/leg/add/<int:mission_id>', mission_leg_update, name='add_mission_leg'),
     path('mission/leg/update/<int:mission_id>/<int:leg_id>', mission_leg_update, name='update_mission_leg'),
-    path('mission/leg/add-mission/<int:mission_id>/<int:leg_id>', mission_leg_delete, name='mission_leg_delete'),
+    path('mission/leg/delete/<int:mission_id>/<int:leg_id>', mission_leg_delete, name='mission_leg_delete'),
 
-    path('mission/dataset/add-mission/<int:mission_id>', mission_dataset_update, name='add_mission_dataset'),
+    path('mission/dataset/add/<int:mission_id>', mission_dataset_update, name='add_mission_dataset'),
+    path('mission/dataset/remove/<int:mission_id>/<int:dataset_id>', mission_dataset_delete, name='delete_mission_dataset'),
+    path('mission/dataset/list/<int:mission_id>', mission_dataset_list, name='list_mission_datasets'),
+
+    path('mission/comment/add/<int:mission_id>', mission_comment_update, name='add_mission_comment'),
+    path('mission/comment/add/<int:mission_id>/<int:comment_id>', mission_comment_update, name='update_mission_comment'),
+    path('mission/comment/remove/<int:mission_id>/<int:comment_id>', mission_comment_delete,
+         name='delete_mission_comment'),
+    path('mission/comment/update/<int:mission_id>/<int:comment_id>', mission_comment_form, name='mission_comment_form'),
+    path('mission/comment/list/<int:mission_id>', mission_comment_list, name='list_mission_comments'),
 ]

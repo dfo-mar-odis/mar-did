@@ -1,0 +1,38 @@
+{% load i18n %}
+
+<table class="table table-striped table-bordered" hx-trigger="mission_comment_updated from:body"
+    hx-get="{% url 'core:list_mission_comments' mission.pk %}" id="table_id_mission_comment_list">
+    <thead>
+        <tr>
+            <th scope="col" width="2%">{# button column #}</th>
+            <th scope="col">{% trans "Author" %}</th>
+            <th scope="col">{% trans "Comment" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comment in mission.comments.all %}
+            <tr>
+                <td style="width: 2%; white-space: nowrap;">
+                {% if request.user.is_authenticated %}
+                    {# Only the author of the comment should be able to edit the comment. #}
+                    {% if request.user.pk == comment.author.pk %}
+                    <button type="button" hx-get="{% url 'core:mission_comment_form' mission.pk comment.pk %}"
+                            hx-target="#form_id_mission_comments" hx-swap="innerHTML"
+                            class="btn btn-sm btn-outline-secondary" title="{% trans 'Edit Comment' %}">
+                        <span class="bi bi-pencil-square"></span>
+                    </button>
+                    {% endif %}
+                    <button type="button" class="btn btn-sm btn-danger" title="{% trans 'Delete' %}"
+                            hx-delete="{% url 'core:delete_mission_comment' mission.pk comment.pk %}"
+                            hx-confirm="{% trans 'Are you sure?' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    hx-target="closest tr" hx-swap="delete">
+                        <span class="bi bi-x-square"></span>
+                    </button>
+                {% endif %}
+                </td>
+                <td style="white-space: nowrap;"><div>{% if comment.author.last_name %}{{ comment.author.last_name }}, {{ comment.author.first_name }}{% else %}{{ comment.author }}{% endif %}</div><div>{{ comment.comment_date }}</div></td>
+                <td style="width: 100%;">{{ comment.comment }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
