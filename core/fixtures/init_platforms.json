@@ -5,7 +5,7 @@
     "fields": {
         "name": "A C D HOWE ",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "HOWE"
@@ -17,7 +17,7 @@
     "fields": {
         "name": "A H CHEVARIE ",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "AHC"
@@ -65,7 +65,7 @@
     "fields": {
         "name": "AKADEMIK KNIPOVICH",
         "country": 143,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "90KN",
         "ship_code": "90KN"
@@ -77,7 +77,7 @@
     "fields": {
         "name": "AKPATOK",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18AA",
         "ship_code": "18AA"
@@ -89,7 +89,7 @@
     "fields": {
         "name": "ALERT ",
         "country": 184,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "74AL",
         "ship_code": "74AL"
@@ -100,7 +100,7 @@
     "pk": 9,
     "fields": {
         "name": "ALERT ",
-        "country": 187,
+        "country": 185,
         "call_sign": "NZVE",
         "max_speed": -999.0,
         "ices_code": "319L",
@@ -125,7 +125,7 @@
     "fields": {
         "name": "AMBROSE FOOTE",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18FO",
         "ship_code": "18FO"
@@ -149,7 +149,7 @@
     "fields": {
         "name": "ANDERSON",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18ND",
         "ship_code": "18ND"
@@ -161,7 +161,7 @@
     "fields": {
         "name": "ANN HARVEY ",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 16.5,
         "ices_code": "18AV",
         "ship_code": "AHV"
@@ -196,8 +196,8 @@
     "pk": 17,
     "fields": {
         "name": "ANTON DOHRN ",
-        "country": 187,
-        "call_sign": "------",
+        "country": 185,
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "31AD",
         "ship_code": "31AD"
@@ -245,7 +245,7 @@
     "fields": {
         "name": "BAYFIELD",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18BY",
         "ship_code": "18BY"
@@ -269,7 +269,7 @@
     "fields": {
         "name": "BEDEQUE",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18BQ",
         "ship_code": "18BQ"
@@ -293,7 +293,7 @@
     "fields": {
         "name": "BELUGA II",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 20.0,
         "ices_code": "18BP",
         "ship_code": "18BP"
@@ -305,7 +305,7 @@
     "fields": {
         "name": "BICKERTON ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "BIK"
@@ -317,7 +317,7 @@
     "fields": {
         "name": "BLUE THROAT",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18BT",
         "ship_code": "18BT"
@@ -341,7 +341,7 @@
     "fields": {
         "name": "BOSTON WHALER",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18BW",
         "ship_code": "18BW"
@@ -353,7 +353,7 @@
     "fields": {
         "name": "BRANDAL",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18BR",
         "ship_code": "18BR"
@@ -377,7 +377,7 @@
     "fields": {
         "name": "CANSO CONDOR",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18CC",
         "ship_code": "18CC"
@@ -389,7 +389,7 @@
     "fields": {
         "name": "CANSO LIGHT",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18CX",
         "ship_code": "18CX"
@@ -401,7 +401,7 @@
     "fields": {
         "name": "CAP BRETON",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 25.0,
         "ices_code": "18BO",
         "ship_code": "18BO"
@@ -425,7 +425,7 @@
     "fields": {
         "name": "CAPE LIGHT ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 30.0,
         "ices_code": null,
         "ship_code": "CLT"
@@ -449,7 +449,7 @@
     "fields": {
         "name": "CARTIER",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 12.5,
         "ices_code": null,
         "ship_code": "18CR"
@@ -473,7 +473,7 @@
     "fields": {
         "name": "CHEBUCTO",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18CH",
         "ship_code": "18CH"
@@ -497,7 +497,7 @@
     "fields": {
         "name": "CLARKS HARBOUR ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "CHB"
@@ -545,7 +545,7 @@
     "fields": {
         "name": "COURTNEY BAY ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "CBY"
@@ -569,7 +569,7 @@
     "fields": {
         "name": "CUMELLA ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "CUM"
@@ -581,7 +581,7 @@
     "fields": {
         "name": "CYGNUS",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 16.0,
         "ices_code": "18CY",
         "ship_code": "CYG"
@@ -593,7 +593,7 @@
     "fields": {
         "name": "DANA ",
         "country": 47,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "26D1",
         "ship_code": "26D1"
@@ -605,7 +605,7 @@
     "fields": {
         "name": "DANA",
         "country": 47,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "26D2",
         "ship_code": "26D2"
@@ -641,7 +641,7 @@
     "fields": {
         "name": "DANA ",
         "country": 47,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "26DA",
         "ship_code": "26DA"
@@ -713,7 +713,7 @@
     "fields": {
         "name": "DISCOVERY",
         "country": 184,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 25.0,
         "ices_code": "74DS",
         "ship_code": "74DS"
@@ -737,7 +737,7 @@
     "fields": {
         "name": "DISCOVERY ",
         "country": 184,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "74DI",
         "ship_code": "74DI"
@@ -761,7 +761,7 @@
     "fields": {
         "name": "DOMINION VICTORY ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "VIC"
@@ -809,7 +809,7 @@
     "fields": {
         "name": "ECOSYSTEM PROGRAM ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "IEP"
@@ -845,7 +845,7 @@
     "fields": {
         "name": "EIDER MS ",
         "country": 187,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 20.0,
         "ices_code": "33ED",
         "ship_code": "33ED"
@@ -857,7 +857,7 @@
     "fields": {
         "name": "EKLIPTIKA ",
         "country": 143,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "90EL",
         "ship_code": "90EL"
@@ -868,7 +868,7 @@
     "pk": 73,
     "fields": {
         "name": "ENDEAVOR RV ",
-        "country": 187,
+        "country": 186,
         "call_sign": "WCE5063",
         "max_speed": 14.0,
         "ices_code": "32EV",
@@ -893,7 +893,7 @@
     "fields": {
         "name": "ERD PACKCAT ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "EPK"
@@ -905,7 +905,7 @@
     "fields": {
         "name": "ERNEST HOLT ",
         "country": 184,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "74EH",
         "ship_code": "74EH"
@@ -917,7 +917,7 @@
     "fields": {
         "name": "EXOCET",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 10.0,
         "ices_code": null,
         "ship_code": null
@@ -941,7 +941,7 @@
     "fields": {
         "name": "EXPLORER ",
         "country": 184,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "74EX",
         "ship_code": "74EX"
@@ -952,8 +952,8 @@
     "pk": 80,
     "fields": {
         "name": "EXPLORER ",
-        "country": 187,
-        "call_sign": "------",
+        "country": 185,
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "31EX",
         "ship_code": "31EX"
@@ -965,7 +965,7 @@
     "fields": {
         "name": "FAIRMORSE",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18FA",
         "ship_code": "18FA"
@@ -977,7 +977,7 @@
     "fields": {
         "name": "FISHING BOAT CANADA ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "FISH"
@@ -989,7 +989,7 @@
     "fields": {
         "name": "FIXED STATIONS CANADA",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18FX",
         "ship_code": "18FX"
@@ -1013,7 +1013,7 @@
     "fields": {
         "name": "FORT FRANCIS",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18FF",
         "ship_code": "18FF"
@@ -1025,7 +1025,7 @@
     "fields": {
         "name": "FOTON ",
         "country": 143,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "906F",
         "ship_code": "906F"
@@ -1097,7 +1097,7 @@
     "fields": {
         "name": "FUNDY SPRAY",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18FQ",
         "ship_code": "FSP"
@@ -1133,7 +1133,7 @@
     "fields": {
         "name": "GALWAY BLAZER CHARTER ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "GALW"
@@ -1169,7 +1169,7 @@
     "fields": {
         "name": "GEOLOG FERSMAN SR",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "19GG",
         "ship_code": "19GG"
@@ -1181,7 +1181,7 @@
     "fields": {
         "name": "GEOLOGICAL SURVEY OF CANADA ATLANTIC ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "GSC"
@@ -1217,7 +1217,7 @@
     "fields": {
         "name": "GOSARS ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "GOSA"
@@ -1241,7 +1241,7 @@
     "fields": {
         "name": "GULF STAR ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "GULF"
@@ -1253,7 +1253,7 @@
     "fields": {
         "name": "HARENGUS",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18HR",
         "ship_code": "HAR"
@@ -1277,7 +1277,7 @@
     "fields": {
         "name": "HENRY BIGELOW",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "HB"
@@ -1313,7 +1313,7 @@
     "fields": {
         "name": "HOWE POINT ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "HPT"
@@ -1349,7 +1349,7 @@
     "fields": {
         "name": "HUDSON BARGE ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 15.0,
         "ices_code": null,
         "ship_code": "HUDB"
@@ -1361,7 +1361,7 @@
     "fields": {
         "name": "IBIS ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "IBIS"
@@ -1373,7 +1373,7 @@
     "fields": {
         "name": "IBMF BARGE ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "IBM"
@@ -1384,8 +1384,8 @@
     "pk": 116,
     "fields": {
         "name": "ICE ISLAND  ",
-        "country": 187,
-        "call_sign": "------",
+        "country": 185,
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "313T",
         "ship_code": "313T"
@@ -1396,8 +1396,8 @@
     "pk": 117,
     "fields": {
         "name": "ICE ISLAND  ",
-        "country": 187,
-        "call_sign": "------",
+        "country": 185,
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "314K",
         "ship_code": "314K"
@@ -1409,7 +1409,7 @@
     "fields": {
         "name": "ISLES DE BARQUES ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "IDB"
@@ -1421,7 +1421,7 @@
     "fields": {
         "name": "J J COWIE ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "JJC"
@@ -1433,7 +1433,7 @@
     "fields": {
         "name": "J L HART",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18LA",
         "ship_code": "HRT"
@@ -1493,7 +1493,7 @@
     "fields": {
         "name": "JOHN A. MACDONALD",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18MC",
         "ship_code": "18MC"
@@ -1517,7 +1517,7 @@
     "fields": {
         "name": "KAPUSKASING",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18KP",
         "ship_code": "18KP"
@@ -1528,7 +1528,7 @@
     "pk": 128,
     "fields": {
         "name": "KNORR ",
-        "country": 187,
+        "country": 185,
         "call_sign": "KCEJ",
         "max_speed": -999.0,
         "ices_code": "316N",
@@ -1553,7 +1553,7 @@
     "fields": {
         "name": "LABRADOR",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18LA",
         "ship_code": "18LA"
@@ -1565,7 +1565,7 @@
     "fields": {
         "name": "LACUNA",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18LC",
         "ship_code": "18LC"
@@ -1601,7 +1601,7 @@
     "fields": {
         "name": "LADY MOOD",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18LM",
         "ship_code": "18LM"
@@ -1613,7 +1613,7 @@
     "fields": {
         "name": "LANCE",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "49L2",
         "ship_code": "49L2"
@@ -1637,7 +1637,7 @@
     "fields": {
         "name": "LANCE ",
         "country": 143,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "909N",
         "ship_code": "909N"
@@ -1683,7 +1683,7 @@
     "model": "core.platforms",
     "pk": 141,
     "fields": {
-        "name": "LE QUÉBÉCOIS",
+        "name": "LE QUÃ‰BÃ‰COIS",
         "country": 189,
         "call_sign": "CG3185",
         "max_speed": 20.0,
@@ -1769,7 +1769,7 @@
     "fields": {
         "name": "MALLOTUS",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18MA",
         "ship_code": "18MA"
@@ -1781,7 +1781,7 @@
     "fields": {
         "name": "MARGARET AND ROBERT",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18PG",
         "ship_code": "18PG"
@@ -1817,7 +1817,7 @@
     "fields": {
         "name": "MARY HICHINS ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "HICH"
@@ -1841,7 +1841,7 @@
     "fields": {
         "name": "MAXWELL",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18MX",
         "ship_code": "18MX"
@@ -1865,7 +1865,7 @@
     "fields": {
         "name": "NARWHAL",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18NR",
         "ship_code": "18NR"
@@ -1889,7 +1889,7 @@
     "fields": {
         "name": "NORTH BAR ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "NBR"
@@ -1901,7 +1901,7 @@
     "fields": {
         "name": "OCEAN SCIENCES DIVISION ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "OSD"
@@ -1912,7 +1912,7 @@
     "pk": 160,
     "fields": {
         "name": "OCEANUS ",
-        "country": 187,
+        "country": 186,
         "call_sign": "WXAQ",
         "max_speed": -999.0,
         "ices_code": "32OC",
@@ -1949,7 +1949,7 @@
     "fields": {
         "name": "PANDALUS III",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18PA",
         "ship_code": "PAN"
@@ -1985,7 +1985,7 @@
     "fields": {
         "name": "PARTRIDGE ISLAND ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "PIS"
@@ -2045,7 +2045,7 @@
     "fields": {
         "name": "POLAR CIRCLE ",
         "country": 184,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "74P6",
         "ship_code": "74P6"
@@ -2069,7 +2069,7 @@
     "fields": {
         "name": "PRINCE 1916-1923",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18PN",
         "ship_code": "18PN"
@@ -2081,7 +2081,7 @@
     "fields": {
         "name": "PRINCESS CGS",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18PS",
         "ship_code": "18PS"
@@ -2117,7 +2117,7 @@
     "fields": {
         "name": "QUEST",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18QU",
         "ship_code": "18QU"
@@ -2129,7 +2129,7 @@
     "fields": {
         "name": "RED HEAD C.S.L.",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18RH",
         "ship_code": "18RH"
@@ -2153,7 +2153,7 @@
     "fields": {
         "name": "ALASKA ENDEAVOR ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 14.0,
         "ices_code": null,
         "ship_code": "33KH"
@@ -2189,7 +2189,7 @@
     "fields": {
         "name": "SANNA R/V",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "SAN"
@@ -2213,7 +2213,7 @@
     "fields": {
         "name": "SCAMP CDL ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "SCAM"
@@ -2225,7 +2225,7 @@
     "fields": {
         "name": "SERVICE LEADER M/V",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "SL"
@@ -2249,7 +2249,7 @@
     "fields": {
         "name": "NEW LISKEARD",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18HI",
         "ship_code": "SHP"
@@ -2261,7 +2261,7 @@
     "fields": {
         "name": "SIGMA T PRE2008",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 14.0,
         "ices_code": null,
         "ship_code": "SIGM"
@@ -2273,7 +2273,7 @@
     "fields": {
         "name": "SIGMA-T 2008",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18SG",
         "ship_code": "18SG"
@@ -2285,7 +2285,7 @@
     "fields": {
         "name": "SIMON FRASER",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "SIMF"
@@ -2333,7 +2333,7 @@
     "fields": {
         "name": "SMITH FCG",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18SF",
         "ship_code": "18SF"
@@ -2357,7 +2357,7 @@
     "fields": {
         "name": "SOURIS ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "SOU"
@@ -2369,7 +2369,7 @@
     "fields": {
         "name": "SPINDRIFT ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 24.0,
         "ices_code": null,
         "ship_code": "SPN"
@@ -2393,7 +2393,7 @@
     "fields": {
         "name": "TANU",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 13.5,
         "ices_code": null,
         "ship_code": "TANU"
@@ -2417,7 +2417,7 @@
     "fields": {
         "name": "TERRY FOX ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 16.0,
         "ices_code": null,
         "ship_code": "TFX"
@@ -2441,7 +2441,7 @@
     "fields": {
         "name": "THERON",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": 20.0,
         "ices_code": "18TE",
         "ship_code": "18TE"
@@ -2453,7 +2453,7 @@
     "fields": {
         "name": "THETA",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18TH",
         "ship_code": "18TH"
@@ -2489,7 +2489,7 @@
     "fields": {
         "name": "TUDLIK CSL",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18TU",
         "ship_code": "18TU"
@@ -2549,7 +2549,7 @@
     "fields": {
         "name": "VIANDRA ",
         "country": 143,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "905C",
         "ship_code": "905C"
@@ -2609,7 +2609,7 @@
     "fields": {
         "name": "VYKHMA ",
         "country": 143,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "906G",
         "ship_code": "906G"
@@ -2632,8 +2632,8 @@
     "pk": 220,
     "fields": {
         "name": "WESTPORT ",
-        "country": 187,
-        "call_sign": "------",
+        "country": 186,
+        "call_sign": "Unknown",
         "max_speed": 24.0,
         "ices_code": "32Y9",
         "ship_code": "32Y9"
@@ -2645,7 +2645,7 @@
     "fields": {
         "name": "WHIP THE WIND",
         "country": 31,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": "18WW",
         "ship_code": "18WW"
@@ -2669,7 +2669,7 @@
     "fields": {
         "name": "ZODIAC LAUNCH ",
         "country": 189,
-        "call_sign": "------",
+        "call_sign": "Unknown",
         "max_speed": -999.0,
         "ices_code": null,
         "ship_code": "ZODI"
