@@ -29,6 +29,9 @@ MEDIA_ROOT = os.getenv('MEDIA_DIR', BASE_DIR / 'media')
 MEDIA_IN = os.path.join(MEDIA_ROOT, 'IN')
 MEDIA_OUT = os.path.join(MEDIA_ROOT, 'OUT')
 
+MEDIA_IN = os.getenv('MEDIA_IN', MEDIA_IN)
+MEDIA_OUT = os.getenv('MEDIA_OUT', MEDIA_OUT)
+
 if not os.path.exists(MEDIA_IN):
     os.makedirs(MEDIA_IN)
 
