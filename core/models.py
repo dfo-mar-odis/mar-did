@@ -37,13 +37,15 @@ class DatasetStatus(models.Model):
     def get_button_colour(self):
         name = self.name.upper()
         if name == 'EXPECTED':
-            return 'btn-warning'
+            return 'btn-danger'
         elif name == 'LAB':
             return 'btn-outline-danger'
         elif name == 'SUBMITTED':
-            return 'btn-success'
+            return 'btn-warning'
         elif name == 'RECEIVED':
-            return 'btn-outline-success'
+            return 'btn-outline-warning'
+        elif name == 'COMPLETE':
+            return 'btn-success'
 
         return 'btn-outline-dark'
 
@@ -124,7 +126,7 @@ class Platforms(models.Model):
     max_speed = models.FloatField(verbose_name=_("Max Speed"), db_column='maximum_speed',
                                   help_text=_("Maximum speed of the platform in knots"), default=-999)
     ices_code = models.CharField(verbose_name=_("ICES Code"), db_column='ices_code', max_length=4, blank=True,
-                                 null=True, help_text=_("ICES code"))
+                                 null=True, help_text=_("<a href='https://vocab.ices.dk/' role='link' title='visit the ICES vocabulary lookup tool' target='_blank' rel='noopener noreferrer'><span class='bi bi-globe2 me-1'></span>ICES vocabulary Lookup</a>"))
     ship_code = models.CharField(verbose_name=_("Ship Code"), db_column='ship_code', max_length=6, blank=True,
                                  null=True, help_text=_("OSCruise code"))
 
@@ -209,6 +211,16 @@ class Missions(models.Model):
         chief = self.legs.filter(participants__position__name__iexact='chief scientist')
         return ', '.join([chief]) if chief else None
 
+    @property
+    def dataset_completion(self):
+        datasets = self.datasets.all()
+        if not datasets:
+            return 0
+
+        completed = datasets.filter(status__name__iexact='complete').count()
+        return int((completed / datasets.count()) * 100)
+
+
     def __str__(self):
         return f'{self.name} - {self.descriptor}'
 
@@ -242,7 +254,7 @@ class Legs(models.Model):
 
     class Meta:
         db_table = 'legs'
-        ordering = ['number']
+        ordering = ['start_date']
         unique_together = ('mission', 'number')
 
     @property
@@ -384,7 +396,7 @@ class MissionComments(models.Model):
 
     class Meta:
         db_table = 'mission_comments'
-        ordering = ['comment_date']
+        ordering = ['-comment_date']
 
 
 class ProcessingStatus(models.Model):

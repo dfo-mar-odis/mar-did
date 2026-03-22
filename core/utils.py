@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.urls import reverse_lazy
 
+
 # Utility functions for user authentication and authorization
 
 
@@ -24,7 +25,8 @@ def authenticated(request, groups: list[str] = None) -> bool:
     return False
 
 
-def redirect_if_not_authenticated(request, next_page, groups: list[str] = None) -> HttpResponse | None:
+def redirect_if_not_authenticated(request, next_page: str | None = None,
+                                  groups: list[str] = None) -> HttpResponse | None:
     """
     Redirect the user to the login page if they are not authenticated.
 
@@ -37,6 +39,9 @@ def redirect_if_not_authenticated(request, next_page, groups: list[str] = None) 
         HttpResponseRedirect: A redirect response to the login page if the user is not authenticated.
         None: If the user is authenticated.
     """
+    if not next_page:
+        next_page = request.get_full_path()
+
     if not authenticated(request, groups):
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         return HttpResponseRedirect(login_url)

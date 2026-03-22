@@ -1,0 +1,10 @@
+[
+{
+    "model": "core.positions",
+    "pk": 1,
+    "fields": {
+        "name": "Chief Scientist",
+        "description": "The Big Wing"
+    }
+}
+]

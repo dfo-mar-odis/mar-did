@@ -4,6 +4,7 @@
        hx-trigger="mission_leg_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_mission_leg_list">
     <thead>
         <tr>
+            {% if user.is_authenticated %}
             <th class="" width="2%">
                 <div id="htmx_indicator_mission_leg_list" class="htmx-indicator d-flex justify-content-center">
                     <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
@@ -11,6 +12,7 @@
                     </div>
                 </div>
             </th>
+            {% endif %}
             <th class="text-start">{% trans 'Leg' %}</th>
             <th class="text-start">{% trans 'Chief Scientist' %}</th>
             <th class="text-start">{% trans 'Start Date' %}</th>
@@ -22,6 +24,7 @@
     <tbody>
         {% for leg in mission.legs.all %}
         <tr id="tr_id_mission_leg_{{ leg.pk }}">
+            {% if user.is_authenticated %}
             <th class="text-start" width="5%" style="white-space: nowrap;">
                 <button type="button" hx-get="{% url 'core:mission_leg_form' mission.pk leg.pk %}"
                         hx-target="#form_id_mission_legs" hx-swap="innerHTML"
@@ -34,6 +37,7 @@
                     <span class="bi bi-x-square"></span>
                 </button>
             </th> {# this ID column will get replaced with a button that uses the ID #}
+            {% endif %}
             <td class="text-start">{{ leg.number }}</td>
             <td class="text-start">{{ leg.chief_scientist }}</td>
             <td class="text-start">{{ leg.start_date }}</td>

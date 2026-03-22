@@ -1,3 +1,80 @@
+"""
+This module provides utilities for adding a multi-select UI component to Django forms.
+
+### How to Use:
+
+1. **Define a MultiselectContext:**
+   Create an instance of `MultiselectContext` with the following parameters:
+   - `prefix`: A unique string identifier for the multi-select field.
+   - `lookup_model`: The Django model associated with the multi-select field.
+   - `form_class`: The form class where the multi-select field will be used.
+   - `render_function`: A callable to render the display of each selected item.
+   - `add_url`: The URL for adding items to the multi-select field.
+   - `remove_url`: The URL for removing items from the multi-select field.
+
+2. **Implement `get_multiselect_context` in Your Form:**
+   Inherit from `MultiselectFieldForm` and implement the `get_multiselect_context` method to return the `MultiselectContext` instance for your form.
+
+3. **Initialize the Multi-Select Field in Your Form:**
+   Use the `init_lookup` method in your form class's __init__ function to initialize the multi-select field. Pass the `prefix` as an argument.
+
+4. **Add URLs for Add/Remove Operations:**
+   Use the `add_to_list` and `remove_from_list` functions in your URL configuration. Pass the `MULTISELECT_CONTEXT_REGISTER` dictionary to these functions to provide the context for each multi-select field.
+
+   Example:
+   ```python
+   from functools import partial
+   from core.views.forms.form_multiselect import add_to_list, remove_from_list
+
+   urlpatterns = [
+       path('mission/add/<str:prefix>', partial(add_to_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='add_to_list'),
+       path('mission/remove/<str:prefix>/<int:element_id>', partial(remove_from_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='remove_from_list'),
+   ]
+   ```
+
+5. **Create a Template for the Multi-Select Field:**
+   Use the `multi_select_bullet.html` template to define how each selected item is displayed. Ensure the template is located at `core/partials/components/multi_select_bullet.html`.
+
+6. **Handle Form Submission:**
+   Use the `clean_multiselect_field` method in your form to validate and process the selected items during form submission.
+
+### Example:
+
+```python
+MULTISELECT_CONTEXT_REGISTER = {
+    prefix: MultiselectContext(
+        prefix=prefix,
+        lookup_model=MyRelatedModel,
+        form_class=MyForm,
+        render_function=lambda obj: obj.name,
+        add_url='add_to_list',
+        remove_url='remove_from_list'
+    ),
+}
+
+class MyForm(MultiselectFieldForm):
+    class Meta:
+        model = MyModel
+        fields = ['my_field']
+
+    def get_multiselect_context(self, prefix):
+        return MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper.layout.append(self.init_lookup('my_field'))
+
+urlpatterns = [
+    path('mission/add/<str:prefix>',
+         partial(add_to_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_add_to_list'),
+    path('mission/remove/<str:prefix>/<int:element_id>',
+         partial(remove_from_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_remove_from_list'),
+]
+```
+
+This will add a multi-select UI component to your form, allowing users to add and remove items dynamically.
+"""
+
 from typing import Callable, Any, Type
 
 from bs4 import BeautifulSoup
@@ -6,6 +83,7 @@ from crispy_forms.layout import Field, Div, Row, HTML
 from crispy_forms.utils import render_crispy_form
 from django import forms
 from django.db import models
+from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 
@@ -119,7 +197,7 @@ def get_list_bullet(multiselect_context: MultiselectContext, element_id: int):
     return render_to_string('core/partials/components/multi_select_bullet.html', context=context)
 
 
-def remove_from_list(request, multiselect_context: MultiselectContext, element_id: int) -> BeautifulSoup | None:
+def remove_from_list_soup(request, multiselect_context: MultiselectContext, element_id: int) -> BeautifulSoup | None:
     existing_ids = [int(id) for id in request.POST.getlist(multiselect_context.prefix)]
     if element_id not in existing_ids:
         return None
@@ -127,12 +205,12 @@ def remove_from_list(request, multiselect_context: MultiselectContext, element_i
     soup = BeautifulSoup()
 
     existing_ids.remove(element_id)
-    soup.append(get_updated_list(request, multiselect_context))
+    soup.append(get_updated_list_soup(request, multiselect_context))
 
     return soup
 
 
-def add_to_list(request, multiselect_context: MultiselectContext, prefix: str) -> BeautifulSoup | None:
+def add_to_list_soup(request, multiselect_context: MultiselectContext, prefix: str) -> BeautifulSoup | None:
 
     new_id = request.POST.get(f'{prefix}_select')
     existing = request.POST.getlist(f'{prefix}_bullet')
@@ -149,13 +227,13 @@ def add_to_list(request, multiselect_context: MultiselectContext, prefix: str) -
     existing_ids = [int(pk) for pk in existing if pk.isdigit()]
     existing_ids.append(element_id)
 
-    soup.append(get_updated_list(request, multiselect_context))
+    soup.append(get_updated_list_soup(request, multiselect_context))
     soup.append(BeautifulSoup(new_pill, 'html.parser'))
 
     return soup
 
 
-def get_updated_list(request, multiselect_context: MultiselectContext) -> BeautifulSoup:
+def get_updated_list_soup(request, multiselect_context: MultiselectContext) -> BeautifulSoup:
 
     existing_ids = [int(id) for id in request.POST.getlist(multiselect_context.prefix)]
     form = multiselect_context.form_class(initial={multiselect_context.prefix: existing_ids})
@@ -167,3 +245,25 @@ def get_updated_list(request, multiselect_context: MultiselectContext) -> Beauti
     form_select.attrs['hx-swap-oob'] = 'true'
 
     return form_select
+
+
+def add_to_list(request, prefix, multiselect_context_dict: dict):
+    multiselect_context = multiselect_context_dict.get(prefix, None)
+    if not multiselect_context:
+        return HttpResponse(status=400)
+
+    if soup := add_to_list_soup(request, multiselect_context, prefix):
+        return HttpResponse(soup)
+
+    return HttpResponse()
+
+
+def remove_from_list(request, prefix, element_id, multiselect_context_dict: dict):
+    multiselect_context = multiselect_context_dict.get(prefix, None)
+    if not multiselect_context:
+        return HttpResponse(status=400)
+
+    if soup := remove_from_list_soup(request,multiselect_context, element_id):
+        return HttpResponse(soup)
+
+    return HttpResponse()

@@ -11,7 +11,9 @@ from core import models
 fake = Faker()
 
 class MardidTestCase(TestCase):
-    fixtures = ['test_countries', 'test_platforms', 'test_programs', 'test_regions']
+    fixtures = [ 'init_group_fixtures', 'init_dataset_status', 'init_countries',
+                 'init_organizations', 'init_platforms', 'init_regions', 'init_programs',
+                 'init_positions', 'init_datatypes']
 
 class MissionFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -45,3 +47,25 @@ class MissionLegFactory(factory.django.DjangoModelFactory):
     end_date = factory.LazyAttribute(
         lambda obj: obj.start_date + datetime.timedelta(days=fake.random_int(min=1, max=30))
     )
+
+class MissionDatasetFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Datasets
+
+    mission = factory.SubFactory(MissionFactory)
+    data_type = factory.LazyFunction(
+        lambda: models.DataTypes.objects.order_by('?').first()
+    )
+    status = factory.LazyFunction(
+        lambda: models.DatasetStatus.objects.get(name__iexact="EXPECTED")
+    )
+
+
+class MissionCommentFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = models.MissionComments
+
+    mission = factory.SubFactory(MissionFactory)
+    author = factory.SelfAttribute('author')
+    comment = factory.Faker('paragraph')

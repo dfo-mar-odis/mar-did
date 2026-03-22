@@ -29,17 +29,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Dataset',
-            fields=[
-                ('id', models.AutoField(db_column='dataset_seq', primary_key=True, serialize=False)),
-                ('legacy_file_location', models.CharField(blank=True, db_column='legacy_file_location', max_length=255, null=True, verbose_name='File location')),
-            ],
-            options={
-                'db_table': 'datasets',
-                'ordering': ['mission', 'data_type'],
-            },
-        ),
-        migrations.CreateModel(
             name='DatasetStatus',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -115,6 +104,20 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='Datasets',
+            fields=[
+                ('id', models.AutoField(db_column='dataset_seq', primary_key=True, serialize=False)),
+                ('legacy_file_location', models.CharField(blank=True, db_column='legacy_file_location', help_text='The location of the files in the legacy system, if applicable', max_length=255, null=True, verbose_name='Legacy File location')),
+                ('data_type', models.ForeignKey(db_column='data_type_seq', on_delete=django.db.models.deletion.PROTECT, related_name='datasets', to='core.datatypes')),
+                ('mission', models.ForeignKey(db_column='mission_seq', on_delete=django.db.models.deletion.CASCADE, related_name='datasets', to='core.missions')),
+                ('status', models.ForeignKey(db_column='dataset_status_seq', on_delete=django.db.models.deletion.PROTECT, related_name='datasets', to='core.datasetstatus', verbose_name='Dataset Status')),
+            ],
+            options={
+                'db_table': 'datasets',
+                'ordering': ['mission', 'data_type'],
+            },
+        ),
+        migrations.CreateModel(
             name='Participants',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -170,7 +173,7 @@ class Migration(migrations.Migration):
                 ('submitted_date', models.DateTimeField(auto_now_add=True, db_column='submitted_date')),
                 ('is_archived', models.BooleanField(db_column='is_archived', default=False, verbose_name='Is archived')),
                 ('submitted_by', models.ForeignKey(db_column='submitted_by', on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('data', models.ForeignKey(db_column='dataset_seq', on_delete=django.db.models.deletion.CASCADE, related_name='files', to='core.dataset')),
+                ('data', models.ForeignKey(db_column='dataset_seq', on_delete=django.db.models.deletion.CASCADE, related_name='files', to='core.datasets')),
                 ('file_type', models.ForeignKey(db_column='file_type_seq', on_delete=django.db.models.deletion.PROTECT, related_name='files', to='core.filetypes')),
             ],
             options={
@@ -199,22 +202,12 @@ class Migration(migrations.Migration):
                 ('comment', models.CharField(db_column='comment', max_length=255, verbose_name='Comments')),
                 ('comment_date', models.DateTimeField(auto_now_add=True, db_column='comment_date')),
                 ('author', models.ForeignKey(db_column='author_seq', on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('dataset', models.ForeignKey(db_column='dataset_seq', on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='core.dataset', verbose_name='Dataset')),
+                ('dataset', models.ForeignKey(db_column='dataset_seq', on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='core.datasets', verbose_name='Dataset')),
             ],
             options={
                 'db_table': 'dataset_comments',
                 'ordering': ['comment_date'],
             },
-        ),
-        migrations.AddField(
-            model_name='dataset',
-            name='status',
-            field=models.ForeignKey(db_column='dataset_status_seq', on_delete=django.db.models.deletion.PROTECT, related_name='datasets', to='core.datasetstatus', verbose_name='Dataset Status'),
-        ),
-        migrations.AddField(
-            model_name='dataset',
-            name='data_type',
-            field=models.ForeignKey(db_column='data_type_seq', on_delete=django.db.models.deletion.PROTECT, related_name='datasets', to='core.datatypes'),
         ),
         migrations.CreateModel(
             name='GroupProfiles',
@@ -254,11 +247,6 @@ class Migration(migrations.Migration):
             model_name='legs',
             name='mission',
             field=models.ForeignKey(db_column='mission_seq', on_delete=django.db.models.deletion.CASCADE, related_name='legs', to='core.missions', verbose_name='Mission'),
-        ),
-        migrations.AddField(
-            model_name='dataset',
-            name='mission',
-            field=models.ForeignKey(db_column='mission_seq', on_delete=django.db.models.deletion.CASCADE, related_name='datasets', to='core.missions'),
         ),
         migrations.CreateModel(
             name='Organizations',
@@ -332,7 +320,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(db_column='processing_seq', primary_key=True, serialize=False)),
                 ('assigned_date', models.DateTimeField(auto_now=True, db_column='assigned_date')),
                 ('assigned_to', models.ForeignKey(db_column='assigned_to', on_delete=django.db.models.deletion.PROTECT, related_name='processing', to=settings.AUTH_USER_MODEL, verbose_name='Assigned')),
-                ('dataset', models.ForeignKey(db_column='dataset_seq', on_delete=django.db.models.deletion.CASCADE, related_name='processing', to='core.dataset', verbose_name='Dataset')),
+                ('dataset', models.ForeignKey(db_column='dataset_seq', on_delete=django.db.models.deletion.CASCADE, related_name='processing', to='core.datasets', verbose_name='Dataset')),
                 ('status', models.ForeignKey(db_column='status_seq', on_delete=django.db.models.deletion.PROTECT, related_name='processing', to='core.status', verbose_name='Status')),
             ],
         ),

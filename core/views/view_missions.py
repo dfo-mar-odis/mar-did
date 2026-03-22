@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 from django import forms
 from django.contrib.auth.decorators import login_required
-from django.db.models import Min
+from django.db.models import Min, Q
 from django.urls import path, reverse_lazy
 from django.utils.translation import gettext as _
 from django.http import HttpResponse, HttpResponseForbidden
@@ -40,14 +40,20 @@ class MissionFilter(forms.Form):
         max_length=50,
         required=False,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        label=_('Mission Descriptor')
+        label=_('Descriptor')
     )
 
     name = forms.CharField(
         max_length=50,
         required=False,
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        label=_('Mission Name')
+        label=_('Name')
+    )
+
+    year = forms.IntegerField(
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        label=_('Year')
     )
 
     def __init__(self, *args, **kwargs):
@@ -75,6 +81,7 @@ class MissionFilter(forms.Form):
             Row(
                 Column(Field('name', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
                 Column(Field('descriptor', css_class="form-control form-control-sm", **text_attrs), css_class="col-2"),
+                Column(Field('year', css_class="form-control form-control-sm", **text_attrs), css_class="col-1"),
             ),
         )
 
@@ -86,21 +93,24 @@ def list_missions(request):
     page_start = page_limit * page
     page_end = page_start + page_limit
 
-    table_soup = BeautifulSoup('', 'html.parser')
-
     # Example query to order missions by the start_date of their first leg
-    queryset = models.Missions.objects.annotate(first_leg_start_date=Min('legs__start_date')).order_by('first_leg_start_date')
+    queryset = models.Missions.objects.annotate(first_leg_start_date=Min('legs__start_date')).order_by('-first_leg_start_date')
     if name:=request.GET.get('name', None):
         queryset = queryset.filter(name__icontains=name)
 
     if descriptor:=request.GET.get('descriptor', None):
         queryset = queryset.filter(descriptor__icontains=descriptor)
 
+    if year:=request.GET.get('year', None):
+        queryset = queryset.filter(
+            Q(legs__start_date__year=year) | Q(legs__end_date__year=year)
+        )
+
     queryset = queryset[page_start:page_end]
 
     if not queryset:
         if page <= 0:
-            html = render_to_string('core/partials/table_missions.html', context={'user': request.user})
+            html = render_to_string('core/partials/table_missions.html', request=request)
             return HttpResponse(html)
         else:
             return HttpResponse()
@@ -108,7 +118,7 @@ def list_missions(request):
     context = {
         "missions": queryset
     }
-    html = render_to_string('core/partials/table_missions.html', context)
+    html = render_to_string('core/partials/table_missions.html', context, request=request)
 
     table_soup = BeautifulSoup(html, "html.parser")
     tbody = table_soup.find('tbody')
@@ -127,62 +137,8 @@ def list_missions(request):
         last_tr.attrs['hx-target'] = "#tbody_id_mission_list"
         last_tr.attrs['hx-swap'] = 'beforeend'
 
-    for tr in trs:
-        first_th = tr.find('th')
-        first_th.attrs['style'] = "width: 2%; white-space: nowrap;"
-        id = int(first_th.string)
-        first_th.string = ""
-        first_th.append(data_btn := table_soup.new_tag('a'))
-        data_btn.append(span := table_soup.new_tag("span"))
-        data_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
-        data_btn.attrs['href'] = reverse_lazy('core:data_view', args=[int(id)])
-        data_btn.attrs['title'] = _('mission Data')
-        span.attrs['class'] = "bi bi-bar-chart"
-
-        if request.user.groups.filter(name__in=["Chief Scientists", "MarDID Maintainers"]):
-            first_th.append(update_btn:=table_soup.new_tag('a'))
-            update_btn.append(span := table_soup.new_tag("span"))
-            update_btn.attrs['class'] = "btn btn-sm btn-dark ms-2"
-            update_btn.attrs['href'] = reverse_lazy('core:update_mission_view', args=[int(id)])
-            update_btn.attrs['title'] = _('Update mission')
-            span.attrs['class'] = "bi bi-pencil-square"
-
-            if request.user.is_superuser:
-                row_id = f"tr_id_mission_{id}"
-                tr.attrs['id'] = row_id
-                first_th.append(del_btn := table_soup.new_tag('a'))
-                del_btn.append(span := table_soup.new_tag("span"))
-                del_btn.attrs['class'] = "btn btn-sm btn-danger ms-2"
-                del_btn.attrs['title'] = _('Delete mission')
-                del_btn.attrs['hx-confirm'] = _("Are you sure you want to delete this curise?")
-                del_btn.attrs['hx-post'] = reverse_lazy('core:delete_mission', args=[int(id)])
-                del_btn.attrs['hx-target'] = f"#{row_id}"
-                del_btn.attrs['hx-swap'] = "delete"
-                span.attrs['class'] = "bi bi-x-square"
-
     if page > 0:
         return HttpResponse(trs)
-
-    table = table_soup.find("table")
-    table.attrs['class'] = 'table table-striped table-sm'
-    # table.attrs['hx-get'] = request.path
-    # table.attrs['hx-trigger'] = 'update_mission_list from:body'
-    # table.attrs['hx-swap'] = 'outerHTML'
-    table.attrs['id'] = 'table_id_mission_list'
-
-    t_head = table.find('thead')
-    t_head.attrs['class'] = 'sticky-top bg-white'
-    th = t_head.find('th')
-    if request.user.is_authenticated:
-        th.append(add_btn:=table_soup.new_tag("a"))
-        add_btn.attrs['class'] = "btn btn-sm btn-outline-dark"
-        add_btn.attrs['href'] = reverse_lazy('core:new_mission_view')
-        add_btn.attrs['title'] = _('Add a new mission')
-        add_btn.append(span:= table_soup.new_tag("span"))
-        span.attrs['class'] = "bi bi-plus-square"
-
-    for th in t_head.find_all('th'):
-        th.attrs['class'] = 'text-start'
 
     return HttpResponse(table_soup)
 
