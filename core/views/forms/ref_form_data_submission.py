@@ -29,6 +29,10 @@ import logging
 
 logger = logging.getLogger('mardid')
 
+#######################################################################
+# Keeping this file for file loading reference while developing the new
+# form_dataset_submission
+#######################################################################
 
 class DataSubmissionView(TemplateView):
     template_name = 'core/forms/form_data_submission.html'
