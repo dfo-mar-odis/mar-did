@@ -33,7 +33,6 @@
                             {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="/admin">{% trans 'Administrator' %}</a></li>
                             <li><hr/></li>
-                            <li><hr/></li>
                             {% endif %}
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_countries' %}">{% trans 'Countries' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_dataset_status' %}">{% trans 'Dataset Status' %}</a></li>
@@ -43,6 +42,7 @@
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_organizations' %}">{% trans 'Organizations' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_participants' %}">{% trans 'Participants' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_positions' %}">{% trans 'Positions' %}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_programs' %}">{% trans 'Programs' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_status' %}">{% trans 'Status' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_platforms' %}">{% trans 'Ships and Platforms' %}</a></li>
                         </ul>
