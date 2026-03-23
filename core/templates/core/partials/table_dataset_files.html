@@ -1,11 +1,16 @@
 {% load i18n %}
-
-<table class="table table-sm table-striped">
+<div class="overflow-auto" style="max-height: 300px;">
+<table class="table table-sm table-striped" hx-get="{% url 'core:dataset_files_list' dataset.pk %}"
+       hx-trigger="load, dataset_files_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_dataset_files_list">
     <thead class="sticky-top bg-white">
-    <tr>
-        {% if not archive_table %}
-        <th>{# button column #}</th>
-        {% endif %}
+        <tr>
+        <th class="" width="2%">
+            <div id="htmx_indicator_dataset_files_list" class="htmx-indicator d-flex justify-content-center">
+                <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </th>
         <th>{% trans 'File Name' %}</th>
         <th>{% trans 'File Location' %}</th>
         <th>{% trans 'Submitted By' %}</th>
@@ -50,3 +55,4 @@
     {% endfor %}
     </tbody>
 </table>
+</div>
