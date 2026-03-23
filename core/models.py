@@ -153,7 +153,8 @@ class Positions(models.Model):
 
 
 class Programs(models.Model):
-    name = models.CharField(verbose_name=_("Name"), max_length=45, unique=True, db_column='name')
+    acronym = models.CharField(verbose_name=_("Acronym"), null=True, blank=True, max_length=10, db_column='acronym')
+    name = models.CharField(verbose_name=_("Name"), max_length=65, unique=True, db_column='name')
     description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
                                    db_column='description')
 
