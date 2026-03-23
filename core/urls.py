@@ -4,6 +4,8 @@ from importlib import import_module
 import os
 import pkgutil
 
+from core.views.forms import form_dataset_submission
+
 app_name = 'core'
 urlpatterns = []
 
@@ -25,3 +27,5 @@ for vpkg in views_pkg:
                     urlpatterns += module.urlpatterns
             except (ImportError, AttributeError) as e:
                 print(f"Could not import urlpatterns from {module_name}: {e}")
+
+urlpatterns += form_dataset_submission.urlpatterns
