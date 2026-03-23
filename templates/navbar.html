@@ -33,6 +33,8 @@
                             {% if user.is_superuser %}
                             <li><a class="dropdown-item" href="/admin">{% trans 'Administrator' %}</a></li>
                             <li><hr/></li>
+                            <li><a class="dropdown-item" href="{% url 'core:lookup_view_dataset_locations' %}">{% trans 'Configuration - Dataset Locations' %}</a></li>
+                            <li><hr/></li>
                             {% endif %}
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_countries' %}">{% trans 'Countries' %}</a></li>
                             <li><a class="dropdown-item" href="{% url 'core:lookup_view_dataset_status' %}">{% trans 'Dataset Status' %}</a></li>

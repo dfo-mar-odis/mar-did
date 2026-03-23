@@ -163,7 +163,7 @@ class Programs(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        return f'{self.name} - {self.description}'
+        return f'{self.acronym} - {self.name}'
 
 
 class Status(models.Model):
@@ -311,6 +311,28 @@ class MissionRegions(models.Model):
     class Meta:
         db_table = 'mission_regions'
         ordering = ['leg', 'region']
+
+
+class DatasetLocations(models.Model):
+    id = models.AutoField(primary_key=True, db_column='dataset_location_seq')
+
+    data_type = models.ForeignKey('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
+                                related_name='locations', db_column='dataset_seq')
+
+    input_dir = models.CharField(verbose_name=_("Input Directory"),
+                                 help_text=_("Directory, within a mission directory on MEDIA_IN, Mar-DID will look in for bulk uploading files"),
+                                 max_length=100, blank=True, null=True,)
+
+    output_dir = models.CharField(verbose_name=_("Output Directory"),
+                                 help_text=_("Directory Mar-DID create, within a mission directory on MEDIA_OUT, to write dataset files to."),
+                                 max_length=100, blank=True, null=True,)
+
+    class Meta:
+        db_table = 'APPLICATION_CONFIGURATION_DATASET_LOCATIONS'
+        ordering = ['data_type']
+
+    def __str__(self):
+        return f'{self.data_type.name} - [Input: {self.input_dir}, Output: {self.output_dir}]'
 
 
 class Datasets(models.Model):
