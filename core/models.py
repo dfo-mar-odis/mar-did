@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
@@ -324,6 +326,13 @@ class Datasets(models.Model):
                                related_name="datasets", db_column='dataset_status_seq')
 
     @property
+    def get_dataset_root_path(self):
+        year = str(self.mission.start_date.year)
+        decade = f'{year[:3]}X'
+
+        return os.path.join(decade, year, self.mission.name.upper())
+
+    @property
     def current_files(self):
         return self.files.filter(is_archived=False)
 
@@ -342,7 +351,7 @@ class Datasets(models.Model):
 class DataFiles(models.Model):
     id = models.AutoField(primary_key=True, db_column='file_seq')
 
-    data = models.ForeignKey(Datasets, on_delete=models.CASCADE, related_name='files', db_column='dataset_seq')
+    dataset = models.ForeignKey(Datasets, on_delete=models.CASCADE, related_name='files', db_column='dataset_seq')
     file_name = models.CharField(verbose_name=_("File Name"), max_length=50, db_column='file_name')
     file_type = models.ForeignKey(FileTypes, on_delete=models.PROTECT, related_name='files', db_column='file_type_seq')
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')

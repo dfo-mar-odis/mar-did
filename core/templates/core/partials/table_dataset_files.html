@@ -26,7 +26,7 @@
         </th>
         {% endif %}
         <td>{{ file.file_name }}</td>
-        <td>{{ file.file }}</td>
+        <td>{{ file.dataset.get_dataset_root_path }}</td>
         <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
         <td>{{ file.submitted_date }}</td>
         {% if file.is_archived %}

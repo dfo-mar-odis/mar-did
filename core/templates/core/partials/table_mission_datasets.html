@@ -14,7 +14,7 @@
         {% for dataset in mission.datasets.all %}
             <tr>
                 <td style="width: 2%; white-space: nowrap;">
-                    <a href="" class="btn btn-sm btn-dark ms-2" title="{% trans "View Dataset Files" %}">
+                    <a href="{% url 'core:dataset_submission_view' dataset.pk %}" class="btn btn-sm btn-dark ms-2" title="{% trans "View Dataset Files" %}">
                         <span class="bi bi-search"></span>
                     </a>
                 {% if request.user.is_authenticated %}
