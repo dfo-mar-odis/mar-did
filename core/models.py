@@ -254,6 +254,9 @@ class Legs(models.Model):
     regions = models.ManyToManyField('GeographicRegions', verbose_name=_("Geographic Regions"),
                                      through='MissionRegions')
 
+    # indicates if MEDS has approved the descriptor for this leg, which is required before a mission can be marked as complete
+    descriptor_approved = models.BooleanField(verbose_name=_("Descriptor Approved"), default=False, db_column='descriptor_approved')
+
     class Meta:
         db_table = 'legs'
         ordering = ['start_date']

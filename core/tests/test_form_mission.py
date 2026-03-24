@@ -193,10 +193,10 @@ class TestFormMission(MardidTestCase):
             'end_date': '2020-01-15'
         }
 
-        # A user should not be able to create legs that have overlapping dates
+        # A user should be able to create legs that don't have overlapping dates
         response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_2_data)
 
-        # The response should contain an error message about overlapping dates
+        # The response should not contain an error message about overlapping dates
         self.assertNotContains(response, "Leg dates cannot overlap with existing legs")
 
 
