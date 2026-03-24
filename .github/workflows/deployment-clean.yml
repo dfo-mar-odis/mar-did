@@ -1,9 +1,9 @@
 name: Clean and Sync Deployment Branch
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
+    types:
+      - closed
     branches: [ master ]
 
 permissions:
@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   clean-deployment:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -53,8 +54,9 @@ jobs:
           git merge --allow-unrelated-histories --no-edit origin/master || \
           git merge --allow-unrelated-histories --no-edit master || true
 
-      - name: Remove tests and test data
+      - name: Remove tests, test data and doc directories
         run: |
+          find . -type d -name "doc" -exec rm -rf {} + || true
           find . -type d -name "media" -exec rm -rf {} + || true
           find . -type d -name "tests" -exec rm -rf {} + || true
           find . -type d -name "test_data" -exec rm -rf {} + || true
