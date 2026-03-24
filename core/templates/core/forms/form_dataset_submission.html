@@ -46,3 +46,18 @@
     </div>
 {% endblock %}
 
+{% block javascript %}
+const fileInput = document.getElementById('id_files');
+const fileCountElement = document.getElementById('fileCount');
+const MAX_FILES = 50; // Set limit
+
+fileInput.addEventListener('change', function() {
+  if (this.files.length > MAX_FILES) {
+    alert(`Maximum ${MAX_FILES} files allowed.`);
+    this.value = ''; // Clear selection
+    fileCountElement.textContent = '';
+  } else {
+    fileCountElement.textContent = this.files.length + " file(s) selected";
+  }
+});
+{% endblock %}
