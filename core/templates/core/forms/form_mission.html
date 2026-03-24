@@ -36,7 +36,7 @@
         </ul>
 
         <div class="tab-content" id="mission_tabs_legs">
-            <div class="tab-pane fade{% if object.legs.count <= 0 %} show active{% endif %}" id="mission_legs" role="tabpanel" aria-labelledby="mission_tabs_legs">
+            <div class="tab-pane fade{% if object.legs.count <= 0 %} show active{% endif %}" id="mission_legs" role="tabpanel" aria-labelledby="mission_legs">
                 {% if user.is_authenticated %}
                 <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_mission_legs">
                     {% crispy mission_legs_form %}
