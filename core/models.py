@@ -404,48 +404,6 @@ class DataFiles(models.Model):
         ordering = ['file_name']
 
 
-class DataFileComments(models.Model):
-    id = models.AutoField(primary_key=True, db_column='file_comment_seq')
-
-    datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE,
-                                 related_name='comments', db_column='file_seq')
-    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
-    comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
-    comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
-
-    class Meta:
-        db_table = 'file_comments'
-        ordering = ['comment_date']
-
-
-class DatasetComments(models.Model):
-    id = models.AutoField(primary_key=True, db_column='dataset_comment_seq')
-
-    dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='comments',
-                                db_column='dataset_seq')
-    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
-    comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
-    comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
-
-    class Meta:
-        db_table = 'dataset_comments'
-        ordering = ['comment_date']
-
-
-class MissionComments(models.Model):
-    id = models.AutoField(primary_key=True, db_column='mission_comment_seq')
-
-    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='comments',
-                                db_column='mission_seq')
-    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
-    comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
-    comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
-
-    class Meta:
-        db_table = 'mission_comments'
-        ordering = ['-comment_date']
-
-
 class ProcessingStatus(models.Model):
     id = models.AutoField(primary_key=True, db_column='processing_seq')
 
@@ -464,3 +422,43 @@ class GroupProfiles(models.Model):
 
     def __str__(self):
         return f"{self.group.name} - {self.description or _('No description')}"
+
+
+class Comments(models.Model):
+
+    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
+    comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
+    comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
+
+    class Meta:
+        abstract = True
+        ordering = ['-comment_date']
+
+
+class MissionComments(Comments):
+    id = models.AutoField(primary_key=True, db_column='mission_comment_seq')
+
+    mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='comments',
+                                db_column='mission_seq')
+
+    class Meta:
+        db_table = 'mission_comments'
+
+
+class DataFileComments(Comments):
+    id = models.AutoField(primary_key=True, db_column='file_comment_seq')
+
+    datafile = models.ForeignKey(DataFiles, verbose_name=_("Data File"), on_delete=models.CASCADE,
+                                 related_name='comments', db_column='file_seq')
+
+    class Meta:
+        db_table = 'file_comments'
+
+
+class DatasetComments(Comments):
+    id = models.AutoField(primary_key=True, db_column='dataset_comment_seq')
+
+    dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='comments',
+                                db_column='dataset_seq')
+    class Meta:
+        db_table = 'dataset_comments'
