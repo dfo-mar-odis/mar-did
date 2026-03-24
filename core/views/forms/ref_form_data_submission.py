@@ -35,7 +35,7 @@ logger = logging.getLogger('mardid')
 #######################################################################
 
 class DataSubmissionView(TemplateView):
-    template_name = 'core/forms/form_data_submission.html'
+    template_name = 'core/forms/ref_form_data_submission.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -182,7 +182,7 @@ def submit_data(request, data_id, notify):
 
     if form.is_valid():
         data = form.save()
-        html = render_to_string('core/forms/form_data_submission.html', context, request)
+        html = render_to_string('core/forms/ref_form_data_submission.html', context, request)
         soup = BeautifulSoup(html, 'html.parser')
 
         files = request.FILES.getlist('files')
@@ -244,7 +244,7 @@ def submit_data(request, data_id, notify):
 
     logger.error(form.errors)
 
-    html = render_to_string('core/forms/form_data_submission.html', context, request)
+    html = render_to_string('core/forms/ref_form_data_submission.html', context, request)
     soup = BeautifulSoup(html, 'html.parser')
     form = soup.find('form', id='form_id_data')
     form.attrs['hx-swap-oob'] = 'true'
