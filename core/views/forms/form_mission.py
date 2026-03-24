@@ -220,8 +220,26 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
 
         return cleaned_regions
 
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+
+        if start_date and end_date and start_date > end_date:
+            raise forms.ValidationError(_("Start date cannot be after end date."))
+
+        legs = self.mission.legs.all()
+        if self.instance.pk:
+            legs = legs.exclude(pk=self.instance.pk)
+
+        if legs.filter(start_date__lt=end_date, end_date__gt=start_date).exists():
+            raise forms.ValidationError(_("Leg dates cannot overlap with existing legs"))
+        return cleaned_data
+
+
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
+        self.mission = mission
         mission_id = mission.pk if mission is not None else -1
         initial = kwargs.pop('initial') if 'initial' in kwargs else {}
         if 'instance' in kwargs:

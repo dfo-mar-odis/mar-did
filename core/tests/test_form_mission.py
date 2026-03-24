@@ -122,6 +122,83 @@ class TestFormMission(MardidTestCase):
         icon = button.find("span", attrs={"class": "bi bi-x-square"})
         self.assertIsNotNone(icon)
 
+    @tag('test_leg_date_start_gt_end_date_fail')
+    def test_leg_date_start_gt_end_date_fail(self):
+        # A start_date should not be greater than the end_date for a leg
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_data = {
+            'mission': mission.pk,
+            'start_date': '2020-01-15',
+            'end_date': '2020-01-05'
+        }
+
+        # A user should not be able to create legs that have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_data)
+
+        # The response should contain an error message about overlapping dates
+        self.assertContains(response, "Start date cannot be after end date.")
+
+
+    @tag('test_leg_date_overlap_fail')
+    def test_leg_date_overlap_fail_start_date(self):
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_1 = MissionLegFactory.create(mission=mission, start_date='2020-01-01', end_date='2020-01-10')
+
+        leg_2_data = {
+            'mission': mission.pk,
+            'start_date': '2020-01-05',
+            'end_date': '2020-01-15'
+        }
+
+        # A user should not be able to create legs that have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_2_data)
+
+        # The response should contain an error message about overlapping dates
+        self.assertContains(response, "Leg dates cannot overlap with existing legs")
+
+    @tag('test_leg_date_overlap_fail')
+    def test_leg_date_overlap_fail_end_date(self):
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_1 = MissionLegFactory.create(mission=mission, start_date='2020-01-01', end_date='2020-01-10')
+
+        leg_2_data = {
+            'mission': mission.pk,
+            'start_date': '2019-12-30',
+            'end_date': '2020-01-05'
+        }
+
+        # A user should not be able to create legs that have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_2_data)
+
+        # The response should contain an error message about overlapping dates
+        self.assertContains(response, "Leg dates cannot overlap with existing legs")
+
+
+    @tag('test_leg_date_overlap_fail')
+    def test_leg_date_overlap_pass(self):
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_1 = MissionLegFactory.create(mission=mission, start_date='2020-01-01', end_date='2020-01-10')
+
+        leg_2_data = {
+            'mission': mission.pk,
+            'start_date': '2020-01-10',
+            'end_date': '2020-01-15'
+        }
+
+        # A user should not be able to create legs that have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_2_data)
+
+        # The response should contain an error message about overlapping dates
+        self.assertNotContains(response, "Leg dates cannot overlap with existing legs")
+
 
 class TestFormMissionLegs(MardidTestCase):
 
