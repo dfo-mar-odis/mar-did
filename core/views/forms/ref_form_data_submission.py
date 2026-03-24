@@ -231,7 +231,7 @@ def submit_data(request, data_id, notify):
                 send_mail(
                     _("Cruise update: Files added"),
                     f"{data.data_type.name} " + _("Files have been submitted for cruise") + f" [{data.mission}]",
-                    _("Do.Not.Reply@mar-did.dfo-mpo.gc.ca"),
+                    "Do.Not.Reply@mar-did.dfo-mpo.gc.ca",
                     notifiers
                 )
 

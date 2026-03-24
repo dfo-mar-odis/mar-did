@@ -135,7 +135,7 @@ class Platforms(models.Model):
     max_speed = models.FloatField(verbose_name=_("Max Speed"), db_column='maximum_speed',
                                   help_text=_("Maximum speed of the platform in knots"), default=-999)
     ices_code = models.CharField(verbose_name=_("ICES Code"), db_column='ices_code', max_length=4, blank=True,
-                                 null=True, help_text=_("<a href='https://vocab.ices.dk/' role='link' title='visit the ICES vocabulary lookup tool' target='_blank' rel='noopener noreferrer'><span class='bi bi-globe2 me-1'></span>ICES vocabulary Lookup</a>"))
+                                 null=True, help_text=f"<a href='https://vocab.ices.dk/' role='link' title='{_("visit the ICES vocabulary lookup tool")}' target='_blank' rel='noopener noreferrer'><span class='bi bi-globe2 me-1'></span>{_("ICES vocabulary Lookup")}</a>")
     ship_code = models.CharField(verbose_name=_("Ship Code"), db_column='ship_code', max_length=6, blank=True,
                                  null=True, help_text=_("OSCruise code"))
 
