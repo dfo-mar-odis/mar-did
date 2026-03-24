@@ -3,24 +3,310 @@
     "model": "core.programs",
     "pk": 1,
     "fields": {
-        "name": "AZMP",
-        "description": "Atlantic Zone Monitoring Program"
+        "acronym": "AZMP",
+        "name": "ATLANTIC ZONE MONITORING PROGRAM",
+        "description": "Multidisciplinary ocean monitoring in the northwest Atlantic (physical, chemical, biological data)",
+        "legacy": true
     }
 },
 {
     "model": "core.programs",
     "pk": 2,
     "fields": {
-        "name": "AZOMP",
-        "description": "Atlantic Zone Off-shelf Monitoring Program"
+        "acronym": "AZOMP",
+        "name": "ATLANTIC ZONE OFF-SHELF MONITORING PROGRAM",
+        "description": "Off-shelf oceanographic monitoring complementing AZMP",
+        "legacy": true
     }
 },
 {
     "model": "core.programs",
     "pk": 3,
     "fields": {
-        "name": "BBMP",
-        "description": "Bedford Basin Monitoring Program"
+        "acronym": "BB-PMP",
+        "name": "BEDFORD BASIN PLANKTON MONITORING PROGRAM",
+        "description": "Plankton data collection as part of regional ocean observations",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 4,
+    "fields": {
+        "acronym": "CAMP",
+        "name": "COMMUNITY AQUATIC MONITORING PROGRAM",
+        "description": "Involves local groups collecting biological and environmental data to assess estuary and watershed health",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 5,
+    "fields": {
+        "acronym": "FSA&IFM",
+        "name": "FISHERY STOCK ASSESSMENTS & INTEGRATED FISHERIES MONITORING",
+        "description": "Ongoing science programs for stock status, recruitment, population dynamics, and harvest advice (e.g., PFMC, IFMP frameworks). DFO science and stock assessment group initiatives support these",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 6,
+    "fields": {
+        "acronym": "EAFM",
+        "name": "ECOSYSTEM APPROACH TO FISHERIES MANAGEMENT",
+        "description": "Cross-discipline working groups aiming to integrate ecosystem dynamics into fisheries decisions",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 7,
+    "fields": {
+        "acronym": "MMRP",
+        "name": "MARINE MAMMAL RESPONSE PROGRAM",
+        "description": "Incident response network for marine mammals and sea turtles in distress, including strandings and rehabilitation support",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 8,
+    "fields": {
+        "acronym": "MMWG",
+        "name": "MARINE MAMMAL WORKING GROUP (INTERNAL ADVISORY)",
+        "description": "Provides guidance on non-harvest use and management of marine mammals",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 9,
+    "fields": {
+        "acronym": "WMTS",
+        "name": "WHALE MONITORING & TRACKING SUPPORT",
+        "description": "Ongoing coast-wide detection and tracking initiatives in partnership with other organizations (not always labeled as single “program name”)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 10,
+    "fields": {
+        "acronym": "ASWP",
+        "name": "ATLANTIC SALMON WATCH PROGRAM",
+        "description": "Monitoring of Atlantic salmon captures and observations, with implications for salmon-associated ecosystem interactions (often linked to whale interactions and ecosystem health)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 11,
+    "fields": {
+        "acronym": "IFMP",
+        "name": "INTEGRATED FISHERIES MANAGEMENT PLANS",
+        "description": "Species/region specific management frameworks guiding quota, fishing rules, seasons etc. (salmon, groundfish, shellfish, etc.)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 12,
+    "fields": {
+        "acronym": "C&P",
+        "name": "CONSERVATION & PROTECTION",
+        "description": "Enforcement program including patrols, compliance monitoring, and fisheries regulation enforcement (supports whale interaction avoidance and other protective measures)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 13,
+    "fields": {
+        "acronym": "OD-NET",
+        "name": "OPERATION DRIFTNET (SUPPORT)",
+        "description": "Surveillance operation conducted in partnership with DFO to control illegal fishing; supports broader fisheries enforcement (linked but led by Canadian Forces)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 14,
+    "fields": {
+        "acronym": "VMS",
+        "name": "VESSEL MONITORING SYSTEM",
+        "description": "Satellite tracking of licensed fishing vessels to support compliance and resource use monitoring (regional DFO monitoring tool). Historical reference from open data sources",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 15,
+    "fields": {
+        "acronym": "MPAS",
+        "name": "MARINE PROTECTED AREAS MONITORING",
+        "description": "Conservation areas with monitoring and protective regulations (various regions; not a single program but an active DFO portfolio). Often implemented under the Oceans Act framework",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 16,
+    "fields": {
+        "acronym": "SARA-RRP",
+        "name": "SPECIES AT RISK RECOVERY PROGRAMS",
+        "description": "Programs developed under Canada’s Species at Risk Act (SARA) for listed aquatic species (e.g., whales, sea turtles, endangered fish).",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 17,
+    "fields": {
+        "acronym": "OMCP",
+        "name": "OCEANS MANAGEMENT CONTRIBUTION PROGRAM",
+        "description": "Funding for stewardship, monitoring, outreach and marine conservation initiatives with partners",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 18,
+    "fields": {
+        "acronym": "NTMP",
+        "name": "LTTM FSRS NEARSHORE MONITORING PROGRAM",
+        "description": "A long‑term scientific monitoring program that collects nearshore environmental and temperature data to support fisheries research and coastal ecosystem assessment",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 19,
+    "fields": {
+        "acronym": "ZMP-HFX2",
+        "name": "ZONAL MONITORING PROGRAM HFX STN 2",
+        "description": "Lindsay Beazley",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 20,
+    "fields": {
+        "acronym": "WRS",
+        "name": "WAS REDFISH SERIES",
+        "description": "Dr. Peter Smith (Revised as No Hydrographic Data collected)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 21,
+    "fields": {
+        "acronym": "CPRD",
+        "name": "CONTINIOUS PLANKTON RECORDER DATA",
+        "description": "A long‑term, standardized dataset of plankton observations collected by towed recorders to monitor changes in marine ecosystems, biodiversity, and climate over time",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 22,
+    "fields": {
+        "acronym": "ZMP-SHDAC",
+        "name": "ZONAL MONITORING PROGRAM SHEDIAC",
+        "description": "A long‑term DFO monitoring program in the Shediac area of the southern Gulf of St. Lawrence that tracks physical, chemical, and biological ocean conditions Dr. Catherine Johnson (was Mary Kennedy)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 23,
+    "fields": {
+        "acronym": "ZMP-BBCP",
+        "name": "ZONAL MONITORING PROGRAM BEDFORD BASIN COMPASS PROGRAM",
+        "description": "A long‑term DFO monitoring program in the bedford basin area that tracks physical, chemical, and biological ocean conditions Andrew Cogswell was Dr. Bill Li (was Mary Kennedy)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 24,
+    "fields": {
+        "acronym": "BTMP",
+        "name": "BEL TEMPERATURE MONITORING PROGRAM",
+        "description": "A scientific monitoring program that collects long‑term temperature data for research and management purposes(Melisa Wong)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 25,
+    "fields": {
+        "acronym": "BS-RTMP",
+        "name": "BARROW STRAIT REAL-TIME MONITORING PROGRAM",
+        "description": "An Arctic monitoring program that collects real‑time oceanographic and environmental data in Barrow Strait to support research, navigation safety, and understanding of climate‑driven change",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 26,
+    "fields": {
+        "acronym": "AOMP",
+        "name": "ARCTIC OCEAN MONITORING PROGRAM",
+        "description": "Multidisciplinary ocean monitoring in the Arctic (physical, chemical, biological data)",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 27,
+    "fields": {
+        "acronym": "CIOOS",
+        "name": "CANADIAN INTEGRATED OCEAN OBSERVING SYSTEM",
+        "description": "National ocean data integration and observation under the core ocean monitoring & cbservation programs",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 28,
+    "fields": {
+        "acronym": "LTTM",
+        "name": "LONG TERM TEMPERATURE MONITORING",
+        "description": "A long‑term scientific monitoring program that collects temperature data to support fisheries research and coastal ecosystem assessment",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 29,
+    "fields": {
+        "acronym": "PFMC",
+        "name": "PACIFIC FISHERY MANAGEMENT COUNCIL",
+        "description": " A U.S. fisheries management council that applies stock assessment science to provide harvest advice and manage fisheries on the U.S. West Coast",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 30,
+    "fields": {
+        "acronym": "MEQ",
+        "name": "MARINE ENVIRONMENTAL QUALITY MONITORING",
+        "description": "National Marine Environmental Quality (MEQ) Monitoring program for Pollution assessment, habitat protection, and regulatory science",
+        "legacy": true
+    }
+},
+{
+    "model": "core.programs",
+    "pk": 31,
+    "fields": {
+        "acronym": "SB-iCYCLER",
+        "name": "SYDNEY BIGHT ICYCLER PROGRAM",
+        "description": "A DFO ocean monitoring program that uses a moored autonomous vertical profiler (iCycler) in Sydney Bight (NAFO 4Vn) to collect year‑round time‑series measurements of temperature, salinity, and related physical oceanographic variables",
+        "legacy": true
     }
 }
 ]
