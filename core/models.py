@@ -378,6 +378,7 @@ class DataFiles(models.Model):
     dataset = models.ForeignKey(Datasets, on_delete=models.CASCADE, related_name='files', db_column='dataset_seq')
     file_name = models.CharField(verbose_name=_("File Name"), max_length=50, db_column='file_name')
     file_type = models.ForeignKey(FileTypes, on_delete=models.PROTECT, related_name='files', db_column='file_type_seq')
+    file_path = models.CharField(verbose_name=_("File Path"), max_length=100, null=True, blank=True, db_column='file_path')
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')
     submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False, db_column='is_archived')
