@@ -38,7 +38,7 @@
                 </button>
             </th> {# this ID column will get replaced with a button that uses the ID #}
             {% endif %}
-            <td class="text-start">{{ leg.number }}</td>
+            <td class="text-start">{{ forloop.counter }}</td>
             <td class="text-start">{{ leg.chief_scientist }}</td>
             <td class="text-start">{{ leg.start_date }}</td>
             <td class="text-start">{{ leg.end_date }}</td>

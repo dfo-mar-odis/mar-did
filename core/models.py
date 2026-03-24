@@ -57,6 +57,9 @@ class DataTypes(models.Model):
     description = models.CharField(verbose_name=_("Description"), blank=True, null=True, max_length=255,
                                    db_column='description')
 
+    legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
+
+
     def __str__(self):
         return f'{self.name} - {self.description}'
 
@@ -86,6 +89,8 @@ class Organizations(models.Model):
     country = models.ForeignKey(Countries, verbose_name=_("Country"), db_column='country_seq',
                                 related_name="organizations", on_delete=models.PROTECT)
 
+    legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
+
     def __str__(self):
         return f'{self.name} - {self.description}'
 
@@ -99,6 +104,8 @@ class Participants(models.Model):
 
     last_name = models.CharField(verbose_name=_("Last Name"), max_length=50, db_column='last_name')
     first_name = models.CharField(verbose_name=_("First Name"), max_length=50, db_column='first_name')
+
+    legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
 
     class Meta:
         db_table = 'lu_participants'
@@ -132,6 +139,8 @@ class Platforms(models.Model):
     ship_code = models.CharField(verbose_name=_("Ship Code"), db_column='ship_code', max_length=6, blank=True,
                                  null=True, help_text=_("OSCruise code"))
 
+    legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
+
     class Meta:
         db_table = 'lu_platforms'
         ordering = ['name']
@@ -157,6 +166,8 @@ class Programs(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=65, unique=True, db_column='name')
     description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
                                    db_column='description')
+
+    legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
 
     class Meta:
         db_table = 'lu_programs'
@@ -246,7 +257,6 @@ class Legs(models.Model):
 
     mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='legs',
                                 db_column='mission_seq')
-    number = models.IntegerField(verbose_name=_("Leg Number"), db_column='number')
     start_date = models.DateField(verbose_name=_("Start Date"), db_column='start_date')
     end_date = models.DateField(verbose_name=_("End Date"), db_column='end_date')
     description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
@@ -255,10 +265,12 @@ class Legs(models.Model):
     regions = models.ManyToManyField('GeographicRegions', verbose_name=_("Geographic Regions"),
                                      through='MissionRegions')
 
+    # indicates if MEDS has approved the descriptor for this leg, which is required before a mission can be marked as complete
+    descriptor_approved = models.BooleanField(verbose_name=_("Descriptor Approved"), default=False, db_column='descriptor_approved')
+
     class Meta:
         db_table = 'legs'
         ordering = ['start_date']
-        unique_together = ('mission', 'number')
 
     @property
     def chief_scientist(self):
@@ -291,6 +303,8 @@ class GeographicRegions(models.Model):
     name = models.CharField(verbose_name=_('Name'), max_length=50, unique=True, db_column='name')
     description = models.CharField(verbose_name=_('Description'), max_length=255, blank=True, null=True,
                                    db_column='description')
+
+    legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
 
     def __str__(self):
         return f'{self.name}'
@@ -377,6 +391,7 @@ class DataFiles(models.Model):
     dataset = models.ForeignKey(Datasets, on_delete=models.CASCADE, related_name='files', db_column='dataset_seq')
     file_name = models.CharField(verbose_name=_("File Name"), max_length=50, db_column='file_name')
     file_type = models.ForeignKey(FileTypes, on_delete=models.PROTECT, related_name='files', db_column='file_type_seq')
+    file_path = models.CharField(verbose_name=_("File Path"), max_length=100, null=True, blank=True, db_column='file_path')
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')
     submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False, db_column='is_archived')
