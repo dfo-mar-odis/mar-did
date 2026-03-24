@@ -56,7 +56,7 @@ jobs:
 
       - name: Remove tests, test data and doc directories
         run: |
-          find . -type d -name "doc" -exec rm -rf {} + || true
+          find . -type d -name "docs" -exec rm -rf {} + || true
           find . -type d -name "media" -exec rm -rf {} + || true
           find . -type d -name "tests" -exec rm -rf {} + || true
           find . -type d -name "test_data" -exec rm -rf {} + || true
