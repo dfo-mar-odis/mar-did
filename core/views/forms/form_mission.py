@@ -383,6 +383,30 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
         organizations_container = self.init_lookup('organizations')
 
+        current_program = []
+        current_platform = []
+        if self.instance:
+            if self.instance.program:
+                current_program = [(self.instance.program.pk, self.instance.program.acronym)]
+
+            if self.instance.program:
+                current_platform = [(self.instance.platform.pk, self.instance.platform.name)]
+
+        self.fields['platform'].choices = (
+            [(None, '----------')] + current_platform +
+            [(p.pk, p.name) for p in models.Platforms.objects.filter(legacy=False)]
+        )
+
+        self.fields['program'].choices = (
+            [(None, '----------')] + current_program +
+            [(p.pk, p.acronym) for p in models.Programs.objects.filter(legacy=False)]
+        )
+
+        self.fields['organizations_select'].choices = (
+            [(None, '----------')] +
+            [(o.pk, o.acronym) for o in models.Organizations.objects.filter(legacy=False)]
+        )
+
         # if an instant is present then we're going to use the 'update_mission' url, otherwise we'll use the url
         # to create a new mission
         if self.instance.pk:
