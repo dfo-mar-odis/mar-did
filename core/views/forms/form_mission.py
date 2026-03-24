@@ -231,9 +231,6 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
                 chief_scientist = chief_scientist.first()
                 initial = kwargs.pop('initial') if 'initial' in kwargs else {}
                 initial['chief_scientist'] = chief_scientist.participant.pk
-        elif mission is not None:
-            leg_number = mission.legs.order_by('-number').first().number + 1 if mission.legs.exists() else 1
-            initial['number'] = leg_number
 
         super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
 
@@ -246,7 +243,6 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             Div(
                 Hidden('mission', mission_id),
                 Row(
-                    Column(Field('number'), css_class='form-control-sm'),
                     Column(Field('start_date'), css_class='form-control-sm'),
                     Column(Field('end_date'), css_class='form-control-sm'),
                     Column(Field('description'), css_class='form-control-sm'),

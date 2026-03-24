@@ -134,57 +134,6 @@ class TestFormMissionLegs(MardidTestCase):
         return soup
 
 
-    def test_mission_legs_form_no_existing_legs(self):
-        # provided a mission that has no legs, we should get a mission form with the leg's initial value set to 1
-        form = form_mission.MissionLegForm(self.mission)
-        soup = self.get_mission_leg_soup(form)
-
-        expected_leg = 1
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(expected_leg))
-
-    @tag('test_mission_legs_form_with_existing_legs')
-    def test_mission_legs_form_with_existing_legs(self):
-        # provided a mission that has existing legs, we should get a mission form with the leg's initial value
-        # set to the number of existing legs + 1
-        batch = 3
-        MissionLegFactory.reset_sequence(0)
-        MissionLegFactory.create_batch(batch, mission=self.mission)
-
-        form = form_mission.MissionLegForm(self.mission)
-        soup = self.get_mission_leg_soup(form)
-
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(batch+1))
-
-    def test_mission_legs_form_with_existing_leg(self):
-        # if the MissionLegForm is provided a leg, the initial value should be set to that leg's number
-        initial_leg = MissionLegFactory.create(mission=self.mission)
-        leg = MissionLegFactory.create(mission=self.mission)
-
-        form = form_mission.MissionLegForm(self.mission, instance=leg)
-        soup = self.get_mission_leg_soup(form)
-
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(leg.number))
-
-    def test_mission_legs_form_with_existing_leg(self):
-        # if the MissionLegForm is provided a leg, there should be an additional field for adding Geographic Regions
-        # to the provided leg
-        initial_leg = MissionLegFactory.create(mission=self.mission)
-        leg = MissionLegFactory.create(mission=self.mission)
-
-        form = form_mission.MissionLegForm(self.mission, instance=leg)
-        soup = self.get_mission_leg_soup(form)
-
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(leg.number))
-
-
 @tag('test_form_mission_comments')
 class TestFormMissionComments(MardidTestCase):
 

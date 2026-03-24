@@ -246,7 +246,6 @@ class Legs(models.Model):
 
     mission = models.ForeignKey(Missions, verbose_name=_("Mission"), on_delete=models.CASCADE, related_name='legs',
                                 db_column='mission_seq')
-    number = models.IntegerField(verbose_name=_("Leg Number"), db_column='number')
     start_date = models.DateField(verbose_name=_("Start Date"), db_column='start_date')
     end_date = models.DateField(verbose_name=_("End Date"), db_column='end_date')
     description = models.CharField(verbose_name=_("Description"), max_length=255, blank=True, null=True,
@@ -258,7 +257,6 @@ class Legs(models.Model):
     class Meta:
         db_table = 'legs'
         ordering = ['start_date']
-        unique_together = ('mission', 'number')
 
     @property
     def chief_scientist(self):

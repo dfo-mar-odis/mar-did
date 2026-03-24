@@ -36,7 +36,6 @@ class MissionLegFactory(factory.django.DjangoModelFactory):
         model = models.Legs
 
     mission = factory.SubFactory(MissionFactory)
-    number = factory.Sequence(lambda n: n + 1)
     start_date = factory.LazyFunction(
         lambda: datetime.date(
             year=fake.random_int(min=2000, max=2030),
