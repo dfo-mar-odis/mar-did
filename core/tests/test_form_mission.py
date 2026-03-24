@@ -122,6 +122,83 @@ class TestFormMission(MardidTestCase):
         icon = button.find("span", attrs={"class": "bi bi-x-square"})
         self.assertIsNotNone(icon)
 
+    @tag('test_leg_date_start_gt_end_date_fail')
+    def test_leg_date_start_gt_end_date_fail(self):
+        # A start_date should not be greater than the end_date for a leg
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_data = {
+            'mission': mission.pk,
+            'start_date': '2020-01-15',
+            'end_date': '2020-01-05'
+        }
+
+        # A user should not be able to create legs that have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_data)
+
+        # The response should contain an error message about overlapping dates
+        self.assertContains(response, "Start date cannot be after end date.")
+
+
+    @tag('test_leg_date_overlap_fail')
+    def test_leg_date_overlap_fail_start_date(self):
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_1 = MissionLegFactory.create(mission=mission, start_date='2020-01-01', end_date='2020-01-10')
+
+        leg_2_data = {
+            'mission': mission.pk,
+            'start_date': '2020-01-05',
+            'end_date': '2020-01-15'
+        }
+
+        # A user should not be able to create legs that have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_2_data)
+
+        # The response should contain an error message about overlapping dates
+        self.assertContains(response, "Leg dates cannot overlap with existing legs")
+
+    @tag('test_leg_date_overlap_fail')
+    def test_leg_date_overlap_fail_end_date(self):
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_1 = MissionLegFactory.create(mission=mission, start_date='2020-01-01', end_date='2020-01-10')
+
+        leg_2_data = {
+            'mission': mission.pk,
+            'start_date': '2019-12-30',
+            'end_date': '2020-01-05'
+        }
+
+        # A user should not be able to create legs that have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_2_data)
+
+        # The response should contain an error message about overlapping dates
+        self.assertContains(response, "Leg dates cannot overlap with existing legs")
+
+
+    @tag('test_leg_date_overlap_fail')
+    def test_leg_date_overlap_pass(self):
+        self.client.login(username='testuser', password='password')
+
+        mission = MissionFactory(name='JC28302')
+        leg_1 = MissionLegFactory.create(mission=mission, start_date='2020-01-01', end_date='2020-01-10')
+
+        leg_2_data = {
+            'mission': mission.pk,
+            'start_date': '2020-01-10',
+            'end_date': '2020-01-15'
+        }
+
+        # A user should be able to create legs that don't have overlapping dates
+        response = self.client.post(reverse_lazy('core:add_mission_leg', args=[mission.pk]), leg_2_data)
+
+        # The response should not contain an error message about overlapping dates
+        self.assertNotContains(response, "Leg dates cannot overlap with existing legs")
+
 
 class TestFormMissionLegs(MardidTestCase):
 
@@ -132,57 +209,6 @@ class TestFormMissionLegs(MardidTestCase):
         crispy = render_crispy_form(form)
         soup = BeautifulSoup(crispy, 'html.parser')
         return soup
-
-
-    def test_mission_legs_form_no_existing_legs(self):
-        # provided a mission that has no legs, we should get a mission form with the leg's initial value set to 1
-        form = form_mission.MissionLegForm(self.mission)
-        soup = self.get_mission_leg_soup(form)
-
-        expected_leg = 1
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(expected_leg))
-
-    @tag('test_mission_legs_form_with_existing_legs')
-    def test_mission_legs_form_with_existing_legs(self):
-        # provided a mission that has existing legs, we should get a mission form with the leg's initial value
-        # set to the number of existing legs + 1
-        batch = 3
-        MissionLegFactory.reset_sequence(0)
-        MissionLegFactory.create_batch(batch, mission=self.mission)
-
-        form = form_mission.MissionLegForm(self.mission)
-        soup = self.get_mission_leg_soup(form)
-
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(batch+1))
-
-    def test_mission_legs_form_with_existing_leg(self):
-        # if the MissionLegForm is provided a leg, the initial value should be set to that leg's number
-        initial_leg = MissionLegFactory.create(mission=self.mission)
-        leg = MissionLegFactory.create(mission=self.mission)
-
-        form = form_mission.MissionLegForm(self.mission, instance=leg)
-        soup = self.get_mission_leg_soup(form)
-
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(leg.number))
-
-    def test_mission_legs_form_with_existing_leg(self):
-        # if the MissionLegForm is provided a leg, there should be an additional field for adding Geographic Regions
-        # to the provided leg
-        initial_leg = MissionLegFactory.create(mission=self.mission)
-        leg = MissionLegFactory.create(mission=self.mission)
-
-        form = form_mission.MissionLegForm(self.mission, instance=leg)
-        soup = self.get_mission_leg_soup(form)
-
-        leg_elm = soup.find(id="id_number")
-        self.assertTrue(leg_elm is not None)
-        self.assertEqual(leg_elm.attrs['value'], str(leg.number))
 
 
 @tag('test_form_mission_comments')
