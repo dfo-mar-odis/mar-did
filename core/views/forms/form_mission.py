@@ -417,6 +417,7 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
         btn_submit_attrs = {
             'title': _("Submit"),
             'hx-target': "#form_id_mission",
+            'hx-disabled-elt': "this",
             'hx-post': submit_url
         }
 
