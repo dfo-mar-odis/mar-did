@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-27 22:33+0000\n"
+"POT-Creation-Date: 2026-03-24 13:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,184 +18,364 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: config/settings/base.py:111
+#: .\config\settings\base.py:128
 msgid "English"
 msgstr "Anglais"
 
-#: config/settings/base.py:112
+#: .\config\settings\base.py:129
 msgid "French"
 msgstr "Français"
 
-#: core/models.py:8 core/models.py:19 core/models.py:30 core/models.py:70
-#: core/models.py:86 core/models.py:101 core/models.py:114
-#: core/templates/core/partials/table_contacts_list.html:11
-#: core/templates/core/partials/table_cruises.html:15
-#: core/views/forms/form_cruise.py:104
+#: .\core\channels_consumer.py:52
+msgid "Working"
+msgstr ""
+
+#: .\core\components.py:23 .\core\views\forms\ref_form_data_submission.py:125
+msgid "Loading"
+msgstr ""
+
+#: .\core\models.py:12 .\core\models.py:27 .\core\models.py:56
+#: .\core\models.py:84 .\core\models.py:128 .\core\models.py:153
+#: .\core\models.py:166 .\core\models.py:181 .\core\models.py:194
+#: .\core\models.py:303 .\core\templates\core\partials\table_missions.html:16
+#: .\core\views\view_missions.py:50
 msgid "Name"
 msgstr "Nom"
 
-#: core/models.py:9
-msgid "Ship Code"
+#: .\core\models.py:13
+msgid "Short Name"
+msgstr ""
+
+#: .\core\models.py:13
+msgid "2-character country code"
+msgstr ""
+
+#: .\core\models.py:15 .\core\models.py:86
+#, fuzzy
+#| msgid "Ship Code"
+msgid "Code"
 msgstr "Code du navire"
 
-#: core/models.py:9
-msgid ""
-"ICES (https://vocab.ices.dk/) code consists of 2 character country code and "
-"a 2 character ship code for every unique vessel."
+#: .\core\models.py:15
+msgid "2-digit country code"
 msgstr ""
-"Le code ICES (https://vocab.ices.dk/) se compose d'un code pays de 2 "
-"caractères et d'un code navire de 2 caractères pour chaque navire unique."
 
-#: core/models.py:20 core/models.py:31 core/models.py:52 core/models.py:71
-#: core/models.py:104
+#: .\core\models.py:28 .\core\models.py:57 .\core\models.py:73
+#: .\core\models.py:87 .\core\models.py:154 .\core\models.py:167
+#: .\core\models.py:182 .\core\models.py:262 .\core\models.py:304
+#: .\core\models.py:463
+#: .\core\templates\core\partials\table_mission_legs.html:20
 msgid "Description"
 msgstr "Description"
 
-#: core/models.py:59
-msgid "Program name"
-msgstr "Nom du programme"
+#: .\core\models.py:60 .\core\models.py:92 .\core\models.py:108
+#: .\core\models.py:142 .\core\models.py:170 .\core\models.py:307
+msgid "Legacy Code"
+msgstr ""
 
-#: core/models.py:60
-msgid "Program description"
+#: .\core\models.py:72
+msgid "Extension"
+msgstr ""
+
+#: .\core\models.py:85 .\core\models.py:165
+msgid "Acronym"
+msgstr ""
+
+#: .\core\models.py:89 .\core\models.py:130
+msgid "Country"
+msgstr ""
+
+#: .\core\models.py:105
+#, fuzzy
+#| msgid "Name"
+msgid "Last Name"
+msgstr "Nom"
+
+#: .\core\models.py:106
+#, fuzzy
+#| msgid "File Name"
+msgid "First Name"
+msgstr "Nom du fichier"
+
+#: .\core\models.py:129
+#, fuzzy
+#| msgid "Program description"
+msgid "Platform name or description"
 msgstr "Description du programme"
 
-#: core/models.py:78
-msgid "This region is in use and cannot be deleted."
-msgstr "Cette région est utilisée et ne peut pas être supprimée."
+#: .\core\models.py:133
+msgid "Call Sign"
+msgstr ""
 
-#: core/models.py:86
+#: .\core\models.py:134
+msgid "Platform call sign, if applicable"
+msgstr ""
+
+#: .\core\models.py:135
+msgid "Max Speed"
+msgstr ""
+
+#: .\core\models.py:136
+msgid "Maximum speed of the platform in knots"
+msgstr ""
+
+#: .\core\models.py:137
+#, fuzzy
+#| msgid "Ship Code"
+msgid "ICES Code"
+msgstr "Code du navire"
+
+#: .\core\models.py:138
+msgid "visit the ICES vocabulary lookup tool"
+msgstr ""
+
+#: .\core\models.py:138
+msgid "ICES vocabulary Lookup"
+msgstr ""
+
+#: .\core\models.py:139
+msgid "Ship Code"
+msgstr "Code du navire"
+
+#: .\core\models.py:140
+#, fuzzy
+#| msgid "Cruise Name"
+msgid "OSCruise code"
+msgstr "Nom de la croisière"
+
+#: .\core\models.py:195
 msgid "The name of the cruise e.g 'CAR2025002'"
 msgstr "Le nom de la croisière, par exemple 'CAR2025002'"
 
-#: core/models.py:87 core/views/forms/form_cruise.py:105
-msgid "Start date"
-msgstr "Date de début"
-
-#: core/models.py:88 core/views/forms/form_cruise.py:106
-msgid "End date"
-msgstr "Date de fin"
-
-#: core/models.py:89 core/templates/core/partials/table_cruises.html:16
-#: core/views/forms/form_cruise.py:107
+#: .\core\models.py:196 .\core\templates\core\partials\table_missions.html:17
+#: .\core\views\view_missions.py:43
 msgid "Descriptor"
 msgstr "Descripteur"
 
-#: core/models.py:89
+#: .\core\models.py:197
 msgid "MEDS assigned description of the cruise e.g '18QL25002'"
 msgstr ""
 "Description attribuée par MEDS de la croisière, par exemple '18QL25002'"
 
-#: core/models.py:90 core/templates/core/partials/table_cruises.html:21
-#: core/views/forms/form_cruise.py:72
-msgid "Chief Scientists"
-msgstr "Chefs scientifiques"
-
-#: core/models.py:91 core/views/forms/form_cruise.py:83
-msgid "Data Managers"
-msgstr "Gestionnaires de données"
-
-#: core/models.py:92
-msgid "Locations"
-msgstr "Emplacements"
-
-#: core/models.py:93
-msgid "programs"
-msgstr "programmes"
-
-#: core/models.py:94
+#: .\core\models.py:199
 msgid "Ship/Platform"
 msgstr "Navire/Plateforme"
 
-#: core/models.py:102
-msgid "Serial Number"
-msgstr "Numéro de série"
+#: .\core\models.py:201
+#, fuzzy
+#| msgid "Programs"
+msgid "Program"
+msgstr "Programmes"
 
-#: core/models.py:103
-msgid "Serial number of an instrument if it exists"
-msgstr "Numéro de série d'un instrument s'il existe"
+#: .\core\models.py:203
+msgid "PPT id"
+msgstr ""
 
-#: core/models.py:115
-msgid "Serial Number or name given to the moored instrument"
-msgstr "Numéro de série ou nom donné à l'instrument amarré"
+#: .\core\models.py:204
+msgid "Project Planning Tool ID to link to project details"
+msgstr ""
 
-#: core/models.py:116 core/models.py:123 templates/navbar.html:33
-msgid "Instruments"
-msgstr "Instruments"
+#: .\core\models.py:206 .\core\views\forms\form_mission.py:347
+#: .\core\views\lookups\view_lookup_organizations.py:17
+#: .\templates\navbar.html:44
+msgid "Organizations"
+msgstr ""
 
-#: core/models.py:122
-msgid "File location"
-msgstr "Emplacement du fichier"
+#: .\core\models.py:245 .\core\models.py:258 .\core\models.py:438
+msgid "Mission"
+msgstr ""
 
-#: core/models.py:124
-msgid "Process Status"
-msgstr "État du processus"
+#: .\core\models.py:247
+msgid "Organization"
+msgstr ""
 
-#: core/models.py:140 core/templates/core/partials/table_dataset_files.html:9
-msgid "File Name"
-msgstr "Nom du fichier"
+#: .\core\models.py:260
+#: .\core\templates\core\partials\table_mission_legs.html:18
+#: .\core\templates\core\partials\table_missions.html:20
+msgid "Start Date"
+msgstr "Date de début"
 
-#: core/models.py:141
-msgid "File"
-msgstr "Fichier"
+#: .\core\models.py:261
+#: .\core\templates\core\partials\table_mission_legs.html:19
+#: .\core\templates\core\partials\table_missions.html:21
+msgid "End Date"
+msgstr "Date de fin"
 
-#: core/models.py:144
-msgid "Is archived"
-msgstr "Est archivé"
+#: .\core\models.py:265 .\templates\navbar.html:43
+msgid "Geographic Regions"
+msgstr "Régions géographiques"
 
-#: core/models.py:154
-msgid "Data File"
-msgstr "Fichier de données"
+#: .\core\models.py:269
+#, fuzzy
+#| msgid "Descriptor"
+msgid "Descriptor Approved"
+msgstr "Descripteur"
 
-#: core/models.py:155
-msgid "Issue Description"
-msgstr "Description du problème"
+#: .\core\models.py:287 .\core\models.py:320
+#: .\core\templates\core\partials\table_mission_legs.html:16
+msgid "Leg"
+msgstr ""
 
-#: core/models.py:161 core/templates/core/partials/table_dataset_status.html:8
+#: .\core\models.py:289
+msgid "Participant"
+msgstr ""
+
+#: .\core\models.py:291
+#, fuzzy
+#| msgid "Description"
+msgid "Position"
+msgstr "Description"
+
+#: .\core\models.py:322
+msgid "Region"
+msgstr ""
+
+#: .\core\models.py:333 .\core\models.py:424 .\core\models.py:452
+#: .\core\templates\core\partials\table_dataset_status.html:8
+#: .\core\templates\core\partials\table_mission_datasets.html:8
 msgid "Dataset"
 msgstr "Jeu de données"
 
-#: core/models.py:162
-msgid "Assigned"
-msgstr "Attribué"
+#: .\core\models.py:336
+msgid "Input Directory"
+msgstr ""
 
-#: core/templates/core/form_data_submission.html:6
-msgid "Missing Descriptor"
-msgstr "Descripteur manquant"
+#: .\core\models.py:337
+msgid ""
+"Directory, within a mission directory on MEDIA_IN, Mar-DID will look in for "
+"bulk uploading files"
+msgstr ""
 
-#: core/templates/core/form_data_submission.html:6
-#: core/templates/core/view_landing.html:40
+#: .\core\models.py:340
+msgid "Output Directory"
+msgstr ""
+
+#: .\core\models.py:341
+msgid ""
+"Directory Mar-DID create, within a mission directory on MEDIA_OUT, to write "
+"dataset files to."
+msgstr ""
+
+#: .\core\models.py:359
+#, fuzzy
+#| msgid "File location"
+msgid "Legacy File location"
+msgstr "Emplacement du fichier"
+
+#: .\core\models.py:360
+msgid "The location of the files in the legacy system, if applicable"
+msgstr ""
+
+#: .\core\models.py:362
+#: .\core\templates\core\forms\form_dataset_submission.html:6
+#: .\core\templates\core\forms\ref_form_data_submission.html:6
+#: .\core\templates\core\view_landing.html:40
+#: .\core\views\forms\form_dataset_submission.py:50
+#: .\core\views\lookups\view_lookup_data_status.py:17
+#: .\templates\navbar.html:40
 msgid "Dataset Status"
 msgstr "État du jeu de données"
 
-#: core/templates/core/form_data_submission.html:21
-#: core/templates/core/form_data_submission.html:28
-#: core/templates/core/form_data_submission.html:35
+#: .\core\models.py:392
+#: .\core\templates\core\partials\table_dataset_files.html:14
+msgid "File Name"
+msgstr "Nom du fichier"
+
+#: .\core\models.py:394
+#, fuzzy
+#| msgid "File Name"
+msgid "File Path"
+msgstr "Nom du fichier"
+
+#: .\core\models.py:397
+msgid "Is archived"
+msgstr "Est archivé"
+
+#: .\core\models.py:410
+msgid "Data File"
+msgstr "Fichier de données"
+
+#: .\core\models.py:413 .\core\models.py:427 .\core\models.py:441
+#: .\core\templates\core\forms\form_dataset_submission.html:28
+#: .\core\templates\core\forms\form_mission.html:33
+msgid "Comments"
+msgstr ""
+
+#: .\core\models.py:454
+msgid "Assigned"
+msgstr "Attribué"
+
+#: .\core\models.py:457
+#: .\core\templates\core\partials\table_dataset_status.html:9
+#: .\core\templates\core\partials\table_mission_datasets.html:9
+#: .\core\views\lookups\view_lookup_status.py:17 .\templates\navbar.html:48
+msgid "Status"
+msgstr "Statut"
+
+#: .\core\models.py:466
+#, fuzzy
+#| msgid "Description"
+msgid "No description"
+msgstr "Description"
+
+#: .\core\templates\core\forms\form_dataset_submission.html:6
+#: .\core\templates\core\forms\form_mission.html:12
+#, fuzzy
+#| msgid "Missing Descriptor"
+msgid "No Mission Descriptor Provided"
+msgstr "Descripteur manquant"
+
+#: .\core\templates\core\forms\form_dataset_submission.html:23
+#, fuzzy
+#| msgid "Data File"
+msgid "Dataset Files"
+msgstr "Fichier de données"
+
+#: .\core\templates\core\forms\form_mission.html:23
+#, fuzzy
+#| msgid "Missing Descriptor"
+msgid "Mission Legs"
+msgstr "Descripteur manquant"
+
+#: .\core\templates\core\forms\form_mission.html:28
+#, fuzzy
+#| msgid "Dataset"
+msgid "Datasets"
+msgstr "Jeu de données"
+
+#: .\core\templates\core\forms\ref_form_data_submission.html:6
+msgid "Missing Descriptor"
+msgstr "Descripteur manquant"
+
+#: .\core\templates\core\forms\ref_form_data_submission.html:24
+#: .\core\templates\core\forms\ref_form_data_submission.html:31
+#: .\core\templates\core\forms\ref_form_data_submission.html:38
 msgid "Save Instrument selections and upload datafiles if attached."
 msgstr ""
 "Enregistrer les sélections d'instruments et télécharger les fichiers de "
 "données s'ils sont joints."
 
-#: core/templates/core/form_data_submission.html:23
+#: .\core\templates\core\forms\ref_form_data_submission.html:26
 msgid "Mark the dataset as expected if more datafiles are required"
 msgstr ""
 "Marquer le jeu de données comme attendu si d'autres fichiers de données sont "
 "nécessaires"
 
-#: core/templates/core/form_data_submission.html:24
+#: .\core\templates\core\forms\ref_form_data_submission.html:27
 msgid "Save"
 msgstr "Enregistrer"
 
-#: core/templates/core/form_data_submission.html:30
+#: .\core\templates\core\forms\ref_form_data_submission.html:33
 msgid "Mark a dataset as being with the lab for post cruise processing"
 msgstr ""
 "Marquer un jeu de données comme étant au laboratoire pour le traitement post-"
 "croisière"
 
-#: core/templates/core/form_data_submission.html:31
+#: .\core\templates\core\forms\ref_form_data_submission.html:34
 msgid "Mark sent to Lab"
 msgstr "Marquer envoyé au laboratoire"
 
-#: core/templates/core/form_data_submission.html:37
+#: .\core\templates\core\forms\ref_form_data_submission.html:40
 msgid ""
 "Mark a dataset submitted to send notifications to stakeholders that data is "
 "ready for processing and/or loading"
@@ -203,156 +383,202 @@ msgstr ""
 "Marquer un jeu de données soumis pour envoyer des notifications aux parties "
 "prenantes que les données sont prêtes pour le traitement et/ou le chargement"
 
-#: core/templates/core/form_data_submission.html:38
+#: .\core\templates\core\forms\ref_form_data_submission.html:41
 msgid "Save, Mark Submitted"
 msgstr "Enregistrer, Marquer comme soumis"
 
-#: core/templates/core/partials/form_archive_file.html:10
-#: core/views/forms/form_cruise.py:303 core/views/view_contacts.py:44
-#: core/views/view_contacts.py:58 core/views/view_data.py:63
-#: core/views/view_lookup_abstract.py:78
-msgid "Submit"
-msgstr "Soumettre"
-
-#: core/templates/core/partials/form_filter_cruises.html:8
-#: core/templates/core/partials/form_filter_dataset_status.html:6
-msgid "Clear Filters"
-msgstr "Effacer les filtres"
-
-#: core/templates/core/partials/form_filter_cruises.html:8
-#: core/templates/core/partials/form_filter_dataset_status.html:6
-msgid "Filter"
-msgstr "Filtrer"
-
-#: core/templates/core/partials/multi_select_bullet.html:4
+#: .\core\templates\core\partials\components\multi_select_bullet.html:4
 msgid "Remove"
 msgstr "Supprimer"
 
-#: core/templates/core/partials/table_contacts_list.html:12
-msgid "Groups"
-msgstr "Groupes"
-
-#: core/templates/core/partials/table_contacts_list.html:22
-msgid "Update Contact Information"
-msgstr "Mettre à jour les informations de contact"
-
-#: core/templates/core/partials/table_contacts_list.html:23
-#: core/templates/core/partials/table_data_list.html:30
-msgid "Are you sure?"
-msgstr "Êtes-vous sûr ?"
-
-#: core/templates/core/partials/table_contacts_list.html:24
-msgid "Remove data type from contacts"
-msgstr "Supprimer le type de données des contacts"
-
-#: core/templates/core/partials/table_cruises.html:10
-#: core/views/view_cruises.py:190
-msgid "Add a new cruise"
-msgstr "Ajouter une nouvelle croisière"
-
-#: core/templates/core/partials/table_cruises.html:17
-msgid "Platform"
-msgstr "Plateforme"
-
-#: core/templates/core/partials/table_cruises.html:18
-msgid "Projects"
-msgstr "Projets"
-
-#: core/templates/core/partials/table_cruises.html:19
-msgid "Start Date"
-msgstr "Date de début"
-
-#: core/templates/core/partials/table_cruises.html:20
-msgid "End Date"
-msgstr "Date de fin"
-
-#: core/templates/core/partials/table_cruises.html:22 templates/navbar.html:32
-msgid "Geographic Regions"
-msgstr "Régions géographiques"
-
-#: core/templates/core/partials/table_data_list.html:19
-msgid "Data Type"
-msgstr "Type de données"
-
-#: core/templates/core/partials/table_data_list.html:20
-#: core/templates/core/partials/table_dataset_status.html:9
-msgid "Status"
-msgstr "Statut"
-
-#: core/templates/core/partials/table_data_list.html:21
-msgid "File Count"
-msgstr "Nombre de fichiers"
-
-#: core/templates/core/partials/table_data_list.html:28
-msgid "View and update associated files"
-msgstr "Voir et mettre à jour les fichiers associés"
-
-#: core/templates/core/partials/table_data_list.html:30
-msgid "Remove data type from Cruise"
-msgstr "Supprimer le type de données de la croisière"
-
-#: core/templates/core/partials/table_dataset_files.html:10
-msgid "File Location"
-msgstr "Emplacement du fichier"
-
-#: core/templates/core/partials/table_dataset_files.html:11
-msgid "Submitted By"
-msgstr "Soumis par"
-
-#: core/templates/core/partials/table_dataset_files.html:12
-msgid "Submitted Date"
-msgstr "Date de soumission"
-
-#: core/templates/core/partials/table_dataset_files.html:24
-msgid "Archive File"
-msgstr "Archiver le fichier"
-
-#: core/templates/core/partials/table_dataset_files.html:25
-msgid "Archive"
-msgstr "Archiver"
-
-#: core/templates/core/partials/table_dataset_files.html:39
-msgid "Issue"
-msgstr "Problème"
-
-#: core/templates/core/partials/table_dataset_status.html:7
-#: core/views/forms/form_data_submission.py:41
-msgid "Cruise"
-msgstr "Croisière"
-
-#: core/templates/core/partials/table_dataset_status.html:10
-msgid "Assign To"
-msgstr "Attribuer à"
-
-#: core/templates/core/partials/table_dataset_status.html:11
-msgid "Assign Date"
-msgstr "Date d'attribution"
-
-#: core/templates/core/partials/template_alert.html:7
+#: .\core\templates\core\partials\components\template_alert.html:7
 msgid "Remove Alert"
 msgstr "Supprimer l'alerte"
 
-#: core/templates/core/view_landing.html:16
+#: .\core\templates\core\partials\form_archive_file.html:10
+#: .\core\views\forms\form_mission.py:288
+#: .\core\views\forms\form_mission.py:394
+#: .\core\views\lookups\view_lookup_abstract.py:92
+msgid "Submit"
+msgstr "Soumettre"
+
+#: .\core\templates\core\partials\form_dataset_submission.html:16
+msgid "Upload attached files"
+msgstr ""
+
+#: .\core\templates\core\partials\form_dataset_submission.html:20
+msgid "Upload Selected Files"
+msgstr ""
+
+#: .\core\templates\core\partials\form_filter_dataset_status.html:6
+#: .\core\templates\core\partials\form_filter_missions.html:8
+msgid "Clear Filters"
+msgstr "Effacer les filtres"
+
+#: .\core\templates\core\partials\form_filter_dataset_status.html:6
+#: .\core\templates\core\partials\form_filter_missions.html:10
+msgid "Filter"
+msgstr "Filtrer"
+
+#: .\core\templates\core\partials\table_dataset_comments.html:8
+#: .\core\templates\core\partials\table_mission_comments.html:8
+msgid "Author"
+msgstr ""
+
+#: .\core\templates\core\partials\table_dataset_comments.html:9
+#: .\core\templates\core\partials\table_mission_comments.html:9
+msgid "Comment"
+msgstr ""
+
+#: .\core\templates\core\partials\table_dataset_comments.html:21
+#: .\core\templates\core\partials\table_mission_comments.html:21
+msgid "Edit Comment"
+msgstr ""
+
+#: .\core\templates\core\partials\table_dataset_comments.html:25
+#: .\core\templates\core\partials\table_mission_comments.html:25
+#: .\core\templates\core\partials\table_mission_datasets.html:21
+#, fuzzy
+#| msgid "Delete cruise"
+msgid "Delete"
+msgstr "Supprimer la croisière"
+
+#: .\core\templates\core\partials\table_dataset_comments.html:27
+#: .\core\templates\core\partials\table_mission_comments.html:27
+#: .\core\templates\core\partials\table_mission_datasets.html:23
+#: .\core\templates\core\partials\table_mission_legs.html:35
+msgid "Are you sure?"
+msgstr "Êtes-vous sûr ?"
+
+#: .\core\templates\core\partials\table_dataset_files.html:15
+msgid "File Location"
+msgstr "Emplacement du fichier"
+
+#: .\core\templates\core\partials\table_dataset_files.html:16
+msgid "Submitted By"
+msgstr "Soumis par"
+
+#: .\core\templates\core\partials\table_dataset_files.html:17
+msgid "Submitted Date"
+msgstr "Date de soumission"
+
+#: .\core\templates\core\partials\table_dataset_files.html:29
+msgid "Archive File"
+msgstr "Archiver le fichier"
+
+#: .\core\templates\core\partials\table_dataset_files.html:30
+msgid "Archive"
+msgstr "Archiver"
+
+#: .\core\templates\core\partials\table_dataset_files.html:44
+msgid "Issue"
+msgstr "Problème"
+
+#: .\core\templates\core\partials\table_dataset_status.html:7
+#: .\core\views\forms\ref_form_data_submission.py:45
+msgid "Cruise"
+msgstr "Croisière"
+
+#: .\core\templates\core\partials\table_dataset_status.html:10
+msgid "Assign To"
+msgstr "Attribuer à"
+
+#: .\core\templates\core\partials\table_dataset_status.html:11
+msgid "Assign Date"
+msgstr "Date d'attribution"
+
+#: .\core\templates\core\partials\table_mission_datasets.html:10
+msgid "File Count"
+msgstr "Nombre de fichiers"
+
+#: .\core\templates\core\partials\table_mission_datasets.html:17
+#, fuzzy
+#| msgid "Data File"
+msgid "View Dataset Files"
+msgstr "Fichier de données"
+
+#: .\core\templates\core\partials\table_mission_legs.html:17
+#: .\core\views\forms\form_mission.py:183
+#, fuzzy
+#| msgid "Chief Scientists"
+msgid "Chief Scientist"
+msgstr "Chefs scientifiques"
+
+#: .\core\templates\core\partials\table_mission_legs.html:21
+#: .\core\views\lookups\view_lookup_geographic_regions.py:17
+msgid "Regions"
+msgstr ""
+
+#: .\core\templates\core\partials\table_mission_legs.html:31
+msgid "Edit this leg"
+msgstr ""
+
+#: .\core\templates\core\partials\table_mission_legs.html:36
+#, fuzzy
+#| msgid "Remove data type from Cruise"
+msgid "Remove leg from mission"
+msgstr "Supprimer le type de données de la croisière"
+
+#: .\core\templates\core\partials\table_missions.html:11
+#, fuzzy
+#| msgid "Add a new cruise"
+msgid "Add a new mission"
+msgstr "Ajouter une nouvelle croisière"
+
+#: .\core\templates\core\partials\table_missions.html:18
+msgid "Platform"
+msgstr "Plateforme"
+
+#: .\core\templates\core\partials\table_missions.html:19
+msgid "Completion"
+msgstr ""
+
+#: .\core\templates\core\partials\table_missions.html:28
+#, fuzzy
+#| msgid "View Cruises"
+msgid "View mission"
+msgstr "Voir les croisières"
+
+#: .\core\templates\core\partials\table_missions.html:33
+msgid "Are you sure you want to delete this curise?"
+msgstr "Êtes-vous sûr de vouloir supprimer cette croisière ?"
+
+#: .\core\templates\core\partials\table_missions.html:35
+#, fuzzy
+#| msgid "Data Submission"
+msgid "Delete mission"
+msgstr "Soumission de données"
+
+#: .\core\templates\core\view_landing.html:16
 msgid "Work Queue"
 msgstr "File d'attente de travail"
 
-#: core/templates/core/view_landing.html:51
-msgid "View Cruises"
+#: .\core\templates\core\view_landing.html:51
+#, fuzzy
+#| msgid "View Cruises"
+msgid "View Missions"
 msgstr "Voir les croisières"
 
-#: core/templates/core/view_landing.html:61
+#: .\core\templates\core\view_landing.html:61
 msgid "Data Discovery"
 msgstr "Découverte de données"
 
-#: core/templatetags/labels_to_translate.py:3
+#: .\core\templates\core\view_lookup.html:24
+#: .\core\views\lookups\view_lookup_abstract.py:299
+#, fuzzy
+#| msgid "File Count"
+msgid "Count"
+msgstr "Nombre de fichiers"
+
+#: .\core\templatetags\labels_to_translate.py:26
 msgid "Expected"
 msgstr "Attendu"
 
-#: core/templatetags/labels_to_translate.py:4
+#: .\core\templatetags\labels_to_translate.py:27
 msgid "Submitted"
 msgstr "Soumis"
 
-#: core/templatetags/labels_to_translate.py:5
+#: .\core\templatetags\labels_to_translate.py:28
 msgid ""
 "Some data has been submitted. Follow up with the data provider and if all "
 "the data has been provided, mark it as received"
@@ -360,72 +586,117 @@ msgstr ""
 "Des données ont été soumises. Faites un suivi avec le fournisseur de données "
 "et si toutes les données ont été fournies, marquez-les comme reçues"
 
-#: core/templatetags/labels_to_translate.py:6
+#: .\core\templatetags\labels_to_translate.py:29
 msgid "Lab"
 msgstr "Lab"
 
-#: core/views/forms/form_cruise.py:42
-msgid "Create Cruise"
-msgstr "Créer une croisière"
+#: .\core\views\forms\form_dataset_submission.py:64
+#: .\core\views\forms\form_dataset_submission.py:70
+#, fuzzy
+#| msgid "Dataset Status"
+msgid "Update Status"
+msgstr "État du jeu de données"
 
-#: core/views/forms/form_cruise.py:56 core/views/view_cruises.py:52
-msgid "Select a program"
-msgstr "Sélectionner un programme"
+#: .\core\views\forms\form_dataset_submission.py:123
+#: .\core\views\forms\form_dataset_submission.py:128
+#: .\core\views\forms\form_mission.py:105
+#: .\core\views\forms\form_mission.py:110
+msgid "Add Comment"
+msgstr ""
 
-#: core/views/forms/form_cruise.py:62 templates/navbar.html:35
-msgid "Programs"
-msgstr "Programmes"
-
-#: core/views/forms/form_cruise.py:66
-msgid "Select Chief Scientist"
-msgstr "Sélectionner un chef scientifique"
-
-#: core/views/forms/form_cruise.py:76
-msgid "Select Data Managers"
-msgstr "Sélectionner des gestionnaires de données"
-
-#: core/views/forms/form_cruise.py:87
-msgid "Select Geographic Locations"
-msgstr "Sélectionner des emplacements géographiques"
-
-#: core/views/forms/form_cruise.py:93
-msgid "Geographic Locations"
-msgstr "Emplacements géographiques"
-
-#: core/views/forms/form_cruise.py:133
-msgid "At least one chief scientist must be added."
-msgstr "Au moins un chef scientifique doit être ajouté."
-
-#: core/views/forms/form_cruise.py:164
-msgid "At least one geographic location must be added."
-msgstr "Au moins un emplacement géographique doit être ajouté."
-
-#: core/views/forms/form_cruise.py:183
-msgid "At least one program must be added."
-msgstr "Au moins un programme doit être ajouté."
-
-#: core/views/forms/form_cruise.py:308
-msgid "Save Updates"
-msgstr "Enregistrer"
-
-#: core/views/forms/form_cruise.py:320
-msgid "optional, if known"
-msgstr "optionnel, si connu"
-
-#: core/views/forms/form_cruise.py:377
+#: .\core\views\forms\form_dataset_submission.py:281
+#: .\core\views\forms\form_mission.py:467
+#: .\core\views\forms\form_mission.py:522
+#: .\core\views\forms\form_mission.py:578
+#: .\core\views\forms\form_mission.py:651
 msgid "An unexpected error occurred while saving the form."
 msgstr ""
 "Une erreur inattendue s'est produite lors de l'enregistrement du formulaire."
 
-#: core/views/forms/form_data_submission.py:41
+#: .\core\views\forms\form_mission.py:43
+#, fuzzy
+#| msgid "Create Cruise"
+msgid "Create Mission"
+msgstr "Créer une croisière"
+
+#: .\core\views\forms\form_mission.py:55
+#, fuzzy
+#| msgid "Update cruise"
+msgid "Updated Mission"
+msgstr "Mettre à jour la croisière"
+
+#: .\core\views\forms\form_mission.py:60
+msgid "Mission not found."
+msgstr ""
+
+#: .\core\views\forms\form_mission.py:132
+msgid "A dataset with this type already exists in the mission."
+msgstr ""
+
+#: .\core\views\forms\form_mission.py:167
+#: .\core\views\forms\form_mission.py:172
+#, fuzzy
+#| msgid "Dataset"
+msgid "Add Dataset"
+msgstr "Jeu de données"
+
+#: .\core\views\forms\form_mission.py:189
+#, fuzzy
+#| msgid "Select Geographic Locations"
+msgid "Select Geographic Locations*"
+msgstr "Sélectionner des emplacements géographiques"
+
+#: .\core\views\forms\form_mission.py:196
+msgid "Geographic Locations"
+msgstr "Emplacements géographiques"
+
+#: .\core\views\forms\form_mission.py:218
+#, fuzzy
+#| msgid "At least one geographic location must be added."
+msgid "At least one geographic region must be added."
+msgstr "Au moins un emplacement géographique doit être ajouté."
+
+#: .\core\views\forms\form_mission.py:229
+msgid "Start date cannot be after end date."
+msgstr ""
+
+#: .\core\views\forms\form_mission.py:236
+msgid "Leg dates cannot overlap with existing legs"
+msgstr ""
+
+#: .\core\views\forms\form_mission.py:293
+#, fuzzy
+#| msgid "Save"
+msgid "Save Leg"
+msgstr "Enregistrer"
+
+#: .\core\views\forms\form_mission.py:303
+msgid "New Leg"
+msgstr ""
+
+#: .\core\views\forms\form_mission.py:340
+#, fuzzy
+#| msgid "Select Geographic Locations"
+msgid "Select Organizations"
+msgstr "Sélectionner des emplacements géographiques"
+
+#: .\core\views\forms\form_mission.py:399
+msgid "Save Updates"
+msgstr "Enregistrer"
+
+#: .\core\views\forms\form_mission.py:411
+msgid "optional, if known"
+msgstr "optionnel, si connu"
+
+#: .\core\views\forms\ref_form_data_submission.py:45
 msgid "Data Submission"
 msgstr "Soumission de données"
 
-#: core/views/forms/form_data_submission.py:61
+#: .\core\views\forms\ref_form_data_submission.py:65
 msgid "Reason for archiving file"
 msgstr "Raison de l'archivage du fichier"
 
-#: core/views/forms/form_data_submission.py:176
+#: .\core\views\forms\ref_form_data_submission.py:203
 msgid ""
 "already exists. If intended, please archive the existing file with reasoning "
 "first and try uploading again."
@@ -433,122 +704,236 @@ msgstr ""
 "existe déjà. Si c'est intentionnel, veuillez d'abord archiver le fichier "
 "existant avec une justification et réessayez de télécharger."
 
-#: core/views/forms/form_data_submission.py:203
+#: .\core\views\forms\ref_form_data_submission.py:232
 msgid "Cruise update: Files added"
 msgstr "Mise à jour de la croisière : fichiers ajoutés"
 
-#: core/views/forms/form_data_submission.py:204
+#: .\core\views\forms\ref_form_data_submission.py:233
 msgid "Files have been submitted for cruise"
 msgstr "Les fichiers ont été soumis pour la croisière"
 
-#: core/views/forms/form_data_submission.py:205
-msgid "Do.Not.Reply@mar-did.dfo-mpo.gc.ca"
-msgstr "Ne.Pas.Répondre@mar-did.dfo-mpo.gc.ca"
-
-#: core/views/view_contacts.py:67
-msgid ""
-"Note, this interface allows users to be added so they can be used in the "
-"interface, but they will not receive passwords and cannot login. Contact the "
-"adminastrator to have passwords assigned."
-msgstr ""
-"Remarque, cette interface permet d'ajouter des utilisateurs pour qu'ils "
-"puissent être utilisés dans l'interface, mais ils ne recevront pas de mots "
-"de passe et ne pourront pas se connecter. Contactez l'administrateur pour "
-"attribuer des mots de passe."
-
-#: core/views/view_cruises.py:40 core/views/view_dataset_status.py:26
-msgid "Cruise Descriptor"
-msgstr "Descripteur de croisière"
-
-#: core/views/view_cruises.py:47 core/views/view_dataset_status.py:33
-msgid "Cruise Name"
-msgstr "Nom de la croisière"
-
-#: core/views/view_cruises.py:148
-msgid "Cruise Data"
-msgstr "Données de croisière"
-
-#: core/views/view_cruises.py:156
-msgid "Update cruise"
-msgstr "Mettre à jour la croisière"
-
-#: core/views/view_cruises.py:165
-msgid "Delete cruise"
-msgstr "Supprimer la croisière"
-
-#: core/views/view_cruises.py:166
-msgid "Are you sure you want to delete this curise?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette croisière ?"
-
-#: core/views/view_data.py:35
-msgid "Filter Data Types"
-msgstr "Filtrer les types de données"
-
-#: core/views/view_dataset_status.py:38
-msgid "Select a status"
-msgstr "Sélectionner un statut"
-
-#: core/views/view_lookup_abstract.py:65
+#: .\core\views\lookups\view_lookup_abstract.py:79
 msgid "Clear"
 msgstr "Effacer"
 
-#: core/views/view_lookup_abstract.py:179
+#: .\core\views\lookups\view_lookup_abstract.py:223
 msgid "Are you sure you want to delete this?"
 msgstr "Êtes-vous sûr de vouloir supprimer ceci ?"
 
-#: core/views/view_lookup_abstract.py:200
-#: core/views/view_lookup_abstract.py:222
+#: .\core\views\lookups\view_lookup_abstract.py:244
+#: .\core\views\lookups\view_lookup_abstract.py:266
 msgid "You must be a MarDID Maintainer to perform this action."
 msgstr "Vous devez être un mainteneur MarDID pour effectuer cette action."
 
-#: core/views/view_lookup_abstract.py:228
+#: .\core\views\lookups\view_lookup_abstract.py:272
 msgid "This value is being used and cannot be deleted."
 msgstr "Cette valeur est utilisée et ne peut pas être supprimée."
 
-#: core/views/view_lookup_platform.py:57
-msgid "ICES"
-msgstr "CIEM"
+#: .\core\views\lookups\view_lookup_countries.py:17 .\templates\navbar.html:39
+msgid "Countries"
+msgstr ""
 
-#: core/views/view_lookup_platform.py:58
-msgid "To search for a ship code see : "
-msgstr "Pour rechercher un code de navire, voir : "
+#: .\core\views\lookups\view_lookup_data_types.py:17 .\templates\navbar.html:41
+#, fuzzy
+#| msgid "Data Type"
+msgid "Data Types"
+msgstr "Type de données"
 
-#: templates/base.html:9 templates/navbar.html:7
+#: .\core\views\lookups\view_lookup_dataset_locations.py:20
+#, fuzzy
+#| msgid "Dataset Status"
+msgid "Dataset Locations"
+msgstr "État du jeu de données"
+
+#: .\core\views\lookups\view_lookup_file_types.py:17 .\templates\navbar.html:42
+#, fuzzy
+#| msgid "Filter Data Types"
+msgid "File Types"
+msgstr "Filtrer les types de données"
+
+#: .\core\views\lookups\view_lookup_participants.py:17
+#: .\templates\navbar.html:45
+msgid "Participants"
+msgstr ""
+
+#: .\core\views\lookups\view_lookup_platforms.py:17
+#, fuzzy
+#| msgid "Platform"
+msgid "Platforms"
+msgstr "Plateforme"
+
+#: .\core\views\lookups\view_lookup_positions.py:17 .\templates\navbar.html:46
+#, fuzzy
+#| msgid "Locations"
+msgid "Positions"
+msgstr "Emplacements"
+
+#: .\core\views\lookups\view_lookup_programs.py:17 .\templates\navbar.html:47
+msgid "Programs"
+msgstr "Programmes"
+
+#: .\core\views\view_dataset_status.py:26
+msgid "Cruise Descriptor"
+msgstr "Descripteur de croisière"
+
+#: .\core\views\view_dataset_status.py:33
+msgid "Cruise Name"
+msgstr "Nom de la croisière"
+
+#: .\core\views\view_dataset_status.py:38
+msgid "Select a status"
+msgstr "Sélectionner un statut"
+
+#: .\core\views\view_missions.py:56
+msgid "Year"
+msgstr ""
+
+#: .\templates\base.html:9 .\templates\navbar.html:7
 msgid "Maritimes Datashop Inventory Dashboard"
 msgstr "Tableau de bord de l'inventaire des données maritimes"
 
-#: templates/navbar.html:13
+#: .\templates\base.html:76
+msgid "Something went wrong, check ./logs/error.log"
+msgstr ""
+
+#: .\templates\navbar.html:18
 msgid "Views"
 msgstr "Vues"
 
-#: templates/navbar.html:16
-msgid "Cruises"
-msgstr "Croisières"
+#: .\templates\navbar.html:21
+msgid "Missions"
+msgstr ""
 
-#: templates/navbar.html:18
-msgid "Add a Cruise"
+#: .\templates\navbar.html:23
+#, fuzzy
+#| msgid "Add a Cruise"
+msgid "Add a Mission"
 msgstr "Ajouter une croisière"
 
-#: templates/navbar.html:25
+#: .\templates\navbar.html:30
 msgid "Lookup Tables"
 msgstr "Tables de recherche"
 
-#: templates/navbar.html:29
+#: .\templates\navbar.html:34
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: templates/navbar.html:31
-msgid "Contacts"
-msgstr "Contacts"
+#: .\templates\navbar.html:36
+msgid "Configuration - Dataset Locations"
+msgstr ""
 
-#: templates/navbar.html:34
+#: .\templates\navbar.html:49
 msgid "Ships and Platforms"
 msgstr "Navires et plateformes"
 
-#: templates/navbar.html:45
+#: .\templates\navbar.html:59
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: templates/navbar.html:48
+#: .\templates\navbar.html:62
 msgid "Login"
 msgstr "Connexion"
+
+#~ msgid "Do.Not.Reply@mar-did.dfo-mpo.gc.ca"
+#~ msgstr "Ne.Pas.Répondre@mar-did.dfo-mpo.gc.ca"
+
+#~ msgid ""
+#~ "ICES (https://vocab.ices.dk/) code consists of 2 character country code "
+#~ "and a 2 character ship code for every unique vessel."
+#~ msgstr ""
+#~ "Le code ICES (https://vocab.ices.dk/) se compose d'un code pays de 2 "
+#~ "caractères et d'un code navire de 2 caractères pour chaque navire unique."
+
+#~ msgid "Program name"
+#~ msgstr "Nom du programme"
+
+#~ msgid "This region is in use and cannot be deleted."
+#~ msgstr "Cette région est utilisée et ne peut pas être supprimée."
+
+#~ msgid "Start date"
+#~ msgstr "Date de début"
+
+#~ msgid "End date"
+#~ msgstr "Date de fin"
+
+#~ msgid "Data Managers"
+#~ msgstr "Gestionnaires de données"
+
+#~ msgid "programs"
+#~ msgstr "programmes"
+
+#~ msgid "Serial Number"
+#~ msgstr "Numéro de série"
+
+#~ msgid "Serial number of an instrument if it exists"
+#~ msgstr "Numéro de série d'un instrument s'il existe"
+
+#~ msgid "Serial Number or name given to the moored instrument"
+#~ msgstr "Numéro de série ou nom donné à l'instrument amarré"
+
+#~ msgid "Instruments"
+#~ msgstr "Instruments"
+
+#~ msgid "Process Status"
+#~ msgstr "État du processus"
+
+#~ msgid "File"
+#~ msgstr "Fichier"
+
+#~ msgid "Issue Description"
+#~ msgstr "Description du problème"
+
+#~ msgid "Groups"
+#~ msgstr "Groupes"
+
+#~ msgid "Update Contact Information"
+#~ msgstr "Mettre à jour les informations de contact"
+
+#~ msgid "Remove data type from contacts"
+#~ msgstr "Supprimer le type de données des contacts"
+
+#~ msgid "Projects"
+#~ msgstr "Projets"
+
+#~ msgid "View and update associated files"
+#~ msgstr "Voir et mettre à jour les fichiers associés"
+
+#~ msgid "Select a program"
+#~ msgstr "Sélectionner un programme"
+
+#~ msgid "Select Chief Scientist"
+#~ msgstr "Sélectionner un chef scientifique"
+
+#~ msgid "Select Data Managers"
+#~ msgstr "Sélectionner des gestionnaires de données"
+
+#~ msgid "At least one chief scientist must be added."
+#~ msgstr "Au moins un chef scientifique doit être ajouté."
+
+#~ msgid "At least one program must be added."
+#~ msgstr "Au moins un programme doit être ajouté."
+
+#~ msgid ""
+#~ "Note, this interface allows users to be added so they can be used in the "
+#~ "interface, but they will not receive passwords and cannot login. Contact "
+#~ "the adminastrator to have passwords assigned."
+#~ msgstr ""
+#~ "Remarque, cette interface permet d'ajouter des utilisateurs pour qu'ils "
+#~ "puissent être utilisés dans l'interface, mais ils ne recevront pas de "
+#~ "mots de passe et ne pourront pas se connecter. Contactez l'administrateur "
+#~ "pour attribuer des mots de passe."
+
+#~ msgid "Cruise Data"
+#~ msgstr "Données de croisière"
+
+#~ msgid "ICES"
+#~ msgstr "CIEM"
+
+#~ msgid "To search for a ship code see : "
+#~ msgstr "Pour rechercher un code de navire, voir : "
+
+#~ msgid "Cruises"
+#~ msgstr "Croisières"
+
+#~ msgid "Contacts"
+#~ msgstr "Contacts"
