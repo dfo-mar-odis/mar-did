@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<form id="form_id_dataset" enctype="multipart/form-data"
+<form id="form_id_dataset_submission" enctype="multipart/form-data"
       hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
       hx-encoding="multipart/form-data" hx-get="{% url 'core:clear_form_dataset_submission' dataset.id %}" hx-trigger="dataset_files_updated from:body" class="mb-2">
 
@@ -11,10 +11,10 @@
         <div><input type="file" name="files" class="form-control" multiple="" id="id_files"> </div>
     </div>
 
-    <input type="hidden" name="submitted_by" value="{{ request.user.pk }}" />
-
+    {# when this button is clicked either everything is fine and the form will be cleared or it should get replaced #}
+    {# with a message area with an error or a form with additional options for the user. #}
     <button id="btn_id_form_submit" type="button" title="{% trans 'Upload attached files' %}"
-            hx-swap="none"
+            hx-swap="outerHTML"
             hx-post="{% url 'core:submit_dataset_files' dataset.id %}" class="btn btn-primary"
             hx-indicator="#htmx_indicator_dataset_files_list">
         <span class="bi bi-check-square me-2"></span>{% trans 'Upload Selected Files' %}

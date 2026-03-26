@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from bs4 import BeautifulSoup
 from crispy_forms.bootstrap import StrictButton
@@ -8,19 +9,21 @@ from crispy_forms.utils import render_crispy_form
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django import forms
 from django.http import HttpResponse
 from django.middleware.csrf import get_token
 from django.template.loader import render_to_string
 from django.urls import path, reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
-from pandas.io.sas.sas_constants import dataset_length, dataset_offset
 
-from core import models, utils
+from core import models
+from core.components import get_alert
+from core.utils.authentication import redirect_if_not_authenticated
 
 import logging
 
-from core.models import Datasets
+from core.utils.file_upload import save_files, validate_files
 
 logger = logging.getLogger('mardid')
 
@@ -41,6 +44,43 @@ class DatasetSubmissionView(TemplateView):
         context['dataset_comments_form'] = DatasetCommentsForm(data_object, self.request.user)
         return context
 
+
+class DatasetSubmissionArchiveForm(forms.Form):
+    archive_message = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4, 'placeholder': _('Enter archive message...')}),
+        label=_('Archive Message'),
+        required=True
+    )
+
+    def __init__(self, dataset_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        submit_url = reverse_lazy('core:archive_dataset_files', args=[dataset_id])
+
+        btn_submit_attrs = {
+            'title': _("Archive Previously Loaded Files"),
+            'hx-target': "#div_id_archive_message_form",
+            'hx-post': submit_url
+        }
+
+        btn_label = _("Archive Files")
+        btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
+                                  css_class='btn btn-sm btn-primary mb-1',
+                                  **btn_submit_attrs)
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Div(
+                Row(
+                    Column(Field('archive_message'), css_class='form-control-sm'),
+                ),
+                Div(
+                    btn_submit
+                ),
+                css_id="div_id_archive_message_form"
+            )
+        )
 
 class DatasetSubmissionStatusForm(ModelForm):
     class Meta:
@@ -133,35 +173,14 @@ class DatasetCommentsForm(ModelForm):
             self.helper.layout.fields[0].fields.append(button_div)
 
 
-def get_file_path(dataset: models.Datasets, datatype_output: str):
-    return os.path.join(settings.MEDIA_OUT, dataset.get_dataset_root_path, datatype_output)
-
-def save_files(user: User, dataset: models.Datasets, files):
-
-    datatype_output = dataset.data_type.locations.first().output_dir
-    output_path = str(get_file_path(dataset, datatype_output))
-
-    if len(files) > 0:
-        if not os.path.exists(output_path):
-            # Create the directory
-            os.makedirs(output_path)
-            print(f"Directory created: {output_path}")
-        else:
-            print(f"Directory already exists: {output_path}")
-
-        file_type = models.FileTypes.objects.get_or_create(extension=".tst", description="this is for testing purposes")[0]
-        for file in files:
-            file_path = os.path.join(output_path, file.name)
-            with open(file_path, 'wb+') as destination:
-                for chunk in file.chunks():
-                    destination.write(chunk)
-
-            models.DataFiles.objects.create(dataset=dataset, file_name=file.name, file_type=file_type, submitted_by=user, is_archived=False)
-            logger.info(f"File saved: {file_path}")
-
-
+# this function is called by the core/partials/form_dataset_submission.html template when files are submitted.
+# It is responsible for validating the files and saving them to the appropriate location.
+#
+# Upon competition, it's expected to replace the button on the form. If successful the function should return an
+# HX-Trigger 'dataset_files_updated' which will trigger a refresh on the file list and will clear the form replacing
+# the form with a new one.
 def submit_files(request, dataset_id):
-    if response:=utils.redirect_if_not_authenticated(request):
+    if response:=redirect_if_not_authenticated(request):
         return response
 
     if request.method == 'POST':
@@ -169,7 +188,24 @@ def submit_files(request, dataset_id):
         files = request.FILES.getlist('files')
 
         dataset = models.Datasets.objects.get(pk=dataset_id)
-        save_files(request.user, dataset, files)
+        datatype_output = dataset.datatype.locations.first().output_dir
+        output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
+
+        existing_files = validate_files(request.user, dataset, files)
+        if existing_files:
+            message = _("The following files already exist in the dataset and must be archived before "
+                        "they can be re-submitted: ") + ", ".join(existing_files)
+
+            form = render_crispy_form(DatasetSubmissionArchiveForm(dataset_id=dataset_id))
+
+            message_soup = get_alert('div_id_submission_message', "warning", message)
+            soup = BeautifulSoup(form, 'html.parser')
+
+            div = soup.find(id="div_id_archive_message_form")
+            div.insert(0, message_soup)
+            return HttpResponse(soup)
+
+        save_files(request.user, dataset, files, output_path)
 
         response = HttpResponse()
         response['HX-Trigger'] = "dataset_files_updated"
@@ -178,9 +214,31 @@ def submit_files(request, dataset_id):
     return HttpResponse()
 
 
-def get_archive_from(request, dataset_id):
-    return HttpResponse()
+def archive_files(request, dataset_id):
+    if response:=redirect_if_not_authenticated(request):
+        return response
 
+    if request.method == 'POST':
+        post_vars = request.POST.copy()
+        files = request.FILES.getlist('files')
+
+        form = DatasetSubmissionArchiveForm(dataset_id=dataset_id, data=post_vars)
+
+        if form.is_valid():
+            # we'll archive existing files here and then save the new files
+            dataset = models.Datasets.objects.get(pk=dataset_id)
+            datatype_output = dataset.datatype.locations.first().output_dir
+            output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
+
+            existing_files = validate_files(request.user, dataset, files)
+
+            response = HttpResponse()
+            response['HX-Trigger'] = "dataset_files_updated"
+            return response
+
+        return HttpResponse(render_crispy_form(form))
+
+    return HttpResponse()
 
 def list_files(request, dataset_id):
     dataset = models.Datasets.objects.get(pk=dataset_id)
@@ -251,7 +309,7 @@ def dataset_comment_form(request, dataset_id, **kwargs):
 
 
 def dataset_comment_update(request, dataset_id, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Create a mutable copy of the POST data
@@ -299,7 +357,7 @@ def dataset_comment_list(request, dataset_id):
 
 
 def dataset_comment_delete(request, dataset_id, comment_id):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     comment = models.DatasetComments.objects.get(pk=comment_id)
@@ -318,9 +376,8 @@ urlpatterns = [
          name='update_dataset_status'),
 
     path('dataset/submission/files/add/<int:dataset_id>', submit_files, name='submit_dataset_files'),
+    path('dataset/submission/files/archive/<int:dataset_id>', archive_files, name='archive_dataset_files'),
     path('dataset/submission/files/list/<int:dataset_id>', list_files, name='dataset_files_list'),
-
-    path('dataset/submission/archive/<int:dataset_id>', get_archive_from, name='get_archive_form'),
 
     path('dataset/comment/add/<int:dataset_id>', dataset_comment_update, name='add_dataset_comment'),
     path('dataset/comment/add/<int:dataset_id>/<int:comment_id>', dataset_comment_update,

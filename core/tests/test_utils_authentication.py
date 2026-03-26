@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory, tag
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from core.utils import authenticated, redirect_if_not_authenticated, redirect_if_not_superuser
+from core.utils.authentication import authenticated, redirect_if_not_authenticated, redirect_if_not_superuser
 from unittest.mock import patch
 
 
@@ -65,6 +65,6 @@ class TestUtilsAuthentication(TestCase):
         # Expected Result: redirect_if_not_superuser() returns None.
         request = self.factory.get('/')
         request.user = self.superuser
-        with patch('core.utils.redirect_if_not_authenticated', return_value=None):
+        with patch('core.utils.authentication.redirect_if_not_authenticated', return_value=None):
             response = redirect_if_not_superuser(request, next_page='/next', groups=['MarDID Maintainers'])
             self.assertIsNone(response)

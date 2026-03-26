@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -234,6 +235,13 @@ class Missions(models.Model):
         completed = datasets.filter(status__name__iexact='complete').count()
         return int((completed / datasets.count()) * 100)
 
+    @property
+    def mission_path(self) -> Path:
+        year = str(self.start_date.year)
+        decade = f'{year[:3]}X'
+
+        return Path(decade, year, self.name.upper())
+
 
     def __str__(self):
         return f'{self.name} - {self.descriptor}'
@@ -330,7 +338,7 @@ class MissionRegions(models.Model):
 class DatasetLocations(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_location_seq')
 
-    data_type = models.ForeignKey('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
+    datatype = models.ForeignKey('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
                                 related_name='locations', db_column='dataset_seq')
 
     input_dir = models.CharField(verbose_name=_("Input Directory"),
@@ -343,17 +351,17 @@ class DatasetLocations(models.Model):
 
     class Meta:
         db_table = 'APPLICATION_CONFIGURATION_DATASET_LOCATIONS'
-        ordering = ['data_type']
+        ordering = ['datatype']
 
     def __str__(self):
-        return f'{self.data_type.name} - [Input: {self.input_dir}, Output: {self.output_dir}]'
+        return f'{self.datatype.name} - [Input: {self.input_dir}, Output: {self.output_dir}]'
 
 
 class Datasets(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_seq')
 
     mission = models.ForeignKey(Missions, on_delete=models.CASCADE, related_name="datasets", db_column='mission_seq')
-    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets",
+    datatype = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets",
                                   db_column='data_type_seq')
     legacy_file_location = models.CharField(max_length=255, blank=True, null=True,
                                             verbose_name=_("Legacy File location"),
@@ -361,13 +369,6 @@ class Datasets(models.Model):
                                             db_column='legacy_file_location')
     status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT,
                                related_name="datasets", db_column='dataset_status_seq')
-
-    @property
-    def get_dataset_root_path(self):
-        year = str(self.mission.start_date.year)
-        decade = f'{year[:3]}X'
-
-        return os.path.join(decade, year, self.mission.name.upper())
 
     @property
     def current_files(self):
@@ -378,11 +379,11 @@ class Datasets(models.Model):
         return self.files.filter(is_archived=True)
 
     def __str__(self):
-        return f'{self.data_type} : {self.status}'
+        return f'{self.datatype} : {self.status}'
 
     class Meta:
         db_table = 'datasets'
-        ordering = ['mission', 'data_type']
+        ordering = ['mission', 'datatype']
 
 
 class DataFiles(models.Model):

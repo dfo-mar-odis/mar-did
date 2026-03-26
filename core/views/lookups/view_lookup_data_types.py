@@ -15,7 +15,7 @@ lookup_model = models.DataTypes
 # name key for the simple lookup table.
 app_name = 'core'
 lookup_title = _('Data Types')
-name_key = 'data_types'
+name_key = 'datatypes'
 columns = [field.name for field in lookup_model._meta.fields if field.name != 'id']
 
 ###### DO NOT CHANGE THESE #############

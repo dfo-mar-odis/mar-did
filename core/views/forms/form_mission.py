@@ -23,6 +23,7 @@ from core import models, utils
 
 import logging
 
+from core.utils.authentication import redirect_if_not_authenticated
 from core.views.forms import form_multiselect
 from core.views.forms.form_multiselect import remove_from_list, add_to_list
 
@@ -32,7 +33,7 @@ class CreateMission(LoginRequiredMixin, TemplateView):
     template_name = 'core/forms/form_mission.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if response:=utils.redirect_if_not_authenticated(request):
+        if response:=redirect_if_not_authenticated(request):
             return response
 
         return super().dispatch(request, *args, **kwargs)
@@ -124,10 +125,10 @@ class MissionDatasetsForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         mission = cleaned_data.get('mission')
-        data_type = cleaned_data.get('data_type')
+        datatype = cleaned_data.get('datatype')
 
-        if mission and data_type:
-            if models.Datasets.objects.filter(mission=mission, data_type=data_type).exists():
+        if mission and datatype:
+            if models.Datasets.objects.filter(mission=mission, datatype=datatype).exists():
                 raise forms.ValidationError(
                     _("A dataset with this type already exists in the mission.")
                 )
@@ -149,7 +150,7 @@ class MissionDatasetsForm(forms.ModelForm):
             Div(
                 Hidden('mission', mission_id),
                 Row(
-                    Column(Field('data_type'), css_class='form-control-sm'),
+                    Column(Field('datatype'), css_class='form-control-sm'),
                     Column(Field('status'), css_class='form-control-sm'),
                 ),
                 Row(
@@ -385,11 +386,11 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
         current_program = []
         current_platform = []
-        if self.instance:
+        if self.instance.pk:
             if self.instance.program:
                 current_program = [(self.instance.program.pk, self.instance.program.acronym)]
 
-            if self.instance.program:
+            if self.instance.platform:
                 current_platform = [(self.instance.platform.pk, self.instance.platform.name)]
 
         self.fields['platform'].choices = (
@@ -464,7 +465,7 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
 
 def update_mission(request, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
@@ -514,7 +515,7 @@ def mission_leg_form(request, mission_id, **kwargs):
 
 #used to submit a new or updated leg
 def mission_leg_update(request, mission_id, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
@@ -565,7 +566,7 @@ def mission_leg_list(request, mission_id):
 
 
 def mission_leg_delete(request, mission_id, leg_id):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     leg = models.Legs.objects.get(pk=leg_id)
@@ -575,7 +576,7 @@ def mission_leg_delete(request, mission_id, leg_id):
 
 
 def mission_dataset_update(request, mission_id, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
@@ -621,7 +622,7 @@ def mission_dataset_list(request, mission_id):
 
 
 def mission_dataset_delete(request, mission_id, dataset_id):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     dataset = models.Datasets.objects.get(pk=dataset_id)
@@ -646,7 +647,7 @@ def mission_comment_form(request, mission_id, **kwargs):
 
 
 def mission_comment_update(request, mission_id, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Create a mutable copy of the POST data
@@ -694,7 +695,7 @@ def mission_comment_list(request, mission_id):
 
 
 def mission_comment_delete(request, mission_id, comment_id):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     comment = models.MissionComments.objects.get(pk=comment_id)
