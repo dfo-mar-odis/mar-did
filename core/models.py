@@ -409,6 +409,7 @@ class DataFiles(models.Model):
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')
     submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False, db_column='is_archived')
+    archived_date = models.DateTimeField(verbose_name=_("Archived Date"), blank=True, null=True, db_column='archived_date')
 
     def __str__(self):
         return self.file_name
@@ -417,6 +418,13 @@ class DataFiles(models.Model):
         db_table = 'files'
         ordering = ['file_name']
 
+    @property
+    def archived_file_name(self):
+        if self.is_archived:
+            timestamp = self.archived_date.strftime('%Y%m%d%H%M%S')
+            return f"{timestamp}_{self.file_name}"
+
+        return self.file_name
 
 class ProcessingStatus(models.Model):
     id = models.AutoField(primary_key=True, db_column='processing_seq')
@@ -449,7 +457,7 @@ class Comments(models.Model):
         ordering = ['-comment_date']
 
     def __str__(self):
-        return f"{self.author.username} - {self.comment_date.strftime('%Y-%m-%d %H:%M:%S')} - {self.comment}"
+        return f"{self.author} - {self.comment}"
 
 class MissionComments(Comments):
     id = models.AutoField(primary_key=True, db_column='mission_comment_seq')

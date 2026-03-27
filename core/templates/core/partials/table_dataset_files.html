@@ -28,6 +28,9 @@
         <th>{% trans 'File Location' %}</th>
         <th>{% trans 'Submitted By' %}</th>
         <th>{% trans 'Submitted Date' %}</th>
+        {% if archived %}
+        <th>{% trans 'Archived Date' %}</th>
+        {% endif %}
     </tr>
     </thead>
     <tbody>
@@ -46,13 +49,16 @@
         <td>{{ file.dataset.get_dataset_root_path }}</td>
         <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
         <td>{{ file.submitted_date }}</td>
+        {% if archived %}
+        <th>{{ file.archived_date }}</th>
+        {% endif %}
 
     </tr>
     {% if file.is_archived %}
         {% for comment in file.comments.all %}
         <tr class="table-success">
         <td></td>
-        <td colspan="4">{{ comment }}</td>
+        <td colspan="5">{{ comment }}</td>
         </tr>
         {% endfor %}
         {% endif %}
