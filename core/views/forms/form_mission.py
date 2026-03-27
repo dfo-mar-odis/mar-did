@@ -26,6 +26,7 @@ import logging
 from core.utils.authentication import redirect_if_not_authenticated
 from core.views.forms import form_multiselect
 from core.views.forms.form_multiselect import remove_from_list, add_to_list
+from custom_widgets.widgets import TooltipSelect
 
 logger = logging.getLogger('mardid')
 
@@ -340,7 +341,7 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
         queryset=models.Organizations.objects.none(),
         label=_("Select Organizations"),
         required=False,
-        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
+        # widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     organizations = forms.ModelMultipleChoiceField(
         queryset=models.Organizations.objects.none(),
@@ -351,21 +352,6 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
     class Meta:
         model = models.Missions
         fields = '__all__'
-
-        ##########################################################################################
-        # This is specifically so labels and help text are translated
-        ##########################################################################################
-        labels = {
-        }
-
-        help_texts = {
-        }
-        ##########################################################################################
-
-        # widgets = {
-        #     'start_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
-        #     'end_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
-        # }
 
     def get_multiselect_context(self, prefix) -> form_multiselect.MultiselectContext | None:
         return MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
@@ -379,34 +365,74 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
         return cleaned_regions
 
+    def init_organization_field(self):
+        all_orgs = list(models.Organizations.objects.all())
+        tooltips = {o.pk: o.description for o in all_orgs if o.description}
+
+        non_legacy = [o for o in all_orgs if not o.legacy]
+        legacy = [o for o in all_orgs if o.legacy]
+        org_choices = (
+                [(None, '----------')] +
+                [(o.pk, f'{o.acronym} - {o.name}') for o in non_legacy] +
+                [(None, '----------')] +
+                [(o.pk, f'{o.acronym} - {o.name}') for o in legacy]
+        )
+
+        self.fields['organizations_select'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=org_choices,
+            tooltips=tooltips,
+        )
+
+    def init_program_field(self):
+        all_programs = list(models.Programs.objects.all())
+        tooltips = {o.pk: o.description for o in all_programs if o.description}
+
+        non_legacy = [o for o in all_programs if not o.legacy]
+        legacy = [o for o in all_programs if o.legacy]
+        program_choices = (
+                [(None, '----------')] +
+                [(p.pk, f'{p.acronym} - {p.name}') for p in non_legacy] +
+                [(None, '----------')] +
+                [(p.pk,  f'{p.acronym} - {p.name}') for p in legacy]
+        )
+        self.fields['program'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=program_choices,
+            tooltips=tooltips,
+        )
+
+    def format_platform_string(self, platform):
+        default_call_sign = models.Platforms._meta.get_field('call_sign').default
+
+        ship_code = platform.ship_code if platform.ship_code else "No Ship Code"
+        call_sign = platform.call_sign if platform.call_sign != default_call_sign else "No Call Sign"
+        return f'{platform.name} - {call_sign} - {ship_code}'
+
+    def init_platform_field(self):
+        all_platforms = list(models.Platforms.objects.all())
+
+        non_legacy = [o for o in all_platforms if not o.legacy]
+        legacy = [o for o in all_platforms if o.legacy]
+        platform_choices = (
+                [(None, '----------')] +
+                [(p.pk, self.format_platform_string(p)) for p in non_legacy] +
+                [(None, '----------')] +
+                [(p.pk,  self.format_platform_string(p)) for p in legacy]
+        )
+        self.fields['platform'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=platform_choices,
+        )
+
     def __init__(self, *args, **kwargs):
         super(MissionForm, self).__init__(*args, **kwargs)
 
         organizations_container = self.init_lookup('organizations')
 
-        current_program = []
-        current_platform = []
-        if self.instance.pk:
-            if self.instance.program:
-                current_program = [(self.instance.program.pk, self.instance.program.acronym)]
-
-            if self.instance.platform:
-                current_platform = [(self.instance.platform.pk, self.instance.platform.name)]
-
-        self.fields['platform'].choices = (
-            [(None, '----------')] + current_platform +
-            [(p.pk, p.name) for p in models.Platforms.objects.filter(legacy=False)]
-        )
-
-        self.fields['program'].choices = (
-            [(None, '----------')] + current_program +
-            [(p.pk, p.acronym) for p in models.Programs.objects.filter(legacy=False)]
-        )
-
-        self.fields['organizations_select'].choices = (
-            [(None, '----------')] +
-            [(o.pk, o.acronym) for o in models.Organizations.objects.filter(legacy=False)]
-        )
+        self.init_program_field()
+        self.init_platform_field()
+        self.init_organization_field()
 
         # if an instant is present then we're going to use the 'update_mission' url, otherwise we'll use the url
         # to create a new mission
@@ -433,10 +459,10 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
         self.helper.layout = Layout(
             Div(
                 Row(
-                    Column(Field('name'), css_class='form-control-sm'),
-                    Column(Field('descriptor', placeholder=_("optional, if known")), css_class='form-control-sm'),
-                    Column(Field('platform'), css_class='form-select-sm'),
-                    Column(Field('program'), css_class='form-select-sm'),
+                    Column(Field('name', css_class='form-control-sm')),
+                    Column(Field('descriptor', placeholder=_("optional, if known"), css_class='form-control-sm')),
+                    Column(Field('platform', css_class='form-select-sm')),
+                    Column(Field('program', css_class='form-select-sm')),
                 ),
                 Row(
                     Column(organizations_container),
@@ -460,6 +486,21 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
                 mission.organizations.set(organizations)
             else:
                 mission.organizations.clear()
+
+            # when the user saves, we'll check the used Platform, Program and Organizations and if any of them are
+            # legacy we'll update them to be non-legacy since they're being used in an active mission now
+            if mission.platform and mission.platform.legacy:
+                mission.platform.legacy = False
+                mission.platform.save()
+
+            if mission.program and mission.program.legacy:
+                mission.program.legacy = False
+                mission.program.save()
+
+            for organization in mission.organizations.all():
+                if organization.legacy:
+                    organization.legacy = False
+                    organization.save()
 
         return mission
 
