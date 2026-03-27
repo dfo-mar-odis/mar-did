@@ -4,15 +4,14 @@ from functools import partial
 
 from django import forms
 from django.http import Http404
-from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
+from django.template.context_processors import csrf
 from django.views.generic.base import TemplateView
 from django.urls import path, reverse_lazy, reverse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Row, Column, Field, Hidden
@@ -23,8 +22,10 @@ from core import models, utils
 
 import logging
 
+from core.utils.authentication import redirect_if_not_authenticated
 from core.views.forms import form_multiselect
 from core.views.forms.form_multiselect import remove_from_list, add_to_list
+from custom_widgets.widgets import TooltipSelect, FieldWithButton
 
 logger = logging.getLogger('mardid')
 
@@ -32,7 +33,7 @@ class CreateMission(LoginRequiredMixin, TemplateView):
     template_name = 'core/forms/form_mission.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if response:=utils.redirect_if_not_authenticated(request):
+        if response:=redirect_if_not_authenticated(request):
             return response
 
         return super().dispatch(request, *args, **kwargs)
@@ -124,10 +125,10 @@ class MissionDatasetsForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         mission = cleaned_data.get('mission')
-        data_type = cleaned_data.get('data_type')
+        datatype = cleaned_data.get('datatype')
 
-        if mission and data_type:
-            if models.Datasets.objects.filter(mission=mission, data_type=data_type).exists():
+        if mission and datatype:
+            if models.Datasets.objects.filter(mission=mission, datatype=datatype).exists():
                 raise forms.ValidationError(
                     _("A dataset with this type already exists in the mission.")
                 )
@@ -149,7 +150,7 @@ class MissionDatasetsForm(forms.ModelForm):
             Div(
                 Hidden('mission', mission_id),
                 Row(
-                    Column(Field('data_type'), css_class='form-control-sm'),
+                    Column(Field('datatype'), css_class='form-control-sm'),
                     Column(Field('status'), css_class='form-control-sm'),
                 ),
                 Row(
@@ -236,6 +237,22 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             raise forms.ValidationError(_("Leg dates cannot overlap with existing legs"))
         return cleaned_data
 
+    def init_regions_field(self):
+        all_regions = list(models.GeographicRegions.objects.all())
+
+        non_legacy = [o for o in all_regions if not o.legacy]
+        legacy = [o for o in all_regions if o.legacy]
+        reg_choices = (
+                [(None, '----------')] +
+                [(o.pk, f'{o.name} - {o.description if o.description else "No Description"}') for o in non_legacy] +
+                [(None, '----------')] +
+                [(o.pk, f'{o.name} - {o.description if o.description else "No Description"}') for o in legacy]
+        )
+
+        self.fields['regions_select'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=reg_choices,
+        )
 
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
@@ -253,6 +270,7 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
         super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
 
         regions_container = self.init_lookup('regions')
+        self.init_regions_field()
 
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -261,12 +279,12 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             Div(
                 Hidden('mission', mission_id),
                 Row(
-                    Column(Field('start_date'), css_class='form-control-sm'),
-                    Column(Field('end_date'), css_class='form-control-sm'),
-                    Column(Field('description'), css_class='form-control-sm'),
+                    Column(Field('start_date', css_class='form-control-sm')),
+                    Column(Field('end_date', css_class='form-control-sm')),
+                    Column(Field('description', css_class='form-control-sm')),
                 ),
                 Row(
-                    Column(Field('chief_scientist'), css_class='form-select-sm'),
+                    Column(Field('chief_scientist', css_class='form-select-sm')),
                 ),
                 Row(
                     Column(regions_container),
@@ -331,6 +349,11 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
                     defaults={'participant': chief_scientist}
                 )
 
+                for region in leg.regions.all():
+                    if region.legacy:
+                        region.legacy = False
+                        region.save()
+
         return leg
 
 
@@ -339,7 +362,7 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
         queryset=models.Organizations.objects.none(),
         label=_("Select Organizations"),
         required=False,
-        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
+        # widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
     )
     organizations = forms.ModelMultipleChoiceField(
         queryset=models.Organizations.objects.none(),
@@ -350,21 +373,6 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
     class Meta:
         model = models.Missions
         fields = '__all__'
-
-        ##########################################################################################
-        # This is specifically so labels and help text are translated
-        ##########################################################################################
-        labels = {
-        }
-
-        help_texts = {
-        }
-        ##########################################################################################
-
-        # widgets = {
-        #     'start_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
-        #     'end_date': forms.DateInput(attrs={'type': 'date', 'max': '9999-12-31'}),
-        # }
 
     def get_multiselect_context(self, prefix) -> form_multiselect.MultiselectContext | None:
         return MULTISELECT_CONTEXT_REGISTER.get(prefix, None)
@@ -378,34 +386,74 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
         return cleaned_regions
 
+    def init_organization_field(self):
+        all_orgs = list(models.Organizations.objects.all())
+        tooltips = {o.pk: o.description for o in all_orgs if o.description}
+
+        non_legacy = [o for o in all_orgs if not o.legacy]
+        legacy = [o for o in all_orgs if o.legacy]
+        org_choices = (
+                [(None, '----------')] +
+                [(o.pk, f'{o.acronym} - {o.name}') for o in non_legacy] +
+                [(None, '----------')] +
+                [(o.pk, f'{o.acronym} - {o.name}') for o in legacy]
+        )
+
+        self.fields['organizations_select'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=org_choices,
+            tooltips=tooltips,
+        )
+
+    def init_program_field(self):
+        all_programs = list(models.Programs.objects.all())
+        tooltips = {o.pk: o.description for o in all_programs if o.description}
+
+        non_legacy = [o for o in all_programs if not o.legacy]
+        legacy = [o for o in all_programs if o.legacy]
+        program_choices = (
+                [(None, '----------')] +
+                [(p.pk, f'{p.acronym} - {p.name}') for p in non_legacy] +
+                [(None, '----------')] +
+                [(p.pk,  f'{p.acronym} - {p.name}') for p in legacy]
+        )
+        self.fields['program'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=program_choices,
+            tooltips=tooltips,
+        )
+
+    def format_platform_string(self, platform):
+        default_call_sign = models.Platforms._meta.get_field('call_sign').default
+
+        ship_code = platform.ship_code if platform.ship_code else "No Ship Code"
+        call_sign = platform.call_sign if platform.call_sign != default_call_sign else "No Call Sign"
+        return f'{platform.name} - {call_sign} - {ship_code}'
+
+    def init_platform_field(self):
+        all_platforms = list(models.Platforms.objects.all())
+
+        non_legacy = [o for o in all_platforms if not o.legacy]
+        legacy = [o for o in all_platforms if o.legacy]
+        platform_choices = (
+                [(None, '----------')] +
+                [(p.pk, self.format_platform_string(p)) for p in non_legacy] +
+                [(None, '----------')] +
+                [(p.pk,  self.format_platform_string(p)) for p in legacy]
+        )
+        self.fields['platform'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=platform_choices,
+        )
+
     def __init__(self, *args, **kwargs):
         super(MissionForm, self).__init__(*args, **kwargs)
 
         organizations_container = self.init_lookup('organizations')
 
-        current_program = []
-        current_platform = []
-        if self.instance:
-            if self.instance.program:
-                current_program = [(self.instance.program.pk, self.instance.program.acronym)]
-
-            if self.instance.program:
-                current_platform = [(self.instance.platform.pk, self.instance.platform.name)]
-
-        self.fields['platform'].choices = (
-            [(None, '----------')] + current_platform +
-            [(p.pk, p.name) for p in models.Platforms.objects.filter(legacy=False)]
-        )
-
-        self.fields['program'].choices = (
-            [(None, '----------')] + current_program +
-            [(p.pk, p.acronym) for p in models.Programs.objects.filter(legacy=False)]
-        )
-
-        self.fields['organizations_select'].choices = (
-            [(None, '----------')] +
-            [(o.pk, o.acronym) for o in models.Organizations.objects.filter(legacy=False)]
-        )
+        self.init_program_field()
+        self.init_platform_field()
+        self.init_organization_field()
 
         # if an instant is present then we're going to use the 'update_mission' url, otherwise we'll use the url
         # to create a new mission
@@ -418,7 +466,7 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
             'title': _("Submit"),
             'hx-target': "#form_id_mission",
             'hx-disabled-elt': "this",
-            'hx-post': submit_url
+            'hx-post': submit_url,
         }
 
         btn_label = _("Save Updates")
@@ -426,16 +474,53 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
                                   css_class='btn btn-sm btn-primary mb-1',
                                   **btn_submit_attrs)
 
+        # this is a placeholder button to indicate if the descriptor has been approved.
+        # eventually it will be clickable and will send an automated e-mail to MEDS requesting descriptor approval
+        approval = _("Not approved")
+        approval_class = "btn btn-sm btn-danger"
+        approval_icon = '<span class="bi bi-x-square"></span>'
+        btn_descriptor_label = ""
+        placeholder = _("Optional, if known")
+        descriptor_args = {
+            'class': 'form-control form-control-sm',
+        }
+        descriptor_div_args = {'id': 'div_id_descriptor_container'}
+
+        if self.instance.pk:
+            if self.instance.descriptor:
+                approval = _("Approved")
+                approval_class = "btn btn-sm btn-success"
+                approval_icon = '<span class="bi bi-check-square"></span>'
+                btn_descriptor_label = ""
+            elif not self.instance.descriptor_approved:
+                descriptor_args["placeholder"] = self.instance.unapproved_descriptor if self.instance.unapproved_descriptor is not None else placeholder
+                descriptor_div_args['hx-get'] = reverse_lazy('core:update_mission_descriptor', args=[self.instance.pk])
+                descriptor_div_args['hx-trigger'] = 'mission_leg_updated from:body'
+
+        btn_descriptor_attrs = {
+            'title': _("Descriptor ") + approval,
+            'hx-confirm': _("This functionality isn't implemented yet."),
+            'hx-swap': "none",
+            'hx-post': ""
+        }
+        btn_descriptor_submit = StrictButton(f'{approval_icon}{btn_descriptor_label}',
+                                  css_class=approval_class,
+                                  **btn_descriptor_attrs)
+
         self.helper = FormHelper()
         self.helper.form_tag = False
 
         self.helper.layout = Layout(
             Div(
                 Row(
-                    Column(Field('name'), css_class='form-control-sm'),
-                    Column(Field('descriptor', placeholder=_("optional, if known")), css_class='form-control-sm'),
-                    Column(Field('platform'), css_class='form-select-sm'),
-                    Column(Field('program'), css_class='form-select-sm'),
+                    Column(Field('name', css_class='form-control-sm')),
+                    Column(FieldWithButton(
+                        'descriptor',
+                        btn_descriptor_submit,
+                        field_kwargs=descriptor_args
+                    ), **descriptor_div_args),
+                    Column(Field('platform', css_class='form-select-sm')),
+                    Column(Field('program', css_class='form-select-sm')),
                 ),
                 Row(
                     Column(organizations_container),
@@ -460,11 +545,26 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
             else:
                 mission.organizations.clear()
 
+            # when the user saves, we'll check the used Platform, Program and Organizations and if any of them are
+            # legacy we'll update them to be non-legacy since they're being used in an active mission now
+            if mission.platform and mission.platform.legacy:
+                mission.platform.legacy = False
+                mission.platform.save()
+
+            if mission.program and mission.program.legacy:
+                mission.program.legacy = False
+                mission.program.save()
+
+            for organization in mission.organizations.all():
+                if organization.legacy:
+                    organization.legacy = False
+                    organization.save()
+
         return mission
 
 
 def update_mission(request, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
@@ -497,6 +597,15 @@ def update_mission(request, **kwargs):
     soup = BeautifulSoup(crispy, 'html.parser')
     return HttpResponse(soup)
 
+def update_descriptor(request, mission_id):
+    mission = models.Missions.objects.get(pk=mission_id)
+    # this is where the code to send the e-mail to MEDS would go, but since that functionality isn't implemented yet
+    # we'll just return a message indicating that the functionality isn't implemented.
+    form = MissionForm(instance=mission)
+    html = render_crispy_form(form)
+    soup = BeautifulSoup(html, 'html.parser')
+    return HttpResponse(soup.find(id=f'div_id_descriptor_container'))
+
 # used to clear or populate a form
 def mission_leg_form(request, mission_id, **kwargs):
     if 'leg_id' in kwargs:
@@ -508,13 +617,15 @@ def mission_leg_form(request, mission_id, **kwargs):
         mission = models.Missions.objects.get(pk=mission_id)
         form = MissionLegForm(mission)
 
-    html = render_crispy_form(form)
+    context = {}
+    context.update(csrf(request))
+    html = render_crispy_form(form, context=context)
     return HttpResponse(html)
 
 
 #used to submit a new or updated leg
 def mission_leg_update(request, mission_id, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
@@ -534,7 +645,7 @@ def mission_leg_update(request, mission_id, **kwargs):
     if form.is_valid():
         try:
             leg = form.save()
-            form = MissionLegForm(mission, instance=leg)
+            form = MissionLegForm(mission)
             crispy = render_crispy_form(form)
             soup = BeautifulSoup(crispy, 'html.parser')
 
@@ -560,22 +671,25 @@ def mission_leg_list(request, mission_id):
         'mission': mission,
         'user': request.user
     }
+    context.update(csrf(request))
     html = render_to_string('core/partials/table_mission_legs.html', context=context)
     return HttpResponse(html)
 
 
 def mission_leg_delete(request, mission_id, leg_id):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     leg = models.Legs.objects.get(pk=leg_id)
     leg.delete()
 
-    return HttpResponse()
+    response = HttpResponse()
+    response['HX-Trigger'] = 'mission_leg_updated'
+    return response
 
 
 def mission_dataset_update(request, mission_id, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Review code in core.views.forms.form_mission_reference.update_mission for an example of how
@@ -621,7 +735,7 @@ def mission_dataset_list(request, mission_id):
 
 
 def mission_dataset_delete(request, mission_id, dataset_id):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     dataset = models.Datasets.objects.get(pk=dataset_id)
@@ -646,7 +760,7 @@ def mission_comment_form(request, mission_id, **kwargs):
 
 
 def mission_comment_update(request, mission_id, **kwargs):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     # Create a mutable copy of the POST data
@@ -694,7 +808,7 @@ def mission_comment_list(request, mission_id):
 
 
 def mission_comment_delete(request, mission_id, comment_id):
-    if response := utils.redirect_if_not_authenticated(request):
+    if response := redirect_if_not_authenticated(request):
         return response
 
     comment = models.MissionComments.objects.get(pk=comment_id)
@@ -729,6 +843,7 @@ urlpatterns = [
     path('mission/view/<int:mission_id>', UpdateMission.as_view(), name='update_mission_view'),
     path('mission/new', update_mission, name='new_mission'),
     path('mission/update/<int:mission_id>', update_mission, name='update_mission'),
+    path('mission/update/descriptor/<int:mission_id>', update_descriptor, name='update_mission_descriptor'),
 
     path('mission/add/<str:prefix>',
          partial(add_to_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_add_to_list'),

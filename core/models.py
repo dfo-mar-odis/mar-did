@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -196,6 +197,8 @@ class Missions(models.Model):
     descriptor = models.CharField(verbose_name=_("Descriptor"), max_length=20, blank=True, null=True,
                                   help_text=_("MEDS assigned description of the cruise e.g '18QL25002'"),
                                   db_column='meds_descriptor')
+    descriptor_approved = models.BooleanField(verbose_name=_("Descriptor Approved"), default=False, db_column='descriptor_approved',
+                                              help_text=_("Indicates if MEDS has approved the descriptor for this mission"))
     platform = models.ForeignKey(Platforms, verbose_name=_("Ship/Platform"), on_delete=models.PROTECT,
                                  related_name='cruises', db_column='platform_seq')
     program = models.ForeignKey(Programs, verbose_name=_("Program"), on_delete=models.PROTECT, related_name='missions',
@@ -209,6 +212,16 @@ class Missions(models.Model):
     class Meta:
         db_table = 'missions'
         ordering = ['name']
+
+    @property
+    def unapproved_descriptor(self) -> str | None:
+        year = self.start_date.year if self.start_date else None
+        ship_code = self.platform.ship_code if self.platform and self.platform.ship_code else None
+        post_fix = self.name[-3:] if len(self.name) >= 3 else None
+        if year and ship_code and post_fix:
+            return f"{ship_code}{year}{post_fix}"
+
+        return None
 
     @property
     def start_date(self):
@@ -233,6 +246,13 @@ class Missions(models.Model):
 
         completed = datasets.filter(status__name__iexact='complete').count()
         return int((completed / datasets.count()) * 100)
+
+    @property
+    def mission_path(self) -> Path:
+        year = str(self.start_date.year)
+        decade = f'{year[:3]}X'
+
+        return Path(decade, year, self.name.upper())
 
 
     def __str__(self):
@@ -264,9 +284,6 @@ class Legs(models.Model):
 
     regions = models.ManyToManyField('GeographicRegions', verbose_name=_("Geographic Regions"),
                                      through='MissionRegions')
-
-    # indicates if MEDS has approved the descriptor for this leg, which is required before a mission can be marked as complete
-    descriptor_approved = models.BooleanField(verbose_name=_("Descriptor Approved"), default=False, db_column='descriptor_approved')
 
     class Meta:
         db_table = 'legs'
@@ -330,7 +347,7 @@ class MissionRegions(models.Model):
 class DatasetLocations(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_location_seq')
 
-    data_type = models.ForeignKey('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
+    datatype = models.ForeignKey('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
                                 related_name='locations', db_column='dataset_seq')
 
     input_dir = models.CharField(verbose_name=_("Input Directory"),
@@ -343,17 +360,17 @@ class DatasetLocations(models.Model):
 
     class Meta:
         db_table = 'APPLICATION_CONFIGURATION_DATASET_LOCATIONS'
-        ordering = ['data_type']
+        ordering = ['datatype']
 
     def __str__(self):
-        return f'{self.data_type.name} - [Input: {self.input_dir}, Output: {self.output_dir}]'
+        return f'{self.datatype.name} - [Input: {self.input_dir}, Output: {self.output_dir}]'
 
 
 class Datasets(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_seq')
 
     mission = models.ForeignKey(Missions, on_delete=models.CASCADE, related_name="datasets", db_column='mission_seq')
-    data_type = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets",
+    datatype = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets",
                                   db_column='data_type_seq')
     legacy_file_location = models.CharField(max_length=255, blank=True, null=True,
                                             verbose_name=_("Legacy File location"),
@@ -363,13 +380,6 @@ class Datasets(models.Model):
                                related_name="datasets", db_column='dataset_status_seq')
 
     @property
-    def get_dataset_root_path(self):
-        year = str(self.mission.start_date.year)
-        decade = f'{year[:3]}X'
-
-        return os.path.join(decade, year, self.mission.name.upper())
-
-    @property
     def current_files(self):
         return self.files.filter(is_archived=False)
 
@@ -377,12 +387,16 @@ class Datasets(models.Model):
     def archived_files(self):
         return self.files.filter(is_archived=True)
 
+    @property
+    def get_dataset_root_path(self):
+        return Path(self.mission.mission_path, self.datatype.locations.first().output_dir)
+
     def __str__(self):
-        return f'{self.data_type} : {self.status}'
+        return f'{self.datatype} : {self.status}'
 
     class Meta:
         db_table = 'datasets'
-        ordering = ['mission', 'data_type']
+        ordering = ['mission', 'datatype']
 
 
 class DataFiles(models.Model):
@@ -395,6 +409,7 @@ class DataFiles(models.Model):
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')
     submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False, db_column='is_archived')
+    archived_date = models.DateTimeField(verbose_name=_("Archived Date"), blank=True, null=True, db_column='archived_date')
 
     def __str__(self):
         return self.file_name
@@ -403,6 +418,13 @@ class DataFiles(models.Model):
         db_table = 'files'
         ordering = ['file_name']
 
+    @property
+    def archived_file_name(self):
+        if self.is_archived:
+            timestamp = self.archived_date.strftime('%Y%m%d%H%M%S')
+            return f"{timestamp}_{self.file_name}"
+
+        return self.file_name
 
 class ProcessingStatus(models.Model):
     id = models.AutoField(primary_key=True, db_column='processing_seq')
@@ -434,6 +456,8 @@ class Comments(models.Model):
         abstract = True
         ordering = ['-comment_date']
 
+    def __str__(self):
+        return f"{self.author} - {self.comment}"
 
 class MissionComments(Comments):
     id = models.AutoField(primary_key=True, db_column='mission_comment_seq')

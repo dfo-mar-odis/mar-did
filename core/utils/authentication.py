@@ -42,6 +42,10 @@ def redirect_if_not_authenticated(request, next_page: str | None = None,
     if not next_page:
         next_page = request.get_full_path()
 
+    if request.user.is_superuser:
+        # Superusers are always authenticated and authorized, so we can skip the group check and redirection.
+        return None
+
     if not authenticated(request, groups):
         login_url = f"{reverse_lazy('login')}?next={next_page}"
         return HttpResponseRedirect(login_url)
@@ -49,7 +53,8 @@ def redirect_if_not_authenticated(request, next_page: str | None = None,
     return None
 
 
-def redirect_if_not_superuser(request, next_page, groups: list[str] = None) -> HttpResponse | None:
+def redirect_if_not_superuser(request, next_page: str | None = None,
+                                  groups: list[str] = None) -> HttpResponse | None:
     """
     Redirect the user to the login page if they are not authenticated.
     If they are authenticated but not a superuser, return a forbidden response.

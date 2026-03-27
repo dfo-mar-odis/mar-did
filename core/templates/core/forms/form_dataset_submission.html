@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="h4 mb-2"><a href="{% url 'core:update_mission_view' dataset.mission.pk %}" class="btn btn-dark me-2"><span class="bi bi-search"></span></a>{{ dataset.mission.name }} - {% if dataset.mission.descriptor %}{{ dataset.mission.descriptor }}{% else %}&lt; {% trans 'No Mission Descriptor Provided' %} &gt;{% endif %} - {{ dataset.data_type.name }} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-get="{% url 'core:update_dataset_status' dataset.pk %}" hx-trigger="load" hx-swap="outerHTML" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></div>
+    <div class="h4 mb-2"><a href="{% url 'core:update_mission_view' dataset.mission.pk %}" class="btn btn-dark me-2"><span class="bi bi-search"></span></a>{{ dataset.mission.name }} - {% if dataset.mission.descriptor %}{{ dataset.mission.descriptor }}{% else %}&lt; {% trans 'No Mission Descriptor Provided' %} &gt;{% endif %} - {{ dataset.datatype.name }} - {% trans 'Dataset Status' %} : <span id="span_id_submission_status" hx-get="{% url 'core:update_dataset_status' dataset.pk %}" hx-trigger="load" hx-swap="outerHTML" class="btn btn-sm {{dataset.status.get_button_colour}} text-black">{{ dataset.status.name }}</span></div>
 
     {% if user.is_authenticated %}
     <div class="card card-body mb-2 border border-dark bg-light">
@@ -11,7 +11,7 @@
     </div>
     {% endif %}
 
-    {% if status_form %}
+    {% if user.is_authenticated and status_form %}
         <form id="form_id_dataset_status">
         {% crispy status_form %}
         </form>
@@ -19,21 +19,41 @@
 
     <ul class="nav nav-tabs" id="ul_id_dataset_tabs" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="dataset_tabs_files" data-bs-toggle="tab" data-bs-target="#dataset_files" type="button" role="tab" aria-controls="dataset_files" aria-selected="true">
-                {% trans 'Dataset Files' %}
+            <button class="nav-link active" id="dataset_tabs_files" data-bs-toggle="tab" data-bs-target="#div_id_dataset_tabs_files" type="button" role="tab" aria-controls="div_id_dataset_tabs_files" aria-selected="true">
+            <div class="d-flex align-items-center">
+                <span>{% trans 'Dataset Files' %}</span>
+                <div id="htmx_indicator_dataset_files_list" class="htmx-indicator d-flex align-items-center ms-2">
+                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="dataset_tabs_comments" data-bs-toggle="tab" data-bs-target="#dataset_comments" type="button" role="tab" aria-controls="dataset_comments">
-                {% trans 'Comments' %}
+            <button class="nav-link" id="dataset_tabs_comments" data-bs-toggle="tab" data-bs-target="#div_id_dataset_tabs_comments" type="button" role="tab" aria-controls="div_id_dataset_tabs_comments">
+                {% trans 'Dataset Comments' %}
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="dataset_tabs_archived" data-bs-toggle="tab" data-bs-target="#div_id_dataset_tabs_archived" type="button" role="tab" aria-controls="div_id_dataset_tabs_archived">
+                <div class="d-flex align-items-center">
+                {% trans 'Archived Files' %}
+                <div id="htmx_indicator_archived_dataset_files_list" class="htmx-indicator d-flex align-items-center ms-2">
+                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
             </button>
         </li>
     </ul>
     <div class="tab-content card card-body mb-2 border border-dark bg-light" id="dataset_tabs">
-        <div class="tab-pane fade show active" id="dataset_files" role="tabpanel" aria-labelledby="dataset_files">
+        <div class="tab-pane fade show active" id="div_id_dataset_tabs_files" role="tabpanel" aria-labelledby="div_id_dataset_tabs_files">
             {% include 'core/partials/table_dataset_files.html' with dataset=dataset %}
         </div>
-        <div class="tab-pane fade" id="dataset_comments" role="tabpanel" aria-labelledby="dataset_comments">
+
+        <div class="tab-pane fade" id="div_id_dataset_tabs_comments" role="tabpanel" aria-labelledby="div_id_dataset_tabs_comments">
             {% if user.is_authenticated %}
             <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_dataset_comments">
                 {% crispy dataset_comments_form %}
@@ -42,6 +62,10 @@
             <div class="card card-body mb-2 border border-dark bg-light">
             {% include 'core/partials/table_dataset_comments.html' with mission=object %}
             </div>
+        </div>
+
+        <div class="tab-pane fade" id="div_id_dataset_tabs_archived" role="tabpanel" aria-labelledby="div_id_dataset_tabs_archived">
+            {% include 'core/partials/table_dataset_files.html' with dataset=dataset archived="true" %}
         </div>
     </div>
 {% endblock %}
