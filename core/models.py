@@ -378,6 +378,10 @@ class Datasets(models.Model):
     def archived_files(self):
         return self.files.filter(is_archived=True)
 
+    @property
+    def get_dataset_root_path(self):
+        return Path(self.mission.mission_path, self.datatype.locations.first().output_dir)
+
     def __str__(self):
         return f'{self.datatype} : {self.status}'
 
@@ -435,6 +439,8 @@ class Comments(models.Model):
         abstract = True
         ordering = ['-comment_date']
 
+    def __str__(self):
+        return f"{self.author.username} - {self.comment_date.strftime('%Y-%m-%d %H:%M:%S')} - {self.comment}"
 
 class MissionComments(Comments):
     id = models.AutoField(primary_key=True, db_column='mission_comment_seq')

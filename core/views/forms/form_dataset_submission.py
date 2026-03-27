@@ -19,13 +19,27 @@ from django.views.generic.base import TemplateView
 
 from core import models
 from core.components import get_alert
-from core.utils.authentication import redirect_if_not_authenticated
+from core.utils.authentication import redirect_if_not_authenticated, redirect_if_not_superuser
 
 import logging
 
-from core.utils.file_upload import save_files, validate_files
+from core.utils.file_upload import save_files, validate_files, archive_files
 
 logger = logging.getLogger('mardid')
+
+
+def get_output_path(dataset_id) -> Path:
+    dataset = models.Datasets.objects.get(pk=dataset_id)
+    datatype_output = dataset.datatype.locations.first().output_dir
+    output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
+    return output_path
+
+
+def get_archive_path(dataset_id) -> Path:
+    dataset = models.Datasets.objects.get(pk=dataset_id)
+    datatype_output = dataset.datatype.locations.first().output_dir
+    archive_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, "archive", datatype_output)
+    return archive_path
 
 
 class DatasetSubmissionView(TemplateView):
@@ -184,12 +198,10 @@ def submit_files(request, dataset_id):
         return response
 
     if request.method == 'POST':
-        post_vars = request.POST.copy()
         files = request.FILES.getlist('files')
 
         dataset = models.Datasets.objects.get(pk=dataset_id)
-        datatype_output = dataset.datatype.locations.first().output_dir
-        output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
+        output_path = get_output_path(dataset_id)
 
         existing_files = validate_files(request.user, dataset, files)
         if existing_files:
@@ -213,8 +225,7 @@ def submit_files(request, dataset_id):
 
     return HttpResponse()
 
-
-def archive_files(request, dataset_id):
+def submit_archive_files(request, dataset_id):
     if response:=redirect_if_not_authenticated(request):
         return response
 
@@ -225,31 +236,80 @@ def archive_files(request, dataset_id):
         form = DatasetSubmissionArchiveForm(dataset_id=dataset_id, data=post_vars)
 
         if form.is_valid():
+            message = form.cleaned_data['archive_message']
+
             # we'll archive existing files here and then save the new files
             dataset = models.Datasets.objects.get(pk=dataset_id)
-            datatype_output = dataset.datatype.locations.first().output_dir
-            output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
+            output_path = get_output_path(dataset_id)
+            archive_path = get_archive_path(dataset_id)
 
             existing_files = validate_files(request.user, dataset, files)
 
-            response = HttpResponse()
-            response['HX-Trigger'] = "dataset_files_updated"
-            return response
+            try:
+                archive_files(user=request.user, dataset=dataset, file_names=existing_files,
+                              output_path=output_path, archive_path=archive_path, message=message)
+
+                save_files(request.user, dataset, files, output_path)
+
+                response = HttpResponse()
+                response['HX-Trigger'] = "dataset_files_updated"
+                return response
+            except Exception as ex:
+                logger.error("Failed to archive files and save new files.")
+                logger.exception(ex)
+                form.add_error(None, _("An unexpected error occurred while archiving and saving files."))
+                form.add_error(None, str(ex))
 
         return HttpResponse(render_crispy_form(form))
 
     return HttpResponse()
 
-def list_files(request, dataset_id):
+def list_files(request, dataset_id, **kwargs):
     dataset = models.Datasets.objects.get(pk=dataset_id)
-    files = dataset.files.filter(is_archived=False)
+    context = {'dataset': dataset}
+    if 'archived' in kwargs:
+        files = dataset.files.filter(is_archived=True)
+        context['archived'] = "true"
+    else:
+        files = dataset.files.filter(is_archived=False)
 
-    file_list_html = render_to_string('core/partials/table_dataset_files.html', context={'dataset': dataset, 'files': files}, request=request)
+    context['files'] = files
+
+    file_list_html = render_to_string('core/partials/table_dataset_files.html', context=context, request=request)
     soup = BeautifulSoup(file_list_html, 'html.parser')
     table = soup.find('table')
     table.attrs['hx-trigger'] = "dataset_files_updated from:body"
 
     return HttpResponse(soup)
+
+
+def delete_files(request, dataset_id, **kwargs):
+    if response:=redirect_if_not_superuser(request):
+        return response
+
+    dataset = models.Datasets.objects.get(pk=dataset_id)
+
+    if 'archived' in kwargs:
+        file_path = get_archive_path(dataset_id)
+        files = dataset.files.filter(is_archived=True)
+    else:
+        file_path = get_output_path(dataset_id)
+        files = dataset.files.filter(is_archived=False)
+
+    for file in files:
+        abs_path = Path(file_path, file.file_name)
+        if abs_path.exists():
+            abs_path.unlink()
+            logger.info(f"File deleted: {file_path}")
+        else:
+            logger.warning(f"File not found for deletion: {file_path}")
+
+        file.delete()
+        logger.info(f"File record deleted: {file.file_name}")
+
+    response = HttpResponse()
+    response['HX-Trigger'] = "dataset_files_updated"
+    return response
 
 
 def clear_submission_form(request, dataset_id):
@@ -376,8 +436,11 @@ urlpatterns = [
          name='update_dataset_status'),
 
     path('dataset/submission/files/add/<int:dataset_id>', submit_files, name='submit_dataset_files'),
-    path('dataset/submission/files/archive/<int:dataset_id>', archive_files, name='archive_dataset_files'),
+    path('dataset/submission/files/archive/<int:dataset_id>', submit_archive_files, name='archive_dataset_files'),
     path('dataset/submission/files/list/<int:dataset_id>', list_files, name='dataset_files_list'),
+    path('dataset/submission/files/list/<int:dataset_id>/<str:archived>', list_files, name='dataset_files_list'),
+    path('dataset/submission/files/delete/<int:dataset_id>', delete_files, name='delete_dataset_files'),
+    path('dataset/submission/files/delete/<int:dataset_id>/<str:archived>', delete_files, name='delete_dataset_files'),
 
     path('dataset/comment/add/<int:dataset_id>', dataset_comment_update, name='add_dataset_comment'),
     path('dataset/comment/add/<int:dataset_id>/<int:comment_id>', dataset_comment_update,

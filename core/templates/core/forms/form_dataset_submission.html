@@ -20,17 +20,31 @@
     <ul class="nav nav-tabs" id="ul_id_dataset_tabs" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="dataset_tabs_files" data-bs-toggle="tab" data-bs-target="#div_id_dataset_tabs_files" type="button" role="tab" aria-controls="div_id_dataset_tabs_files" aria-selected="true">
-                {% trans 'Dataset Files' %}
+            <div class="d-flex align-items-center">
+                <span>{% trans 'Dataset Files' %}</span>
+                <div id="htmx_indicator_dataset_files_list" class="htmx-indicator d-flex align-items-center ms-2">
+                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
             </button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="dataset_tabs_comments" data-bs-toggle="tab" data-bs-target="#div_id_dataset_tabs_comments" type="button" role="tab" aria-controls="div_id_dataset_tabs_comments">
-                {% trans 'Comments' %}
+                {% trans 'Dataset Comments' %}
             </button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="dataset_tabs_archived" data-bs-toggle="tab" data-bs-target="#div_id_dataset_tabs_archived" type="button" role="tab" aria-controls="div_id_dataset_tabs_archived">
+                <div class="d-flex align-items-center">
                 {% trans 'Archived Files' %}
+                <div id="htmx_indicator_archived_dataset_files_list" class="htmx-indicator d-flex align-items-center ms-2">
+                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
             </button>
         </li>
     </ul>
@@ -51,7 +65,7 @@
         </div>
 
         <div class="tab-pane fade" id="div_id_dataset_tabs_archived" role="tabpanel" aria-labelledby="div_id_dataset_tabs_archived">
-            {# Todo: create an archived files table that shows a list of files, when they were archived and the comment #}
+            {% include 'core/partials/table_dataset_files.html' with dataset=dataset archived="true" %}
         </div>
     </div>
 {% endblock %}
