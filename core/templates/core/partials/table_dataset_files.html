@@ -1,57 +1,67 @@
 {% load i18n %}
 <div class="overflow-auto" style="max-height: 300px;">
+{% if archived == "true" %}
+<table class="table table-sm table-striped" hx-get="{% url 'core:dataset_files_list' dataset.pk "true" %}"
+       hx-trigger="load, dataset_files_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_archived_dataset_files_list">
+{% else %}
 <table class="table table-sm table-striped" hx-get="{% url 'core:dataset_files_list' dataset.pk %}"
        hx-trigger="load, dataset_files_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_dataset_files_list">
+{% endif %}
     <thead class="sticky-top bg-white">
         <tr>
-        <th class="" width="2%">
-            <div id="htmx_indicator_dataset_files_list" class="htmx-indicator d-flex justify-content-center">
-                <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </th>
+        <td class="" style="2%; white-space: nowrap;">
+        {% if request.user.is_superuser %}
+            <button class="btn btn-sm btn-danger" hx-targert="nearest tr"
+                    hx-confirm="{% trans 'Are you sure you want to delete these files?' %}"
+                    {% if archived %}
+                    hx-post="{% url 'core:delete_dataset_files' dataset.pk "ture" %}"
+                    {% else %}
+                    hx-post="{% url 'core:delete_dataset_files' dataset.pk %}"
+                    {% endif %}
+                    hx-swap="None"
+                    title="{% trans "Delete Dataset Files" %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                <span class="bi bi-x-square"></span>
+            </button>
+        {% endif %}
+        </td>
         <th>{% trans 'File Name' %}</th>
         <th>{% trans 'File Location' %}</th>
         <th>{% trans 'Submitted By' %}</th>
         <th>{% trans 'Submitted Date' %}</th>
-        {% if archive_table %}
-        <td></td>
+        {% if archived %}
+        <th>{% trans 'Archived Date' %}</th>
         {% endif %}
     </tr>
     </thead>
     <tbody>
     {% for file in files %}
     <tr>
-        {% if not file.is_archived %}
+        {% if request.user.is_authenticated and not archived %}
         <th style="width: 2%; white-space: nowrap;">
             <button class="btn btn-sm btn-warning" hx-target="#div_id_data_submission_messages"
-                    hx-get="{% url 'core:get_archive_form' file.id %}" title="{% trans 'Archive File' %}"><span
+                    hx-get="" title="{% trans 'Archive File' %}"><span
                     class="bi bi-safe"> {% trans 'Archive' %}</span></button>
         </th>
+        {% else %}
+            <td></td>
         {% endif %}
         <td>{{ file.file_name }}</td>
         <td>{{ file.dataset.get_dataset_root_path }}</td>
         <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
         <td>{{ file.submitted_date }}</td>
-        {% if file.is_archived %}
-        <td></td>
+        {% if archived %}
+        <th>{{ file.archived_date }}</th>
         {% endif %}
 
     </tr>
-    {% for issue in file.issues.all %}
-    <tr class="table-success">
-        <th>{% trans 'Issue' %}</th>
-        <td colspan="4">{{ issue.issue }}</td>
-    </tr>
-    <tr class="table-success">
-        <th></th>
-        <th></th>
-        <td>{{ issue.submitted_by }}</td>
-        <td>{{ issue.submitted_date }}</td>
+    {% if file.is_archived %}
+        {% for comment in file.comments.all %}
+        <tr class="table-success">
         <td></td>
-    </tr>
-    {% endfor %}
+        <td colspan="5">{{ comment }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
     {% endfor %}
     </tbody>
 </table>

@@ -16,7 +16,7 @@
         <tr id="tr_id_dataset_status_{{dataset.id}}">
             <td>{{dataset.pk}}</td>
             <td>{{ dataset.cruise }}</td>
-            <td>{{ dataset.data_type.name }}</td>
+            <td>{{ dataset.datatype.name }}</td>
             <td>
                 <button class="btn btn-sm {{dataset.status.get_button_colour}}" title="{% trans dataset.status.description %}">{% trans dataset.status.name %}</button>
             </td>

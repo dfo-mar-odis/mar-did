@@ -17,7 +17,7 @@ from crispy_forms.layout import Layout, Row, Column, Field
 
 from urllib.parse import urlencode, parse_qs
 
-from core.utils import redirect_if_not_superuser
+from core.utils.authentication import redirect_if_not_superuser
 from core.views.forms import form_mission
 from core import models
 
