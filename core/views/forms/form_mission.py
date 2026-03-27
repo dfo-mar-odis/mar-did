@@ -4,15 +4,14 @@ from functools import partial
 
 from django import forms
 from django.http import Http404
-from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
+from django.template.context_processors import csrf
 from django.views.generic.base import TemplateView
 from django.urls import path, reverse_lazy, reverse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Row, Column, Field, Hidden
@@ -26,7 +25,7 @@ import logging
 from core.utils.authentication import redirect_if_not_authenticated
 from core.views.forms import form_multiselect
 from core.views.forms.form_multiselect import remove_from_list, add_to_list
-from custom_widgets.widgets import TooltipSelect
+from custom_widgets.widgets import TooltipSelect, FieldWithButton
 
 logger = logging.getLogger('mardid')
 
@@ -238,6 +237,22 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             raise forms.ValidationError(_("Leg dates cannot overlap with existing legs"))
         return cleaned_data
 
+    def init_regions_field(self):
+        all_regions = list(models.GeographicRegions.objects.all())
+
+        non_legacy = [o for o in all_regions if not o.legacy]
+        legacy = [o for o in all_regions if o.legacy]
+        reg_choices = (
+                [(None, '----------')] +
+                [(o.pk, f'{o.name} - {o.description if o.description else "No Description"}') for o in non_legacy] +
+                [(None, '----------')] +
+                [(o.pk, f'{o.name} - {o.description if o.description else "No Description"}') for o in legacy]
+        )
+
+        self.fields['regions_select'].widget = TooltipSelect(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=reg_choices,
+        )
 
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
@@ -255,6 +270,7 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
         super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
 
         regions_container = self.init_lookup('regions')
+        self.init_regions_field()
 
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -263,12 +279,12 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             Div(
                 Hidden('mission', mission_id),
                 Row(
-                    Column(Field('start_date'), css_class='form-control-sm'),
-                    Column(Field('end_date'), css_class='form-control-sm'),
-                    Column(Field('description'), css_class='form-control-sm'),
+                    Column(Field('start_date', css_class='form-control-sm')),
+                    Column(Field('end_date', css_class='form-control-sm')),
+                    Column(Field('description', css_class='form-control-sm')),
                 ),
                 Row(
-                    Column(Field('chief_scientist'), css_class='form-select-sm'),
+                    Column(Field('chief_scientist', css_class='form-select-sm')),
                 ),
                 Row(
                     Column(regions_container),
@@ -332,6 +348,11 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
                     position=position,
                     defaults={'participant': chief_scientist}
                 )
+
+                for region in leg.regions.all():
+                    if region.legacy:
+                        region.legacy = False
+                        region.save()
 
         return leg
 
@@ -445,13 +466,46 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
             'title': _("Submit"),
             'hx-target': "#form_id_mission",
             'hx-disabled-elt': "this",
-            'hx-post': submit_url
+            'hx-post': submit_url,
         }
 
         btn_label = _("Save Updates")
         btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
                                   css_class='btn btn-sm btn-primary mb-1',
                                   **btn_submit_attrs)
+
+        # this is a placeholder button to indicate if the descriptor has been approved.
+        # eventually it will be clickable and will send an automated e-mail to MEDS requesting descriptor approval
+        approval = _("Not approved")
+        approval_class = "btn btn-sm btn-danger"
+        approval_icon = '<span class="bi bi-x-square"></span>'
+        btn_descriptor_label = ""
+        placeholder = _("Optional, if known")
+        descriptor_args = {
+            'class': 'form-control form-control-sm',
+        }
+        descriptor_div_args = {'id': 'div_id_descriptor_container'}
+
+        if self.instance.pk:
+            if self.instance.descriptor:
+                approval = _("Approved")
+                approval_class = "btn btn-sm btn-success"
+                approval_icon = '<span class="bi bi-check-square"></span>'
+                btn_descriptor_label = ""
+            elif not self.instance.descriptor_approved:
+                descriptor_args["placeholder"] = self.instance.unapproved_descriptor if self.instance.unapproved_descriptor is not None else placeholder
+                descriptor_div_args['hx-get'] = reverse_lazy('core:update_mission_descriptor', args=[self.instance.pk])
+                descriptor_div_args['hx-trigger'] = 'mission_leg_updated from:body'
+
+        btn_descriptor_attrs = {
+            'title': _("Descriptor ") + approval,
+            'hx-confirm': _("This functionality isn't implemented yet."),
+            'hx-swap': "none",
+            'hx-post': ""
+        }
+        btn_descriptor_submit = StrictButton(f'{approval_icon}{btn_descriptor_label}',
+                                  css_class=approval_class,
+                                  **btn_descriptor_attrs)
 
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -460,7 +514,11 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
             Div(
                 Row(
                     Column(Field('name', css_class='form-control-sm')),
-                    Column(Field('descriptor', placeholder=_("optional, if known"), css_class='form-control-sm')),
+                    Column(FieldWithButton(
+                        'descriptor',
+                        btn_descriptor_submit,
+                        field_kwargs=descriptor_args
+                    ), **descriptor_div_args),
                     Column(Field('platform', css_class='form-select-sm')),
                     Column(Field('program', css_class='form-select-sm')),
                 ),
@@ -539,6 +597,15 @@ def update_mission(request, **kwargs):
     soup = BeautifulSoup(crispy, 'html.parser')
     return HttpResponse(soup)
 
+def update_descriptor(request, mission_id):
+    mission = models.Missions.objects.get(pk=mission_id)
+    # this is where the code to send the e-mail to MEDS would go, but since that functionality isn't implemented yet
+    # we'll just return a message indicating that the functionality isn't implemented.
+    form = MissionForm(instance=mission)
+    html = render_crispy_form(form)
+    soup = BeautifulSoup(html, 'html.parser')
+    return HttpResponse(soup.find(id=f'div_id_descriptor_container'))
+
 # used to clear or populate a form
 def mission_leg_form(request, mission_id, **kwargs):
     if 'leg_id' in kwargs:
@@ -550,7 +617,9 @@ def mission_leg_form(request, mission_id, **kwargs):
         mission = models.Missions.objects.get(pk=mission_id)
         form = MissionLegForm(mission)
 
-    html = render_crispy_form(form)
+    context = {}
+    context.update(csrf(request))
+    html = render_crispy_form(form, context=context)
     return HttpResponse(html)
 
 
@@ -576,7 +645,7 @@ def mission_leg_update(request, mission_id, **kwargs):
     if form.is_valid():
         try:
             leg = form.save()
-            form = MissionLegForm(mission, instance=leg)
+            form = MissionLegForm(mission)
             crispy = render_crispy_form(form)
             soup = BeautifulSoup(crispy, 'html.parser')
 
@@ -602,6 +671,7 @@ def mission_leg_list(request, mission_id):
         'mission': mission,
         'user': request.user
     }
+    context.update(csrf(request))
     html = render_to_string('core/partials/table_mission_legs.html', context=context)
     return HttpResponse(html)
 
@@ -613,7 +683,9 @@ def mission_leg_delete(request, mission_id, leg_id):
     leg = models.Legs.objects.get(pk=leg_id)
     leg.delete()
 
-    return HttpResponse()
+    response = HttpResponse()
+    response['HX-Trigger'] = 'mission_leg_updated'
+    return response
 
 
 def mission_dataset_update(request, mission_id, **kwargs):
@@ -771,6 +843,7 @@ urlpatterns = [
     path('mission/view/<int:mission_id>', UpdateMission.as_view(), name='update_mission_view'),
     path('mission/new', update_mission, name='new_mission'),
     path('mission/update/<int:mission_id>', update_mission, name='update_mission'),
+    path('mission/update/descriptor/<int:mission_id>', update_descriptor, name='update_mission_descriptor'),
 
     path('mission/add/<str:prefix>',
          partial(add_to_list, multiselect_context_dict=MULTISELECT_CONTEXT_REGISTER), name='mission_add_to_list'),

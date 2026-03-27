@@ -214,6 +214,16 @@ class Missions(models.Model):
         ordering = ['name']
 
     @property
+    def unapproved_descriptor(self) -> str | None:
+        year = self.start_date.year if self.start_date else None
+        ship_code = self.platform.ship_code if self.platform and self.platform.ship_code else None
+        post_fix = self.name[-3:] if len(self.name) >= 3 else None
+        if year and ship_code and post_fix:
+            return f"{ship_code}{year}{post_fix}"
+
+        return None
+
+    @property
     def start_date(self):
         first_leg = self.legs.order_by('start_date').first()
         return first_leg.start_date if first_leg else None
@@ -274,9 +284,6 @@ class Legs(models.Model):
 
     regions = models.ManyToManyField('GeographicRegions', verbose_name=_("Geographic Regions"),
                                      through='MissionRegions')
-
-    # indicates if MEDS has approved the descriptor for this leg, which is required before a mission can be marked as complete
-    descriptor_approved = models.BooleanField(verbose_name=_("Descriptor Approved"), default=False, db_column='descriptor_approved')
 
     class Meta:
         db_table = 'legs'
