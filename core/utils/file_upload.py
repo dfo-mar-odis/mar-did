@@ -1,7 +1,7 @@
 import os
 import shutil
 from pathlib import Path
-from datetime import datetime
+from django.utils import timezone
 
 from django.contrib.auth.models import User
 
@@ -70,13 +70,7 @@ def archive_files(user: User, dataset: models.Datasets, file_names: list[str], o
             continue
 
         # Prepend timestamp to the file name
-        timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-        archived_file_name = f"{timestamp}_{file_name}"
-        archived_file_path = os.path.join(archive_path, archived_file_name)
-
-        # Move the file to the archive directory
-        shutil.move(original_file_path, archived_file_path)
-        logger.info(f"File archived: {archived_file_path}")
+        archive_date = timezone.now()
 
         # Update the dataset file record, there should only ever be one unarchived file.
         # if there's more this will throw a multiple objects returned error, which is what we want because it means
@@ -84,7 +78,15 @@ def archive_files(user: User, dataset: models.Datasets, file_names: list[str], o
         dataset_file = dataset.files.get(file_name=file_name, is_archived=False)
         if dataset_file:
             dataset_file.is_archived = True
+            dataset_file.archived_date = archive_date
             dataset_file.save()
             models.DataFileComments.objects.create(datafile=dataset_file, comment=message, author=user)
 
             logger.info(f"File record updated: {file_name} marked as archived.")
+
+        archived_file_path = os.path.join(archive_path, dataset_file.archived_file_name)
+
+        # Move the file to the archive directory
+        shutil.move(original_file_path, archived_file_path)
+        logger.info(f"File archived: {archived_file_path}")
+

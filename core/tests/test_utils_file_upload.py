@@ -13,7 +13,6 @@ from core.tests.core_factory_floor import MardidTestCase
 
 from core.utils import file_upload
 
-
 # When running unit tests we want to use a separate media output directory to avoid
 # accidentally deleting or overwriting real files.
 @override_settings(MEDIA_OUT='media/OUT')
@@ -138,6 +137,11 @@ class TestFileUpload(MardidTestCase):
                                       message="Archiving for test")
             archived_file = dataset.files.filter(is_archived=True)
             assert archived_file.exists(), "Expected file to be archived."
+
+            #when archived, archived files should have their archived_date set to the current date and time
+            archived_file = archived_file.first()
+
+            assert archived_file.archived_date is not None, "Expected archived_date to be set for archived file."
 
             file_upload.save_files(user=self.user, dataset=dataset, files=new_mock_files, output_path=output_path)
         except Exception as ex:
