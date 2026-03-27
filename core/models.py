@@ -197,6 +197,8 @@ class Missions(models.Model):
     descriptor = models.CharField(verbose_name=_("Descriptor"), max_length=20, blank=True, null=True,
                                   help_text=_("MEDS assigned description of the cruise e.g '18QL25002'"),
                                   db_column='meds_descriptor')
+    descriptor_approved = models.BooleanField(verbose_name=_("Descriptor Approved"), default=False, db_column='descriptor_approved',
+                                              help_text=_("Indicates if MEDS has approved the descriptor for this mission"))
     platform = models.ForeignKey(Platforms, verbose_name=_("Ship/Platform"), on_delete=models.PROTECT,
                                  related_name='cruises', db_column='platform_seq')
     program = models.ForeignKey(Programs, verbose_name=_("Program"), on_delete=models.PROTECT, related_name='missions',
