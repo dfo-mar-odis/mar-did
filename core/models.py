@@ -193,7 +193,7 @@ class Status(models.Model):
 
 class Missions(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=20,
-                            help_text=_("The name of the cruise e.g 'CAR2025002'"), db_column='name')
+                            help_text=_("The name of the cruise e.g 'CAR2025002'"), db_column='name', unique=True)
     descriptor = models.CharField(verbose_name=_("Descriptor"), max_length=20, blank=True, null=True,
                                   help_text=_("MEDS assigned description of the cruise e.g '18QL25002'"),
                                   db_column='meds_descriptor')
