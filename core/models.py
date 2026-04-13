@@ -287,7 +287,7 @@ class Legs(models.Model):
 
     class Meta:
         db_table = 'legs'
-        ordering = ['start_date']
+        ordering = ['start_date', 'end_date']
 
     @property
     def chief_scientist(self):

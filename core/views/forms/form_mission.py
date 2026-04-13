@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from functools import partial
 
 from django import forms
+from django.forms.widgets import Select
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
@@ -254,6 +255,22 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
             choices=reg_choices,
         )
 
+    def init_chief_scientist_field(self):
+        all_chief_scientists = list(models.Participants.objects.all())
+
+        non_legacy = [o for o in all_chief_scientists if not o.legacy]
+        legacy = [o for o in all_chief_scientists if o.legacy]
+        chief_scientist_choices = (
+                [(None, '----------')] +
+                [(p.pk, p) for p in non_legacy] +
+                [(None, '----------')] +
+                [(p.pk, p) for p in legacy]
+        )
+        self.fields['chief_scientist'].widget = Select(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=chief_scientist_choices,
+        )
+
     # if mission is none this will return a form with no submit buttons. It's only intended to get updated UI elements
     def __init__(self, mission: models.Missions | None = None, *args, **kwargs):
         self.mission = mission
@@ -271,6 +288,7 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
 
         regions_container = self.init_lookup('regions')
         self.init_regions_field()
+        self.init_chief_scientist_field()
 
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -349,10 +367,14 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
                     defaults={'participant': chief_scientist}
                 )
 
-                for region in leg.regions.all():
+                for region in leg.regions.filter(legacy=True):
                     if region.legacy:
                         region.legacy = False
                         region.save()
+
+                if chief_scientist.legacy:
+                    chief_scientist.legacy = False
+                    chief_scientist.save()
 
         return leg
 
