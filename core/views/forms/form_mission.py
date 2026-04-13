@@ -261,7 +261,7 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
         initial = kwargs.pop('initial') if 'initial' in kwargs else {}
         if 'instance' in kwargs:
             leg = kwargs['instance']
-            chief_scientist = leg.leg_participants.filter(position__name="Chief Scientist")
+            chief_scientist = leg.leg_participants.filter(position__name__iexact="Chief Scientist")
             if chief_scientist.exists():
                 chief_scientist = chief_scientist.first()
                 initial = kwargs.pop('initial') if 'initial' in kwargs else {}
