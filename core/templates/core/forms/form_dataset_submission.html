@@ -50,7 +50,37 @@
     </ul>
     <div class="tab-content card card-body mb-2 border border-dark bg-light" id="dataset_tabs">
         <div class="tab-pane fade show active" id="div_id_dataset_tabs_files" role="tabpanel" aria-labelledby="div_id_dataset_tabs_files">
-            {% include 'core/partials/table_dataset_files.html' with dataset=dataset %}
+            <form id="dataset_files_form" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                {% if request.user.is_authenticated %}
+                <div id="div_id_dataset_file_actions">
+                    <button type="button" class="btn btn-sm btn-warning"
+                            name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
+                            hx-target="#div_id_dataset_tabs_message"
+                            hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
+                            hx-include="#dataset_files_form"
+                            hx-indicator=".htmx-indicator"
+                            hx-prompt="{% trans "Reason for archival" %}"
+                    ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>
+                    {% if request.user.is_superuser %}
+                    <button type="button" class="btn btn-sm btn-danger"
+                            name="dataset_files_delete" title="{% trans "Remove Files from Database Tracking" %}"
+                            hx-target="#div_id_dataset_tabs_message"
+                            hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
+                            hx-include="#dataset_files_form"
+                            hx-indicator=".htmx-indicator"
+                            hx-confirm="{% trans "Are you sure you want to untrack these files" %}"
+                    ><span class="bi bi-dash-square me-1"></span>{% trans "Untrack Selected" %}</button>
+                    {% endif %}
+                {% endif %}
+{#                    <button type="button" class="btn btn-sm btn-danger"><span class="bi bi-dash-square"></span></button>#}
+                </div>
+                <div class="mt-2" id="div_id_dataset_tabs_message">
+
+                </div>
+                <div class="overflow-auto" style="max-height: 300px;">
+                {% include 'core/partials/table_dataset_files.html' with dataset=dataset %}
+                </div>
+            </form>
         </div>
 
         <div class="tab-pane fade" id="div_id_dataset_tabs_comments" role="tabpanel" aria-labelledby="div_id_dataset_tabs_comments">
@@ -65,7 +95,9 @@
         </div>
 
         <div class="tab-pane fade" id="div_id_dataset_tabs_archived" role="tabpanel" aria-labelledby="div_id_dataset_tabs_archived">
+            <div class="overflow-auto" style="max-height: 300px;">
             {% include 'core/partials/table_dataset_files.html' with dataset=dataset archived="true" %}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 import datetime
+from pathlib import Path
 
 import factory
 from django.contrib.auth.models import User
@@ -124,4 +125,5 @@ class DatasetLocationsFactory(factory.django.DjangoModelFactory):
     datatype = factory.LazyFunction(
         lambda: models.DataTypes.objects.order_by('?').first()
     )
-    output_dir = 'test_output'
+    output_dir = lambda o: str(Path('test_output', o.datatype.name))
+    input_dir = lambda o: str(Path('test_output', o.datatype.name))
