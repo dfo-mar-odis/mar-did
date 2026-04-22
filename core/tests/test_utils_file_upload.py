@@ -11,12 +11,12 @@ from core import models
 from core.tests import core_factory_floor
 from core.tests.core_factory_floor import MardidTestCase
 
-from core.utils import file_upload
+from core.utils import file_handler
 
 # When running unit tests we want to use a separate media output directory to avoid
 # accidentally deleting or overwriting real files.
 @override_settings(MEDIA_OUT='media/OUT')
-@tag("file_upload")
+@tag("file_handler")
 class TestFileUpload(MardidTestCase):
 
     def setUp(self):
@@ -28,7 +28,7 @@ class TestFileUpload(MardidTestCase):
 
     def test_authentication_fails(self):
         try:
-            file_upload.save_files(user=None, dataset=None, files=[], output_path="")
+            file_handler.save_files(user=None, dataset_id=-1, files=[])
         except PermissionError as ex:
             assert str(ex) == "Only authenticated users can upload files."
         else:
@@ -36,24 +36,25 @@ class TestFileUpload(MardidTestCase):
 
     def test_returns_without_files(self):
         try:
-            file_upload.save_files(user=self.user, dataset=None, files=[], output_path="")
+            file_handler.save_files(user=self.user, dataset_id=-1, files=[])
         except Exception as ex:
             assert False, f"Unexpected exception was raised: {ex}"
 
+    @tag("test_os_patch_created_called")
     def tests_os_path_created_called(self):
-        dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1))
-        core_factory_floor.DatasetLocationsFactory(datatype=dataset.datatype)
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
+        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
 
-        output_path = Path(settings.BASE_DIR, 'core', 'tests', 'data', dataset.datatype.locations.first().output_dir)
+        output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
 
-        mock_files = [
+        mock_files: list[SimpleUploadedFile] = [
             SimpleUploadedFile("file1.txt", b"Content of file 1"),
             SimpleUploadedFile("file2.txt", b"Content of file 2"),
             SimpleUploadedFile("file3.txt", b"Content of file 3"),
         ]
         try:
-            file_upload.save_files(user=self.user, dataset=dataset, files=mock_files, output_path=output_path)
-            assert os.path.exists(output_path), "Output path was not created."
+            file_handler.save_files(user=self.user, dataset_id=dataset.pk, files=mock_files)
+            assert os.path.exists(output_path), f"Output path was not created. {output_path}"
         except Exception as ex:
             assert False, f"Unexpected exception was raised: {ex}"
         finally:
@@ -61,7 +62,7 @@ class TestFileUpload(MardidTestCase):
                 shutil.rmtree(output_path)
 
     def test_file_validation(self):
-        dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1))
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
         models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
 
         mock_files = [
@@ -71,7 +72,7 @@ class TestFileUpload(MardidTestCase):
         ]
 
         # First upload should succeed
-        existing_files = file_upload.validate_files(user=self.user, dataset=dataset, files=mock_files)
+        existing_files = file_handler.validate_files(user=self.user, dataset_id=dataset.pk, files=mock_files)
         self.assertIsNone(existing_files, "Expected no existing files on first validation.")
 
         # Simulate saving the files to the dataset
@@ -81,7 +82,7 @@ class TestFileUpload(MardidTestCase):
                                             is_archived=False)
 
         # Second upload with the same files should fail
-        existing_files = file_upload.validate_files(user=self.user, dataset=dataset, files=mock_files)
+        existing_files = file_handler.validate_files(user=self.user, dataset_id=dataset.pk, files=mock_files)
         self.assertIsNotNone(existing_files, "Expected existing files on second validation.")
 
     @tag('test_file_validation_should_not_return_archived_files')
@@ -97,7 +98,7 @@ class TestFileUpload(MardidTestCase):
                                             is_archived=False)
 
         # Validate the file exists
-        existing_files = file_upload.validate_files(user=self.user, dataset=dataset, files=[mock_file])
+        existing_files = file_handler.validate_files(user=self.user, dataset_id=dataset.pk, files=[mock_file])
         self.assertIsNotNone(existing_files, "Expected existing files on validation.")
 
         # Mark the file as archived
@@ -105,17 +106,15 @@ class TestFileUpload(MardidTestCase):
         data_file.save()
 
         # Validate the file is no longer returned by validation
-        existing_files = file_upload.validate_files(user=self.user, dataset=dataset, files=[mock_file])
+        existing_files = file_handler.validate_files(user=self.user, dataset_id=dataset.pk, files=[mock_file])
         self.assertIsNone(existing_files, "Expected no existing files after archiving.")
 
+    @tag('test_archive_files_success')
     def test_archive_files_success(self):
         dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1))
         models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
 
-        output_path = Path(settings.BASE_DIR, 'core', 'tests', 'data', 'test_output',
-                           dataset.datatype.locations.first().output_dir)
-        archive_path = Path(settings.BASE_DIR, 'core', 'tests', 'data', 'test_output', 'archive',
-                            dataset.datatype.locations.first().output_dir)
+        output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
 
         try:
             mock_files = [
@@ -124,16 +123,15 @@ class TestFileUpload(MardidTestCase):
                 SimpleUploadedFile("file3.txt", b"Content of file 3"),
             ]
 
-            file_upload.save_files(user=self.user, dataset=dataset, files=mock_files, output_path=output_path)
-            assert os.path.exists(output_path), "Output path was not created."
+            file_handler.save_files(user=self.user, dataset_id=dataset.pk, files=mock_files)
+            assert os.path.exists(output_path), f"Output path was not created: {output_path}"
 
             new_mock_files = [
                 SimpleUploadedFile("file1.txt", b"Content of new file 1"),
             ]
 
-            file_upload.archive_files(user=self.user, dataset=dataset,
+            file_handler.archive_files_by_name(user=self.user, dataset_id=dataset.pk,
                                       file_names=[file.name for file in new_mock_files],
-                                      output_path=output_path, archive_path=archive_path,
                                       message="Archiving for test")
             archived_file = dataset.files.filter(is_archived=True)
             assert archived_file.exists(), "Expected file to be archived."
@@ -143,7 +141,79 @@ class TestFileUpload(MardidTestCase):
 
             assert archived_file.archived_date is not None, "Expected archived_date to be set for archived file."
 
-            file_upload.save_files(user=self.user, dataset=dataset, files=new_mock_files, output_path=output_path)
+            file_handler.save_files(user=self.user, dataset_id=dataset.pk, files=new_mock_files)
+        except Exception as ex:
+            assert False, f"Unexpected exception was raised: {ex}"
+        finally:
+            if os.path.exists(output_path):
+                shutil.rmtree(output_path)
+
+    @tag("test_delete_files")
+    def test_delete_files(self):
+        # if user is superuser and no files are selected for a provided dataset, all files in the
+        # dataset should be deleted
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
+        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+
+        output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
+
+        try:
+            file_names = ["file1.txt","file2.txt","file3.txt",]
+            mock_files = [SimpleUploadedFile(fn, b"Content of file " + str(index).encode()) for index, fn in enumerate(file_names, start=1)]
+
+            file_handler.save_files(user=self.superuser, dataset_id=dataset.pk, files=mock_files)
+            assert os.path.exists(output_path), f"Output path was not created: {output_path}"
+
+            for file in mock_files:
+                file_path = os.path.join(output_path, file.name)
+                assert os.path.exists(file_path), f"Expected file to exist before deletion: {file_path}"
+
+            file_handler.delete_files_by_name(user=self.superuser, dataset_id=dataset.pk, file_names=file_names)
+
+            for file in mock_files:
+                file_path = os.path.join(output_path, file.name)
+                assert not os.path.exists(file_path), f"Expected file to not exist after deletion: {file_path}"
+
+        except Exception as ex:
+            assert False, f"Unexpected exception was raised: {ex}"
+        finally:
+            if os.path.exists(output_path):
+                shutil.rmtree(output_path)
+
+    def test_delete_selected_files(self):
+        # if user is superuser and specific files are selected for a provided dataset, specific files in the
+        # dataset should be deleted while others remain
+        dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1))
+        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+
+        output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
+
+        try:
+            mock_files = [
+                SimpleUploadedFile("file1.txt", b"Content of file 1"),
+                SimpleUploadedFile("file2.txt", b"Content of file 2"),
+                SimpleUploadedFile("file3.txt", b"Content of file 3"),
+            ]
+
+            file_handler.save_files(user=self.superuser, dataset_id=dataset.pk, files=mock_files)
+            assert os.path.exists(output_path), f"Output path was not created: {output_path}"
+
+            for file in mock_files:
+                file_path = os.path.join(output_path, file.name)
+                assert os.path.exists(file_path), f"Expected file to exist before deletion: {file_path}"
+
+            files = dataset.files.filter(file_name__iexact="file1.txt")
+            file_handler.delete_files(user=self.superuser, dataset_id=dataset.pk, files=files)
+
+            file_path = os.path.join(output_path, "file1.txt")
+            assert not os.path.exists(file_path), f"Expected file to not exist after deletion: {file_path}"
+
+            file_path = os.path.join(output_path, "file2.txt")
+            assert os.path.exists(file_path), f"Expected file to exist after deletion: {file_path}"
+
+            file_path = os.path.join(output_path, "file2.txt")
+            assert os.path.exists(file_path), f"Expected file to exist after deletion: {file_path}"
+
         except Exception as ex:
             assert False, f"Unexpected exception was raised: {ex}"
         finally:

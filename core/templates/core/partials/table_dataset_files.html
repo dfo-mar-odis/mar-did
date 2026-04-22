@@ -1,5 +1,5 @@
 {% load i18n %}
-<div class="overflow-auto" style="max-height: 300px;">
+
 {% if archived == "true" %}
 <table class="table table-sm table-striped" hx-get="{% url 'core:dataset_files_list' dataset.pk "true" %}"
        hx-trigger="load, dataset_files_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_archived_dataset_files_list">
@@ -10,18 +10,8 @@
     <thead class="sticky-top bg-white">
         <tr>
         <td class="" style="2%; white-space: nowrap;">
-        {% if request.user.is_superuser %}
-            <button class="btn btn-sm btn-danger" hx-targert="nearest tr"
-                    hx-confirm="{% trans 'Are you sure you want to delete these files?' %}"
-                    {% if archived %}
-                    hx-post="{% url 'core:delete_dataset_files' dataset.pk "ture" %}"
-                    {% else %}
-                    hx-post="{% url 'core:delete_dataset_files' dataset.pk %}"
-                    {% endif %}
-                    hx-swap="None"
-                    title="{% trans "Delete Dataset Files" %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                <span class="bi bi-x-square"></span>
-            </button>
+        {% if request.user.is_authenticated and not archived %}
+            <input type="checkbox" class="form-check" name="dataset_files" value="all" title="{% trans 'Select All' %}" />
         {% endif %}
         </td>
         <th>{% trans 'File Name' %}</th>
@@ -38,9 +28,7 @@
     <tr>
         {% if request.user.is_authenticated and not archived %}
         <th style="width: 2%; white-space: nowrap;">
-            <button class="btn btn-sm btn-warning" hx-target="#div_id_data_submission_messages"
-                    hx-get="" title="{% trans 'Archive File' %}"><span
-                    class="bi bi-safe"> {% trans 'Archive' %}</span></button>
+            <input type="checkbox" class="form-check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}" />
         </th>
         {% else %}
             <td></td>
@@ -57,12 +45,12 @@
     {% if file.is_archived %}
         {% for comment in file.comments.all %}
         <tr class="table-success">
-        <td></td>
-        <td colspan="5">{{ comment }}</td>
+        <td class="bg-white"></td>
+        <td class="bg-white"></td>
+        <td colspan="4">{{ comment }}</td>
         </tr>
         {% endfor %}
         {% endif %}
     {% endfor %}
     </tbody>
 </table>
-</div>
