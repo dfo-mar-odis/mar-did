@@ -17,14 +17,14 @@ logger = logging.getLogger('mardid')
 
 def get_output_path(dataset_id) -> Path:
     dataset = models.Datasets.objects.get(pk=dataset_id)
-    datatype_output = dataset.datatype.locations.first().output_dir
+    datatype_output = dataset.datatype.location.output_dir
     output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
     return output_path
 
 
 def get_archive_path(dataset_id) -> Path:
     dataset = models.Datasets.objects.get(pk=dataset_id)
-    datatype_output = dataset.datatype.locations.first().output_dir
+    datatype_output = dataset.datatype.location.output_dir
     archive_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, "archive", datatype_output)
     return archive_path
 
@@ -72,7 +72,7 @@ def save_files(user: User, dataset_id: int, files: list[File]):
 
         models.DataFiles.objects.create(dataset=dataset, file_name=file.name,
                                         file_type=file_type, submitted_by=user,
-                                        file_path=dataset.datatype.locations.first().output_dir, is_archived=False)
+                                        file_path=dataset.datatype.location.output_dir, is_archived=False)
         logger.info(f"File saved: {file_path}")
 
 

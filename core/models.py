@@ -347,8 +347,8 @@ class MissionRegions(models.Model):
 class DatasetLocations(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_location_seq')
 
-    datatype = models.ForeignKey('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
-                                related_name='locations', db_column='dataset_seq')
+    datatype = models.OneToOneField('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
+                                related_name='location', db_column='dataset_seq')
 
     input_dir = models.CharField(verbose_name=_("Input Directory"),
                                  help_text=_("Directory, within a mission directory on MEDIA_IN, Mar-DID will look in for bulk uploading files"),
@@ -389,7 +389,7 @@ class Datasets(models.Model):
 
     @property
     def get_dataset_root_path(self):
-        return Path(self.mission.mission_path, self.datatype.locations.first().output_dir)
+        return Path(self.mission.mission_path, self.datatype.location.output_dir)
 
     def __str__(self):
         return f'{self.datatype} : {self.status}'

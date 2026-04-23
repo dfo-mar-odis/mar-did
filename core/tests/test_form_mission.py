@@ -1,11 +1,14 @@
+import shutil
+from pathlib import Path
+
 from bs4 import BeautifulSoup
 from crispy_forms.utils import render_crispy_form
+from django.conf import settings
 from django.contrib.auth.models import User, Group
-from django.test import tag, RequestFactory, Client
+from django.test import tag, RequestFactory, Client, override_settings
 from django.urls import reverse_lazy
 
 from core.tests.core_factory_floor import MardidTestCase, MissionFactory, MissionLegFactory, MissionDatasetFactory, MissionCommentFactory
-from core.views.forms import form_mission
 
 
 @tag('test_form_mission')
@@ -199,6 +202,61 @@ class TestFormMission(MardidTestCase):
         # The response should not contain an error message about overlapping dates
         self.assertNotContains(response, "Leg dates cannot overlap with existing legs")
 
+
+@override_settings(MEDIA_IN='media/IN')
+@tag("test_mission_dataset_form")
+class TestFormMissionDatasets(MardidTestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='password')
+        self.superuser = User.objects.create_superuser(username='admin', password='password')
+        self.group = Group.objects.get_or_create(name='MarDID Maintainers')[0]
+        self.user.groups.add(self.group)
+
+        self.mission = MissionFactory.create()
+        MissionLegFactory(mission=self.mission, start_date="2025-09-28", end_date="2025-10-28")
+
+    def tearDown(self):
+        expected_path = Path(settings.MEDIA_IN)
+        if expected_path.exists():
+            shutil.rmtree(expected_path)
+
+    def test_anonymous_user_build_bulk_btn(self):
+        # an anonymous user should not be able to access the build input button
+        url = reverse_lazy('core:list_mission_datasets', args=[self.mission.pk])
+        response = self.client.get(url)
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+        bulk_input_btn = soup.find(id="button_id_build_bulk_input")
+        assert bulk_input_btn is None, "Anonymous user should not see the build bulk input button"
+
+    def test_anonymous_user_build_bulk_update_denied(self):
+        # an anonymous user should not be able to call the build bulk input function
+        url = reverse_lazy('core:build_bulk_input_directories', args=[self.mission.pk])
+        response = self.client.get(url)
+
+        assert response.status_code == 302, "Anonymous user should not beable to access the bulk input function"
+
+    def test_authenticated_user_build_bulk_btn(self):
+        self.client.login(username='testuser', password='password')
+
+        # an authenticated user should be able to access the build input button
+        url = reverse_lazy('core:list_mission_datasets', args=[self.mission.pk])
+        response = self.client.get(url)
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+        bulk_input_btn = soup.find(id="button_id_build_bulk_input")
+        assert bulk_input_btn is not None, "Authenticated user should see the build bulk input button"
+
+    def test_build_bulk_input_dir(self):
+        self.client.login(username='testuser', password='password')
+
+        # provided a mission the bulk input function should create an input directory structer for the mission
+        url = reverse_lazy('core:build_bulk_input_directories', args=[self.mission.pk])
+        response = self.client.get(url)
+
+        expected_path = Path(settings.MEDIA_IN, self.mission.mission_path)
+        assert expected_path.exists(), f"Expected file path does not exist: {expected_path}"
 
 class TestFormMissionLegs(MardidTestCase):
 

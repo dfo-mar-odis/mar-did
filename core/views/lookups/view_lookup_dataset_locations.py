@@ -33,7 +33,9 @@ labels = [(field_lookup[col_name].verbose_name if field_lookup[col_name].verbose
 def list_lookup(request):
 
     queryset = lookup_model.objects.all()
-    queryset_list = queryset.values_list('id', *columns)
+    dataset_columns = columns.copy()
+    dataset_columns[columns.index('datatype')] = 'datatype__name'
+    queryset_list = queryset.values('id', *dataset_columns)
 
     df = read_frame(queryset_list)
     df.set_index('id', inplace=True)
