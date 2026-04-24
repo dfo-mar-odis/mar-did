@@ -4,14 +4,7 @@
     hx-get="{% url 'core:list_mission_datasets' mission.pk %}" id="table_id_mission_dataset_list">
     <thead>
         <tr>
-            <th scope="col" style="width: 2%; white-space: nowrap;">{% if request.user.is_authenticated %}
-                <button id="button_id_build_bulk_input" type="button" class="btn btn-sm btn-secondary"
-                        title="{% trans 'Build Bulk Input Directories'%}"
-                        hx-target="closest table"
-                        hx-swap="beforebegin"
-                        hx-get="{% url 'core:build_bulk_input_directories' mission.pk %}"
-                ><span class="bi bi-hammer me-2"></span>{% trans 'Bulk Dir' %}</button>
-            {% endif %}</th>
+            <th scope="col" style="width: 2%; white-space: nowrap;"></th>
             <th scope="col">{% trans "Dataset" %}</th>
             <th scope="col">{% trans "Status" %}</th>
             <th scope="col">{% trans "File Count" %}</th>
