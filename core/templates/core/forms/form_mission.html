@@ -54,6 +54,18 @@
                 </form>
                 {% endif %}
                 <div class="card card-body mb-2 border border-dark bg-light">
+                {% if request.user.is_authenticated %}
+                    <div class="row mb-2">
+                        <div class="col">
+                            <button id="button_id_build_bulk_input" type="button" class="btn btn-sm btn-secondary"
+                                    title="{% trans 'Build Bulk Input Directories'%}"
+                                    hx-target="#div_id_dataset_message_area"
+                                    hx-get="{% url 'core:build_bulk_input_directories' object.pk %}"
+                            ><span class="bi bi-hammer me-2"></span>{% trans 'Bulk Dir' %}</button>
+                        </div>
+                    </div>
+                    <div id="div_id_dataset_message_area"></div>
+                {% endif %}
                 {% include 'core/partials/table_mission_datasets.html' with mission=object %}
                 </div>
             </div>
