@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from bs4 import BeautifulSoup
 
 from functools import partial
@@ -19,10 +21,12 @@ from crispy_forms.layout import Layout, Div, Row, Column, Field, Hidden
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.utils import render_crispy_form
 
-from core import models, utils
+from core import models
+from core.utils import bulk_upload
 
 import logging
 
+from core.components import get_alert, AlertDialog
 from core.utils.authentication import redirect_if_not_authenticated
 from core.views.forms import form_multiselect
 from core.views.forms.form_multiselect import remove_from_list, add_to_list
@@ -839,6 +843,45 @@ def mission_comment_delete(request, mission_id, comment_id):
     return HttpResponse()
 
 
+def create_bulk_directories(request, mission_id):
+
+    if redirect := redirect_if_not_authenticated(request):
+        return redirect
+
+    mission = models.Missions.objects.get(pk=mission_id)
+    bulk_upload.build_file_structure(mission)
+
+    # To be helpful, we should return a list of datasets that could not have directories created because they
+    # have no DataLocation configuration.
+    alert = AlertDialog("div_id_bulk_load_message", "light", "Building Bulk Load Directories")
+    alert.set_border('dark')
+
+    created_datasets = mission.datasets.filter(datatype__location__input_dir__isnull=False)
+    if created_datasets.exists():
+        missing_alert = AlertDialog("div_id_bulk_load_message_created", "success", _("Created dataset directories for datasets"))
+        missing_alert.find('div').attrs['class'].append('mt-2')
+        missing_alert.get_content_area().append(ul:=missing_alert.new_tag('ul'))
+
+        alert.get_content_area().append(missing_alert)
+
+        for m_dataset in created_datasets:
+            ds_path = Path(mission.mission_path, m_dataset.datatype.location.input_dir)
+            ul.append(missing_alert.new_tag('li', string=f"{m_dataset.datatype.name} - {ds_path}"))
+
+    missing_datasets = mission.datasets.filter(datatype__location__input_dir__isnull=True)
+    if missing_datasets.exists():
+        missing_alert = AlertDialog("div_id_bulk_load_message_missing", "warning", _("Could not create directory for datasets"))
+        missing_alert.find('div').attrs['class'].append('mt-2')
+        missing_alert.get_content_area().append(ul:=missing_alert.new_tag('ul'))
+
+        alert.get_content_area().append(missing_alert)
+
+        for m_dataset in missing_datasets:
+            ul.append(missing_alert.new_tag('li', string=f"{m_dataset.datatype.name}"))
+
+    return HttpResponse(alert)
+
+
 # Registered functions for controlling multi-select UI components.
 MULTISELECT_CONTEXT_REGISTER = {
     'regions': form_multiselect.MultiselectContext(
@@ -889,4 +932,6 @@ urlpatterns = [
          name='delete_mission_comment'),
     path('mission/comment/update/<int:mission_id>/<int:comment_id>', mission_comment_form, name='mission_comment_form'),
     path('mission/comment/list/<int:mission_id>', mission_comment_list, name='list_mission_comments'),
+
+    path('mission/bulkload/create/<int:mission_id>', create_bulk_directories, name='build_bulk_input_directories'),
 ]
