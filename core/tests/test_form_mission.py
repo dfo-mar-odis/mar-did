@@ -241,7 +241,7 @@ class TestFormMissionDatasets(MardidTestCase):
         self.client.login(username='testuser', password='password')
 
         # an authenticated user should be able to access the build input button
-        url = reverse_lazy('core:list_mission_datasets', args=[self.mission.pk])
+        url = reverse_lazy('core:update_mission_view', args=[self.mission.pk])
         response = self.client.get(url)
 
         soup = BeautifulSoup(response.content, 'html.parser')
