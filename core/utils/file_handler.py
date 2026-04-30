@@ -62,18 +62,29 @@ def save_files(user: User, dataset_id: int, files: list[File]):
     else:
         logger.info(f"Directory already exists: {output_path}")
 
-    # Todo: extract the file typ from the file name, validate the file type is allowed from the provided datatype
-    file_type = models.FileTypes.objects.get_or_create(extension=".tst", description="this is for testing purposes")[0]
+    upload_status: list = []
+    # Todo: extract the file type from the file name, validate the file type is allowed from the provided datatype
     for file in files:
-        file_path = os.path.join(output_path, file.name)
-        with open(file_path, 'wb+') as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
+        file_extension = os.path.splitext(file.name)[1][1:]
+        try:
+            file_type = models.FileTypes.objects.get(extension__iexact=file_extension.upper())
 
-        models.DataFiles.objects.create(dataset=dataset, file_name=file.name,
-                                        file_type=file_type, submitted_by=user,
-                                        file_path=dataset.datatype.location.output_dir, is_archived=False)
-        logger.info(f"File saved: {file_path}")
+            file_path = os.path.join(output_path, file.name)
+            with open(file_path, 'wb+') as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
+
+            models.DataFiles.objects.create(dataset=dataset, file_name=file.name,
+                                            file_type=file_type, submitted_by=user,
+                                            file_path=dataset.datatype.location.output_dir, is_archived=False)
+        except models.FileTypes.DoesNotExist as ex:
+            upload_status.append({'file': file.name, 'exception': ex})
+            continue
+
+    logger.info(f"Debug: {settings.DEBUG}")
+    if settings.DEBUG:
+        for status in upload_status:
+            logger.debug(f"file: {status['file']} - exception: {status['exception']}")
 
 
 def archive_files(user: User, dataset_id: int, files: list[models.DataFiles], message: str):
