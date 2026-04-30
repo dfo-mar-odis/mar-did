@@ -12,6 +12,7 @@ from django.test import tag, Client
 from django.urls import reverse_lazy
 from django.test import override_settings
 
+from core.models import DataFiles
 from core.tests import core_factory_floor
 from core.tests.core_factory_floor import MardidTestCase
 from core.utils.file_handler import get_output_path, save_files
@@ -229,7 +230,7 @@ class TestFormWithFiles(AbstractTestWithUsers):
             file_path = Path(output_path, file.name)
             self.assertTrue(file_path.exists())
 
-    @tag('test_dataset_file_submission_success')
+    @tag('test_dataset_delete_dataset_files')
     def test_dataset_delete_dataset_files(self):
         # Provided just the dataset ID and no selected files the delete function should remove all non-archived files
         # related to the dataset.
@@ -254,10 +255,10 @@ class TestFormWithFiles(AbstractTestWithUsers):
             form_data['dataset_files'] = 'all'
             response = self.client.post(reverse_lazy('core:delete_dataset_files', args=[self.dataset.pk]),
                                         data=form_data)
-
             for file in files_names:
                 file_path = Path(output_path, file)
                 assert not file_path.exists(), f"file sill exists: {file_path}"
+                assert not DataFiles.objects.filter(file_name__iexact=file).exists(), f"file still exists: {file_path}"
 
             # should return a success message
             soup = BeautifulSoup(response.content, 'html.parser')

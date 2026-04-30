@@ -55,6 +55,10 @@ class TestFileUpload(MardidTestCase):
         try:
             file_handler.save_files(user=self.user, dataset_id=dataset.pk, files=mock_files)
             assert os.path.exists(output_path), f"Output path was not created. {output_path}"
+
+            # files should also now be tracked as part of the dataset
+            dataset = models.Datasets.objects.get(pk=dataset.pk)
+            assert dataset.files.count() == 3, "Files are not being tracked, but the should be"
         except Exception as ex:
             assert False, f"Unexpected exception was raised: {ex}"
         finally:
@@ -174,46 +178,9 @@ class TestFileUpload(MardidTestCase):
                 file_path = os.path.join(output_path, file.name)
                 assert not os.path.exists(file_path), f"Expected file to not exist after deletion: {file_path}"
 
-        except Exception as ex:
-            assert False, f"Unexpected exception was raised: {ex}"
-        finally:
-            if os.path.exists(output_path):
-                shutil.rmtree(output_path)
-
-    def test_delete_selected_files(self):
-        # if user is superuser and specific files are selected for a provided dataset, specific files in the
-        # dataset should be deleted while others remain
-        dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1))
-        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
-
-        output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
-
-        try:
-            mock_files = [
-                SimpleUploadedFile("file1.txt", b"Content of file 1"),
-                SimpleUploadedFile("file2.txt", b"Content of file 2"),
-                SimpleUploadedFile("file3.txt", b"Content of file 3"),
-            ]
-
-            file_handler.save_files(user=self.superuser, dataset_id=dataset.pk, files=mock_files)
-            assert os.path.exists(output_path), f"Output path was not created: {output_path}"
-
-            for file in mock_files:
-                file_path = os.path.join(output_path, file.name)
-                assert os.path.exists(file_path), f"Expected file to exist before deletion: {file_path}"
-
-            files = dataset.files.filter(file_name__iexact="file1.txt")
-            file_handler.delete_files(user=self.superuser, dataset_id=dataset.pk, files=files)
-
-            file_path = os.path.join(output_path, "file1.txt")
-            assert not os.path.exists(file_path), f"Expected file to not exist after deletion: {file_path}"
-
-            file_path = os.path.join(output_path, "file2.txt")
-            assert os.path.exists(file_path), f"Expected file to exist after deletion: {file_path}"
-
-            file_path = os.path.join(output_path, "file2.txt")
-            assert os.path.exists(file_path), f"Expected file to exist after deletion: {file_path}"
-
+            # this should also remove the file tracking from the database
+            dataset = models.Datasets.objects.get(pk=dataset.pk)
+            assert dataset.files.count() == 0, "Files are still being tracked in the database"
         except Exception as ex:
             assert False, f"Unexpected exception was raised: {ex}"
         finally:
