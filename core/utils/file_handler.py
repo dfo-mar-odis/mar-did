@@ -5,6 +5,7 @@ from pathlib import Path
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files import File
+from django.db.models import QuerySet
 from django.utils import timezone
 
 from django.contrib.auth.models import User
@@ -63,7 +64,6 @@ def save_files(user: User, dataset_id: int, files: list[File]):
         logger.info(f"Directory already exists: {output_path}")
 
     upload_status: list = []
-    # Todo: extract the file type from the file name, validate the file type is allowed from the provided datatype
     for file in files:
         file_extension = os.path.splitext(file.name)[1][1:]
         try:
@@ -87,7 +87,7 @@ def save_files(user: User, dataset_id: int, files: list[File]):
             logger.debug(f"file: {status['file']} - exception: {status['exception']}")
 
 
-def archive_files(user: User, dataset_id: int, files: list[models.DataFiles], message: str):
+def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles], message: str):
     if user is None or not user.is_authenticated:
         raise PermissionError("Only authenticated users can upload files.")
 
@@ -125,7 +125,7 @@ def archive_files(user: User, dataset_id: int, files: list[models.DataFiles], me
         logger.info(f"File archived: {archived_file_path}")
 
 
-def get_files_by_name(dataset_id: int, file_names: list[str]=None) -> list[models.DataFiles]:
+def get_files_by_name(dataset_id: int, file_names: list[str]=None) -> QuerySet[models.DataFiles]:
     dataset = models.Datasets.objects.get(pk=dataset_id)
     if file_names is None:
         files = dataset.current_files
@@ -135,7 +135,7 @@ def get_files_by_name(dataset_id: int, file_names: list[str]=None) -> list[model
     return files
 
 
-def get_files_by_id(dataset_id: int, file_ids: list[int]=None) -> list[models.DataFiles]:
+def get_files_by_id(dataset_id: int, file_ids: list[int]=None) -> QuerySet[models.DataFiles]:
     if not file_ids:
         raise ValidationError("No files were selected for archiving. Please select files and try again.")
 
@@ -158,35 +158,17 @@ def archive_files_by_id(user: User, dataset_id: int, file_ids: list, message: st
     archive_files(user, dataset_id, files, message)
 
 
-def delete_files(user: User, dataset_id: int, files: list[models.DataFiles]=None, archived=True):
-
+def delete_files_by_name(user: User, dataset_id: int, file_names: list[str]=None):
     if user is None or not user.is_superuser:
         raise PermissionError("Only authenticated superusers can delete files.")
 
-    dataset = models.Datasets.objects.get(pk=dataset_id)
-
-    archive_file_path = get_archive_path(dataset.pk)
-    working_file_path = get_output_path(dataset.pk)
-
-    for file in files:
-        file_path = archive_file_path if file.is_archived else working_file_path
-        abs_path = Path(file_path, file.file_name)
-        if abs_path.exists():
-            abs_path.unlink()
-            logger.info(f"File deleted: {file_path}")
-        else:
-            logger.warning(f"File not found for deletion: {file_path}")
-
-        file.delete()
-        logger.info(f"File record deleted: {file.file_name}")
-
-
-
-def delete_files_by_name(user: User, dataset_id: int, file_names: list[str]=None):
     files = get_files_by_name(dataset_id, file_names)
-    delete_files(user, dataset_id, files)
+    files.delete()
 
 
 def delete_files_by_id(user: User, dataset_id: int, file_ids: list):
+    if user is None or not user.is_superuser:
+        raise PermissionError("Only authenticated superusers can delete files.")
+
     files = get_files_by_id(dataset_id, file_ids)
-    delete_files(user, dataset_id, files)
+    files.delete()
