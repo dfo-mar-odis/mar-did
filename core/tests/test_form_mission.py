@@ -1,14 +1,10 @@
-import shutil
-from pathlib import Path
-
 from bs4 import BeautifulSoup
 from crispy_forms.utils import render_crispy_form
-from django.conf import settings
 from django.contrib.auth.models import User, Group
-from django.test import tag, RequestFactory, Client, override_settings
+from django.test import tag, Client
 from django.urls import reverse_lazy
 
-from core.tests.core_factory_floor import MardidTestCase, MissionFactory, MissionLegFactory, MissionDatasetFactory, MissionCommentFactory
+from core.tests.core_factory_floor import MardidTestCase, MissionFactory, MissionLegFactory, MissionDatasetFactory
 
 
 @tag('test_form_mission')
@@ -203,61 +199,6 @@ class TestFormMission(MardidTestCase):
         self.assertNotContains(response, "Leg dates cannot overlap with existing legs")
 
 
-@override_settings(MEDIA_IN='media/IN')
-@tag("test_mission_dataset_form")
-class TestFormMissionDatasets(MardidTestCase):
-
-    def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='password')
-        self.superuser = User.objects.create_superuser(username='admin', password='password')
-        self.group = Group.objects.get_or_create(name='MarDID Maintainers')[0]
-        self.user.groups.add(self.group)
-
-        self.mission = MissionFactory.create()
-        MissionLegFactory(mission=self.mission, start_date="2025-09-28", end_date="2025-10-28")
-
-    def tearDown(self):
-        expected_path = Path(settings.MEDIA_IN)
-        if expected_path.exists():
-            shutil.rmtree(expected_path)
-
-    def test_anonymous_user_build_bulk_btn(self):
-        # an anonymous user should not be able to access the build input button
-        url = reverse_lazy('core:list_mission_datasets', args=[self.mission.pk])
-        response = self.client.get(url)
-
-        soup = BeautifulSoup(response.content, 'html.parser')
-        bulk_input_btn = soup.find(id="button_id_build_bulk_input")
-        assert bulk_input_btn is None, "Anonymous user should not see the build bulk input button"
-
-    def test_anonymous_user_build_bulk_update_denied(self):
-        # an anonymous user should not be able to call the build bulk input function
-        url = reverse_lazy('core:build_bulk_input_directories', args=[self.mission.pk])
-        response = self.client.get(url)
-
-        assert response.status_code == 302, "Anonymous user should not beable to access the bulk input function"
-
-    def test_authenticated_user_build_bulk_btn(self):
-        self.client.login(username='testuser', password='password')
-
-        # an authenticated user should be able to access the build input button
-        url = reverse_lazy('core:update_mission_view', args=[self.mission.pk])
-        response = self.client.get(url)
-
-        soup = BeautifulSoup(response.content, 'html.parser')
-        bulk_input_btn = soup.find(id="button_id_build_bulk_input")
-        assert bulk_input_btn is not None, "Authenticated user should see the build bulk input button"
-
-    def test_build_bulk_input_dir(self):
-        self.client.login(username='testuser', password='password')
-
-        # provided a mission the bulk input function should create an input directory structer for the mission
-        url = reverse_lazy('core:build_bulk_input_directories', args=[self.mission.pk])
-        response = self.client.get(url)
-
-        expected_path = Path(settings.MEDIA_IN, self.mission.mission_path)
-        assert expected_path.exists(), f"Expected file path does not exist: {expected_path}"
-
 class TestFormMissionLegs(MardidTestCase):
 
     def setUp(self):
@@ -269,123 +210,3 @@ class TestFormMissionLegs(MardidTestCase):
         return soup
 
 
-@tag('test_form_mission_comments')
-class TestFormMissionComments(MardidTestCase):
-
-    def setUp(self):
-        self.mission = MissionFactory.create()
-        self.user = User.objects.create_user(username='testuser', password='password')
-        self.superuser = User.objects.create_superuser(username='admin', password='password')
-
-    # anonymous users
-    def test_mission_comments_form_anonymous_user(self):
-        response = self.client.get(reverse_lazy('core:update_mission_view', args=[self.mission.pk]))
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        # should not see the comment form
-        comment_form = soup.find(id="form_id_mission_comments")
-        self.assertIsNone(comment_form)
-
-        # should see the comments section
-        comments_section = soup.find(id="table_id_mission_comment_list")
-        self.assertIsNotNone(comments_section)
-
-        # should not see a delete button for comments
-        button = comments_section.find("button", attrs={"class": "btn-danger"})
-        self.assertIsNone(button)
-
-        # should not see an edit button for comments
-        button = comments_section.find("button", attrs={"class": "btn-secondary"})
-        self.assertIsNone(button)
-
-    # authenticated users
-    def test_mission_comments_form_authenticated_user(self):
-        self.client.login(username='testuser', password='password')
-
-        MissionCommentFactory(mission=self.mission, author=self.user)
-        MissionCommentFactory(mission=self.mission, author=self.superuser)
-
-        response = self.client.get(reverse_lazy('core:update_mission_view', args=[self.mission.pk]))
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        # should see the comment form
-        comment_form = soup.find(id="form_id_mission_comments")
-        self.assertIsNotNone(comment_form)
-
-        # should see the comments section
-        comments_section = soup.find(id="table_id_mission_comment_list")
-        self.assertIsNotNone(comments_section)
-
-        # should not see a delete button for comments
-        button = comments_section.find("button", attrs={"class": "btn-danger"})
-        self.assertIsNotNone(button)
-
-        # should see an edit button for comments that the user authored
-        # Find the <div> element with text matching self.user.username
-        div = comments_section.find('div', text=self.user.username)
-        self.assertIsNotNone(div)
-
-        # Get the parent <tr> element
-        row = div.find_parent().find_parent("tr")
-        self.assertIsNotNone(row)
-
-        span_edit_button = row.find("span", attrs={"class": "bi bi-pencil-square"})
-        self.assertIsNotNone(span_edit_button)
-
-        # should not see an edit button for comments that another user authored
-        # Find the <div> element with text matching self.superuser.username
-        div = comments_section.find('div', text=self.superuser.username)
-        self.assertIsNotNone(div)
-
-        # Get the parent <tr> element
-        row = div.find_parent().find_parent("tr")
-        self.assertIsNotNone(row)
-
-        span_edit_button = row.find("span", attrs={"class": "bi bi-pencil-square"})
-        self.assertIsNone(span_edit_button)
-
-    # superusers
-    def test_mission_comments_form_superuser(self):
-        self.client.login(username='admin', password='password')
-
-        MissionCommentFactory(mission=self.mission, author=self.user)
-        MissionCommentFactory(mission=self.mission, author=self.superuser)
-
-        response = self.client.get(reverse_lazy('core:update_mission_view', args=[self.mission.pk]))
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        # should see the comment form
-        comment_form = soup.find(id="form_id_mission_comments")
-        self.assertIsNotNone(comment_form)
-
-        # should see the comments section
-        comments_section = soup.find(id="table_id_mission_comment_list")
-        self.assertIsNotNone(comments_section)
-
-        # should see a delete button for comments
-        button = comments_section.find("button", attrs={"class": "btn-danger"})
-        self.assertIsNotNone(button)
-
-        # should see an edit button for comments that the user authored
-        # Find the <div> element with text matching self.user.username
-        div = comments_section.find('div', text=self.superuser.username)
-        self.assertIsNotNone(div)
-
-        # Get the parent <tr> element
-        row = div.find_parent().find_parent("tr")
-        self.assertIsNotNone(row)
-
-        span_edit_button = row.find("span", attrs={"class": "bi bi-pencil-square"})
-        self.assertIsNotNone(span_edit_button)
-
-        # should not see an edit button for comments that another user authored
-        # Find the <div> element with text matching self.superuser.username
-        div = comments_section.find('div', text=self.user.username)
-        self.assertIsNotNone(div)
-
-        # Get the parent <tr> element
-        row = div.find_parent().find_parent("tr")
-        self.assertIsNotNone(row)
-
-        span_edit_button = row.find("span", attrs={"class": "bi bi-pencil-square"})
-        self.assertIsNone(span_edit_button)

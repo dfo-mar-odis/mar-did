@@ -882,6 +882,46 @@ def create_bulk_directories(request, mission_id):
     return HttpResponse(alert)
 
 
+def upload_bulk_directories(request, mission_id):
+
+    if redirect := redirect_if_not_authenticated(request):
+        return redirect
+
+    mission = models.Missions.objects.get(pk=mission_id)
+    file_index = bulk_upload.index_files(mission)
+    bulk_upload.move_files(request.user, mission, file_index)
+
+    alert = AlertDialog("div_id_bulk_load_message", "light", "Moved and Indexed Files")
+    alert.set_border('dark')
+
+    no_files_detected_datatypes = []
+    for datatype_key, m_dataset in file_index.items():
+        if m_dataset == []:
+            no_files_detected_datatypes.append(datatype_key)
+            continue
+
+        success_alert = AlertDialog(f"div_id_bulk_upload_message_created_{datatype_key}", "success", datatype_key)
+
+        success_content = success_alert.get_content_area()
+        success_content.attrs['class'].append('mt-2')
+        success_content.append(ul := success_alert.new_tag('ul'))
+        for file in m_dataset:
+            ul.append(success_alert.new_tag('li', string=f"{file}"))
+
+        alert.get_content_area().append(success_alert)
+
+    if no_files_detected_datatypes:
+        warn_alert = AlertDialog(f"div_id_bulk_upload_message_created_not_files", "warning", _("No files detected for the following datatypes"))
+        warn_content = warn_alert.get_content_area()
+        warn_content.attrs['class'].append('mt-2')
+        warn_content.append(ul := warn_alert.new_tag('ul'))
+        for file in no_files_detected_datatypes:
+            ul.append(warn_alert.new_tag('li', string=f"{file}"))
+
+        alert.get_content_area().append(warn_alert)
+
+    return HttpResponse(alert)
+
 # Registered functions for controlling multi-select UI components.
 MULTISELECT_CONTEXT_REGISTER = {
     'regions': form_multiselect.MultiselectContext(
@@ -934,4 +974,5 @@ urlpatterns = [
     path('mission/comment/list/<int:mission_id>', mission_comment_list, name='list_mission_comments'),
 
     path('mission/bulkload/create/<int:mission_id>', create_bulk_directories, name='build_bulk_input_directories'),
+    path('mission/bulkload/upload/<int:mission_id>', upload_bulk_directories, name='upload_bulk_input_directories'),
 ]
