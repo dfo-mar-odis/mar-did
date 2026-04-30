@@ -10,6 +10,9 @@ class AlertDialog(BeautifulSoup):
     def get_content_area(self) -> BeautifulSoup:
         return self.find("div", id=f"{self.alert_id}_content_area")
 
+    def get_button_area(self) -> BeautifulSoup:
+        return self.find("div", id=f"{self.alert_id}_button_area")
+
     def set_border(self, border: str):
         self.find('div').attrs['class'].append(f'border-{border}')
 

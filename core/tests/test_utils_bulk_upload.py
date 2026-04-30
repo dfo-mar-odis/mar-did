@@ -88,9 +88,9 @@ class TestUtilsBulkUploadWithFiles(MardidTestCase):
 
         build_file_structure(self.mission)
 
-        mission_input_path = get_mission_input_path(self.mission)
-        ctd_datatype_path = Path(mission_input_path, self.ctd_datatype.location.input_dir)
-        btl_datatype_path = Path(mission_input_path, self.btl_datatype.location.input_dir)
+        self.mission_input_path = get_mission_input_path(self.mission)
+        ctd_datatype_path = Path(self.mission_input_path, self.ctd_datatype.location.input_dir)
+        btl_datatype_path = Path(self.mission_input_path, self.btl_datatype.location.input_dir)
 
         self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
         self.create_files(btl_datatype_path, files_to_create=self.btl_files)
@@ -145,3 +145,18 @@ class TestUtilsBulkUploadWithFiles(MardidTestCase):
 
         ctd_files = models.DataFiles.objects.filter(dataset__datatype__name='CTD_RAW')
         assert ctd_files.exists(), f"Expected files were not tracked in the database"
+
+    @tag('test_move_files_that_already_exist')
+    def test_move_files_that_already_exist(self):
+        # files placed in the bulk input directory should be indexed and a list for each data type returned.
+        # resulting dictionary when fed to the move files function should transfer from the input to output directories.
+        file_dict = index_files(self.mission)
+        move_files(self.user, self.mission, file_dict)
+
+        ctd_datatype_path = Path(self.mission_input_path, self.ctd_datatype.location.input_dir)
+        self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
+
+        file_dict = index_files(self.mission)
+
+        with self.assertRaises(FileExistsError):
+            move_files(self.user, self.mission, file_dict)
