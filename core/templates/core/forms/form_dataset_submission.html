@@ -65,11 +65,11 @@
                     <button type="button" class="btn btn-sm btn-danger"
                             name="dataset_files_delete" title="{% trans "Remove Files from Database Tracking" %}"
                             hx-target="#div_id_dataset_tabs_message"
-                            hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
+                            hx-post="{% url 'core:delete_dataset_files' dataset.pk %}"
                             hx-include="#dataset_files_form"
                             hx-indicator=".htmx-indicator"
-                            hx-confirm="{% trans "Are you sure you want to untrack these files" %}"
-                    ><span class="bi bi-dash-square me-1"></span>{% trans "Untrack Selected" %}</button>
+                            hx-confirm="{% trans "Are you sure you want to delete these files" %}"
+                    ><span class="bi bi-dash-square me-1"></span>{% trans "Delete Selected" %}</button>
                     {% endif %}
                 {% endif %}
 {#                    <button type="button" class="btn btn-sm btn-danger"><span class="bi bi-dash-square"></span></button>#}
