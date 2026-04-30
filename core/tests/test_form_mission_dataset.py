@@ -1,5 +1,6 @@
 import shutil
 from pathlib import Path
+from unittest.mock import patch
 
 from bs4 import BeautifulSoup
 from django.conf import settings
@@ -21,6 +22,17 @@ class TestFormMissionDatasets(MardidTestCase):
         for file_name in files_to_create:
             file_path = selected_path / file_name
             file_path.touch()  # This creates an empty file
+
+    def populate_input_directories(self):
+        # provided a mission the bulk input function should scan the input directories, move files to the
+        # expected output directory and log the new files in the database. This is going to get complicated...
+        build_file_structure(self.mission)
+        mission_input_path = get_mission_input_path(self.mission)
+        ctd_datatype_path = Path(mission_input_path, self.ctd_datatype.location.input_dir)
+        btl_datatype_path = Path(mission_input_path, self.btl_datatype.location.input_dir)
+
+        self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
+        self.create_files(btl_datatype_path, files_to_create=self.btl_files)
 
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='password')
@@ -120,16 +132,7 @@ class TestFormMissionDatasets(MardidTestCase):
 
     def test_upload_bulk_input_dir(self):
         self.client.login(username='testuser', password='password')
-
-        # provided a mission the bulk input function should scan the input directories, move files to the
-        # expected output directory and log the new files in the database. This is going to get complicated...
-        build_file_structure(self.mission)
-        mission_input_path = get_mission_input_path(self.mission)
-        ctd_datatype_path = Path(mission_input_path, self.ctd_datatype.location.input_dir)
-        btl_datatype_path = Path(mission_input_path, self.btl_datatype.location.input_dir)
-
-        self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
-        self.create_files(btl_datatype_path, files_to_create=self.btl_files)
+        self.populate_input_directories()
 
         url = reverse_lazy('core:upload_bulk_input_directories', args=[self.mission.pk])
         response = self.client.get(url)
@@ -143,4 +146,17 @@ class TestFormMissionDatasets(MardidTestCase):
         btl_src_datatype_path = Path(expected_path, self.btl_datatype.location.input_dir)
         assert btl_src_datatype_path.exists(), f"Expected file path does not exist: {btl_src_datatype_path}"
 
+    @tag("test_upload_bulk_update_file_exists")
+    def test_upload_bulk_update_file_exists(self):
+        # if uploading a bath of files that already exists the bulk upload function should return a dialog to the
+        # user indicating that the files already exist and ask if they want to upload the file anyway. This dialog
+        # should have a button to confirm the upload and a button to cancel the upload.
+        self.client.login(username='testuser', password='password')
 
+        url = reverse_lazy('core:upload_bulk_input_directories', args=[self.mission.pk])
+
+        with patch('core.utils.bulk_upload.move_files', side_effect=FileExistsError("One or more files already exist")):
+            response = self.client.get(url)
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+        assert soup.find("button", id="button_id_upload_bulk_confirm")

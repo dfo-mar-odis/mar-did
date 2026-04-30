@@ -9,11 +9,12 @@ from django.forms.widgets import Select
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
+from django.middleware.csrf import get_token
 from django.template.context_processors import csrf
 from django.views.generic.base import TemplateView
 from django.urls import path, reverse_lazy, reverse
 from django.template.loader import render_to_string
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from crispy_forms.helper import FormHelper
@@ -887,9 +888,30 @@ def upload_bulk_directories(request, mission_id):
     if redirect := redirect_if_not_authenticated(request):
         return redirect
 
+    reason = request.headers.get('HX-Prompt', None)
     mission = models.Missions.objects.get(pk=mission_id)
     file_index = bulk_upload.index_files(mission)
-    bulk_upload.move_files(request.user, mission, file_index)
+    try:
+        # if a reason is provided then we'll archive any existing files
+        bulk_upload.move_files(request.user, mission, file_index, reason)
+    except FileExistsError as ex:
+        alert = AlertDialog("div_id_bulk_load_message", "warning", "One or more files in the batch already exist. Upload with reason?")
+        alert.set_border('dark')
+        alert.get_button_area().append(btn:=alert.new_tag("button"))
+        btn.attrs = {
+            "id": "button_id_upload_bulk_confirm",
+            "title": _("Archive files with a reason"),
+            "class": "btn btn-sm btn-warning",
+            "type": "button",
+            "hx-post": reverse_lazy('core:upload_bulk_input_directories', args=[mission_id]),
+            "hx-target": "#div_id_dataset_message_area",
+            "hx-prompt": _("Reason for archival"),
+            "hx-indicator": ".htmx-indicator",
+            "hx-headers": '{"X-CSRFToken": "' + get_token(request) + '"}',
+        }
+        btn.append(alert.new_tag("span", string=_("Archive reason"), attrs={'class': "bi bi-check me-1"}))
+
+        return HttpResponse(alert)
 
     alert = AlertDialog("div_id_bulk_load_message", "light", "Moved and Indexed Files")
     alert.set_border('dark')
