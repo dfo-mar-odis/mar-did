@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User, Group, AnonymousUser
 from django.test import tag, override_settings, RequestFactory
 
-from core.utils.bulk_upload import build_file_structure, index_files, move_files, get_mission_input_path
+from core.utils.bulk_upload import build_file_structure, index_files, move_files, get_mission_input_path, FileStatus
 
 from core.tests.core_factory_floor import (MardidTestCase, MissionFactory, MissionLegFactory,
                                            MissionDatasetFactory, DatasetLocationsFactory)
@@ -78,22 +78,22 @@ class TestUtilsBulkUploadWithFiles(MardidTestCase):
 
         expected_input_path = Path('CTD', 'BTL')
         self.btl_datatype = models.DataTypes.objects.get_or_create(name="BTL")[0]
-        MissionDatasetFactory.create(mission=self.mission, datatype=self.btl_datatype)
+        self.btl_dataset = MissionDatasetFactory.create(mission=self.mission, datatype=self.btl_datatype)
         DatasetLocationsFactory.create(datatype=self.btl_datatype, input_dir=expected_input_path, output_dir=expected_input_path)
 
         expected_input_path = Path('CTD', 'CTD_RAW')
         self.ctd_datatype = models.DataTypes.objects.get_or_create(name="CTD_RAW")[0]
-        MissionDatasetFactory.create(mission=self.mission, datatype=self.ctd_datatype)
+        self.ctd_dataset = MissionDatasetFactory.create(mission=self.mission, datatype=self.ctd_datatype)
         DatasetLocationsFactory.create(datatype=self.ctd_datatype, input_dir=expected_input_path, output_dir=expected_input_path)
 
         build_file_structure(self.mission)
 
         self.mission_input_path = get_mission_input_path(self.mission)
-        ctd_datatype_path = Path(self.mission_input_path, self.ctd_datatype.location.input_dir)
-        btl_datatype_path = Path(self.mission_input_path, self.btl_datatype.location.input_dir)
+        self.ctd_datatype_path = Path(self.mission_input_path, self.ctd_datatype.location.input_dir)
+        self.btl_datatype_path = Path(self.mission_input_path, self.btl_datatype.location.input_dir)
 
-        self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
-        self.create_files(btl_datatype_path, files_to_create=self.btl_files)
+        self.create_files(self.ctd_datatype_path, files_to_create=self.ctd_files)
+        self.create_files(self.btl_datatype_path, files_to_create=self.btl_files)
 
     def tearDown(self):
         expected_path = Path(settings.MEDIA_IN)
@@ -160,3 +160,23 @@ class TestUtilsBulkUploadWithFiles(MardidTestCase):
 
         with self.assertRaises(FileExistsError):
             move_files(self.user, self.mission, file_dict)
+
+    @tag('test_move_files_that_already_failure')
+    def test_move_files_that_already_failure(self):
+        # files placed in the bulk input directory should be indexed and a list for each data type returned.
+        # If an issue occurs while transferring a file in the move function there should be a status object returned
+        # with the error for why that file could not be transferred.
+        # Files that transferred correctly should have FileStatus.Status.success
+        self.create_files(self.btl_datatype_path, files_to_create=['unrecognized_file_type.dne'])
+        file_dict = index_files(self.mission)
+        file_status_list = move_files(self.user, self.mission, file_dict)
+
+        assert self.btl_dataset in file_status_list, 'expected type was not in the returned dictionary'
+        assert len(file_status_list[self.btl_dataset]) == 3, 'There should be a satus object for each file in the dataset'
+
+        for file_status in file_status_list[self.btl_dataset]:
+            if file_status.file.name == 'unrecognized_file_type.dne':
+                assert file_status.status == FileStatus.Status.failure, 'status was supposed to be a failure based on a missing FileType object'
+                assert isinstance(file_status.error, models.FileTypes.DoesNotExist), 'File type was supposed to be a failure based on a missing FileType object'
+            else:
+                assert file_status.status == FileStatus.Status.success, 'Other files should transfer correctly'

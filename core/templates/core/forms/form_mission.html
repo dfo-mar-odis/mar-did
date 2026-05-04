@@ -61,12 +61,21 @@
                                     title="{% trans 'Build Bulk Input Directories'%}"
                                     hx-target="#div_id_dataset_message_area"
                                     hx-get="{% url 'core:build_bulk_input_directories' object.pk %}"
+                                    hx-indicator="#htmx_indicator_dataset_files_list"
                             ><span class="bi bi-hammer me-2"></span>{% trans 'Create Bulk Directories' %}</button>
                             <button id="button_id_upload_bulk_input" type="button" class="btn btn-sm btn-secondary"
                                     title="{% trans 'Upload Bulk Input Directories'%}"
                                     hx-target="#div_id_dataset_message_area"
                                     hx-get="{% url 'core:upload_bulk_input_directories' object.pk %}"
+                                    hx-indicator="#htmx_indicator_dataset_files_list"
                             ><span class="bi bi-arrow-up me-2"></span>{% trans 'Upload Bulk Directories' %}</button>
+                            <button type="button" class="btn btn-outline-light">
+                                <div id="htmx_indicator_dataset_files_list" class="htmx-indicator d-flex align-items-center ms-2">
+                                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                     </div>
                     <div id="div_id_dataset_message_area"></div>
