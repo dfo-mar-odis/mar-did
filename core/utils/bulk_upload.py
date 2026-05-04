@@ -1,5 +1,6 @@
 import logging
 import os
+import shutil
 from pathlib import Path
 
 from django.conf import settings
@@ -103,7 +104,7 @@ def move_files(user: User, mission: Missions, datatype_dict: dict, message=None)
                     destination_path = Path(get_output_path(dataset.pk), file.name)
                     logger.info(f"Moving file {file} to {destination_path}")
                     destination_path.parent.mkdir(parents=True, exist_ok=True)
-                    file.rename(destination_path)
+                    shutil.move(str(file), str(destination_path))
 
                     DataFiles.objects.create(dataset=dataset, file_name=file.name, file_type=file_type,
                                              submitted_by=user,
