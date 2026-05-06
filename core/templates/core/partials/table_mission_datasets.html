@@ -28,7 +28,7 @@
                 </td>
                 <td><div class="btn btn-outline-secondary" title="{{ dataset.datatype.description }}">{{ dataset.datatype.name }}</div></td>
                 <td><div class="btn {{dataset.status.get_button_colour}}" title="{{ dataset.status.description }}" >{{ dataset.status.name }}</div></td>
-                <td>{{ dataset.files.count }}</td>
+                <td>{{ dataset.current_files.count }}</td>
             </tr>
         {% endfor %}
     </tbody>

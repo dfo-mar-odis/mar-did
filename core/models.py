@@ -426,6 +426,7 @@ class DataFiles(models.Model):
 
         return self.file_name
 
+
 class ProcessingStatus(models.Model):
     id = models.AutoField(primary_key=True, db_column='processing_seq')
 
