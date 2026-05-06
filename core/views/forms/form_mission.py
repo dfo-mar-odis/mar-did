@@ -128,6 +128,22 @@ class MissionDatasetsForm(forms.ModelForm):
         model = models.Datasets
         fields = '__all__'
 
+    def init_datatype_field(self):
+        all_datatypes = list(models.DataTypes.objects.all())
+
+        non_legacy = [o for o in all_datatypes if not o.legacy]
+        legacy = [o for o in all_datatypes if o.legacy]
+        datatype_choices = (
+                [(None, '----------')] +
+                [(p.pk, p) for p in non_legacy] +
+                [(None, '----------')] +
+                [(p.pk, p) for p in legacy]
+        )
+        self.fields['datatype'].widget = Select(
+            attrs={'class': 'form-select form-select-sm'},
+            choices=datatype_choices,
+        )
+
     def clean(self):
         cleaned_data = super().clean()
         mission = cleaned_data.get('mission')
@@ -148,6 +164,8 @@ class MissionDatasetsForm(forms.ModelForm):
         initial['status'] = models.DatasetStatus.objects.get(name__iexact='expected')
 
         super(MissionDatasetsForm, self).__init__(initial=initial, *args, **kwargs)
+
+        self.init_datatype_field()
 
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -183,6 +201,17 @@ class MissionDatasetsForm(forms.ModelForm):
             button_div.append(btn_submit)
             self.helper.layout.fields[0].fields.append(button_div)
 
+    def save(self, commit=True):
+        dataset = super(MissionDatasetsForm, self).save(commit=False)
+
+        if commit:
+            dataset.save()
+
+        if dataset.datatype.legacy:
+            dataset.datatype.legacy = False
+            dataset.datatype.save()
+
+        return dataset
 
 class MissionLegForm(form_multiselect.MultiselectFieldForm):
     chief_scientist = forms.ModelChoiceField(
