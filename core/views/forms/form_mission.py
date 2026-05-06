@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Generator, Any
 
 from bs4 import BeautifulSoup
 
@@ -922,7 +923,7 @@ def upload_bulk_directories(request, mission_id):
     file_index = bulk_upload.index_files(mission)
     try:
         # if a reason is provided then we'll archive any existing files
-        bulk_upload.move_files(request.user, mission, file_index, reason)
+        status_object_list: dict[models.Datasets, Generator[bulk_upload.FileStatus, Any, None]] = bulk_upload.move_files(request.user, mission, file_index, reason)
     except FileExistsError as ex:
         alert = AlertDialog("div_id_bulk_load_message", "warning", "One or more files in the batch already exist. Upload with reason?")
         alert.set_border('dark')
@@ -944,34 +945,48 @@ def upload_bulk_directories(request, mission_id):
 
     alert = AlertDialog("div_id_bulk_load_message", "light", "Moved and Indexed Files")
     alert.set_border('dark')
+    alert.get_content_area().attrs['class'].append('overflow-y-scroll')
+    alert.get_content_area().attrs['style'] = "height: 400px;"
 
-    no_files_detected_datatypes = []
-    for datatype_key, m_dataset in file_index.items():
-        if m_dataset == []:
-            no_files_detected_datatypes.append(datatype_key)
-            continue
+    show_success = False
+    show_errors = False
+    for datatype_key, m_dataset in status_object_list.items():
+        datatype_alert = AlertDialog("div_id_bulk_load_message", "light", f"{datatype_key}")
+        datatype_alert.set_border('dark')
 
-        success_alert = AlertDialog(f"div_id_bulk_upload_message_created_{datatype_key}", "success", datatype_key)
-
+        datatype_name = datatype_key.datatype.name
+        success_alert = AlertDialog(f"div_id_bulk_upload_message_created_{datatype_name}", "success",
+                                    _("Successfully moved files"))
         success_content = success_alert.get_content_area()
         success_content.attrs['class'].append('mt-2')
-        success_content.append(ul := success_alert.new_tag('ul'))
-        for file in m_dataset:
-            ul.append(success_alert.new_tag('li', string=f"{file}"))
+        success_content.append(ul_success := success_alert.new_tag('ul'))
 
-        alert.get_content_area().append(success_alert)
+        error_alert = AlertDialog(f"div_id_bulk_upload_message_created_not_files_{datatype_name}", "danger",
+                                 _("Unmoveable files"))
+        error_content = error_alert.get_content_area()
+        error_content.attrs['class'].append('mt-2')
+        error_content.append(ul_error := error_alert.new_tag('ul'))
 
-    if no_files_detected_datatypes:
-        warn_alert = AlertDialog(f"div_id_bulk_upload_message_created_not_files", "warning", _("No files detected for the following datatypes"))
-        warn_content = warn_alert.get_content_area()
-        warn_content.attrs['class'].append('mt-2')
-        warn_content.append(ul := warn_alert.new_tag('ul'))
-        for file in no_files_detected_datatypes:
-            ul.append(warn_alert.new_tag('li', string=f"{file}"))
+        for m_data in m_dataset:
+            if m_data.status == bulk_upload.FileStatus.Status.success:
+                ul_success.append(li := success_alert.new_tag('li', string=f"{m_data.file.name}"))
+                show_success = True
+            elif m_data.status == bulk_upload.FileStatus.Status.failure:
+                ul_error.append(li := error_alert.new_tag('li', string=f"{m_data.file.name} - {str(m_data.error)}"))
+                show_errors = True
 
-        alert.get_content_area().append(warn_alert)
+        if show_errors or show_success:
+            if show_success:
+                datatype_alert.get_content_area().append(success_alert)
 
-    return HttpResponse(alert)
+            if show_errors:
+                datatype_alert.get_content_area().append(error_alert)
+
+            alert.get_content_area().append(datatype_alert)
+
+    response = HttpResponse(alert)
+    response['HX-Trigger'] = "mission_dataset_updated"
+    return response
 
 # Registered functions for controlling multi-select UI components.
 MULTISELECT_CONTEXT_REGISTER = {
