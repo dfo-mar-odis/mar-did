@@ -9,17 +9,18 @@
 {% endif %}
     <thead class="sticky-top bg-white">
         <tr>
-        <td class="" style="2%; white-space: nowrap;">
         {% if request.user.is_authenticated and not archived %}
+        <td class="" style="2%; white-space: nowrap;">
             <input type="checkbox" class="form-check" name="dataset_files" value="all" title="{% trans 'Select All' %}" />
-        {% endif %}
         </td>
+        {% endif %}
         <th>{% trans 'File Name' %}</th>
         <th>{% trans 'File Location' %}</th>
         <th>{% trans 'Submitted By' %}</th>
-        <th>{% trans 'Submitted Date' %}</th>
         {% if archived %}
         <th>{% trans 'Archived Date' %}</th>
+        {% else %}
+        <th>{% trans 'Submitted Date' %}</th>
         {% endif %}
     </tr>
     </thead>
@@ -30,24 +31,21 @@
         <th style="width: 2%; white-space: nowrap;">
             <input type="checkbox" class="form-check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}" />
         </th>
-        {% else %}
-            <td></td>
         {% endif %}
-        <td>{{ file.file_name }}</td>
+        <td{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %}>{{ file.file_name }}</td>
         <td>{{ file.dataset.get_dataset_root_path }}</td>
         <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
-        <td>{{ file.submitted_date }}</td>
         {% if archived %}
         <th>{{ file.archived_date }}</th>
+        {% else %}
+        <td>{{ file.submitted_date }}</td>
         {% endif %}
 
     </tr>
     {% if file.is_archived %}
         {% for comment in file.comments.all %}
         <tr class="table-success">
-        <td class="bg-white"></td>
-        <td class="bg-white"></td>
-        <td colspan="4">{{ comment }}</td>
+        <td colspan="3">{{ comment }}</td>
         </tr>
         {% endfor %}
         {% endif %}

@@ -199,7 +199,7 @@ LOGGERS = (
         "mardid": {
             "handlers": ["console", "error_handler"],
             "level": "DEBUG",
-            "propagate": True
+            "propagate": False
         },
     },
 )
