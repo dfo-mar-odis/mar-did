@@ -130,7 +130,10 @@ class TestUtilsBulkUploadWithFiles(MardidTestCase):
         # resulting dictionary when fed to the move files function should transfer from the input to output directories.
         file_dict = index_files(self.mission)
 
-        move_files(self.user, self.mission, file_dict)
+        file_status_list = move_files(self.user, self.mission, file_dict)
+
+        # move_files uses a generator so no work is done until we've iterated over the list
+        file_transfers = [[f.status for f in m_dataset] for datatype_key, m_dataset in file_status_list.items()]
 
         output_mission_path = Path(settings.MEDIA_OUT, self.mission.mission_path)
         output_ctd_path = Path(output_mission_path, self.ctd_datatype.location.output_dir)
@@ -151,14 +154,21 @@ class TestUtilsBulkUploadWithFiles(MardidTestCase):
         # files placed in the bulk input directory should be indexed and a list for each data type returned.
         # resulting dictionary when fed to the move files function should transfer from the input to output directories.
         file_dict = index_files(self.mission)
-        move_files(self.user, self.mission, file_dict)
+
+        # initial create and track files
+        file_status_list = move_files(self.user, self.mission, file_dict)
+
+        # move_files uses a generator so no work is done until we've iterated over the list
+        file_transfers = [[f.status for f in m_dataset] for datatype_key, m_dataset in file_status_list.items()]
 
         ctd_datatype_path = Path(self.mission_input_path, self.ctd_datatype.location.input_dir)
-        self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
 
+        # re-add the file to the input dir.
+        self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
         file_dict = index_files(self.mission)
 
         with self.assertRaises(FileExistsError):
+            # this should throw a File Exists Error
             move_files(self.user, self.mission, file_dict)
 
     @tag('test_move_files_that_already_failure')
@@ -172,9 +182,10 @@ class TestUtilsBulkUploadWithFiles(MardidTestCase):
         file_status_list = move_files(self.user, self.mission, file_dict)
 
         assert self.btl_dataset in file_status_list, 'expected type was not in the returned dictionary'
-        assert len(file_status_list[self.btl_dataset]) == 3, 'There should be a satus object for each file in the dataset'
+        btl_files = [f for f in file_status_list[self.btl_dataset]]
+        assert len(btl_files) == 3, 'There should be a satus object for each file in the dataset'
 
-        for file_status in file_status_list[self.btl_dataset]:
+        for file_status in btl_files:
             if file_status.file.name == 'unrecognized_file_type.dne':
                 assert file_status.status == FileStatus.Status.failure, 'status was supposed to be a failure based on a missing FileType object'
                 assert isinstance(file_status.error, models.FileTypes.DoesNotExist), 'File type was supposed to be a failure based on a missing FileType object'
