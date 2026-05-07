@@ -14,6 +14,31 @@ from core.utils.file_handler import  get_output_path, archive_files
 logger = logging.getLogger('mardid')
 
 
+class FileStatus:
+    class Status(Enum):
+        success = "success"
+        failure = "failure"
+
+    file: Path
+    status: Status
+    error: Exception
+
+    def set_status(self, status: Status):
+        self.status = status
+
+    def set_error(self, error: Exception):
+        self.status = FileStatus.Status.failure
+        self.error = error
+
+    def get_file_name(self):
+        return self.file.name
+
+    def __init__(self, file: Path, status: Status, error: Exception = None):
+        self.file = file
+        self.status = status
+        self.error = error
+
+
 def get_mission_input_path(mission: Missions) -> Path:
     return Path(settings.MEDIA_IN, mission.mission_path)
 
@@ -100,29 +125,6 @@ def find_existing_files(mission: Missions, datatype_dict: dict) -> list[Path]:
 
     return existing_files
 
-class FileStatus:
-    class Status(Enum):
-        success = "success"
-        failure = "failure"
-
-    file: Path
-    status: Status
-    error: Exception
-
-    def set_status(self, status: Status):
-        self.status = status
-
-    def set_error(self, error: Exception):
-        self.status = FileStatus.Status.failure
-        self.error = error
-
-    def get_file_name(self):
-        return self.file.name
-
-    def __init__(self, file: Path, status: Status, error: Exception = None):
-        self.file = file
-        self.status = status
-        self.error = error
 
 def file_itr(user: User, existing_files: list[Path], datatype_path: Path, datatype_dict, dataset, message=None) -> Generator[FileStatus, Any, None]:
     for file in datatype_path.iterdir():
@@ -134,7 +136,7 @@ def file_itr(user: User, existing_files: list[Path], datatype_path: Path, dataty
                 file_type = FileTypes.objects.get(extension__iexact=file_extension.upper())
 
                 if file.name in existing_files:
-                    archive = dataset.files.filter(file_name__in=existing_files)
+                    archive = dataset.files.filter(file_name__iexact=file.name, is_archived=False)
                     archive_files(user, dataset.pk, archive, message=message)
 
                 if file.name in datatype_dict.get(dataset.datatype.name, []):
@@ -147,7 +149,7 @@ def file_itr(user: User, existing_files: list[Path], datatype_path: Path, dataty
                                              file_path=dataset.datatype.location.output_dir, is_archived=False)
                     status_object.set_status(FileStatus.Status.success)
             except FileTypes.DoesNotExist as e:
-                logger.exception(f"Provided file type in bulk input does not exist {file_extension}")
+                logger.warning(f"Provided file type '{file_extension}' in bulk input folder does not exist and needs to be added as a FileType before it can be uploaded.")
                 status_object.set_error(e)
             except Exception as e:
                 logger.exception(f"Error processing file {file}", e)
