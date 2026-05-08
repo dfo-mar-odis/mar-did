@@ -125,25 +125,29 @@ def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles]
         logger.info(f"File archived: {archived_file_path}")
 
 
-def get_files_by_name(dataset_id: int, file_names: list[str]=None) -> QuerySet[models.DataFiles]:
+def get_files_by_name(dataset_id: int, file_names: list[str]=None, archived:bool=False) -> QuerySet[models.DataFiles]:
     dataset = models.Datasets.objects.get(pk=dataset_id)
-    if file_names is None:
-        files = dataset.current_files
+    if file_names:
+        files = dataset.files.filter(file_name__in=file_names, is_archived=archived)
+    elif archived:
+        files = dataset.archived_files
     else:
-        files = dataset.files.filter(file_name__in=file_names, is_archived=False)
+        files = dataset.current_files
 
     return files
 
 
-def get_files_by_id(dataset_id: int, file_ids: list[int]=None) -> QuerySet[models.DataFiles]:
+def get_files_by_id(dataset_id: int, file_ids: list[int]=None, archived:bool=False) -> QuerySet[models.DataFiles]:
     if not file_ids:
         raise ValidationError("No files were selected for archiving. Please select files and try again.")
 
     dataset = models.Datasets.objects.get(pk=dataset_id)
-    if 'all' in file_ids:
-        files = dataset.current_files
+    if 'all' not in file_ids:
+        files = dataset.files.filter(pk__in=file_ids, is_archived=archived)
+    elif archived:
+        files= dataset.archived_files
     else:
-        files = dataset.files.filter(pk__in=file_ids, is_archived=False)
+        files = dataset.current_files
 
     return files
 
@@ -158,17 +162,17 @@ def archive_files_by_id(user: User, dataset_id: int, file_ids: list, message: st
     archive_files(user, dataset_id, files, message)
 
 
-def delete_files_by_name(user: User, dataset_id: int, file_names: list[str]=None):
+def delete_files_by_name(user: User, dataset_id: int, file_names: list[str]=None, archived:bool=False):
     if user is None or not user.is_superuser:
         raise PermissionError("Only authenticated superusers can delete files.")
 
-    files = get_files_by_name(dataset_id, file_names)
+    files = get_files_by_name(dataset_id, file_names, archived)
     files.delete()
 
 
-def delete_files_by_id(user: User, dataset_id: int, file_ids: list):
+def delete_files_by_id(user: User, dataset_id: int, file_ids: list, archived:bool=False):
     if user is None or not user.is_superuser:
         raise PermissionError("Only authenticated superusers can delete files.")
 
-    files = get_files_by_id(dataset_id, file_ids)
+    files = get_files_by_id(dataset_id, file_ids, archived)
     files.delete()
