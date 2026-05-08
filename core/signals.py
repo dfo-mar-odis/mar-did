@@ -15,12 +15,14 @@ def delete_file_on_datafile_delete(sender, instance: DataFiles, **kwargs):
 
     if instance.is_archived:
         file_path = get_archive_path(dataset.pk)
+        archive_prefix = instance.archived_date.strftime("%Y%m%d%H%M%S")
+        abs_path = Path(file_path, f'{archive_prefix}_{instance.file_name}')
     else:
         file_path = get_output_path(dataset.pk)
+        abs_path = Path(file_path, instance.file_name)
 
-    abs_path = Path(file_path, instance.file_name)
     if abs_path.exists():
         abs_path.unlink()
-        logger.info(f"File deleted: {file_path}")
+        logger.info(f"File deleted: {abs_path}")
     else:
-        logger.warning(f"File not found for deletion: {file_path}")
+        logger.warning(f"File not found for deletion: {abs_path}")

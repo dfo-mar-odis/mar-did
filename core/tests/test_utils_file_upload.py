@@ -1,6 +1,9 @@
 import os
 import shutil
+
 from pathlib import Path
+from unittest.mock import patch
+from datetime import datetime
 
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -12,6 +15,7 @@ from core.tests import core_factory_floor
 from core.tests.core_factory_floor import MardidTestCase
 
 from core.utils import file_handler
+from core.utils.file_handler import get_archive_path
 
 # When running unit tests we want to use a separate media output directory to avoid
 # accidentally deleting or overwriting real files.
@@ -177,6 +181,54 @@ class TestFileUpload(MardidTestCase):
             for file in mock_files:
                 file_path = os.path.join(output_path, file.name)
                 assert not os.path.exists(file_path), f"Expected file to not exist after deletion: {file_path}"
+
+            # this should also remove the file tracking from the database
+            dataset = models.Datasets.objects.get(pk=dataset.pk)
+            assert dataset.files.count() == 0, "Files are still being tracked in the database"
+        except Exception as ex:
+            assert False, f"Unexpected exception was raised: {ex}"
+        finally:
+            if os.path.exists(output_path):
+                shutil.rmtree(output_path)
+
+
+    @tag("test_delete_archived_files")
+    @patch('core.utils.file_handler.timezone.now')
+    def test_delete_archived_files(self, mock_now):
+        expected_datetime = datetime(2026, 5, 8, 10, 30, 0)
+        mock_now.return_value = expected_datetime
+        # if user is superuser and no files are selected for a provided dataset, all archived files in the
+        # dataset should be deleted
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
+        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+
+        output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path)
+
+        try:
+            file_names = ["file1.txt","file2.txt","file3.txt",]
+            mock_files = [SimpleUploadedFile(fn, b"Content of file " + str(index).encode()) for index, fn in enumerate(file_names, start=1)]
+
+            file_handler.save_files(user=self.superuser, dataset_id=dataset.pk, files=mock_files)
+
+            dataset_path = Path(output_path, dataset.datatype.location.output_dir)
+            assert os.path.exists(dataset_path), f"Output path was not created: {dataset_path}"
+
+            # simulate the files being archived
+            file_handler.archive_files_by_name(user=self.superuser, dataset_id=dataset.pk, file_names=file_names, message="Archiving for test")
+
+            dataset_archive_path = get_archive_path(dataset.pk)
+            assert os.path.exists(dataset_archive_path), f"Archive path was not created: {dataset_archive_path}"
+
+            archive_prefix = expected_datetime.strftime("%Y%m%d%H%M%S")
+            for file in mock_files:
+                file_path = os.path.join(get_archive_path(dataset.pk), f'{archive_prefix}_{file.name}')
+                assert os.path.exists(file_path), f"Expected file to exist before deletion: {file_path}"
+
+            file_handler.delete_files_by_name(user=self.superuser, dataset_id=dataset.pk, file_names=file_names, archived=True)
+
+            for file in mock_files:
+                file_path = os.path.join(get_archive_path(dataset.pk), f'{archive_prefix}_{file.name}')
+                assert not os.path.exists(file_path), f"Expected file should not exist after deletion: {file_path}"
 
             # this should also remove the file tracking from the database
             dataset = models.Datasets.objects.get(pk=dataset.pk)

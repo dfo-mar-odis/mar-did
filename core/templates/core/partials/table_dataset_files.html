@@ -2,14 +2,14 @@
 
 {% if archived == "true" %}
 <table class="table table-sm table-striped" hx-get="{% url 'core:dataset_files_list' dataset.pk "true" %}"
-       hx-trigger="load, dataset_files_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_archived_dataset_files_list">
+       hx-trigger="load, dataset_archive_files_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_archived_dataset_files_list">
 {% else %}
 <table class="table table-sm table-striped" hx-get="{% url 'core:dataset_files_list' dataset.pk %}"
        hx-trigger="load, dataset_files_updated from:body" hx-swap="outerHTML" hx-indicator="#htmx_indicator_dataset_files_list">
 {% endif %}
     <thead class="sticky-top bg-white">
         <tr>
-        {% if request.user.is_authenticated and not archived %}
+        {% if request.user.is_authenticated %}
         <td class="" style="2%; white-space: nowrap;">
             <input type="checkbox" class="form-check" name="dataset_files" value="all" title="{% trans 'Select All' %}" />
         </td>
@@ -17,35 +17,35 @@
         <th>{% trans 'File Name' %}</th>
         <th>{% trans 'File Location' %}</th>
         <th>{% trans 'Submitted By' %}</th>
+        <th>{% trans 'Submitted Date' %}</th>
         {% if archived %}
         <th>{% trans 'Archived Date' %}</th>
         {% else %}
-        <th>{% trans 'Submitted Date' %}</th>
         {% endif %}
     </tr>
     </thead>
     <tbody>
     {% for file in files %}
     <tr>
-        {% if request.user.is_authenticated and not archived %}
-        <th style="width: 2%; white-space: nowrap;">
+        {% if request.user.is_authenticated %}
+        <th{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %} style="width: 2%; white-space: nowrap;">
             <input type="checkbox" class="form-check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}" />
         </th>
         {% endif %}
         <td{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %}>{{ file.file_name }}</td>
         <td>{{ file.dataset.get_dataset_root_path }}</td>
         <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
+        <td>{{ file.submitted_date }}</td>
         {% if archived %}
         <th>{{ file.archived_date }}</th>
         {% else %}
-        <td>{{ file.submitted_date }}</td>
         {% endif %}
 
     </tr>
     {% if file.is_archived %}
         {% for comment in file.comments.all %}
         <tr class="table-success">
-        <td colspan="3">{{ comment }}</td>
+        <td colspan="4">{{ comment }}</td>
         </tr>
         {% endfor %}
         {% endif %}

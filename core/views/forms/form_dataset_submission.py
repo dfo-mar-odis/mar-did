@@ -243,9 +243,11 @@ def submit_archive_files(request, dataset_id):
 def list_files(request, dataset_id, **kwargs):
     dataset = models.Datasets.objects.get(pk=dataset_id)
     context = {'dataset': dataset}
+    trigger = "dataset_files_updated from:body"
     if 'archived' in kwargs:
         files = dataset.files.filter(is_archived=True)
         context['archived'] = "true"
+        trigger = "dataset_archive_files_updated from:body"
     else:
         files = dataset.files.filter(is_archived=False)
 
@@ -254,7 +256,7 @@ def list_files(request, dataset_id, **kwargs):
     file_list_html = render_to_string('core/partials/table_dataset_files.html', context=context, request=request)
     soup = BeautifulSoup(file_list_html, 'html.parser')
     table = soup.find('table')
-    table.attrs['hx-trigger'] = "dataset_files_updated from:body"
+    table.attrs['hx-trigger'] = trigger
 
     return HttpResponse(soup)
 
@@ -402,7 +404,7 @@ def get_add_to_archive_form(request, dataset_id, **kwargs):
     return response
 
 
-def delete_files(request, dataset_id, **kwargs):
+def delete_files(request, dataset_id, archived, **kwargs):
     if response := redirect_if_not_superuser(request, next_page=reverse_lazy('core:dataset_submission_view', args=[dataset_id])):
         return response
 
@@ -410,9 +412,10 @@ def delete_files(request, dataset_id, **kwargs):
     triggers = []
     if request.method == 'POST':
         file_ids = request.POST.getlist('dataset_files', [])
+        archived_files = archived.lower() == 'true'
 
         try:
-            file_handler.delete_files_by_id(request.user, dataset_id, file_ids)
+            file_handler.delete_files_by_id(request.user, dataset_id, file_ids, archived=(archived_files))
         except Exception as ex:
             alert = get_alert("div_id_delete_message", "warning", str(ex))
             soup.append(alert)
@@ -420,7 +423,10 @@ def delete_files(request, dataset_id, **kwargs):
 
         alert = get_alert("div_id_delete_message", "success", _("Success"))
         soup.append(alert)
-        triggers.append('dataset_files_updated')
+        if archived_files:
+            triggers.append('dataset_archive_files_updated')
+        else:
+            triggers.append('dataset_files_updated')
     else:
         alert = get_alert("div_id_delete_message", "danger", _("Cannot process this request as a GET request."))
         soup.append(alert)
@@ -446,7 +452,7 @@ urlpatterns = [
     path('dataset/submission/files/list/<int:dataset_id>', list_files, name='dataset_files_list'),
     path('dataset/submission/files/list/<int:dataset_id>/<str:archived>', list_files, name='dataset_files_list'),
 
-    path('dataset/submission/files/delete/<int:dataset_id>', delete_files, name='delete_dataset_files'),
+    path('dataset/submission/files/delete/<int:dataset_id>/', delete_files, {'archived': 'false'}, name='delete_dataset_files'),
     path('dataset/submission/files/delete/<int:dataset_id>/<str:archived>', delete_files, name='delete_dataset_files'),
 
     path('dataset/comment/add/<int:dataset_id>', dataset_comment_update, name='add_dataset_comment'),
