@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.urls import reverse_lazy
 
+from django.utils.translation import gettext_lazy as _
 
 # Utility functions for user authentication and authorization
 
@@ -73,6 +74,6 @@ def redirect_if_not_superuser(request, next_page: str | None = None,
         return response
 
     if not request.user.is_superuser:
-        return HttpResponseForbidden("You do not have permission to access this resource.")
+        return HttpResponseForbidden(_("You do not have permission to access this resource."))
 
     return None
