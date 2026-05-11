@@ -9,7 +9,7 @@ from django import forms
 from django.forms.widgets import Select
 from django.http import Http404
 from django.contrib.auth.models import User
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseForbidden
 from django.middleware.csrf import get_token
 from django.template.context_processors import csrf
 from django.views.generic.base import TemplateView
@@ -796,6 +796,9 @@ def mission_dataset_delete(request, mission_id, dataset_id):
         return response
 
     dataset = models.Datasets.objects.get(pk=dataset_id)
+    if dataset.files.all().count() > 0:
+        return HttpResponseForbidden(_("Cannot delete a dataset that has files. Please delete the files from the dataset view first."))
+
     dataset.delete()
 
     return HttpResponse()
