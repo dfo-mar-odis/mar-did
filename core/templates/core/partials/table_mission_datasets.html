@@ -18,15 +18,16 @@
                         <span class="bi bi-search"></span>
                     </a>
                 {% if request.user.is_authenticated %}
-                    {% if dataset.files.all.count <= 0 %} {# only show the delete button if  #}
+                     {# only show the delete button if  #}
                     <button id="button_id_delete_dataset_{{ dataset.pk }}"
                             type="button" class="btn btn-sm btn-danger" title="{% trans 'Delete' %}"
+                            {% if dataset.files.all.count > 0 %}disabled="disabled"{% else %}
                             hx-delete="{% url 'core:delete_mission_dataset' mission.pk dataset.pk %}"
                             hx-confirm="{% trans 'Are you sure?' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                    hx-target="closest tr" hx-swap="delete">
+                            hx-target="closest tr" hx-swap="delete"
+                            {% endif %}>
                         <span class="bi bi-x-square"></span>
                     </button>
-                    {% endif %}
                 {% endif %}
                 </td>
                 <td><div class="btn btn-outline-secondary" title="{{ dataset.datatype.description }}">{{ dataset.datatype.name }}</div></td>

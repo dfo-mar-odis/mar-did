@@ -179,7 +179,9 @@ class TestFormMissionDatasets(MardidTestCase):
 
         soup = BeautifulSoup(response.content, 'html.parser')
         delete_btl_btn = soup.find(id=f"button_id_delete_dataset_{self.btl_dataset.pk}")
-        assert delete_btl_btn is None, "Anonymous user should not see the dataset delete button for BTL dataset, which has files"
+        assert delete_btl_btn is not None, "Anonymous user should see the dataset delete button for BTL dataset, which has files"
+        assert 'disabled' in delete_btl_btn.attrs, "The delete button should be disabled if a dataset has files attached to it"
+
 
         delete_salinity_btn = soup.find(id=f"button_id_delete_dataset_{self.salinity_dataset.pk}")
         assert delete_salinity_btn is not None, "Anonymous user should see the dataset delete button for Salinity dataset, which doesn't have files"
