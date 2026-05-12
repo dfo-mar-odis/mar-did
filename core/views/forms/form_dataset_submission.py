@@ -1,3 +1,9 @@
+import io
+import zipfile
+
+from pathlib import Path
+from datetime import datetime
+
 from bs4 import BeautifulSoup
 from crispy_forms.bootstrap import StrictButton
 from crispy_forms.helper import FormHelper
@@ -15,11 +21,13 @@ from django.views.generic.base import TemplateView
 
 from core import models
 from core.components import get_alert
+from core.models import Datasets
 from core.utils.authentication import redirect_if_not_authenticated, redirect_if_not_superuser
 
 import logging
 
 from core.utils import file_handler
+from core.utils.file_handler import get_current_working_path, get_files_by_id
 
 logger = logging.getLogger('mardid')
 
@@ -106,7 +114,7 @@ class DatasetSubmissionStatusForm(ModelForm):
 
         btn_label = _("Update Status")
         btn_submit = StrictButton(f'<span class="bi bi-check-square me-2"></span>{btn_label}',
-                                  css_class='btn btn-primary mb-1',
+                                  css_class='btn btn-primary btn-sm mb-1',
                                   **btn_submit_attrs)
 
         self.helper.layout = Layout(
@@ -437,6 +445,45 @@ def delete_files(request, dataset_id, archived, **kwargs):
     return response
 
 
+def download_files(request, dataset_id, archived, **kwargs):
+    dataset = Datasets.objects.get(pk=dataset_id)
+
+    file_ids = request.GET.getlist('dataset_files', [])
+    archived_files = archived.lower() == 'true'
+
+    if file_ids == []:
+        soup = BeautifulSoup('', 'html.parser')
+        alert = get_alert("div_id_download_message", "warning", _("No files were selected for download"))
+        soup.append(alert)
+
+        return HttpResponse(soup)
+
+    files = get_files_by_id(dataset_id, file_ids, archived_files)
+    download_file_name = f"{dataset.mission.name}_{dataset.datatype.name}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    dataset_path = get_current_working_path(dataset.pk)
+
+    # Create an in-memory file-like object
+    zip_buffer = io.BytesIO()
+
+    # Create a zip file in the buffer
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        for file in files:
+            data_file = Path(dataset_path, file.file_name)
+            if data_file.exists() and data_file.is_file():
+                logger.debug(data_file)
+                # Add each file to the zip archive
+                zip_file.write(data_file, arcname=data_file.name)
+
+    # Set the buffer's position to the beginning
+    zip_buffer.seek(0)
+
+    # Create the HTTP response with the zip file
+    response = HttpResponse(zip_buffer, content_type='application/zip')
+    response['Content-Disposition'] = f'attachment; filename="{download_file_name}.zip"'
+    response['HX-Trigger-After-Settle'] = "clear_messages"
+
+    return response
+
 urlpatterns = [
     path('dataset/submission/<int:dataset_id>', DatasetSubmissionView.as_view(), name='dataset_submission_view'),
 
@@ -449,6 +496,8 @@ urlpatterns = [
 
     path('dataset/submission/files/add/<int:dataset_id>', submit_files, name='submit_dataset_files'),
     path('dataset/submission/files/archive/<int:dataset_id>', submit_archive_files, name='archive_dataset_files'),
+    path('dataset/files/archive/<int:dataset_id>', get_add_to_archive_form, name='dataset_files_archive_files'),
+
     path('dataset/submission/files/list/<int:dataset_id>', list_files, name='dataset_files_list'),
     path('dataset/submission/files/list/<int:dataset_id>/<str:archived>', list_files, name='dataset_files_list'),
 
@@ -463,5 +512,6 @@ urlpatterns = [
     path('dataset/comment/update/<int:dataset_id>/<int:comment_id>', dataset_comment_form, name='dataset_comment_form'),
     path('dataset/comment/list/<int:dataset_id>', dataset_comment_list, name='list_dataset_comments'),
 
-    path('dataset/files/archive/<int:dataset_id>', get_add_to_archive_form, name='dataset_files_archive_files'),
+    path('dataset/submission/files/download/<int:dataset_id>/', download_files, {'archived': 'false'},
+         name='download_dataset_files'),
 ]

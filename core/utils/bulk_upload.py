@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from core.models import Missions, DataFiles, FileTypes, Datasets
-from core.utils.file_handler import  get_output_path, archive_files
+from core.utils.file_handler import  get_current_working_path, archive_files
 
 logger = logging.getLogger('mardid')
 
@@ -140,7 +140,7 @@ def file_itr(user: User, existing_files: list[Path], datatype_path: Path, dataty
                     archive_files(user, dataset.pk, archive, message=message)
 
                 if file.name in datatype_dict.get(dataset.datatype.name, []):
-                    destination_path = Path(get_output_path(dataset.pk), file.name)
+                    destination_path = Path(get_current_working_path(dataset.pk), file.name)
                     logger.info(f"Moving file {file} to {destination_path}")
                     destination_path.parent.mkdir(parents=True, exist_ok=True)
                     shutil.move(str(file), str(destination_path))

@@ -5,7 +5,7 @@
         <div class="col">{{ title }}</div>
         <div id="{{ alert_id }}_button_area" class="col-auto">
             <button type="button" class="btn btn-sm btn-outline-dark" title="{% trans 'Remove Alert' %}"
-                    hx-target="#{{ alert_id }}" hx-swap="delete" hx-get="">
+                    hx-target="#{{ alert_id }}" hx-swap="delete" hx-get="" hx-trigger="click, clear_messages from:body">
                 <span class="bi bi-x"></span>
             </button>
         </div>

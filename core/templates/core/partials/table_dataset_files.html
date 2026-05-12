@@ -9,11 +9,9 @@
 {% endif %}
     <thead class="sticky-top bg-white">
         <tr>
-        {% if request.user.is_authenticated %}
         <td class="" style="2%; white-space: nowrap;">
             <input type="checkbox" class="form-check" name="dataset_files" value="all" title="{% trans 'Select All' %}" />
         </td>
-        {% endif %}
         <th>{% trans 'File Name' %}</th>
         <th>{% trans 'File Location' %}</th>
         <th>{% trans 'Submitted By' %}</th>
@@ -27,11 +25,9 @@
     <tbody>
     {% for file in files %}
     <tr>
-        {% if request.user.is_authenticated %}
         <th{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %} style="width: 2%; white-space: nowrap;">
             <input type="checkbox" class="form-check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}" />
         </th>
-        {% endif %}
         <td{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %}>{{ file.file_name }}</td>
         <td>{{ file.dataset.get_dataset_root_path }}</td>
         <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>

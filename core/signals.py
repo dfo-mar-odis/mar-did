@@ -4,7 +4,7 @@ from pathlib import Path
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from core.models import DataFiles  # Replace with the correct import path for your DataFiles model
-from core.utils.file_handler import get_archive_path, get_output_path
+from core.utils.file_handler import get_archive_path, get_current_working_path
 
 import logging
 logger = logging.getLogger("mardid")
@@ -18,7 +18,7 @@ def delete_file_on_datafile_delete(sender, instance: DataFiles, **kwargs):
         archive_prefix = instance.archived_date.strftime("%Y%m%d%H%M%S")
         abs_path = Path(file_path, f'{archive_prefix}_{instance.file_name}')
     else:
-        file_path = get_output_path(dataset.pk)
+        file_path = get_current_working_path(dataset.pk)
         abs_path = Path(file_path, instance.file_name)
 
     if abs_path.exists():
