@@ -307,11 +307,13 @@ def update_dataset_status(request, dataset_id):
     span.attrs['class'] = f'btn btn-sm {dataset.status.get_button_colour} text-black'
     span.string = dataset.status.name
 
-    send_mail("Mar-DID Dataset Status Updated",
+    res = send_mail("Mar-DID Dataset Status Updated",
               "This is a test message, the status of a dataset has changed.",
               "mar-did-no-reply@dfo-mpo.gc.ca",
               ["patrick.upson@dfo-mpo.gc.ca"],
               fail_silently=False)
+    logger.info(f"Mail sent: {res}")
+    
     return HttpResponse(soup)
 
 
