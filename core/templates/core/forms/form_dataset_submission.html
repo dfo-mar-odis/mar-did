@@ -67,28 +67,37 @@
         <div class="tab-pane fade show active" id="div_id_dataset_tabs_files" role="tabpanel"
              aria-labelledby="div_id_dataset_tabs_files">
             <form id="dataset_files_form" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                {% if request.user.is_authenticated %}
-                    <div id="div_id_dataset_file_actions">
-                    <button type="button" class="btn btn-sm btn-warning"
-                            name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
+                <div id="div_id_dataset_file_actions">
+                    <button name="dataset_files_download" title="{% trans "Download Selected Files" %}"
+                            class="btn btn-sm btn-primary"
                             hx-target="#div_id_dataset_tabs_message"
-                            hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
-                            hx-include="#dataset_files_form"
+                            hx-get="{% url 'core:download_dataset_files' dataset.pk %}"
                             hx-indicator=".htmx-indicator"
-                            hx-prompt="{% trans "Reason for archival" %}"
-                    ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>
-                    {% if request.user.is_superuser %}
-                        <button type="button" class="btn btn-sm btn-danger"
-                                name="dataset_files_delete" title="{% trans "Remove Files and Database Tracking" %}"
+                            hx-include="#dataset_files_form"
+                    >
+                        <span class="bi bi-filetype-pdf me-1"></span>{% trans "Download Selected" %}
+                    </button>
+                    {% if request.user.is_authenticated %}
+                        <button type="button" class="btn btn-sm btn-warning"
+                                name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
                                 hx-target="#div_id_dataset_tabs_message"
-                                hx-post="{% url 'core:delete_dataset_files' dataset.pk %}"
+                                hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
                                 hx-include="#dataset_files_form"
                                 hx-indicator=".htmx-indicator"
-                                hx-confirm="{% trans "These files will be unrecoverable. Are you sure you want to delete these files?" %}"
-                        ><span class="bi bi-dash-square me-1"></span>{% trans "Delete Selected" %}</button>
+                                hx-prompt="{% trans "Reason for archival" %}"
+                        ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>
+                        {% if request.user.is_superuser %}
+                            <button type="button" class="btn btn-sm btn-danger"
+                                    name="dataset_files_delete" title="{% trans "Remove Files and Database Tracking" %}"
+                                    hx-target="#div_id_dataset_tabs_message"
+                                    hx-post="{% url 'core:delete_dataset_files' dataset.pk %}"
+                                    hx-include="#dataset_files_form"
+                                    hx-indicator=".htmx-indicator"
+                                    hx-confirm="{% trans "These files will be unrecoverable. Are you sure you want to delete these files?" %}"
+                            ><span class="bi bi-dash-square me-1"></span>{% trans "Delete Selected" %}</button>
+                        {% endif %}
                     {% endif %}
                 </div>
-                {% endif %}
                 <div class="mt-2" id="div_id_dataset_tabs_message">
 
                 </div>
@@ -146,12 +155,12 @@
     const MAX_FILES = 50; // Set limit
 
     fileInput.addEventListener('change', function() {
-    if (this.files.length > MAX_FILES) {
-    alert(`Maximum ${MAX_FILES} files allowed.`);
-    this.value = ''; // Clear selection
-    fileCountElement.textContent = '';
-    } else {
-    fileCountElement.textContent = this.files.length + " file(s) selected";
-    }
+        if (this.files.length > MAX_FILES) {
+            alert(`Maximum ${MAX_FILES} files allowed.`);
+            this.value = ''; // Clear selection
+            fileCountElement.textContent = '';
+        } else {
+            fileCountElement.textContent = this.files.length + " file(s) selected";
+        }
     });
 {% endblock %}
