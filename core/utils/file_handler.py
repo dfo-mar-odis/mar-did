@@ -16,7 +16,7 @@ import logging
 logger = logging.getLogger('mardid')
 
 
-def get_output_path(dataset_id) -> Path:
+def get_current_working_path(dataset_id) -> Path:
     dataset = models.Datasets.objects.get(pk=dataset_id)
     datatype_output = dataset.datatype.location.output_dir
     output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
@@ -56,7 +56,7 @@ def save_files(user: User, dataset_id: int, files: list[File]):
 
     dataset = models.Datasets.objects.get(pk=dataset_id)
 
-    output_path = get_output_path(dataset.pk)
+    output_path = get_current_working_path(dataset.pk)
     if not os.path.exists(output_path):
         os.makedirs(output_path)
         logger.info(f"Directory created: {output_path}")
@@ -94,7 +94,7 @@ def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles]
     if message is None:
         raise ValidationError("A reason must be given for why files are being archived.")
 
-    output_path = get_output_path(dataset_id)
+    output_path = get_current_working_path(dataset_id)
     archive_path = get_archive_path(dataset_id)
 
     if not os.path.exists(archive_path):

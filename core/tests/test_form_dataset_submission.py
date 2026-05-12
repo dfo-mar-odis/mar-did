@@ -15,7 +15,7 @@ from django.test import override_settings
 from core.models import DataFiles
 from core.tests import core_factory_floor
 from core.tests.core_factory_floor import MardidTestCase
-from core.utils.file_handler import get_output_path, save_files
+from core.utils.file_handler import get_current_working_path, save_files
 
 
 # When running unit tests we want to use a separate media output directory to avoid
@@ -32,13 +32,16 @@ class AbstractTestWithUsers(MardidTestCase):
 
 
 @tag('test_form_dataset_submission')
-class TestFormMission(AbstractTestWithUsers):
+class TestFormDatasetSubmission(AbstractTestWithUsers):
+
+    def setUp(self):
+        super().setUp()
+        self.dataset = core_factory_floor.MissionDatasetFactory.create()
 
     def test_dataset_status_update_not_visible_to_anonymous_user(self):
-        dataset = core_factory_floor.MissionDatasetFactory()
-        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=dataset)
+        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=self.dataset)
 
-        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[dataset.pk]))
+        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[self.dataset.pk]))
         soup = BeautifulSoup(response.content, 'html.parser')
 
         # an anonymous user should not be able to see the file submission form
@@ -70,10 +73,9 @@ class TestFormMission(AbstractTestWithUsers):
         # IDs are accounted for if they end up being changed in the future.
         self.client.login(username='testuser', password='password')
 
-        dataset = core_factory_floor.MissionDatasetFactory()
-        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=dataset)
+        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=self.dataset)
 
-        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[dataset.pk]))
+        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[self.dataset.pk]))
         soup = BeautifulSoup(response.content, 'html.parser')
 
         # a user should be able to see the file submission form
@@ -108,10 +110,9 @@ class TestFormMission(AbstractTestWithUsers):
         # If the user is a authenticated, they should have access to the archive data files button.
         self.client.login(username='testuser', password='password')
 
-        dataset = core_factory_floor.MissionDatasetFactory()
-        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=dataset)
+        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=self.dataset)
 
-        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[dataset.pk]))
+        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[self.dataset.pk]))
         soup = BeautifulSoup(response.content, 'html.parser')
 
         delete_btn = soup.find("button", attrs={'name': 'dataset_files_archive'})
@@ -121,10 +122,9 @@ class TestFormMission(AbstractTestWithUsers):
         # If the user is a superuser, they should have access to the delete data files button.
         self.client.login(username='admin', password='password')
 
-        dataset = core_factory_floor.MissionDatasetFactory()
-        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=dataset)
+        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=self.dataset)
 
-        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[dataset.pk]))
+        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[self.dataset.pk]))
         soup = BeautifulSoup(response.content, 'html.parser')
 
         delete_btn = soup.find("button", attrs={'name': 'dataset_files_delete'})
@@ -134,14 +134,22 @@ class TestFormMission(AbstractTestWithUsers):
         # If the user is authenticated, but not a superuser, they should not have access to the delete data files button.
         self.client.login(username='testuser', password='password')
 
-        dataset = core_factory_floor.MissionDatasetFactory()
-        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=dataset)
+        core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=self.dataset)
 
-        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[dataset.pk]))
+        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[self.dataset.pk]))
         soup = BeautifulSoup(response.content, 'html.parser')
 
         delete_btn = soup.find("button", attrs={'name': 'dataset_files_delete'})
         self.assertIsNone(delete_btn)
+
+    def test_download_dataset(self):
+        # I don't require a user to be logged in to download a dataset. Everyone should have access to the button
+        # and functions to select files to be downloaded.
+        response = self.client.get(reverse_lazy('core:dataset_submission_view', args=[self.dataset.pk]))
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        download_btn = soup.find("button", attrs={'name': 'dataset_files_download'})
+        assert download_btn is not None, "The download button was not found but is expected to exist."
 
 
 @tag('test_form_dataset_submission', 'test_form_dataset_submission_with_files')
@@ -162,7 +170,7 @@ class TestFormWithFiles(AbstractTestWithUsers):
     def test_dataset_file_submission_success(self):
         # If files are successfully submitted, the response should include an HX-Trigger header with the value 'dataset_files_updated'
         # and None is returned because the form should clear itself
-        output_path = get_output_path(self.dataset.pk)
+        output_path = get_current_working_path(self.dataset.pk)
 
         self.client.login(username='testuser', password='password')
         files = ['file1.txt', 'file2.txt', 'file3.txt', 'file4.txt']
@@ -186,7 +194,7 @@ class TestFormWithFiles(AbstractTestWithUsers):
         # the response should contain a message area to be swapped in where the button exists.
         # this should contain a new form with a text field asking the user to leave a message on why files
         # are being replaced.
-        output_path = get_output_path(self.dataset.pk)
+        output_path = get_current_working_path(self.dataset.pk)
 
         self.client.login(username='testuser', password='password')
 
@@ -214,7 +222,7 @@ class TestFormWithFiles(AbstractTestWithUsers):
 
         response = self.client.post(reverse_lazy('core:delete_dataset_files', args=[self.dataset.pk]))
         self.assertEqual(response.status_code, 302)
-        self.assertIn('/en/login/?next=/en/dataset/submission/6', response.url)
+        self.assertIn(f'/en/login/?next=/en/dataset/submission/{self.dataset.pk}', response.url)
 
     def test_dataset_delete_authenticated(self):
         # an authenticated non-super user should get a HttpResponseForbidden when attempting to delete dataset files
@@ -236,7 +244,7 @@ class TestFormWithFiles(AbstractTestWithUsers):
         # related to the dataset.
         # If files are successfully deleted, the response should include an HX-Trigger header with the value
         # 'dataset_files_updated' and None is returned because the form should clear itself
-        output_path = get_output_path(self.dataset.pk)
+        output_path = get_current_working_path(self.dataset.pk)
 
         # must be a superuser to delete files
         self.client.login(username='admin', password='password')
