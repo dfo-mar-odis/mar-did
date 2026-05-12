@@ -10,6 +10,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Hidden, Row, Column, Div, Field
 from crispy_forms.utils import render_crispy_form
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.forms import ModelForm
 from django import forms
 from django.http import HttpResponse
@@ -306,6 +307,11 @@ def update_dataset_status(request, dataset_id):
     span.attrs['class'] = f'btn btn-sm {dataset.status.get_button_colour} text-black'
     span.string = dataset.status.name
 
+    send_mail("Mar-DID Dataset Status Updated",
+              "This is a test message, the status of a dataset has changed.",
+              "mar-did-no-reply@dfo-mpo.gc.ca",
+              ["patrick.upson@dfo-mpo.gc.ca"],
+              fail_silently=False)
     return HttpResponse(soup)
 
 
