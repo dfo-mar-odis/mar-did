@@ -379,6 +379,8 @@ class Datasets(models.Model):
     status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT,
                                related_name="datasets", db_column='dataset_status_seq')
 
+    subscribers = models.ManyToManyField("auth.User", verbose_name=_("Subscribers"), through='DatasetSubscribers')
+
     @property
     def current_files(self):
         return self.files.filter(is_archived=False)
@@ -397,6 +399,17 @@ class Datasets(models.Model):
     class Meta:
         db_table = 'datasets'
         ordering = ['mission', 'datatype']
+
+
+class DatasetSubscribers(models.Model):
+    id = models.AutoField(primary_key=True, db_column='subscriber_seq')
+    dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='subscriber_datasets',
+                                db_column='dataset_seq')
+    subscriber = models.ForeignKey('auth.User', verbose_name=_("Subscriber"), on_delete=models.CASCADE,
+                                   related_name='dataset_subscribers', db_column='user_seq')
+
+    class Meta:
+        db_table = 'APPLICATION_DATASET_SUBSCRIBERS'
 
 
 class DataFiles(models.Model):
