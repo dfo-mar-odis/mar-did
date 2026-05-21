@@ -14,6 +14,7 @@
     {# when this button is clicked either everything is fine and the form will be cleared or it should get replaced #}
     {# with a message area with an error or a form with additional options for the user. #}
     <button id="btn_id_form_submit" type="button" title="{% trans 'Upload attached files' %}"
+            hx-encoding="multipart/form-data"
             hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
             hx-swap="outerHTML"
             hx-post="{% url 'core:submit_dataset_files' dataset.id %}" class="btn btn-sm btn-primary"
