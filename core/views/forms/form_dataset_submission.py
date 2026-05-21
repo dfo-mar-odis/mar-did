@@ -27,7 +27,7 @@ from core.utils.authentication import redirect_if_not_authenticated, redirect_if
 
 import logging
 
-from core.utils import file_handler
+from core.utils import file_handler, notifications
 from core.utils.file_handler import get_current_working_path, get_files_by_id
 
 logger = logging.getLogger('mardid')
@@ -283,13 +283,8 @@ def update_dataset_status_form(request, dataset_id):
 
     form = DatasetSubmissionStatusForm(request.POST, instance=dataset)
     if form.is_valid():
-        form.save()
-
-        send_mail("Mar-DID Dataset Status Updated",
-                  "This is a test message, the status of a dataset has changed.",
-                  "mar-did-no-reply@dfo-mpo.gc.ca",
-                  ["patrick.upson@dfo-mpo.gc.ca"],
-                  fail_silently=False)
+        dataset: Datasets = form.save()
+        notifications.send_data_status_notification(dataset)
 
         context = {
             'csrf_token': get_token(request)  # Add CSRF token to the context
@@ -491,6 +486,31 @@ def download_files(request, dataset_id, archived, **kwargs):
 
     return response
 
+def update_dataset_subscribe(request, dataset_id, subscribe):
+    if response := redirect_if_not_authenticated(request):
+        return response
+
+    dataset = Datasets.objects.get(pk=dataset_id)
+    subscribed = False
+    if subscribe.lower() == 'true':
+        dataset.subscribers.add(request.user)
+        subscribed = True
+    else:
+        dataset.subscribers.remove(request.user)
+
+    soup = BeautifulSoup("", "html.parser")
+    soup.append(btn := soup.new_tag('button'))
+    btn.attrs['class'] = 'btn btn-dark' if subscribed else 'btn btn-outline-dark'
+    btn.attrs['type'] = 'button'
+    btn.attrs['hx-get'] = reverse_lazy('core:update_dataset_subscribe', args=[dataset_id, str(not subscribed)])
+    btn.attrs['hx-swap'] = 'outerHTML'
+    btn.attrs['title'] = _("Unsubscribe from dataset") if subscribed else _("Subscribe to dataset")
+    btn.append(soup.new_tag('span', attrs={'class': 'bi bi-rss'}))
+
+    response = HttpResponse(soup)
+    response['HX-Trigger'] = "dataset_subscription_updated"
+    return response
+
 urlpatterns = [
     path('dataset/submission/<int:dataset_id>', DatasetSubmissionView.as_view(), name='dataset_submission_view'),
 
@@ -500,6 +520,8 @@ urlpatterns = [
          name='update_dataset_status_form'),
     path('dataset/submission/status/update/icon/<int:dataset_id>', update_dataset_status,
          name='update_dataset_status'),
+    path('dataset/submission/status/update/subscribe/<int:dataset_id>/<str:subscribe>', update_dataset_subscribe,
+         name='update_dataset_subscribe'),
 
     path('dataset/submission/files/add/<int:dataset_id>', submit_files, name='submit_dataset_files'),
     path('dataset/submission/files/archive/<int:dataset_id>', submit_archive_files, name='archive_dataset_files'),

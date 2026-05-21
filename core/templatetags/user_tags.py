@@ -18,3 +18,11 @@ def is_chief_scientist(user):
         return user.is_superuser or user.groups.filter(name='Chief Scientists').exists()
 
     return False
+
+@register.filter
+def is_subscribed(user, dataset):
+    """Check if user is subscribed to a dataset"""
+    if not user.is_authenticated:
+        return False
+
+    return dataset.subscribers.filter(dataset_subscribers__subscriber=user).exists()
