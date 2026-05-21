@@ -15,6 +15,7 @@ from django.forms import ModelForm
 from django import forms
 from django.http import HttpResponse
 from django.middleware.csrf import get_token
+from django.template.context_processors import csrf
 from django.template.loader import render_to_string
 from django.urls import path, reverse_lazy
 from django.utils.translation import gettext as _
@@ -197,7 +198,9 @@ def submit_files(request, dataset_id):
             message = _("The following files already exist in the dataset and must be archived before "
                         "they can be re-submitted: ") + ", ".join(existing_files)
 
-            form = render_crispy_form(DatasetSubmissionArchiveForm(dataset_id=dataset_id))
+            context = {}
+            context.update(csrf(request))
+            form = render_crispy_form(DatasetSubmissionArchiveForm(dataset_id=dataset_id), context=context)
 
             message_soup = get_alert('div_id_submission_message', "warning", message)
             soup = BeautifulSoup(form, 'html.parser')
