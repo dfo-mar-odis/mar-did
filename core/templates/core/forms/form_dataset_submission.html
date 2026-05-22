@@ -75,8 +75,9 @@
     <div class="tab-content card card-body mb-2 border border-dark bg-light" id="dataset_tabs">
         <div class="tab-pane fade show active" id="div_id_dataset_tabs_files" role="tabpanel"
              aria-labelledby="div_id_dataset_tabs_files">
-            <form id="dataset_files_form" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+            <form id="dataset_files_form">
                 <div id="div_id_dataset_file_actions">
+                <!-- Button trigger modal -->
                     <button name="dataset_files_download" title="{% trans "Download Selected Files" %}"
                             class="btn btn-sm btn-primary"
                             hx-target="#div_id_dataset_tabs_message"
@@ -87,14 +88,19 @@
                         <span class="bi bi-filetype-pdf me-1"></span>{% trans "Download Selected" %}
                     </button>
                     {% if request.user.is_authenticated %}
-                        <button type="button" class="btn btn-sm btn-warning"
-                                name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
-                                hx-target="#div_id_dataset_tabs_message"
-                                hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
-                                hx-include="#dataset_files_form"
-                                hx-indicator=".htmx-indicator"
-                                hx-prompt="{% trans "Reason for archival" %}"
-                        ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>
+                        <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.showModal()"><span class="bi bi-filetype-pdf me-1"></span>{% trans "Archive Selected" %}</button>
+                        <dialog id="dataset_modal">
+                                <p class="mb-2">{% trans "Reason for archival" %}</p>
+                                <input name="dataset_archive_reason" class="form-control form-control-sm mb-2">
+                                <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.close()"
+                                    name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
+                                    hx-target="#div_id_dataset_tabs_message"
+                                    hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
+                                    hx-include="#dataset_files_form"
+                                    hx-indicator=".htmx-indicator"
+                                ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>
+                                <button type="button" class="btn btn-sm btn-secondary" onclick="window.dataset_modal.close()">{% trans "Cancel" %}</button>
+                        </dialog>
                         {% if request.user.is_superuser %}
                             <button type="button" class="btn btn-sm btn-danger"
                                     name="dataset_files_delete" title="{% trans "Remove Files and Database Tracking" %}"
@@ -118,7 +124,7 @@
 
         <div class="tab-pane fade" id="div_id_dataset_tabs_archived" role="tabpanel"
              aria-labelledby="div_id_dataset_tabs_archived">
-            <form id="dataset_files_form" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+            <form id="dataset_files_form">
                 {% if request.user.is_authenticated %}
                     <div id="div_id_dataset_file_actions">
                         {% if request.user.is_superuser %}
@@ -146,7 +152,7 @@
         <div class="tab-pane fade" id="div_id_dataset_tabs_comments" role="tabpanel"
              aria-labelledby="div_id_dataset_tabs_comments">
             {% if user.is_authenticated %}
-                <form class="mb-2" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id="form_id_dataset_comments">
+                <form class="mb-2" id="form_id_dataset_comments">
                     {% crispy dataset_comments_form %}
                 </form>
             {% endif %}

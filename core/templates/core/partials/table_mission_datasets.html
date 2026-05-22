@@ -23,7 +23,7 @@
                             type="button" class="btn btn-sm btn-danger" title="{% trans 'Delete' %}"
                             {% if dataset.files.all.count > 0 %}disabled="disabled"{% else %}
                             hx-delete="{% url 'core:delete_mission_dataset' mission.pk dataset.pk %}"
-                            hx-confirm="{% trans 'Are you sure?' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                            hx-confirm="{% trans 'Are you sure?' %}"
                             hx-target="closest tr" hx-swap="delete"
                             {% endif %}>
                         <span class="bi bi-x-square"></span>

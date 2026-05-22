@@ -127,7 +127,7 @@ class MissionCommentsForm(forms.ModelForm):
 class MissionDatasetsForm(forms.ModelForm):
     class Meta:
         model = models.Datasets
-        fields = '__all__'
+        exclude = ['subscribers']
 
     def init_datatype_field(self):
         all_datatypes = list(models.DataTypes.objects.all())
@@ -940,7 +940,6 @@ def upload_bulk_directories(request, mission_id):
             "hx-target": "#div_id_dataset_message_area",
             "hx-prompt": _("Reason for archival"),
             "hx-indicator": ".htmx-indicator",
-            "hx-headers": '{"X-CSRFToken": "' + get_token(request) + '"}',
         }
         btn.append(alert.new_tag("span", string=_("Archive reason"), attrs={'class': "bi bi-check me-1"}))
 
