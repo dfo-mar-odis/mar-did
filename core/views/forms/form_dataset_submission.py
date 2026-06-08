@@ -395,7 +395,7 @@ def get_add_to_archive_form(request, dataset_id, **kwargs):
     triggers = []
     if request.method == 'POST':
         file_ids = request.POST.getlist('dataset_files', [])
-        message = request.headers.get('HX-Prompt', '')
+        message = request.POST.get("dataset_archive_reason", "").strip() or None
 
         try:
             file_handler.archive_files_by_id(request.user, dataset_id, file_ids, message)
@@ -407,6 +407,7 @@ def get_add_to_archive_form(request, dataset_id, **kwargs):
         alert = get_alert("div_id_archive_message", "success", _("Success"))
         soup.append(alert)
         triggers.append('dataset_files_updated')
+        triggers.append('dataset_archive_files_updated')
     else:
         alert = get_alert("div_id_archive_message", "danger", _("Cannot process this request as a GET request."))
         soup.append(alert)
