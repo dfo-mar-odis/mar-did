@@ -24,7 +24,7 @@
                     {% endif %}
                     <button type="button" class="btn btn-sm btn-danger" title="{% trans 'Delete' %}"
                             hx-delete="{% url 'core:delete_mission_comment' mission.pk comment.pk %}"
-                            hx-confirm="{% trans 'Are you sure?' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                            hx-confirm="{% trans 'Are you sure?' %}"
                     hx-target="closest tr" hx-swap="delete">
                         <span class="bi bi-x-square"></span>
                     </button>

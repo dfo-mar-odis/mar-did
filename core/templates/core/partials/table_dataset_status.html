@@ -21,7 +21,7 @@
                 <button class="btn btn-sm {{dataset.status.get_button_colour}}" title="{% trans dataset.status.description %}">{% trans dataset.status.name %}</button>
             </td>
             <td>
-                <form hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                <form>
                     {% csrf_token %}
                     <div class="input-group">
                         <select class="form-select form-select-sm" id="select_id_assigned_to" name="assigned_to">

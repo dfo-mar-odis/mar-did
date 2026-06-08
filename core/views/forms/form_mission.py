@@ -127,7 +127,7 @@ class MissionCommentsForm(forms.ModelForm):
 class MissionDatasetsForm(forms.ModelForm):
     class Meta:
         model = models.Datasets
-        fields = '__all__'
+        exclude = ['subscribers']
 
     def init_datatype_field(self):
         all_datatypes = list(models.DataTypes.objects.all())
@@ -921,30 +921,16 @@ def upload_bulk_directories(request, mission_id):
     if redirect := redirect_if_not_authenticated(request):
         return redirect
 
-    reason = request.headers.get('HX-Prompt', None)
+    reason = request.POST.get('dataset_archive_reason', None)
     mission = models.Missions.objects.get(pk=mission_id)
     file_index = bulk_upload.index_files(mission)
     try:
         # if a reason is provided then we'll archive any existing files
         status_object_list: dict[models.Datasets, Generator[bulk_upload.FileStatus, Any, None]] = bulk_upload.move_files(request.user, mission, file_index, reason)
     except FileExistsError as ex:
-        alert = AlertDialog("div_id_bulk_load_message", "warning", "One or more files in the batch already exist. Upload with reason?")
-        alert.set_border('dark')
-        alert.get_button_area().append(btn:=alert.new_tag("button"))
-        btn.attrs = {
-            "id": "button_id_upload_bulk_confirm",
-            "title": _("Archive files with a reason"),
-            "class": "btn btn-sm btn-warning",
-            "type": "button",
-            "hx-post": reverse_lazy('core:upload_bulk_input_directories', args=[mission_id]),
-            "hx-target": "#div_id_dataset_message_area",
-            "hx-prompt": _("Reason for archival"),
-            "hx-indicator": ".htmx-indicator",
-            "hx-headers": '{"X-CSRFToken": "' + get_token(request) + '"}',
-        }
-        btn.append(alert.new_tag("span", string=_("Archive reason"), attrs={'class': "bi bi-check me-1"}))
-
-        return HttpResponse(alert)
+        # If a reason is required, activate the '#dataset_modal' which gives the user access to the 'dataset_archive_reason' textbox
+        html = '<div hx-on:load="window.dataset_modal.showModal()"></div>'
+        return HttpResponse(html)
 
     alert = AlertDialog("div_id_bulk_load_message", "light", "Moved and Indexed Files")
     alert.set_border('dark')
