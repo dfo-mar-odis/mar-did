@@ -78,6 +78,20 @@
                             </button>
                         </div>
                     </div>
+                    <div>
+                        <dialog id="dataset_modal">
+                            <label for="textarea_data_archive_reason">{% trans "Some files already exist. A reason must be given for their re-upload." %}</label>
+                            <textarea id="textarea_data_archive_reason" rows="2" cols="60" name="dataset_archive_reason" class="form-control mb-2"></textarea>
+                            <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.close()"
+                                    name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
+                                    hx-target="#div_id_dataset_message_area"
+                                    hx-post="{% url 'core:upload_bulk_input_directories' object.pk %}"
+                                    hx-include="#textarea_data_archive_reason"
+                                    hx-indicator=".htmx-indicator"
+                                ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>
+                                <button type="button" class="btn btn-sm btn-secondary" onclick="window.dataset_modal.close()">{% trans "Cancel" %}</button>
+                        </dialog>
+                    </div>
                     <div id="div_id_dataset_message_area"></div>
                 {% endif %}
                 {% include 'core/partials/table_mission_datasets.html' with mission=object %}

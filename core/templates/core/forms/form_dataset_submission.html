@@ -90,9 +90,9 @@
                     {% if request.user.is_authenticated %}
                         <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.showModal()"><span class="bi bi-filetype-pdf me-1"></span>{% trans "Archive Selected" %}</button>
                         <dialog id="dataset_modal">
-                                <p class="mb-2">{% trans "Reason for archival" %}</p>
-                                <input name="dataset_archive_reason" class="form-control form-control-sm mb-2">
-                                <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.close()"
+                            <label for="textarea_data_archive_reason">{% trans "Reason for archival" %}</label>
+                            <textarea id="textarea_data_archive_reason" rows="2" cols="60" name="dataset_archive_reason" class="form-control mb-2"></textarea>
+                            <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.close()"
                                     name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
                                     hx-target="#div_id_dataset_tabs_message"
                                     hx-post="{% url 'core:dataset_files_archive_files' dataset.pk %}"
