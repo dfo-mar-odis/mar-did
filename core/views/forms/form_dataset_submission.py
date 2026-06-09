@@ -495,23 +495,15 @@ def update_dataset_subscribe(request, dataset_id, subscribe):
         return response
 
     dataset = Datasets.objects.get(pk=dataset_id)
-    subscribed = False
     if subscribe.lower() == 'true':
         dataset.subscribers.add(request.user)
-        subscribed = True
     else:
         dataset.subscribers.remove(request.user)
 
-    soup = BeautifulSoup("", "html.parser")
-    soup.append(btn := soup.new_tag('button'))
-    btn.attrs['class'] = 'btn btn-dark' if subscribed else 'btn btn-outline-dark'
-    btn.attrs['type'] = 'button'
-    btn.attrs['hx-get'] = reverse_lazy('core:update_dataset_subscribe', args=[dataset_id, str(not subscribed)])
-    btn.attrs['hx-swap'] = 'outerHTML'
-    btn.attrs['title'] = _("Unsubscribe from dataset") if subscribed else _("Subscribe to dataset")
-    btn.append(soup.new_tag('span', attrs={'class': 'bi bi-rss'}))
+    context = { 'dataset': dataset }
+    subscribe = render_to_string('core/forms/form_dataset_submission.html#subscribe_partial', context, request)
 
-    response = HttpResponse(soup)
+    response = HttpResponse(subscribe)
     response['HX-Trigger'] = "dataset_subscription_updated"
     return response
 
