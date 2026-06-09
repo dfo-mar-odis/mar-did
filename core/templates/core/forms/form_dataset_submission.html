@@ -3,16 +3,30 @@
 {% load crispy_forms_tags %}
 {% load user_tags %}
 
-{% block content %}
-    <div class="h4 mb-2">
-        <a href="{% url 'core:update_mission_view' dataset.mission.pk %}" class="btn btn-dark me-2"><span class="bi bi-search"></span></a>
+{% partialdef subscribe_partial %}
+    <hx-partial hx-target="#span_id_subscribe" hx-swap="innerHTML">
         {% if request.user.is_authenticated %}
             {% if request.user|is_subscribed:dataset %}
-        <button type="button" hx-swap="outerHTML" hx-get="{% url 'core:update_dataset_subscribe' dataset.pk 'False' %}" title="{% trans "Unsubscribe from dataset" %}" class="btn btn-dark"><span class="bi bi-rss"></span></button>
+        <button type="button" hx-get="{% url 'core:update_dataset_subscribe' dataset.pk 'False' %}" title="{% trans "Unsubscribe from dataset" %}" class="btn btn-dark"><span class="bi bi-rss me-2"></span> {% trans "Unsubscribe" %}</button>
             {% else %}
-        <button type="button" hx-swap="outerHTML" hx-get="{% url 'core:update_dataset_subscribe' dataset.pk 'True' %}" title="{% trans "Subscribe to dataset" %}" class="btn btn-outline-dark"><span class="bi bi-rss"></span></button>
+        <button type="button" hx-get="{% url 'core:update_dataset_subscribe' dataset.pk 'True' %}" title="{% trans "Subscribe to dataset" %}" class="btn btn-outline-dark"><span class="bi bi-rss me-2"></span> {% trans "Subscribe" %}</button>
             {% endif %}
         {% endif %}
+    </hx-partial>
+{% endpartialdef %}
+
+{% block content %}
+    <div class="h4 mb-2">
+        <a href="{% url 'core:update_mission_view' dataset.mission.pk %}" class="btn btn-dark me-2" title="{% trans "Back to Mission" %}"><span class="bi bi-search me-2"></span> {% trans "Mission" %}</a>
+        <span id="span_id_subscribe">
+        {% if request.user.is_authenticated %}
+            {% if request.user|is_subscribed:dataset %}
+            <button type="button" hx-swap="none" hx-get="{% url 'core:update_dataset_subscribe' dataset.pk 'False' %}" title="{% trans "Unsubscribe from dataset to cancel notifications for updates" %}" class="btn btn-dark"><span class="bi bi-rss me-2"></span> {% trans "Unsubscribe" %}</button>
+            {% else %}
+            <button type="button" hx-swap="none" hx-get="{% url 'core:update_dataset_subscribe' dataset.pk 'True' %}" title="{% trans "Subscribe to dataset to receive notifications for updates" %}" class="btn btn-outline-dark"><span class="bi bi-rss me-2"></span> {% trans "Subscribe" %}</button>
+            {% endif %}
+        {% endif %}
+        </span>
         {{ dataset.mission.name }} -
         {% if dataset.mission.descriptor %}{{ dataset.mission.descriptor }}{% else %}&lt;
             {% trans 'No Mission Descriptor Provided' %} &gt;{% endif %} - {{ dataset.datatype.name }}
