@@ -23,7 +23,7 @@ from django.views.generic.base import TemplateView
 
 from core import models
 from core.components import get_alert
-from core.models import Datasets
+from core.models import Datasets, DataTypes
 from core.utils.authentication import redirect_if_not_authenticated, redirect_if_not_superuser
 
 import logging
@@ -209,7 +209,30 @@ def submit_files(request, dataset_id):
             div.insert(0, message_soup)
             return HttpResponse(soup)
 
-        file_handler.save_files(request.user, dataset_id, files)
+        error_message = None
+        try:
+            file_handler.save_files(request.user, dataset_id, files)
+        except AttributeError as e:
+            # This might be a good place to automate an e-mail to a sysadmin to add a configuration
+            # for the missing datatype location.
+            logger.exception(e)
+            error_message = str(e)
+        except Exception as e:
+            logger.exception(e)
+            error_message = _("An error has occurred") + " : " + str(e)
+
+        if error_message:
+            dataset = Datasets.objects.get(pk=dataset_id)
+            soup = BeautifulSoup('<div id="div_id_upload_error_message"></div>', 'html.parser')
+
+            fds = BeautifulSoup(render_to_string('core/partials/form_dataset_submission.html', context={'dataset': dataset}), 'html.parser')
+            button = fds.find(id='btn_id_form_submit')
+            message_soup = get_alert('div_id_submission_message', "danger", error_message)
+
+            div = soup.find(id="div_id_upload_error_message")
+            div.append(message_soup)
+            div.append(button)
+            return HttpResponse(div)
 
         response = HttpResponse()
         response['HX-Trigger'] = "dataset_files_updated"
@@ -236,7 +259,8 @@ def submit_archive_files(request, dataset_id):
             try:
                 file_handler.archive_files_by_name(request.user, dataset_id, existing_files, message)
 
-                file_handler.save_files(request.user, dataset_id, files)
+                for status in file_handler.save_files(request.user, dataset_id, files):
+                    logger.debug(f"file: {status['file']} - exception: {status['exception']}")
 
                 response = HttpResponse()
                 response['HX-Trigger'] = "dataset_files_updated"
