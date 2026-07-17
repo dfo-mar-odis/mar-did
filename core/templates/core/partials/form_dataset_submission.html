@@ -5,7 +5,14 @@
 
     <div id="div_id_files" class="mb-3">
         <label for="id_files" class="form-label">
-            Upload Files
+            <div class="d-flex align-items-center">
+                <span>{% trans 'Upload Files' %}</span>
+                <div id="htmx_indicator_upload_files" class="htmx-indicator d-flex align-items-center ms-2">
+                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                        <span class="visually-hidden">{% trans 'Loading...' %}</span>
+                    </div>
+                </div>
+            </div>
         </label>
         <div><input type="file" name="files" class="form-control" multiple="" id="id_files"> </div>
     </div>
@@ -15,7 +22,7 @@
     <button id="btn_id_form_submit" type="button" title="{% trans 'Upload attached files' %}"
             hx-swap="outerHTML"
             hx-post="{% url 'core:submit_dataset_files' dataset.id %}" class="btn btn-sm btn-primary"
-            hx-indicator="#htmx_indicator_dataset_files_list">
+            hx-indicator=".htmx-indicator">
         <span class="bi bi-check-square me-2"></span>{% trans 'Upload Selected Files' %}
     </button>
 </form>
