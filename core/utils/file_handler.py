@@ -18,6 +18,9 @@ logger = logging.getLogger('mardid')
 
 def get_current_working_path(dataset_id) -> Path:
     dataset = models.Datasets.objects.get(pk=dataset_id)
+    location_exists = hasattr(dataset.datatype, 'location')
+    if not location_exists or (location_exists and dataset.datatype.location.output_dir is None):
+        raise AttributeError("Dataset upload location is not configured. Contact the system administrator.")
     datatype_output = dataset.datatype.location.output_dir
     output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
     return output_path
