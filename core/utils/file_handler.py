@@ -89,6 +89,8 @@ def save_files(user: User, dataset_id: int, files: list[File]):
         for status in upload_status:
             logger.debug(f"file: {status['file']} - exception: {status['exception']}")
 
+    return upload_status
+
 
 def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles], message: str):
     if user is None or not user.is_authenticated:
