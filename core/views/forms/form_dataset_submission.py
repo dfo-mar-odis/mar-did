@@ -66,6 +66,7 @@ class DatasetSubmissionArchiveForm(forms.Form):
         btn_submit_attrs = {
             'title': _("Archive Previously Loaded Files"),
             'hx-target': "#div_id_archive_message_form",
+            'hx-indicator': ".hx-indicator",
             'hx-post': submit_url
         }
 
