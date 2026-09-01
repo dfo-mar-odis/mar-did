@@ -251,8 +251,8 @@ def update_lookup(request, model_form, **kwargs):
 
     if form.is_valid():
         form.save()
-        response = HttpResponse(render_crispy_form(form))
-        response['HX-Trigger'] = 'update_table'
+        response = HttpResponse(render_crispy_form(model_form()))
+        response['Hx-Trigger'] = 'update_table'
         return response
 
     response = HttpResponse(render_crispy_form(form))
