@@ -6,8 +6,9 @@
         <tr>
             <th scope="col" style="width: 2%; white-space: nowrap;"></th>
             <th scope="col">{% trans "Dataset" %}</th>
-            <th scope="col">{% trans "Status" %}</th>
+            <th scope="col">{% trans "Path" %}</th>
             <th scope="col">{% trans "File Count" %}</th>
+            <th scope="col">{% trans "Status" %}</th>
         </tr>
     </thead>
     <tbody>
@@ -30,9 +31,10 @@
                     </button>
                 {% endif %}
                 </td>
-                <td><div class="btn btn-outline-secondary" title="{{ dataset.datatype.description }}">{{ dataset.datatype.name }}</div></td>
-                <td><div class="btn {{dataset.status.get_button_colour}}" title="{{ dataset.status.description }}" >{{ dataset.status.name }}</div></td>
+                <td>{% if dataset.datatype %}<div class="btn btn-outline-secondary" title="{{ dataset.datatype.description }}">{{ dataset.datatype.name }}</div>{% endif %}</td>
+                <td>{{ dataset.directory }}</td>
                 <td>{{ dataset.current_files.count }}</td>
+                <td><div class="btn {{dataset.status.get_button_colour}}" title="{{ dataset.status.description }}" >{{ dataset.status.name }}</div></td>
             </tr>
         {% endfor %}
     </tbody>

@@ -17,7 +17,7 @@ class Countries(models.Model):
                                db_column='code')
 
     class Meta:
-        db_table = 'lu_countries'
+        db_table = 'md_lu_countries'
         ordering = ['name']
 
     def __str__(self):
@@ -30,7 +30,7 @@ class DatasetStatus(models.Model):
                                    db_column='description')
 
     class Meta:
-        db_table = 'lu_dataset_status'
+        db_table = 'md_lu_dataset_status'
         ordering = ['name']
 
     def __str__(self):
@@ -65,7 +65,7 @@ class DataTypes(models.Model):
         return f'{self.name} - {self.description}'
 
     class Meta:
-        db_table = 'lu_dataset_types'
+        db_table = 'md_lu_dataset_types'
         ordering = ['name']
 
 
@@ -77,7 +77,7 @@ class FileTypes(models.Model):
         return f'{self.extension} - {self.description}'
 
     class Meta:
-        db_table = 'lu_file_types'
+        db_table = 'md_lu_file_types'
         ordering = ['extension']
 
 
@@ -96,7 +96,7 @@ class Organizations(models.Model):
         return f'{self.name} - {self.description}'
 
     class Meta:
-        db_table = 'lu_organizations'
+        db_table = 'md_lu_organizations'
         ordering = ['name']
 
 
@@ -109,7 +109,7 @@ class Participants(models.Model):
     legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
 
     class Meta:
-        db_table = 'lu_participants'
+        db_table = 'md_lu_participants'
         ordering = ['last_name', 'first_name']
 
     def __str__(self):
@@ -143,7 +143,7 @@ class Platforms(models.Model):
     legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
 
     class Meta:
-        db_table = 'lu_platforms'
+        db_table = 'md_lu_platforms'
         ordering = ['name']
 
     def __str__(self):
@@ -155,7 +155,7 @@ class Positions(models.Model):
     description = models.CharField(verbose_name=_("Description"), max_length=255, db_column='description')
 
     class Meta:
-        db_table = 'lu_positions'
+        db_table = 'md_lu_positions'
         ordering = ['name']
 
     def __str__(self):
@@ -171,7 +171,7 @@ class Programs(models.Model):
     legacy = models.BooleanField(verbose_name=_("Legacy Code"), default=True, db_column='legacy')
 
     class Meta:
-        db_table = 'lu_programs'
+        db_table = 'md_lu_programs'
         ordering = ['name']
 
     def __str__(self):
@@ -184,7 +184,7 @@ class Status(models.Model):
                                    db_column='description')
 
     class Meta:
-        db_table = 'lu_status'
+        db_table = 'md_lu_status'
         ordering = ['name']
 
     def __str__(self):
@@ -210,7 +210,7 @@ class Missions(models.Model):
                                            through='MissionOrganizations')
 
     class Meta:
-        db_table = 'missions'
+        db_table = 'md_missions'
         ordering = ['name']
 
     @property
@@ -268,7 +268,7 @@ class MissionOrganizations(models.Model):
                                      related_name='organization_missions', db_column='organization_seq')
 
     class Meta:
-        db_table = 'mission_organizations'
+        db_table = 'md_mission_organizations'
         ordering = ['mission', 'organization']
 
 
@@ -286,7 +286,7 @@ class Legs(models.Model):
                                      through='MissionRegions')
 
     class Meta:
-        db_table = 'legs'
+        db_table = 'md_legs'
         ordering = ['start_date', 'end_date']
 
     @property
@@ -309,7 +309,7 @@ class MissionParticipants(models.Model):
                                  related_name='position_legs', db_column='position_seq')
 
     class Meta:
-        db_table = 'mission_participants'
+        db_table = 'md_mission_participants'
         ordering = ['leg', 'position']
 
     def __str__(self):
@@ -327,7 +327,7 @@ class GeographicRegions(models.Model):
         return f'{self.name}'
 
     class Meta:
-        db_table = 'lu_geographic_regions'
+        db_table = 'md_lu_geographic_regions'
         ordering = ['name']
 
 
@@ -340,42 +340,20 @@ class MissionRegions(models.Model):
                                related_name='region_legs', db_column='geographic_region_seq')
 
     class Meta:
-        db_table = 'mission_regions'
+        db_table = 'md_mission_regions'
         ordering = ['leg', 'region']
-
-
-class DatasetLocations(models.Model):
-    id = models.AutoField(primary_key=True, db_column='dataset_location_seq')
-
-    datatype = models.OneToOneField('DataTypes', verbose_name=_("Dataset"), on_delete=models.CASCADE,
-                                related_name='location', db_column='dataset_seq')
-
-    input_dir = models.CharField(verbose_name=_("Input Directory"),
-                                 help_text=_("Directory, within a mission directory on MEDIA_IN, Mar-DID will look in for bulk uploading files"),
-                                 max_length=100, blank=True, null=True,)
-
-    output_dir = models.CharField(verbose_name=_("Output Directory"),
-                                 help_text=_("Directory Mar-DID create, within a mission directory on MEDIA_OUT, to write dataset files to."),
-                                 max_length=100, blank=True, null=True,)
-
-    class Meta:
-        db_table = 'APPLICATION_CONFIGURATION_DATASET_LOCATIONS'
-        ordering = ['datatype']
-
-    def __str__(self):
-        return f'{self.datatype.name} - [Input: {self.input_dir}, Output: {self.output_dir}]'
 
 
 class Datasets(models.Model):
     id = models.AutoField(primary_key=True, db_column='dataset_seq')
 
     mission = models.ForeignKey(Missions, on_delete=models.CASCADE, related_name="datasets", db_column='mission_seq')
-    datatype = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets",
+    datatype = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets", null=True, blank=True,
                                   db_column='data_type_seq')
-    legacy_file_location = models.CharField(max_length=255, blank=True, null=True,
-                                            verbose_name=_("Legacy File location"),
-                                            help_text=_("The location of the files in the legacy system, if applicable"),
-                                            db_column='legacy_file_location')
+    directory = models.CharField(max_length=255, blank=True, null=True,
+                                    verbose_name=_("Legacy File location"),
+                                    help_text=_("The location of the files in the legacy system, if applicable"),
+                                    db_column='legacy_file_location')
     status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT,
                                related_name="datasets", db_column='dataset_status_seq')
 
@@ -391,14 +369,14 @@ class Datasets(models.Model):
 
     @property
     def get_dataset_root_path(self):
-        return Path(self.mission.mission_path, self.datatype.location.output_dir)
+        return Path(self.mission.mission_path, self.directory)
 
     def __str__(self):
         return f'{self.datatype} : {self.status}'
 
     class Meta:
-        db_table = 'datasets'
-        ordering = ['mission', 'datatype']
+        db_table = 'md_datasets'
+        ordering = ['mission', 'datatype', 'directory']
 
 
 class DatasetSubscribers(models.Model):
@@ -409,35 +387,34 @@ class DatasetSubscribers(models.Model):
                                    related_name='dataset_subscribers', db_column='user_seq')
 
     class Meta:
-        db_table = 'APPLICATION_DATASET_SUBSCRIBERS'
+        db_table = 'MD_APPLICATION_DATASET_SUBSCRIBERS'
 
 
 class DataFiles(models.Model):
     id = models.AutoField(primary_key=True, db_column='file_seq')
 
-    dataset = models.ForeignKey(Datasets, on_delete=models.CASCADE, related_name='files', db_column='dataset_seq')
-    file_name = models.CharField(verbose_name=_("File Name"), max_length=100, db_column='file_name')
+    filename = models.CharField(verbose_name=_("File Name"), max_length=100, db_column='filename')
     file_type = models.ForeignKey(FileTypes, on_delete=models.PROTECT, related_name='files', db_column='file_type_seq')
-    file_path = models.CharField(verbose_name=_("File Path"), max_length=100, null=True, blank=True, db_column='file_path')
+    dataset = models.ForeignKey(Datasets, on_delete=models.CASCADE, blank=True, null=True, related_name='files', db_column='dir_seq')
     submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')
     submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False, db_column='is_archived')
     archived_date = models.DateTimeField(verbose_name=_("Archived Date"), blank=True, null=True, db_column='archived_date')
 
     def __str__(self):
-        return self.file_name
+        return self.filename
 
     class Meta:
-        db_table = 'files'
-        ordering = ['file_name']
+        db_table = 'md_files'
+        ordering = ['filename']
 
     @property
-    def archived_file_name(self):
+    def archived_filename(self):
         if self.is_archived:
             timestamp = self.archived_date.strftime('%Y%m%d%H%M%S')
-            return f"{timestamp}_{self.file_name}"
+            return f"{timestamp}_{self.filename}"
 
-        return self.file_name
+        return self.filename
 
 
 class ProcessingStatus(models.Model):
@@ -480,7 +457,7 @@ class MissionComments(Comments):
                                 db_column='mission_seq')
 
     class Meta:
-        db_table = 'mission_comments'
+        db_table = 'md_mission_comments'
 
 
 class DataFileComments(Comments):
@@ -490,7 +467,7 @@ class DataFileComments(Comments):
                                  related_name='comments', db_column='file_seq')
 
     class Meta:
-        db_table = 'file_comments'
+        db_table = 'md_file_comments'
 
 
 class DatasetComments(Comments):
@@ -499,4 +476,4 @@ class DatasetComments(Comments):
     dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='comments',
                                 db_column='dataset_seq')
     class Meta:
-        db_table = 'dataset_comments'
+        db_table = 'md_dataset_comments'
