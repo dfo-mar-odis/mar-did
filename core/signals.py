@@ -27,9 +27,12 @@ def delete_files_on_directory_delete(sender, instance: Datasets, **kwargs):
 
     # make sure files are deleted before the directories are.
     instance.files.all().delete()
-    path = Path(settings.MEDIA_OUT, instance.mission.mission_path, instance.directory)
-
-    cleanup_path(path)
+    try:
+        if instance and hasattr(instance, 'directory'):
+            path = Path(settings.MEDIA_OUT, instance.mission.mission_path, instance.directory)
+            cleanup_path(path)
+    except TypeError as ex:
+        logger.warning(f"Instance does not exist: {instance}")
 
 
 @receiver(post_delete, sender=DataFiles)

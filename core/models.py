@@ -383,7 +383,7 @@ class DatasetSubscribers(models.Model):
     id = models.AutoField(primary_key=True, db_column='subscriber_seq')
     dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='subscriber_datasets',
                                 db_column='dataset_seq')
-    subscriber = models.ForeignKey('auth.User', verbose_name=_("Subscriber"), on_delete=models.CASCADE,
+    subscriber = models.ForeignKey('auth.User', db_constraint=False, verbose_name=_("Subscriber"), on_delete=models.CASCADE,
                                    related_name='dataset_subscribers', db_column='user_seq')
 
     class Meta:
@@ -396,7 +396,7 @@ class DataFiles(models.Model):
     filename = models.CharField(verbose_name=_("File Name"), max_length=100, db_column='filename')
     file_type = models.ForeignKey(FileTypes, on_delete=models.PROTECT, related_name='files', db_column='file_type_seq')
     dataset = models.ForeignKey(Datasets, on_delete=models.CASCADE, blank=True, null=True, related_name='files', db_column='dir_seq')
-    submitted_by = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='submitted_by')
+    submitted_by = models.ForeignKey('auth.User', db_constraint=False, on_delete=models.PROTECT, db_column='submitted_by')
     submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False, db_column='is_archived')
     archived_date = models.DateTimeField(verbose_name=_("Archived Date"), blank=True, null=True, db_column='archived_date')
@@ -422,7 +422,7 @@ class ProcessingStatus(models.Model):
 
     dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing',
                                 db_column='dataset_seq')
-    assigned_to = models.ForeignKey('auth.User', verbose_name=_("Assigned"), on_delete=models.PROTECT,
+    assigned_to = models.ForeignKey('auth.User', db_constraint=False, verbose_name=_("Assigned"), on_delete=models.PROTECT,
                                     related_name='processing', db_column='assigned_to')
     assigned_date = models.DateTimeField(auto_now=True, db_column='assigned_date')
     status = models.ForeignKey(Status, verbose_name=_("Status"), on_delete=models.PROTECT, related_name='processing',
@@ -439,7 +439,7 @@ class GroupProfiles(models.Model):
 
 class Comments(models.Model):
 
-    author = models.ForeignKey('auth.User', on_delete=models.PROTECT, db_column='author_seq')
+    author = models.ForeignKey('auth.User', db_constraint=False, on_delete=models.PROTECT, db_column='author_seq')
     comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
     comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
 
