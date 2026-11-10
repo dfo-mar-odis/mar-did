@@ -18,7 +18,7 @@
                     <a href="{% url 'core:dataset_submission_view' dataset.pk %}" class="btn btn-sm btn-dark ms-2" title="{% trans "View Dataset Files" %}">
                         <span class="bi bi-search"></span>
                     </a>
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
                      {# only show the delete button if  #}
                     <button id="button_id_delete_dataset_{{ dataset.pk }}"
                             type="button" class="btn btn-sm btn-danger" title="{% trans 'Delete' %}"
