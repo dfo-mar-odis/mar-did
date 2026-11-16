@@ -8,10 +8,6 @@ class MARDIDRouter:
         "staticfiles",
     }
 
-    default_models = {
-        "core.groupprofiles",
-    }
-
     def db_for_read(self, model, **hints):
         if model._meta.app_label in self.auth_apps:
             return "default"
