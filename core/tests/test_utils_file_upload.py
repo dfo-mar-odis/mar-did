@@ -46,8 +46,7 @@ class TestFileUpload(MardidTestCase):
 
     @tag("test_os_patch_created_called")
     def tests_os_path_created_called(self):
-        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
-        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1), directory=r"\test")
 
         output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
 
@@ -70,8 +69,7 @@ class TestFileUpload(MardidTestCase):
                 shutil.rmtree(output_path)
 
     def test_file_validation(self):
-        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
-        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1), directory=r"\test")
 
         mock_files = [
             SimpleUploadedFile("file1.txt", b"Content of file 1"),
@@ -85,7 +83,7 @@ class TestFileUpload(MardidTestCase):
 
         # Simulate saving the files to the dataset
         for file in mock_files:
-            models.DataFiles.objects.create(dataset=dataset, file_name=file.name,
+            models.DataFiles.objects.create(dataset=dataset, filename=file.name,
                                             file_type=models.FileTypes.objects.first(), submitted_by=self.user,
                                             is_archived=False)
 
@@ -95,13 +93,12 @@ class TestFileUpload(MardidTestCase):
 
     @tag('test_file_validation_should_not_return_archived_files')
     def test_file_validation_should_not_return_archived_files(self):
-        dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1))
-        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+        dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1), directory=r"\test")
 
         mock_file = SimpleUploadedFile("file1.txt", b"Content of file 1")
 
         # Simulate saving the file to the dataset
-        data_file = models.DataFiles.objects.create(dataset=dataset, file_name=mock_file.name,
+        data_file = models.DataFiles.objects.create(dataset=dataset, filename=mock_file.name,
                                             file_type=models.FileTypes.objects.first(), submitted_by=self.user,
                                             is_archived=False)
 
@@ -119,10 +116,9 @@ class TestFileUpload(MardidTestCase):
 
     @tag('test_archive_files_success')
     def test_archive_files_success(self):
-        dataset = core_factory_floor.MissionDatasetFactory(datatype=models.DataTypes.objects.get(pk=1))
-        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1), directory=r"\test")
 
-        output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
+        output_path = Path(settings.MEDIA_OUT, dataset.directory)
 
         try:
             mock_files = [
@@ -160,10 +156,9 @@ class TestFileUpload(MardidTestCase):
     def test_delete_files(self):
         # if user is superuser and no files are selected for a provided dataset, all files in the
         # dataset should be deleted
-        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
-        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1), directory=r"\test")
 
-        output_path = Path(settings.MEDIA_OUT, dataset.get_dataset_root_path)
+        output_path = Path(settings.MEDIA_OUT, dataset.directory)
 
         try:
             file_names = ["file1.txt","file2.txt","file3.txt",]
@@ -199,8 +194,7 @@ class TestFileUpload(MardidTestCase):
         mock_now.return_value = expected_datetime
         # if user is superuser and no files are selected for a provided dataset, all archived files in the
         # dataset should be deleted
-        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1))
-        models.DatasetLocations.objects.create(datatype=dataset.datatype, output_dir="test_output")
+        dataset = core_factory_floor.MissionDatasetFactory.create(datatype=models.DataTypes.objects.get(pk=1), directory=r'\test')
 
         output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path)
 
@@ -210,7 +204,7 @@ class TestFileUpload(MardidTestCase):
 
             file_handler.save_files(user=self.superuser, dataset_id=dataset.pk, files=mock_files)
 
-            dataset_path = Path(output_path, dataset.datatype.location.output_dir)
+            dataset_path = Path(output_path, dataset.directory)
             assert os.path.exists(dataset_path), f"Output path was not created: {dataset_path}"
 
             # simulate the files being archived

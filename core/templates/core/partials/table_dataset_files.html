@@ -28,7 +28,7 @@
         <th{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %} style="width: 2%; white-space: nowrap;">
             <input type="checkbox" class="form-check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}" />
         </th>
-        <td{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %}>{{ file.file_name }}</td>
+        <td{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %}>{{ file.filename }}</td>
         <td>{{ file.dataset.get_dataset_root_path }}</td>
         <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
         <td>{{ file.submitted_date }}</td>

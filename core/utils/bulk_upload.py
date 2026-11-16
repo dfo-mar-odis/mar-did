@@ -136,7 +136,7 @@ def file_itr(user: User, existing_files: list[Path], datatype_path: Path, dataty
                 file_type = FileTypes.objects.get(extension__iexact=file_extension.upper())
 
                 if file.name in existing_files:
-                    archive = dataset.files.filter(file_name__iexact=file.name, is_archived=False)
+                    archive = dataset.files.filter(filename__iexact=file.name, is_archived=False)
                     archive_files(user, dataset.pk, archive, message=message)
 
                 if file.name in datatype_dict.get(dataset.datatype.name, []):
@@ -145,7 +145,7 @@ def file_itr(user: User, existing_files: list[Path], datatype_path: Path, dataty
                     destination_path.parent.mkdir(parents=True, exist_ok=True)
                     shutil.move(str(file), str(destination_path))
 
-                    DataFiles.objects.create(dataset=dataset, file_name=file.name, file_type=file_type, submitted_by=user,
+                    DataFiles.objects.create(dataset=dataset, filename=file.name, file_type=file_type, submitted_by=user,
                                              file_path=dataset.datatype.location.output_dir, is_archived=False)
                     status_object.set_status(FileStatus.Status.success)
             except FileTypes.DoesNotExist as e:

@@ -18,17 +18,15 @@ logger = logging.getLogger('mardid')
 
 def get_current_working_path(dataset_id) -> Path:
     dataset = models.Datasets.objects.get(pk=dataset_id)
-    location_exists = hasattr(dataset.datatype, 'location')
-    if not location_exists or (location_exists and dataset.datatype.location.output_dir is None):
-        raise AttributeError("Dataset upload location is not configured. Contact the system administrator.")
-    datatype_output = dataset.datatype.location.output_dir
+
+    datatype_output = dataset.directory
     output_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, datatype_output)
     return output_path
 
 
 def get_archive_path(dataset_id) -> Path:
     dataset = models.Datasets.objects.get(pk=dataset_id)
-    datatype_output = dataset.datatype.location.output_dir
+    datatype_output = dataset.directory
     archive_path = Path(settings.MEDIA_OUT, dataset.mission.mission_path, "archive", datatype_output)
     return archive_path
 
@@ -43,7 +41,7 @@ def validate_files(user: User, dataset_id: int, files: list) -> list | None:
     dataset = models.Datasets.objects.get(pk=dataset_id)
 
     # Fetch all existing file names in the dataset in one query
-    existing_file_names = set(dataset.files.filter(file_name__in=file_names, is_archived=False).values_list('file_name', flat=True))
+    existing_file_names = set(dataset.files.filter(filename__in=file_names, is_archived=False).values_list('filename', flat=True))
     existing_files = list(existing_file_names)
 
     return existing_files if len(existing_files) > 0 else None
@@ -77,9 +75,8 @@ def save_files(user: User, dataset_id: int, files: list[File]):
                 for chunk in file.chunks():
                     destination.write(chunk)
 
-            models.DataFiles.objects.create(dataset=dataset, file_name=file.name,
-                                            file_type=file_type, submitted_by=user,
-                                            file_path=dataset.datatype.location.output_dir, is_archived=False)
+            models.DataFiles.objects.create(dataset=dataset, filename=file.name,
+                                            file_type=file_type, submitted_by=user, is_archived=False)
         except models.FileTypes.DoesNotExist as ex:
             upload_status.append({'file': file.name, 'exception': ex})
             continue
@@ -107,7 +104,7 @@ def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles]
         logger.info(f"Archive directory created: {archive_path}")
 
     for file in files:
-        original_file_path = os.path.join(output_path, file.file_name)
+        original_file_path = os.path.join(output_path, file.filename)
         if not os.path.exists(original_file_path):
             logger.warning(f"File not found: {original_file_path}")
             continue
@@ -121,9 +118,9 @@ def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles]
             file.save()
             models.DataFileComments.objects.create(datafile=file, comment=message, author=user)
 
-            logger.info(f"File record updated: {file.file_name} marked as archived.")
+            logger.info(f"File record updated: {file.filename} marked as archived.")
 
-        archived_file_path = os.path.join(archive_path, file.archived_file_name)
+        archived_file_path = os.path.join(archive_path, file.archived_filename)
 
         # Move the file to the archive directory
         shutil.move(original_file_path, archived_file_path)
@@ -133,7 +130,7 @@ def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles]
 def get_files_by_name(dataset_id: int, file_names: list[str]=None, archived:bool=False) -> QuerySet[models.DataFiles]:
     dataset = models.Datasets.objects.get(pk=dataset_id)
     if file_names:
-        files = dataset.files.filter(file_name__in=file_names, is_archived=archived)
+        files = dataset.files.filter(filename__in=file_names, is_archived=archived)
     elif archived:
         files = dataset.archived_files
     else:

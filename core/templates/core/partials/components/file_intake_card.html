@@ -1,0 +1,53 @@
+{% load i18n %}
+<div id="div_card_intake_{{ intake_id }}" class="card mb-2">
+    <div id="div_card_header_intake_{{ intake_id }}" class="card-header">
+        <div class="row">
+            <div class="col-auto">
+                <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#div_card_intake_collapse_{{ intake_id }}" aria-expanded="false" aria-controls="div_card_intake_collapse_{{ intake_id }}">
+                    <span class="bi-chevron-down"></span>
+                </button>
+            </div>
+            <div class="col">
+                <div id="div_card_title_intake_{{ intake_id }}" class="card-title">
+                    {{ path }}
+                </div>
+                <input type="hidden" name="intake_path_{{ intake_id }}" value="{{ path }}" />
+                <input type="hidden" name="path_id" value="{{ intake_id }}" />
+            </div>
+            <div class="col-auto">
+                <div id="div_card_dataset_intake_{{ intake_id }}">
+                    <select id="select_intake_{{ intake_id }}" class="form-select form-select-sm"
+                            name="intake_type_{{ intake_id }}">
+                        <option value="" {% if not selected %} selected="selected"{% endif %}>-----</option>
+                        {% for d in datasets %}
+                            <option value="{{ d.pk }}" title="{{ d.description }}"{% if selected and selected == d.name %} selected="selected"{% endif %}>{{ d.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-auto">
+                <button id="btn_dataset_intake_accept_{{ intake_id }}" class="btn btn-secondary btn-sm accept_intake"
+                        hx-post="{% url "core:accept_files" mission.pk %}"
+                        hx-target="#div_card_intake_{{ intake_id }}"
+                        hx-swap="outerHTML"
+                        hx-trigger="click, click from:#button_intake_accept_all"
+                        hx-include="#div_card_intake_{{ intake_id }}"
+                ><span class="bi bi-check-square me-2"></span> {% trans "Accept" %}</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-bg-warning">
+        <div class="row">
+            <div id="div_card_intake_message_{{ intake_id }}" class="col"></div>
+        </div>
+    </div>
+    <div class="collapse" id="div_card_intake_collapse_{{ intake_id }}">
+        <div id="div_card_intake_body_intake_{{ intake_id }}" class="card-body">
+            <ul>
+            {% for file in files %}
+                <li>{{ file }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

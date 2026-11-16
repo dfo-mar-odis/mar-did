@@ -98,7 +98,7 @@ class MissionDataFilesFactory(factory.django.DjangoModelFactory):
         model = models.DataFiles
 
     dataset = factory.SubFactory(MissionDatasetFactory)
-    file_name = factory.LazyAttribute(lambda o: f"{fake.file_name(extension='txt')}")
+    filename = factory.LazyAttribute(lambda o: f"{fake.file_name(extension='txt')}")
     file_type = factory.LazyFunction(
         lambda: models.FileTypes.objects.order_by('?').first()
     )
@@ -115,15 +115,3 @@ class MissionCommentFactory(factory.django.DjangoModelFactory):
     mission = factory.SubFactory(MissionFactory)
     author = factory.SelfAttribute('author')
     comment = factory.Faker('paragraph')
-
-
-class DatasetLocationsFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = models.DatasetLocations
-
-    datatype = factory.LazyFunction(
-        lambda: models.DataTypes.objects.order_by('?').first()
-    )
-    output_dir = lambda o: str(Path('test_output', o.datatype.name))
-    input_dir = lambda o: str(Path('test_output', o.datatype.name))

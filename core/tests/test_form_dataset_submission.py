@@ -107,7 +107,7 @@ class TestFormDatasetSubmission(AbstractTestWithUsers):
         self.assertIsNone(delete_btn)
 
     def test_authenticated_archive_dataset(self):
-        # If the user is a authenticated, they should have access to the archive data files button.
+        # If the user is authenticated, they should have access to the archive data files button.
         self.client.login(username='testuser', password='password')
 
         core_factory_floor.MissionDataFilesFactory.create_batch(4, dataset=self.dataset)
@@ -161,10 +161,8 @@ class TestFormWithFiles(AbstractTestWithUsers):
         self.leg = core_factory_floor.MissionLegFactory.create(mission=self.mission,
                                                                start_date=datetime(2025, 1, 1),
                                                                end_date=datetime(2025, 1, 31))
-        self.dataset = core_factory_floor.MissionDatasetFactory.create(mission=self.mission)
+        self.dataset = core_factory_floor.MissionDatasetFactory.create(mission=self.mission, directory="/test/dir")
 
-        output_path = Path('test_data', self.dataset.datatype.name)
-        core_factory_floor.DatasetLocationsFactory(datatype=self.dataset.datatype, output_dir=output_path)
 
     @tag('test_dataset_file_submission_success')
     def test_dataset_file_submission_success(self):
@@ -202,7 +200,7 @@ class TestFormWithFiles(AbstractTestWithUsers):
         # Create mock files
 
         form_data = {
-            'files': [SimpleUploadedFile(f.file_name, f"File content {n}".encode()) for n, f in enumerate(files)],
+            'files': [SimpleUploadedFile(f.filename, f"File content {n}".encode()) for n, f in enumerate(files)],
             'submitted_by': self.user.id,
         }
         try:
@@ -266,7 +264,7 @@ class TestFormWithFiles(AbstractTestWithUsers):
             for file in files_names:
                 file_path = Path(output_path, file)
                 assert not file_path.exists(), f"file sill exists: {file_path}"
-                assert not DataFiles.objects.filter(file_name__iexact=file).exists(), f"file still exists: {file_path}"
+                assert not DataFiles.objects.filter(filename__iexact=file).exists(), f"file still exists: {file_path}"
 
             # should return a success message
             soup = BeautifulSoup(response.content, 'html.parser')

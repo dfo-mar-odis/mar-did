@@ -11,11 +11,42 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import re
+
 from django.utils.translation import gettext_lazy as _
 from config.env import BASE_DIR, env
 
+class DataMapping:
+    path_map: dict[str, str] = {}
+    datatype_map: dict[str, list[str]] = {}
+
+    def add(self, key, value):
+        self.path_map[value] = key
+        if key not in self.datatype_map:
+            self.datatype_map[key] = []
+        self.datatype_map[key].append(value)
+
+    def find_mapping(self, path):
+        for k in self.path_map:
+            if re.findall(k, str(path).upper()):
+                return self.path_map[k]
+
+        return None
+
 env_file = os.getenv('ENV_FILE', '.env')
 env.read_env(os.path.join(BASE_DIR, env_file))
+
+with open(f'config/intake_exclusions.cfg', 'r') as f:
+    INTAKE_DIR_EXCLUSIONS = [f".*?{e.strip().upper()}" for e in f.readlines() if not e.startswith("#") and e.strip() != ""]
+
+with open(f'config/intake_data_mapping.cfg', 'r') as f:
+    key_values = [e.strip().split('=') for e in f.readlines() if not e.startswith("#") and e.strip() != ""]
+
+DATATYPE_MAPPING: DataMapping = DataMapping()
+for k, value in key_values:
+    key = k.strip().upper()
+    value = value.strip()
+    DATATYPE_MAPPING.add(key, value)
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
@@ -146,6 +177,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+DATABASE_ROUTERS = ["config.db_routers.MARDIDRouter"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
