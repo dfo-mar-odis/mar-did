@@ -16,11 +16,19 @@ INSTALLED_APPS += [
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASE_BACKEND'),
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASS'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT')
+        'ENGINE': os.getenv('AUTH_DATABASE_BACKEND', os.getenv('DATABASE_BACKEND')),
+        'NAME': os.getenv('AUTH_DATABASE_NAME', os.getenv('DATABASE_NAME')),
+        'USER': os.getenv('AUTH_DATABASE_USER', os.getenv('DATABASE_USER')),
+        'PASSWORD': os.getenv('AUTH_DATABASE_PASS', os.getenv('DATABASE_PASS')),
+        'HOST': os.getenv('AUTH_DATABASE_HOST', os.getenv('DATABASE_HOST')),
+        'PORT': os.getenv('AUTH_DATABASE_PORT', os.getenv('DATABASE_PORT'))
+    },
+    'core': {
+        'ENGINE': os.getenv('DATABASE_BACKEND'),
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASS'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT')
     }
 }
