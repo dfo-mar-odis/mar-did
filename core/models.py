@@ -428,6 +428,8 @@ class ProcessingStatus(models.Model):
     status = models.ForeignKey(Status, verbose_name=_("Status"), on_delete=models.PROTECT, related_name='processing',
                                db_column='status_seq')
 
+    class Meta:
+        db_table = 'md_dataset_processing_status'
 
 class GroupProfiles(models.Model):
     group = models.OneToOneField('auth.Group', on_delete=models.CASCADE, related_name='profile')
@@ -436,6 +438,8 @@ class GroupProfiles(models.Model):
     def __str__(self):
         return f"{self.group.name} - {self.description or _('No description')}"
 
+    class Meta:
+        db_table = 'md_lu_group_profiles'
 
 class Comments(models.Model):
 
