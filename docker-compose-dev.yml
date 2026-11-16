@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  postgres:
+  postgres_auth:
     image: postgres:15
-    container_name: postgres_dev
+    container_name: postgres_auth
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -11,7 +11,20 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      - postgres_auth:/var/lib/postgresql/data
+
+  postgres_data:
+    image: postgres:15
+    container_name: postgres_data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
       - postgres_data:/var/lib/postgresql/data
 
 volumes:
+  postgres_auth:
   postgres_data:

@@ -6,11 +6,11 @@ from bs4 import BeautifulSoup
 from functools import partial
 
 from django import forms
+from django.conf import settings
 from django.forms.widgets import Select
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse, HttpResponseForbidden
-from django.middleware.csrf import get_token
 from django.template.context_processors import csrf
 from django.views.generic.base import TemplateView
 from django.urls import path, reverse_lazy, reverse
@@ -24,7 +24,7 @@ from crispy_forms.bootstrap import StrictButton
 from crispy_forms.utils import render_crispy_form
 
 from core import models
-from core.utils import bulk_upload
+from core.utils import bulk_upload, file_intake
 
 import logging
 
@@ -179,7 +179,7 @@ class MissionDatasetsForm(forms.ModelForm):
                     Column(Field('status'), css_class='form-control-sm'),
                 ),
                 Row(
-                    Column(Field('legacy_file_location'), css_class='form-control-sm'),
+                    Column(Field('directory'), css_class='form-control-sm'),
                 ),
                 css_class="card card-body mb-2 border border-dark bg-light"
             )
@@ -877,105 +877,84 @@ def mission_comment_delete(request, mission_id, comment_id):
     return HttpResponse()
 
 
-def create_bulk_directories(request, mission_id):
-
+def scan_in_directory(request, mission_id):
     if redirect := redirect_if_not_authenticated(request):
         return redirect
 
+    user = request.user
     mission = models.Missions.objects.get(pk=mission_id)
-    bulk_upload.build_file_structure(mission)
+    dir_listing = file_intake.scan_directories(user=user, mission=mission)
 
-    # To be helpful, we should return a list of datasets that could not have directories created because they
-    # have no DataLocation configuration.
-    alert = AlertDialog("div_id_bulk_load_message", "light", "Building Bulk Load Directories")
-    alert.set_border('dark')
+    soup = BeautifulSoup("", "html.parser")
 
-    created_datasets = mission.datasets.filter(datatype__location__input_dir__isnull=False)
-    if created_datasets.exists():
-        missing_alert = AlertDialog("div_id_bulk_load_message_created", "success", _("Created dataset directories for datasets"))
-        missing_alert.find('div').attrs['class'].append('mt-2')
-        missing_alert.get_content_area().append(ul:=missing_alert.new_tag('ul'))
+    soup.append(button_row := soup.new_tag("div", attrs={'id': 'div_id_intake_button_row', 'class': 'row mb-2'}))
+    button_row.append(soup.new_tag("div", attrs={'class': 'col'}))
+    button_row.append(button_col := soup.new_tag("div", attrs={'class': 'col-auto'}))
+    button_col.append(all_button := soup.new_tag("button", attrs={'id': 'button_intake_accept_all', 'class': 'btn btn-warning btn-sm'}))
+    all_button.append(soup.new_tag("span", attrs={'class': 'bi bi-check-square me-2'}))
+    all_button.append(all_label := soup.new_tag("span"))
+    all_label.string = _("Accept all")
 
-        alert.get_content_area().append(missing_alert)
+    all_button.attrs['hx-delete'] = ""
+    all_button.attrs['hx-target'] = "#div_id_intake_button_row"
+    all_button.attrs['hx-swap'] = "outerHTML"
 
-        for m_dataset in created_datasets:
-            ds_path = Path(mission.mission_path, m_dataset.datatype.location.input_dir)
-            ul.append(missing_alert.new_tag('li', string=f"{m_dataset.datatype.name} - {ds_path}"))
+    datatypes = models.DataTypes.objects.order_by("name").all()
+    for index, dir in enumerate(dir_listing):
+        if dir['files']:
+            context = {
+                "mission": mission,
+                "intake_id": index,
+                "path": dir['path'],
+                "files": dir['files'],
+                "datasets": [dt for dt in datatypes],
+                "selected": settings.DATATYPE_MAPPING.find_mapping(str(dir['path'])),
+            }
+            intake_html = render_to_string('core/partials/components/file_intake_card.html', context=context)
+            soup.append(BeautifulSoup(intake_html, "html.parser"))
 
-    missing_datasets = mission.datasets.filter(datatype__location__input_dir__isnull=True)
-    if missing_datasets.exists():
-        missing_alert = AlertDialog("div_id_bulk_load_message_missing", "warning", _("Could not create directory for datasets"))
-        missing_alert.find('div').attrs['class'].append('mt-2')
-        missing_alert.get_content_area().append(ul:=missing_alert.new_tag('ul'))
-
-        alert.get_content_area().append(missing_alert)
-
-        for m_dataset in missing_datasets:
-            ul.append(missing_alert.new_tag('li', string=f"{m_dataset.datatype.name}"))
-
-    return HttpResponse(alert)
+    response = HttpResponse(soup)
+    response['HX-Trigger'] = "update_intake"
+    return response
 
 
-def upload_bulk_directories(request, mission_id):
-
+def accept_data_directory(request, mission_id):
     if redirect := redirect_if_not_authenticated(request):
         return redirect
 
-    reason = request.POST.get('dataset_archive_reason', None)
-    mission = models.Missions.objects.get(pk=mission_id)
-    file_index = bulk_upload.index_files(mission)
-    try:
-        # if a reason is provided then we'll archive any existing files
-        status_object_list: dict[models.Datasets, Generator[bulk_upload.FileStatus, Any, None]] = bulk_upload.move_files(request.user, mission, file_index, reason)
-    except FileExistsError as ex:
-        # If a reason is required, activate the '#dataset_modal' which gives the user access to the 'dataset_archive_reason' textbox
-        html = '<div hx-on:load="window.dataset_modal.showModal()"></div>'
-        return HttpResponse(html)
+    path_id = request.POST.get("path_id", None)
+    if path_id:
+        user = request.user
+        mission = models.Missions.objects.get(pk=mission_id)
+        path = request.POST.get(f"intake_path_{path_id}", None)
+        datatype_id = request.POST.get(f"intake_type_{path_id}", None)
+        try:
+            file_intake.intake_files(user, mission, Path(path), datatype_id)
+        except Exception as e:
+            logger.exception(e)
+            soup = BeautifulSoup("", "html.parser")
+            datatypes = models.DataTypes.objects.order_by("name").all()
+            files = [f for f in Path(path).iterdir() if f.is_file()]
+            context = {
+                "mission": mission,
+                "intake_id": path_id,
+                "path": path,
+                "files": files,
+                "datasets": [dt for dt in datatypes],
+                "selected": datatype_id,
+            }
+            intake_html = render_to_string('core/partials/components/file_intake_card.html', context=context)
+            intake_soup = BeautifulSoup(intake_html, "html.parser")
+            intake_soup.find('div', attrs={'class': 'card-header'}).attrs['class'].append('text-bg-warning')
+            intake_soup.find(attrs={'class': 'collapse'}).attrs['class'].append('show')
+            intake_soup.find(id=f"div_card_intake_message_{path_id}").string = str(e)
+            soup.append(intake_soup)
+            return HttpResponse(soup)
 
-    alert = AlertDialog("div_id_bulk_load_message", "light", "Moved and Indexed Files")
-    alert.set_border('dark')
-    alert.get_content_area().attrs['class'].append('overflow-y-scroll')
-    alert.get_content_area().attrs['style'] = "height: 400px;"
-
-    show_success = False
-    show_errors = False
-    for datatype_key, m_dataset in status_object_list.items():
-        datatype_alert = AlertDialog("div_id_bulk_load_message", "light", f"{datatype_key}")
-        datatype_alert.set_border('dark')
-
-        datatype_name = datatype_key.datatype.name
-        success_alert = AlertDialog(f"div_id_bulk_upload_message_created_{datatype_name}", "success",
-                                    _("Successfully moved files"))
-        success_content = success_alert.get_content_area()
-        success_content.attrs['class'].append('mt-2')
-        success_content.append(ul_success := success_alert.new_tag('ul'))
-
-        error_alert = AlertDialog(f"div_id_bulk_upload_message_created_not_files_{datatype_name}", "danger",
-                                 _("Unmoveable files"))
-        error_content = error_alert.get_content_area()
-        error_content.attrs['class'].append('mt-2')
-        error_content.append(ul_error := error_alert.new_tag('ul'))
-
-        for m_data in m_dataset:
-            if m_data.status == bulk_upload.FileStatus.Status.success:
-                ul_success.append(li := success_alert.new_tag('li', string=f"{m_data.file.name}"))
-                show_success = True
-            elif m_data.status == bulk_upload.FileStatus.Status.failure:
-                ul_error.append(li := error_alert.new_tag('li', string=f"{m_data.file.name} - {str(m_data.error)}"))
-                show_errors = True
-
-        if show_errors or show_success:
-            if show_success:
-                datatype_alert.get_content_area().append(success_alert)
-
-            if show_errors:
-                datatype_alert.get_content_area().append(error_alert)
-
-            alert.get_content_area().append(datatype_alert)
-
-    response = HttpResponse(alert)
+    response = HttpResponse()
     response['HX-Trigger'] = "mission_dataset_updated"
     return response
+
 
 # Registered functions for controlling multi-select UI components.
 MULTISELECT_CONTEXT_REGISTER = {
@@ -1028,6 +1007,6 @@ urlpatterns = [
     path('mission/comment/update/<int:mission_id>/<int:comment_id>', mission_comment_form, name='mission_comment_form'),
     path('mission/comment/list/<int:mission_id>', mission_comment_list, name='list_mission_comments'),
 
-    path('mission/bulkload/create/<int:mission_id>', create_bulk_directories, name='build_bulk_input_directories'),
-    path('mission/bulkload/upload/<int:mission_id>', upload_bulk_directories, name='upload_bulk_input_directories'),
+    path('mission/bulkload/scan/in/<int:mission_id>', scan_in_directory, name='scan_in_directory'),
+    path('mission/bulkload/accept/in/<int:mission_id>', accept_data_directory, name='accept_files'),
 ]

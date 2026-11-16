@@ -490,7 +490,7 @@ def download_files(request, dataset_id, archived, **kwargs):
         return HttpResponse(soup)
 
     files = get_files_by_id(dataset_id, file_ids, archived_files)
-    download_file_name = f"{dataset.mission.name}_{dataset.datatype.name}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    download_filename = f"{dataset.mission.name}_{dataset.datatype.name}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
     dataset_path = get_current_working_path(dataset.pk)
 
     # Create an in-memory file-like object
@@ -499,7 +499,7 @@ def download_files(request, dataset_id, archived, **kwargs):
     # Create a zip file in the buffer
     with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
         for file in files:
-            data_file = Path(dataset_path, file.file_name)
+            data_file = Path(dataset_path, file.filename)
             if data_file.exists() and data_file.is_file():
                 logger.debug(data_file)
                 # Add each file to the zip archive
@@ -510,7 +510,7 @@ def download_files(request, dataset_id, archived, **kwargs):
 
     # Create the HTTP response with the zip file
     response = HttpResponse(zip_buffer, content_type='application/zip')
-    response['Content-Disposition'] = f'attachment; filename="{download_file_name}.zip"'
+    response['Content-Disposition'] = f'attachment; filename="{download_filename}.zip"'
     response['HX-Trigger-After-Settle'] = "clear_messages"
 
     return response

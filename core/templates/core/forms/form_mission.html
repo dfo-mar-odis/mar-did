@@ -24,13 +24,18 @@
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link{% if object.legs.count > 0 %} active{% endif %}" id="mission_tabs_datasets" data-bs-toggle="tab" data-bs-target="#mission_datasets" type="button" role="tab" aria-controls="mission_datasets">
-                    {% trans 'Datasets' %}
+                <button class="nav-link" id="mission_tabs_comments" data-bs-toggle="tab" data-bs-target="#mission_comments" type="button" role="tab" aria-controls="mission_comments">
+                    {% trans 'Mission Comments' %}
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="mission_tabs_comments" data-bs-toggle="tab" data-bs-target="#mission_comments" type="button" role="tab" aria-controls="mission_comments">
-                    {% trans 'Comments' %}
+                <button class="nav-link" id="mission_tabs_files" data-bs-toggle="tab" data-bs-target="#mission_files" type="button" role="tab" aria-controls="mission_files">
+                    {% trans 'Mission Files' %}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link{% if object.legs.count > 0 %} active{% endif %}" id="mission_tabs_datasets" data-bs-toggle="tab" data-bs-target="#mission_datasets" type="button" role="tab" aria-controls="mission_datasets">
+                    {% trans 'Datasets' %}
                 </button>
             </li>
         </ul>
@@ -47,57 +52,6 @@
                 </div>
             </div>
 
-            <div class="tab-pane fade{% if object.legs.count > 0 %} show active{% endif %}" id="mission_datasets" role="tabpanel" aria-labelledby="mission_tabs_datasets">
-                {% if user.is_authenticated %}
-                <form class="mb-2" id="form_id_mission_datasets">
-                    {% crispy mission_datasets_form %}
-                </form>
-                {% endif %}
-                <div class="card card-body mb-2 border border-dark bg-light">
-                {% if request.user.is_authenticated %}
-                    <div class="row mb-2">
-                        <div class="col">
-                            <button id="button_id_build_bulk_input" type="button" class="btn btn-sm btn-secondary"
-                                    title="{% trans 'Build Bulk Input Directories'%}"
-                                    hx-target="#div_id_dataset_message_area"
-                                    hx-get="{% url 'core:build_bulk_input_directories' object.pk %}"
-                                    hx-indicator="#htmx_indicator_dataset_files_list"
-                            ><span class="bi bi-hammer me-2"></span>{% trans 'Create Bulk Directories' %}</button>
-                            <button id="button_id_upload_bulk_input" type="button" class="btn btn-sm btn-secondary"
-                                    title="{% trans 'Upload Bulk Input Directories'%}"
-                                    hx-target="#div_id_dataset_message_area"
-                                    hx-get="{% url 'core:upload_bulk_input_directories' object.pk %}"
-                                    hx-indicator="#htmx_indicator_dataset_files_list"
-                            ><span class="bi bi-arrow-up me-2"></span>{% trans 'Upload Bulk Directories' %}</button>
-                            <button type="button" class="btn btn-outline-light">
-                                <div id="htmx_indicator_dataset_files_list" class="htmx-indicator d-flex align-items-center ms-2">
-                                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <dialog id="dataset_modal">
-                            <label for="textarea_data_archive_reason">{% trans "Some files already exist. A reason must be given for their re-upload." %}</label>
-                            <textarea id="textarea_data_archive_reason" rows="2" cols="60" name="dataset_archive_reason" class="form-control mb-2"></textarea>
-                            <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.close()"
-                                    name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"
-                                    hx-target="#div_id_dataset_message_area"
-                                    hx-post="{% url 'core:upload_bulk_input_directories' object.pk %}"
-                                    hx-include="#textarea_data_archive_reason"
-                                    hx-indicator=".htmx-indicator"
-                                ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>
-                                <button type="button" class="btn btn-sm btn-secondary" onclick="window.dataset_modal.close()">{% trans "Cancel" %}</button>
-                        </dialog>
-                    </div>
-                    <div id="div_id_dataset_message_area"></div>
-                {% endif %}
-                {% include 'core/partials/table_mission_datasets.html' with mission=object %}
-                </div>
-            </div>
-
             <div class="tab-pane fade" id="mission_comments" role="tabpanel" aria-labelledby="mission_tabs_comments">
                 {% if user.is_authenticated %}
                 <form class="mb-2" id="form_id_mission_comments">
@@ -108,6 +62,71 @@
                 {% include 'core/partials/table_mission_comments.html' with mission=object %}
                 </div>
             </div>
+
+            <div class="tab-pane fade" id="mission_files" role="tabpanel" aria-labelledby="mission_tabs_files">
+                <div class="card card-body mb-2 border border-dark bg-light">
+                {% if request.user.is_authenticated %}
+                    <div class="row mb-2">
+                        <div class="col">
+                            <button id="button_id_scan_in_input" type="button" class="btn btn-sm btn-secondary"
+                                    title="{% trans 'Scan In Directory'%}"
+                                    hx-target="#div_id_in_file_list"
+                                    hx-get="{% url 'core:scan_in_directory' object.pk %}"
+                                    hx-indicator="#htmx_indicator_mission_files_list"
+                            ><span class="bi bi-arrow-up me-2"></span>{% trans 'Scan In Directory' %}</button>
+                            <button type="button" class="btn btn-outline-light">
+                                <div id="htmx_indicator_mission_files_list" class="htmx-indicator d-flex align-items-center ms-2">
+                                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+                    <div id="div_id_in_file_list"></div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade{% if object.legs.count > 0 %} show active{% endif %}" id="mission_datasets" role="tabpanel" aria-labelledby="mission_tabs_datasets">
+                {% if user.is_authenticated %}
+                <form class="mb-2" id="form_id_mission_datasets">
+                    {% crispy mission_datasets_form %}
+                </form>
+                {% endif %}
+                <div class="card card-body mb-2 border border-dark bg-light">
+                {% if request.user.is_authenticated %}
+                    <div class="row mb-2">
+                        <div class="col">
+                            <button type="button" class="btn btn-outline-light">
+                                <div id="htmx_indicator_dataset_files_list" class="htmx-indicator d-flex align-items-center ms-2">
+                                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+{#                    <div>#}
+{#                        <dialog id="dataset_modal">#}
+{#                            <label for="textarea_data_archive_reason">{% trans "Some files already exist. A reason must be given for their re-upload." %}</label>#}
+{#                            <textarea id="textarea_data_archive_reason" rows="2" cols="60" name="dataset_archive_reason" class="form-control mb-2"></textarea>#}
+{#                            <button type="button" class="btn btn-sm btn-warning" onclick="window.dataset_modal.close()"#}
+{#                                    name="dataset_files_archive" title="{% trans "Archive Selected Files" %}"#}
+{#                                    hx-target="#div_id_dataset_message_area"#}
+{#                                    hx-post="{% url 'core:upload_bulk_input_directories' object.pk %}"#}
+{#                                    hx-include="#textarea_data_archive_reason"#}
+{#                                    hx-indicator=".htmx-indicator"#}
+{#                                ><span class="bi bi-safe me-1"></span>{% trans "Archive Selected" %}</button>#}
+{#                                <button type="button" class="btn btn-sm btn-secondary" onclick="window.dataset_modal.close()">{% trans "Cancel" %}</button>#}
+{#                        </dialog>#}
+{#                    </div>#}
+                    <div id="div_id_dataset_message_area"></div>
+                {% endif %}
+                {% include 'core/partials/table_mission_datasets.html' with mission=object %}
+                </div>
+            </div>
+
         </div>
 
     {% endif %}

@@ -34,4 +34,4 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 COPY . .
 
 # Set entrypoint
-CMD ["uv", "run", "daphne", "-b", "0.0.0.0", "-p", "8000", "config.asgi:application"]
+CMD ["uv", "run", "daphne", "-b", "0.0.0.0", "-p", "9000", "config.asgi:application"]

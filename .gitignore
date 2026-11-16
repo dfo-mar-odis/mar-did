@@ -214,4 +214,5 @@ staticfiles/*
 *.mwb.bak
 
 # this is a script on the server to start the Daphane server
+logs/*
 start_mardid.sh
