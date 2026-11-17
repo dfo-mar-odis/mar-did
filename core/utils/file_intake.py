@@ -8,7 +8,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.transaction import atomic
 
-from core.models import Missions, DataFiles, Datasets, FileTypes, DatasetStatus, DataTypes
+from core.models import Missions, DataFiles, Datasets, FileTypes, DatasetStatus, DataTypes, MardidUser
 
 
 @atomic
@@ -32,6 +32,7 @@ def intake_files(user: User, mission: Missions, path: Path = None, datatype_id: 
 
     create_files = []
     remove_files = []
+    m_user = MardidUser.from_django_user(user)
     for in_file in path.iterdir():
         if in_file.is_file():
 
@@ -53,7 +54,7 @@ def intake_files(user: User, mission: Missions, path: Path = None, datatype_id: 
                 filename=name,
                 file_type=file_type,
                 dataset=dataset,
-                submitted_by=user
+                submitted_by=m_user
             )
             create_files.append(file)
 

@@ -249,8 +249,8 @@ class Missions(models.Model):
     organizations = models.ManyToManyField(Organizations, verbose_name=_("Organizations"),
                                            through='MissionOrganizations')
 
-    created_by = models.CharField(max_length=50, default="unknown", db_column='created_by')
-    created_date = models.DateTimeField(verbose_name=_("Created Date"), auto_now_add=True, db_column='created_date')
+    last_updated_by = models.ForeignKey(MardidUser, verbose_name=_("Updated by"), on_delete=models.PROTECT, db_column='updated_by')
+    last_updated_date = models.DateTimeField(verbose_name=_("Updated Date"), auto_now=True, db_column='created_date')
 
     class Meta:
         db_table = 'md_missions'

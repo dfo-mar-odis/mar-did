@@ -24,6 +24,7 @@ from crispy_forms.bootstrap import StrictButton
 from crispy_forms.utils import render_crispy_form
 
 from core import models
+from core.models import MardidUser
 from core.utils import bulk_upload, file_intake
 
 import logging
@@ -49,7 +50,7 @@ class CreateMission(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
 
         context['title'] = _('Create Mission')
-        context['mission_form'] = MissionForm()
+        context['mission_form'] = MissionForm(user=self.request.user)
 
         return context
 
@@ -67,7 +68,7 @@ class UpdateMission(TemplateView):
         except models.Missions.DoesNotExist:
             raise Http404(_("Mission not found."))
 
-        context['mission_form'] = MissionForm(instance=context['object'])
+        context['mission_form'] = MissionForm(user=self.request.user, instance=context['object'])
         context['mission_legs_form'] = MissionLegForm(context['object'])
         context['mission_datasets_form'] = MissionDatasetsForm(context['object'])
         if self.request.user:
@@ -427,6 +428,12 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
         label=_("Organizations")
     )
 
+    last_updated_by = forms.ModelChoiceField(
+    queryset=MardidUser.objects.all(),
+    required=False,
+    widget=forms.HiddenInput(),
+)
+
     class Meta:
         model = models.Missions
         fields = '__all__'
@@ -503,8 +510,11 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
             choices=platform_choices,
         )
 
-    def __init__(self, *args, **kwargs):
-        super(MissionForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, user: User|None = None, **kwargs):
+        initial = kwargs.pop('initial', {})
+        initial['last_updated_by'] = user.pk if user else None
+
+        super(MissionForm, self).__init__(*args, **kwargs, initial=initial)
 
         organizations_container = self.init_lookup('organizations')
 
@@ -569,6 +579,7 @@ class MissionForm(form_multiselect.MultiselectFieldForm):
 
         self.helper.layout = Layout(
             Div(
+                Field('last_updated_by'),
                 Row(
                     Column(Field('name', css_class='form-control-sm')),
                     Column(FieldWithButton(
@@ -658,7 +669,7 @@ def update_descriptor(request, mission_id):
     mission = models.Missions.objects.get(pk=mission_id)
     # this is where the code to send the e-mail to MEDS would go, but since that functionality isn't implemented yet
     # we'll just return a message indicating that the functionality isn't implemented.
-    form = MissionForm(instance=mission)
+    form = MissionForm(user=request.user, instance=mission)
     html = render_crispy_form(form)
     soup = BeautifulSoup(html, 'html.parser')
     return HttpResponse(soup.find(id=f'div_id_descriptor_container'))
