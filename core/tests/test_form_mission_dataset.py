@@ -100,12 +100,10 @@ class TestFormMissionDatasets(MardidTestCase):
 
         soup = BeautifulSoup(response.content, 'html.parser')
         delete_btl_btn = soup.find(id=f"button_id_delete_dataset_{self.btl_dataset.pk}")
-        assert delete_btl_btn is not None, "Anonymous user should see the dataset delete button for BTL dataset, which has files"
-        assert 'disabled' in delete_btl_btn.attrs, "The delete button should be disabled if a dataset has files attached to it"
-
+        assert delete_btl_btn is None, "Anonymous user should not see the dataset delete button for BTL dataset, which has files"
 
         delete_salinity_btn = soup.find(id=f"button_id_delete_dataset_{self.salinity_dataset.pk}")
-        assert delete_salinity_btn is not None, "Anonymous user should see the dataset delete button for Salinity dataset, which doesn't have files"
+        assert delete_salinity_btn is None, "Anonymous user should not see the dataset delete button for Salinity dataset, which doesn't have files"
 
     def test_delete_dataset_with_files_fails(self):
         # Datasets should not be able to be removed from a mission when they have files. A user at the superuser level

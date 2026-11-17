@@ -15,7 +15,7 @@
                 <td style="width: 2%; white-space: nowrap;">
                 {% if request.user.is_authenticated %}
                     {# Only the author of the comment should be able to edit the comment. #}
-                    {% if request.user.pk == comment.author.pk %}
+                    {% if request.user.username == comment.author.username %}
                     <button type="button" hx-get="{% url 'core:mission_comment_form' mission.pk comment.pk %}"
                             hx-target="#form_id_mission_comments" hx-swap="innerHTML"
                             class="btn btn-sm btn-outline-secondary" title="{% trans 'Edit Comment' %}">
@@ -30,7 +30,7 @@
                     </button>
                 {% endif %}
                 </td>
-                <td style="white-space: nowrap;"><div>{% if comment.author.last_name %}{{ comment.author.last_name }}, {{ comment.author.first_name }}{% else %}{{ comment.author }}{% endif %}</div><div>{{ comment.comment_date }}</div></td>
+                <td style="white-space: nowrap;"><div>{{ comment.author }}</div><div>{{ comment.comment_date }}</div></td>
                 <td style="width: 100%;">{{ comment.comment }}</td>
             </tr>
         {% endfor %}

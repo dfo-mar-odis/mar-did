@@ -8,7 +8,9 @@ class MARDIDRouter:
         "staticfiles",
     }
 
-    default_models = {}
+    default_models = {
+        "groupprofiles"
+    }
 
     def db_for_read(self, model, **hints):
         if model._meta.app_label in self.auth_apps:
@@ -27,6 +29,6 @@ class MARDIDRouter:
     def allow_migrate(self, db, app_label, model_name=None, **hints):
         if app_label in self.auth_apps:
             return db == "default"
-        if app_label == "core" and model_name and model_name.lower() == "groupprofiles":
+        if app_label == "core" and model_name and model_name.lower() in self.default_models:
             return db == "default"
         return db == "core"

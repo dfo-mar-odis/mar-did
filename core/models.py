@@ -1,9 +1,49 @@
-import os
 from pathlib import Path
 
 from django.db import models
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+
+
+from django.contrib.auth import get_user_model
+from django.db import models
+
+class MardidUser(models.Model):
+
+    # for now we're only using django authentication, in the future we'll have to map users to OAuth2
+    PROVIDER_CHOICES = [
+        ("django", "Django Auth"),
+        # ("oauth2", "OAuth2"),
+    ]
+
+    provider = models.CharField(max_length=20, choices=PROVIDER_CHOICES)
+    provider_user_id = models.CharField(max_length=255)   # stable user identifier from provider
+    username = models.CharField(max_length=150, unique=True)
+    email = models.EmailField(null=True, blank=True)
+    display_name = models.CharField(max_length=255, null=True, blank=True)
+
+    class Meta:
+        db_table = "md_lu_users"
+        unique_together = ("provider", "provider_user_id")
+
+    def __str__(self):
+        return self.username
+
+    def get_auth_user(self):
+        return get_user_model().objects.using("default").get(pk=self.provider_user_id)
+
+    @classmethod
+    def from_django_user(cls, user):
+        user = cls.objects.get_or_create(
+            provider="django",
+            provider_user_id=str(user.pk),
+            defaults={
+                "username": user.username,
+                "email": user.email,
+                "display_name": user.get_full_name() or user.username,
+            },
+        )[0]
+
+        return user
 
 
 # MEDS uses a list of country codes that I think are from ICES
@@ -209,6 +249,9 @@ class Missions(models.Model):
     organizations = models.ManyToManyField(Organizations, verbose_name=_("Organizations"),
                                            through='MissionOrganizations')
 
+    created_by = models.CharField(max_length=50, default="unknown", db_column='created_by')
+    created_date = models.DateTimeField(verbose_name=_("Created Date"), auto_now_add=True, db_column='created_date')
+
     class Meta:
         db_table = 'md_missions'
         ordering = ['name']
@@ -357,7 +400,7 @@ class Datasets(models.Model):
     status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT,
                                related_name="datasets", db_column='dataset_status_seq')
 
-    subscribers = models.ManyToManyField("auth.User", verbose_name=_("Subscribers"), through='DatasetSubscribers')
+    subscribers = models.ManyToManyField(MardidUser, verbose_name=_("Subscribers"), through='DatasetSubscribers')
 
     @property
     def current_files(self):
@@ -383,7 +426,7 @@ class DatasetSubscribers(models.Model):
     id = models.AutoField(primary_key=True, db_column='subscriber_seq')
     dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='subscriber_datasets',
                                 db_column='dataset_seq')
-    subscriber = models.ForeignKey('auth.User', db_constraint=False, verbose_name=_("Subscriber"), on_delete=models.CASCADE,
+    subscriber = models.ForeignKey(MardidUser, db_constraint=False, verbose_name=_("Subscriber"), on_delete=models.CASCADE,
                                    related_name='dataset_subscribers', db_column='user_seq')
 
     class Meta:
@@ -396,10 +439,11 @@ class DataFiles(models.Model):
     filename = models.CharField(verbose_name=_("File Name"), max_length=100, db_column='filename')
     file_type = models.ForeignKey(FileTypes, on_delete=models.PROTECT, related_name='files', db_column='file_type_seq')
     dataset = models.ForeignKey(Datasets, on_delete=models.CASCADE, blank=True, null=True, related_name='files', db_column='dir_seq')
-    submitted_by = models.ForeignKey('auth.User', db_constraint=False, on_delete=models.PROTECT, db_column='submitted_by')
-    submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
     is_archived = models.BooleanField(verbose_name=_("Is archived"), default=False, db_column='is_archived')
     archived_date = models.DateTimeField(verbose_name=_("Archived Date"), blank=True, null=True, db_column='archived_date')
+
+    submitted_by = models.ForeignKey(MardidUser, db_constraint=False, on_delete=models.PROTECT, db_column='submitted_by')
+    submitted_date = models.DateTimeField(auto_now_add=True, db_column='submitted_date')
 
     def __str__(self):
         return self.filename
@@ -422,7 +466,7 @@ class ProcessingStatus(models.Model):
 
     dataset = models.ForeignKey(Datasets, verbose_name=_("Dataset"), on_delete=models.CASCADE, related_name='processing',
                                 db_column='dataset_seq')
-    assigned_to = models.ForeignKey('auth.User', db_constraint=False, verbose_name=_("Assigned"), on_delete=models.PROTECT,
+    assigned_to = models.ForeignKey(MardidUser, db_constraint=False, verbose_name=_("Assigned"), on_delete=models.PROTECT,
                                     related_name='processing', db_column='assigned_to')
     assigned_date = models.DateTimeField(auto_now=True, db_column='assigned_date')
     status = models.ForeignKey(Status, verbose_name=_("Status"), on_delete=models.PROTECT, related_name='processing',
@@ -443,7 +487,7 @@ class GroupProfiles(models.Model):
 
 class Comments(models.Model):
 
-    author = models.ForeignKey('auth.User', db_constraint=False, on_delete=models.PROTECT, db_column='author_seq')
+    author = models.ForeignKey(MardidUser, db_constraint=False, on_delete=models.PROTECT, db_column='author_seq')
     comment = models.CharField(max_length=255, verbose_name=_("Comments"), db_column='comment')
     comment_date = models.DateTimeField(auto_now_add=True, db_column='comment_date')
 
