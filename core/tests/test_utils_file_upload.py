@@ -11,6 +11,7 @@ from django.contrib.auth.models import User, Group
 from django.test import tag, RequestFactory, override_settings
 
 from core import models
+from core.models import MardidUser
 from core.tests import core_factory_floor
 from core.tests.core_factory_floor import MardidTestCase
 
@@ -83,8 +84,9 @@ class TestFileUpload(MardidTestCase):
 
         # Simulate saving the files to the dataset
         for file in mock_files:
+            m_user = MardidUser.from_django_user(self.user)
             models.DataFiles.objects.create(dataset=dataset, filename=file.name,
-                                            file_type=models.FileTypes.objects.first(), submitted_by=self.user,
+                                            file_type=models.FileTypes.objects.first(), submitted_by=m_user,
                                             is_archived=False)
 
         # Second upload with the same files should fail
@@ -98,8 +100,9 @@ class TestFileUpload(MardidTestCase):
         mock_file = SimpleUploadedFile("file1.txt", b"Content of file 1")
 
         # Simulate saving the file to the dataset
+        m_user = MardidUser.from_django_user(self.user)
         data_file = models.DataFiles.objects.create(dataset=dataset, filename=mock_file.name,
-                                            file_type=models.FileTypes.objects.first(), submitted_by=self.user,
+                                            file_type=models.FileTypes.objects.first(), submitted_by=m_user,
                                             is_archived=False)
 
         # Validate the file exists

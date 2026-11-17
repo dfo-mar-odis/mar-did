@@ -82,6 +82,7 @@ class TestFormMissionComments(MardidTestCase):
         self.assertIsNone(span_edit_button)
 
     # superusers
+    @tag("test_mission_comments_form_superuser")
     def test_mission_comments_form_superuser(self):
         self.client.login(username='admin', password='password')
 

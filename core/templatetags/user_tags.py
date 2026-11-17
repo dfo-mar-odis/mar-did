@@ -1,6 +1,8 @@
 # core/templatetags/user_tags.py
 from django import template
 
+from core.models import MardidUser
+
 register = template.Library()
 
 @register.filter(name='is_maintainer')
@@ -25,4 +27,5 @@ def is_subscribed(user, dataset):
     if not user.is_authenticated:
         return False
 
-    return dataset.subscribers.filter(dataset_subscribers__subscriber=user).exists()
+    m_user = MardidUser.from_django_user(user)
+    return dataset.subscribers.filter(dataset_subscribers__subscriber=m_user).exists()

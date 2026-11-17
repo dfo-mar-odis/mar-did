@@ -13,6 +13,9 @@ from django.contrib.auth.models import User
 from core import models
 
 import logging
+
+from core.models import MardidUser
+
 logger = logging.getLogger('mardid')
 
 
@@ -75,8 +78,9 @@ def save_files(user: User, dataset_id: int, files: list[File]):
                 for chunk in file.chunks():
                     destination.write(chunk)
 
+            m_user = MardidUser.from_django_user(user)
             models.DataFiles.objects.create(dataset=dataset, filename=file.name,
-                                            file_type=file_type, submitted_by=user, is_archived=False)
+                                            file_type=file_type, submitted_by=m_user, is_archived=False)
         except models.FileTypes.DoesNotExist as ex:
             upload_status.append({'file': file.name, 'exception': ex})
             continue
@@ -103,6 +107,7 @@ def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles]
         os.makedirs(archive_path)
         logger.info(f"Archive directory created: {archive_path}")
 
+    m_user = MardidUser.from_django_user(user)
     for file in files:
         original_file_path = os.path.join(output_path, file.filename)
         if not os.path.exists(original_file_path):
@@ -116,7 +121,7 @@ def archive_files(user: User, dataset_id: int, files: QuerySet[models.DataFiles]
             file.is_archived = True
             file.archived_date = archive_date
             file.save()
-            models.DataFileComments.objects.create(datafile=file, comment=message, author=user)
+            models.DataFileComments.objects.create(datafile=file, comment=message, author=m_user)
 
             logger.info(f"File record updated: {file.filename} marked as archived.")
 

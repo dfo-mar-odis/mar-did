@@ -11,6 +11,8 @@ from core import models
 fake = Faker()
 
 class MardidTestCase(TestCase):
+    databases = {'default', 'core'}
+
     fixtures = [ 'init_group_fixtures', 'init_dataset_status', 'init_countries',
                  'init_organizations', 'init_platforms', 'init_regions', 'init_programs',
                  'init_positions', 'init_datatypes', 'init_file_types']
@@ -103,7 +105,7 @@ class MissionDataFilesFactory(factory.django.DjangoModelFactory):
         lambda: models.FileTypes.objects.order_by('?').first()
     )
     submitted_by = factory.LazyFunction(
-        lambda: User.objects.order_by('?').first()
+        lambda: models.MardidUser.from_django_user(User.objects.order_by('?').first())
     )
 
 
@@ -113,5 +115,26 @@ class MissionCommentFactory(factory.django.DjangoModelFactory):
         model = models.MissionComments
 
     mission = factory.SubFactory(MissionFactory)
-    author = factory.SelfAttribute('author')
     comment = factory.Faker('paragraph')
+
+    @staticmethod
+    def _resolve_author(author):
+        if author is None:
+            user = User.objects.order_by('?').first()
+            if user is None:
+                raise ValueError("No Django User available to seed MissionComments")
+            return models.MardidUser.from_django_user(user)
+
+        if isinstance(author, models.MardidUser):
+            return author
+
+        if isinstance(author, User):
+            return models.MardidUser.from_django_user(author)
+
+        return author
+
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+        if "author" in kwargs:
+            kwargs["author"] = cls._resolve_author(kwargs["author"])
+        return super()._create(model_class, *args, **kwargs)
