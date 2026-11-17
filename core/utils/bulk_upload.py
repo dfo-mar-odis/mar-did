@@ -8,7 +8,7 @@ from typing import Any, Generator
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from core.models import Missions, DataFiles, FileTypes, Datasets
+from core.models import Missions, DataFiles, FileTypes, Datasets, MardidUser
 from core.utils.file_handler import  get_current_working_path, archive_files
 
 logger = logging.getLogger('mardid')
@@ -145,7 +145,8 @@ def file_itr(user: User, existing_files: list[Path], datatype_path: Path, dataty
                     destination_path.parent.mkdir(parents=True, exist_ok=True)
                     shutil.move(str(file), str(destination_path))
 
-                    DataFiles.objects.create(dataset=dataset, filename=file.name, file_type=file_type, submitted_by=user,
+                    m_user = MardidUser.from_django_user(user)
+                    DataFiles.objects.create(dataset=dataset, filename=file.name, file_type=file_type, submitted_by=m_user,
                                              file_path=dataset.datatype.location.output_dir, is_archived=False)
                     status_object.set_status(FileStatus.Status.success)
             except FileTypes.DoesNotExist as e:
