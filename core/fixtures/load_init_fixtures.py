@@ -6,4 +6,5 @@ fixture_list = [ 'init_group_fixtures', 'init_dataset_status', 'init_countries',
                  'init_positions', 'init_datatypes', 'init_file_types']
 
 
+call_command("loaddata", database='core', *fixture_list)
 call_command("loaddata", *fixture_list)

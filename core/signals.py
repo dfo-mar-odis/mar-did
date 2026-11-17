@@ -2,9 +2,10 @@ import os
 from pathlib import Path
 
 from django.conf import settings
+from django.contrib.auth import user_logged_in
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-from core.models import DataFiles, Datasets
+from core.models import DataFiles, Datasets, MardidUser
 
 import logging
 logger = logging.getLogger("mardid")
@@ -45,7 +46,7 @@ def delete_file_on_datafile_delete(sender, instance: DataFiles, **kwargs):
         name = instance.filename
 
         if instance.is_archived:
-            abs_path = Path(root, mission, 'archive', path, name)
+            abs_path = Path(root, mission, 'archive', path, instance.archived_filename)
         else:
             abs_path = Path(root, mission, path, name)
 
@@ -57,3 +58,8 @@ def delete_file_on_datafile_delete(sender, instance: DataFiles, **kwargs):
     except Exception as e:
         logger.warning(f"Could not delete file: {instance.filename}")
         logger.exception(e)
+
+
+@receiver(user_logged_in)
+def sync_account_on_login(sender, user, request, **kwargs):
+    MardidUser.from_django_user(user)
