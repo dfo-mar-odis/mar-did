@@ -37,10 +37,10 @@ env_file = os.getenv('ENV_FILE', '.env')
 env.read_env(os.path.join(BASE_DIR, env_file))
 
 with open(f'config/intake_exclusions.cfg', 'r') as f:
-    INTAKE_DIR_EXCLUSIONS = [f".*?{e.strip().upper()}" for e in f.readlines() if not e.startswith("#") and e.strip() != ""]
+    INTAKE_DIR_EXCLUSIONS = [f".*?{e.strip().upper().replace("//", os.path.sep)}" for e in f.readlines() if not e.startswith("#") and e.strip() != ""]
 
 with open(f'config/intake_data_mapping.cfg', 'r') as f:
-    key_values = [e.strip().split('=') for e in f.readlines() if not e.startswith("#") and e.strip() != ""]
+    key_values = [e.strip().replace("//", os.path.sep).split('=') for e in f.readlines() if not e.startswith("#") and e.strip() != ""]
 
 DATATYPE_MAPPING: DataMapping = DataMapping()
 for k, value in key_values:
