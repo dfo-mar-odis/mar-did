@@ -20,25 +20,41 @@
                             name="intake_type_{{ intake_id }}">
                         <option value="" {% if not selected %} selected="selected"{% endif %}>-----</option>
                         {% for d in datasets %}
-                            <option value="{{ d.pk }}" title="{{ d.description }}"{% if selected and selected == d.name %} selected="selected"{% endif %}>{{ d.name }}</option>
+                            <option value="{{ d.pk }}" title="{{ d.description }}"{% if selected and selected == d.pk %} selected="selected"{% endif %}>{{ d.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
             </div>
             <div class="col-auto">
-                <button id="btn_dataset_intake_accept_{{ intake_id }}" class="btn btn-secondary btn-sm accept_intake"
-                        hx-post="{% url "core:accept_files" mission.pk %}"
+                <button id="btn_dataset_intake_move_{{ intake_id }}" class="btn btn-warning btn-sm intake_button"
+                        hx-post="{% url "core:move_files" mission.pk %}"
                         hx-target="#div_card_intake_{{ intake_id }}"
                         hx-swap="outerHTML"
-                        hx-trigger="click, click from:#button_intake_accept_all"
+                        hx-trigger="click, click from:#button_intake_move_all"
                         hx-include="#div_card_intake_{{ intake_id }}"
-                ><span class="bi bi-check-square me-2"></span> {% trans "Accept" %}</button>
+                        hx-indicator="#htmx_indicator_copy_files_{{ intake_id }}"
+                        title="{% trans "Move the data from the input location to the MAR-DID application directory" %}"
+                ><span class="bi bi-check-square me-2"></span> {% trans "Move" %}</button>
+                <button id="btn_dataset_intake_copy_{{ intake_id }}" class="btn btn-secondary btn-sm intake_button"
+                        hx-post="{% url "core:copy_files" mission.pk %}"
+                        hx-target="#div_card_intake_{{ intake_id }}"
+                        hx-swap="outerHTML"
+                        hx-trigger="click, click from:#button_intake_copy_all"
+                        hx-include="#div_card_intake_{{ intake_id }}"
+                        hx-indicator="#htmx_indicator_copy_files_{{ intake_id }}"
+                        title="{% trans "Copy the data from the input location to the MAR-DID application directory" %}"
+                ><span class="bi bi-check-square me-2"></span> {% trans "Copy" %}</button>
+                <span id="htmx_indicator_copy_files_{{ intake_id }}" class="d-inline-flex htmx-indicator d-flex align-items-center ms-2">
+                    <div class="spinner-border spinner-border-sm text-secondary sm-indicator" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
     <div class="container-fluid text-bg-warning">
         <div class="row">
-            <div id="div_card_intake_message_{{ intake_id }}" class="col"></div>
+            <div id="div_card_intake_message_{{ intake_id }}" class="col">{% if message %}{{ message }}{% endif %}</div>
         </div>
     </div>
     <div class="collapse" id="div_card_intake_collapse_{{ intake_id }}">

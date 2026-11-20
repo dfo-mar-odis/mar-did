@@ -217,10 +217,14 @@ HANDLERS = {
 
 LOGGERS = (
     {
+        "root": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+        },
         "django": {
             "handlers": ["console"],
             "level": "INFO",
-            "propagate": True,
+            "propagate": False,
         },
         "django.request": {
             "handlers": ['error_handler'],
