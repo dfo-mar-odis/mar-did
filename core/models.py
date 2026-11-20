@@ -394,7 +394,7 @@ class Datasets(models.Model):
     datatype = models.ForeignKey(DataTypes, on_delete=models.PROTECT, related_name="datasets", null=True, blank=True,
                                   db_column='data_type_seq')
     directory = models.CharField(max_length=255, blank=True, null=True,
-                                    verbose_name=_("Legacy File location"),
+                                    verbose_name=_("Legacy File Location"),
                                     help_text=_("The location of the files in the legacy system, if applicable"),
                                     db_column='legacy_file_location')
     status = models.ForeignKey(DatasetStatus, verbose_name=_("Dataset Status"), on_delete=models.PROTECT,
