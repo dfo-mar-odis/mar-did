@@ -7,4 +7,4 @@ fixture_list = [ 'init_group_fixtures', 'init_dataset_status', 'init_countries',
 
 
 call_command("loaddata", database='core', *fixture_list)
-call_command("loaddata", *fixture_list)
+call_command("loaddata", database='default', *fixture_list)

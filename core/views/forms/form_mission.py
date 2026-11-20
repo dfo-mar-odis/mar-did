@@ -176,11 +176,11 @@ class MissionDatasetsForm(forms.ModelForm):
             Div(
                 Hidden('mission', mission_id),
                 Row(
-                    Column(Field('datatype'), css_class='form-control-sm'),
-                    Column(Field('status'), css_class='form-control-sm'),
+                    Column(Field('datatype', css_class="form-select-sm")),
+                    Column(Field('status', css_class="form-select-sm")),
                 ),
                 Row(
-                    Column(Field('directory'), css_class='form-control-sm'),
+                    Column(Field('directory', css_class='form-control-sm')),
                 ),
                 css_class="card card-body mb-2 border border-dark bg-light"
             )
@@ -898,38 +898,60 @@ def scan_in_directory(request, mission_id):
 
     soup = BeautifulSoup("", "html.parser")
 
-    soup.append(button_row := soup.new_tag("div", attrs={'id': 'div_id_intake_button_row', 'class': 'row mb-2'}))
-    button_row.append(soup.new_tag("div", attrs={'class': 'col'}))
-    button_row.append(button_col := soup.new_tag("div", attrs={'class': 'col-auto'}))
-    button_col.append(all_button := soup.new_tag("button", attrs={'id': 'button_intake_accept_all', 'class': 'btn btn-warning btn-sm'}))
-    all_button.append(soup.new_tag("span", attrs={'class': 'bi bi-check-square me-2'}))
-    all_button.append(all_label := soup.new_tag("span"))
-    all_label.string = _("Accept all")
+    def add_all_button_row():
+        soup.insert(0, button_row := soup.new_tag("div", attrs={'id': 'div_id_intake_button_row', 'class': 'row mb-2'}))
+        button_row.append(soup.new_tag("div", attrs={'class': 'col'}))
+        button_row.append(button_col := soup.new_tag("div", attrs={'class': 'col-auto'}))
+        button_col.append(move_button := soup.new_tag("button", attrs={'id': 'button_intake_move_all', 'class': 'btn btn-warning btn-sm btn-intake me-1'}))
+        button_col.append(copy_button := soup.new_tag("button", attrs={'id': 'button_intake_copy_all', 'class': 'btn btn-secondary btn-sm btn-intake'}))
 
-    all_button.attrs['hx-delete'] = ""
-    all_button.attrs['hx-target'] = "#div_id_intake_button_row"
-    all_button.attrs['hx-swap'] = "outerHTML"
+        move_button.append(soup.new_tag("span", attrs={'class': 'bi bi-check-square me-2'}))
+        move_button.append(move_label := soup.new_tag("span"))
+        move_label.attrs['title'] = _("Move the data from the input location to the MAR-DID application directory")
+        move_label.string = _("Move All")
 
+        copy_button.append(soup.new_tag("span", attrs={'class': 'bi bi-check-square me-2'}))
+        copy_button.append(copy_label := soup.new_tag("span"))
+        copy_label.attrs['title'] = _("Copy the data from the input location to the MAR-DID application directory")
+        copy_label.string = _("Copy All")
+
+        move_button.attrs['hx-delete'] = ""
+        move_button.attrs['hx-target'] = "#div_id_intake_button_row"
+        move_button.attrs['hx-swap'] = "outerHTML"
+
+        copy_button.attrs['hx-delete'] = ""
+        copy_button.attrs['hx-target'] = "#div_id_intake_button_row"
+        copy_button.attrs['hx-swap'] = "outerHTML"
+
+    appended = 0
     datatypes = models.DataTypes.objects.order_by("name").all()
-    for index, dir in enumerate(dir_listing):
-        if dir['files']:
+    for index, in_dir in enumerate(dir_listing):
+        if in_dir['files'] or in_dir['archive']:
+            dt_name = settings.DATATYPE_MAPPING.find_mapping(str(in_dir['path']))
+            datatype = models.DataTypes.objects.filter(name=dt_name) if dt_name else None
             context = {
                 "mission": mission,
                 "intake_id": index,
-                "path": dir['path'],
-                "files": dir['files'],
+                "path": in_dir['path'],
+                "files": in_dir['files'] + in_dir['archive'],
                 "datasets": [dt for dt in datatypes],
-                "selected": settings.DATATYPE_MAPPING.find_mapping(str(dir['path'])),
+                "selected": datatype.first().pk if datatype and datatype.exists() else None,
+                "message": _("Some files may need to be archived before replacement") if in_dir['archive'] else None
             }
             intake_html = render_to_string('core/partials/components/file_intake_card.html', context=context)
             soup.append(BeautifulSoup(intake_html, "html.parser"))
+            appended += 1
+
+    if appended > 1:
+        add_all_button_row()
 
     response = HttpResponse(soup)
     response['HX-Trigger'] = "update_intake"
     return response
 
 
-def accept_data_directory(request, mission_id):
+def move_data_directory(request, mission_id, copy: bool = True):
+    soup = BeautifulSoup("", "html.parser")
     if redirect := redirect_if_not_authenticated(request):
         return redirect
 
@@ -937,28 +959,34 @@ def accept_data_directory(request, mission_id):
     if path_id:
         user = request.user
         mission = models.Missions.objects.get(pk=mission_id)
-        path = request.POST.get(f"intake_path_{path_id}", None)
+        intake_path = request.POST.get(f"intake_path_{path_id}", None)
         datatype_id = request.POST.get(f"intake_type_{path_id}", None)
+        files = None
         try:
-            file_intake.intake_files(user, mission, Path(path), datatype_id)
+            # todo: put in a method for the user to archive files and then retry the move/copy
+            #       Or when files are scanned, we know they already exist and user can provide
+            #       an archive message then before trying to copy/move existing files.
+            res = file_intake.intake_files(user, mission, Path(intake_path), datatype_id, copy=copy)
+            if res['needs_archive']:
+                files = {"message": _("File(s) need to be archived"), "files": res['needs_archive']}
         except Exception as e:
             logger.exception(e)
-            soup = BeautifulSoup("", "html.parser")
+            files = {"message": str(e), "files":[f for f in Path(intake_path).iterdir() if f.is_file()]}
+
+        if files:
             datatypes = models.DataTypes.objects.order_by("name").all()
-            files = [f for f in Path(path).iterdir() if f.is_file()]
             context = {
                 "mission": mission,
                 "intake_id": path_id,
-                "path": path,
-                "files": files,
+                "path": intake_path,
+                "files": files['files'],
                 "datasets": [dt for dt in datatypes],
-                "selected": datatype_id,
+                "selected": int(datatype_id),
+                "message": files["message"],
             }
             intake_html = render_to_string('core/partials/components/file_intake_card.html', context=context)
             intake_soup = BeautifulSoup(intake_html, "html.parser")
-            intake_soup.find('div', attrs={'class': 'card-header'}).attrs['class'].append('text-bg-warning')
             intake_soup.find(attrs={'class': 'collapse'}).attrs['class'].append('show')
-            intake_soup.find(id=f"div_card_intake_message_{path_id}").string = str(e)
             soup.append(intake_soup)
             return HttpResponse(soup)
 
@@ -1019,5 +1047,6 @@ urlpatterns = [
     path('mission/comment/list/<int:mission_id>', mission_comment_list, name='list_mission_comments'),
 
     path('mission/bulkload/scan/in/<int:mission_id>', scan_in_directory, name='scan_in_directory'),
-    path('mission/bulkload/accept/in/<int:mission_id>', accept_data_directory, name='accept_files'),
+    path('mission/bulkload/move/in/<int:mission_id>', move_data_directory, kwargs={'copy': False},  name='move_files'),
+    path('mission/bulkload/copy/in/<int:mission_id>', move_data_directory, kwargs={'copy': True}, name='copy_files'),
 ]
