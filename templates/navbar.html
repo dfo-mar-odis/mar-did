@@ -19,7 +19,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="missionsDropdown">
                         <li><a class="dropdown-item" href="{% url 'core:mission_view' %}">{% trans 'Mission List' %}</a></li>
-                        {% if user.is_authenticated and user|is_chief_scientist %}
+                        {% if user.is_authenticated and perms.core.add_missions %}
                         <li><a class="dropdown-item" href="{% url 'core:new_mission_view' %}">{% trans 'Add a Mission' %}</a></li>
                         {% endif %}
                     </ul>

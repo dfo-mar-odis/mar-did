@@ -193,16 +193,21 @@
         }
     });
 
-    function selectAll(elm) {
+    function selectAll(elm, archive=false) {
         console.log(elm.id)
-        var checkboxes = document.getElementsByClassName("data_file_check");
-        if (elm.id == "dataset_files_all") {
+        const id_class = archive ? "archive_data_file_check" : "data_file_check";
+        const id_key = archive ? "archive_dataset_files_all" : "dataset_files_all";
+
+        console.log(id_class + ", " + id_key);
+
+        var checkboxes = document.getElementsByClassName(id_class);
+        if (elm.id == id_key) {
 
             checkboxes.forEach(function(checkbox) {
                 checkbox.checked = elm.checked;
             });
         } else {
-            var all = document.getElementById("dataset_files_all");
+            var all = document.getElementById(id_key);
             var checked = true;
             checkboxes.forEach(function(checkbox) {
                 if (!checkbox.checked) {

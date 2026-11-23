@@ -10,7 +10,13 @@
     {% else %}
     <div class="card card-body mb-2 border border-dark bg-light" id="div_id_mission_details">
         <h5 class="card-title">{{ object.name }} - {% if object.descriptor %}{{ object.descriptor }}{% else %}&lt; {% trans 'No Mission Descriptor Provided' %} &gt;{% endif %}</h5>
-        <p class="card-text">{{ object.description }}</p>
+        <p class="card-text">
+            {% if object.description %}<b>{% trans "Description: " %}</b>{{ object.description }}<br />{% endif %}
+            <b>{% trans "Platform/Ship: " %}</b>{{ object.platform }} <br />
+            <b>{% trans "Dates: " %}</b> {{ object.start_date }} - {{ object.end_date }} <br />
+            <b>{% trans "Program: " %}</b>{{ object.program }} <br />
+            <b>{% trans "Organization(s): " %}</b><ul>{% for org in object.organizations.all %}{{ org.name }}{% endfor %}</ul> <br />
+        </p>
 
     </div>
     {% endif %}

@@ -10,8 +10,8 @@
     <thead class="sticky-top bg-white">
         <tr>
         <td class="" style="2%; white-space: nowrap;">
-            <input type="checkbox" class="form-check" name="dataset_files" value="all" title="{% trans 'Select All' %}"
-                    id="dataset_files_all" onclick="selectAll(this)" {# selectAll() is in form_dataset_submission #}
+            <input type="checkbox" class="form-check" name="{% if archived == "true" %}archive_{% endif %}dataset_files" value="all" title="{% trans 'Select All' %}"
+                    id="{% if archived == "true" %}archive_{% endif %}dataset_files_all" onclick="selectAll(this{% if archived %}, true{% endif %})" {# selectAll() is in forms\form_dataset_submission #}
             />
         </td>
         <th>{% trans 'File Name' %}</th>
@@ -28,13 +28,19 @@
     {% for file in files %}
     <tr>
         <th{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %} style="width: 2%; white-space: nowrap;">
-            <input type="checkbox" class="form-check data_file_check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}"
-                    onclick="selectAll(this)" {# selectAll() is in form_dataset_submission #}
+            {% if archived %}
+            <input type="checkbox" class="form-check archive_data_file_check" name="archive_dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}"
+                    onclick="selectAll(this, true)" {# selectAll() is in forms\form_dataset_submission #}
             />
+            {% else %}
+            <input type="checkbox" class="form-check data_file_check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}"
+                    onclick="selectAll(this)" {# selectAll() is in forms\form_dataset_submission #}
+            />
+            {% endif %}
         </th>
         <td{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %}>{{ file.filename }}</td>
         <td>{{ file.dataset.get_dataset_root_path }}</td>
-        <td>{{ file.submitted_by.last_name }}, {{ file.submitted_by.first_name }}</td>
+        <td>{{ file.submitted_by.display_name }}</td>
         <td>{{ file.submitted_date }}</td>
         {% if archived %}
         <th>{{ file.archived_date }}</th>
