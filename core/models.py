@@ -7,6 +7,34 @@ from django.utils.translation import gettext as _
 from django.contrib.auth import get_user_model
 from django.db import models
 
+
+# ========== Default database application models  ========= #
+
+
+class GroupProfiles(models.Model):
+    group = models.OneToOneField('auth.Group', on_delete=models.CASCADE, related_name='profile')
+    description = models.TextField(_("Description"), blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.group.name} - {self.description or _('No description')}"
+
+    class Meta:
+        db_table = 'md_lu_group_profiles'
+
+
+class FieldInstructions(models.Model):
+    form_name = models.CharField(max_length=100)
+    field_name = models.CharField(max_length=100)
+    instructions_en = models.TextField()
+    instructions_fr = models.TextField(blank=True)
+
+    class Meta:
+        db_table = "md_field_instructions"
+        unique_together = ("form_name", "field_name")
+
+
+# ========== Core database models ========= #
+
 class MardidUser(models.Model):
 
     # for now we're only using django authentication, in the future we'll have to map users to OAuth2
@@ -475,15 +503,6 @@ class ProcessingStatus(models.Model):
     class Meta:
         db_table = 'md_dataset_processing_status'
 
-class GroupProfiles(models.Model):
-    group = models.OneToOneField('auth.Group', on_delete=models.CASCADE, related_name='profile')
-    description = models.TextField(_("Description"), blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.group.name} - {self.description or _('No description')}"
-
-    class Meta:
-        db_table = 'md_lu_group_profiles'
 
 class Comments(models.Model):
 

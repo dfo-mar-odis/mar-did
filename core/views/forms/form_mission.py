@@ -33,7 +33,7 @@ from core.utils import file_intake, dataset_download
 from core.utils.authentication import redirect_if_not_authenticated
 from core.views.forms import form_multiselect
 from core.views.forms.form_multiselect import remove_from_list, add_to_list
-from custom_widgets.widgets import TooltipSelect, FieldWithButton
+from custom_widgets.widgets import TooltipSelect, FieldWithButton, InstructionModelChoiceField
 
 logger = logging.getLogger(__name__)
 
@@ -216,10 +216,18 @@ class MissionDatasetsForm(forms.ModelForm):
         return dataset
 
 class MissionLegForm(form_multiselect.MultiselectFieldForm):
-    chief_scientist = forms.ModelChoiceField(
+    chief_scientist = InstructionModelChoiceField(
         queryset=models.Participants.objects.all(),
         label=_("Chief Scientist"),
-        widget=forms.Select(attrs={'class': 'form-select form-select-sm'})
+        widget=forms.Select(
+            attrs={"class": "form-select form-select-sm"}
+        ),
+        instruction_model=models.FieldInstructions,
+        instruction_lookup={
+            "form_name": "MissionLegForm",
+            "field_name": "chief_scientist",
+        },
+        instruction_field="instructions",
     )
 
     regions_select = forms.ModelChoiceField(
@@ -321,6 +329,10 @@ class MissionLegForm(form_multiselect.MultiselectFieldForm):
                 initial['chief_scientist'] = chief_scientist.participant.pk
 
         super(MissionLegForm, self).__init__(initial=initial, *args, **kwargs)
+
+        for field in self.fields.values():
+            if isinstance(field, InstructionModelChoiceField):
+                field.apply_instruction_label()
 
         regions_container = self.init_lookup('regions')
         self.init_regions_field()
