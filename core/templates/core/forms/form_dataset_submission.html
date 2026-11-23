@@ -192,4 +192,27 @@
             fileCountElement.textContent = this.files.length + " file(s) selected";
         }
     });
+
+    function selectAll(elm) {
+        console.log(elm.id)
+        var checkboxes = document.getElementsByClassName("data_file_check");
+        if (elm.id == "dataset_files_all") {
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = elm.checked;
+            });
+        } else {
+            var all = document.getElementById("dataset_files_all");
+            var checked = true;
+            checkboxes.forEach(function(checkbox) {
+                if (!checkbox.checked) {
+                    checked = false;
+                    return;
+                }
+            });
+            console.log(checked);
+            all.checked = checked;
+        }
+    }
+
 {% endblock %}

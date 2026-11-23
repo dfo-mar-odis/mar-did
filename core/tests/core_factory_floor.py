@@ -18,6 +18,18 @@ class MardidTestCase(TestCase):
                  'init_positions', 'init_datatypes', 'init_file_types']
 
 
+class MardidUserFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.MardidUser
+        django_get_or_create = ('username',)
+
+    provider = "django"
+    provider_user_id = factory.LazyAttribute(lambda o: fake.random_int(min=0, max=1000000))
+    username = factory.LazyAttribute(
+        lambda o: f"{fake.last_name()}{fake.first_name()[0]}"
+    )
+
+
 class MissionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Missions
@@ -34,6 +46,7 @@ class MissionFactory(factory.django.DjangoModelFactory):
         lambda
             o: f"{Faker().random_element(['CAR', 'DY', 'JC'])}{Faker().random_int(min=2000, max=2030):04}{Faker().random_int(min=1, max=999):03}"
     )
+    last_updated_by = factory.SubFactory(MardidUserFactory)
 
 
 class MissionWithLegsFactory(MissionFactory):
@@ -80,6 +93,7 @@ class MissionLegFactory(factory.django.DjangoModelFactory):
     end_date = factory.LazyAttribute(
         lambda obj: obj.start_date + datetime.timedelta(days=fake.random_int(min=1, max=30))
     )
+
 
 class MissionDatasetFactory(factory.django.DjangoModelFactory):
     class Meta:

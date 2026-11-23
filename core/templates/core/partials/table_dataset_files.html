@@ -10,7 +10,9 @@
     <thead class="sticky-top bg-white">
         <tr>
         <td class="" style="2%; white-space: nowrap;">
-            <input type="checkbox" class="form-check" name="dataset_files" value="all" title="{% trans 'Select All' %}" />
+            <input type="checkbox" class="form-check" name="dataset_files" value="all" title="{% trans 'Select All' %}"
+                    id="dataset_files_all" onclick="selectAll(this)" {# selectAll() is in form_dataset_submission #}
+            />
         </td>
         <th>{% trans 'File Name' %}</th>
         <th>{% trans 'File Location' %}</th>
@@ -26,7 +28,9 @@
     {% for file in files %}
     <tr>
         <th{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %} style="width: 2%; white-space: nowrap;">
-            <input type="checkbox" class="form-check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}" />
+            <input type="checkbox" class="form-check data_file_check" name="dataset_files" value="{{ file.pk }}" title="{% trans "Select" %} {{ file.name }}"
+                    onclick="selectAll(this)" {# selectAll() is in form_dataset_submission #}
+            />
         </th>
         <td{% if file.is_archived %} rowspan="{{ file.comments.count|add:1 }}"{% endif %}>{{ file.filename }}</td>
         <td>{{ file.dataset.get_dataset_root_path }}</td>

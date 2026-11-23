@@ -19,6 +19,14 @@ body {
     display: none !important;
 }
 
+/* static/css/custom.css */
+#add_dataset_accordion .accordion-button {
+    --bs-accordion-btn-bg: #6c757d;
+    --bs-accordion-active-bg: #6c757d;
+    --bs-accordion-btn-color: #fff;
+    --bs-accordion-active-color: #fff;
+}
+
 /* Style for the tab navigation */
 .nav-tabs {
     border-bottom: 2px solid #dee2e6;
@@ -29,7 +37,7 @@ body {
     border-radius: 0.25rem 0.25rem 0 0;
     color: #fff;
     background-color: #6c757d; /* Matches btn-secondary background */
-    border-color: #6c757d #6c757d #f8f9fa;
+    border-color: #6c757d;
     padding: 0.5rem 1rem;
     margin-right: 0.2rem;
     transition: background-color 0.3s ease, color 0.3s ease;

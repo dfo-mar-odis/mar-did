@@ -490,7 +490,12 @@ def download_files(request, dataset_id, archived, **kwargs):
         return HttpResponse(soup)
 
     files = get_files_by_id(dataset_id, file_ids, archived_files)
-    download_filename = f"{dataset.mission.name}_{dataset.datatype.name}_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    name: list[str] = [dataset.mission.name]
+    if dataset.datatype:
+        name.append(dataset.datatype.name)
+    name.append(datetime.now().strftime('%Y%m%d%H%M%S'))
+
+    download_filename = "_".join(name)
     dataset_path = get_current_working_path(dataset.pk)
 
     # Create an in-memory file-like object

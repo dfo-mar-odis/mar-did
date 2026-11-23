@@ -1,0 +1,12 @@
+[
+{
+    "model": "core.fieldinstructions",
+    "pk": 1,
+    "fields": {
+        "form_name": "MissionLegForm",
+        "field_name": "chief_scientist",
+        "instructions_en": "Chief Scientist options are pulled from the Participants lookup table",
+        "instructions_fr": "Test for French instructions"
+    }
+}
+]
