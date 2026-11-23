@@ -3,6 +3,11 @@ from crispy_forms.utils import TEMPLATE_PACK
 from django.template.loader import render_to_string
 from django.forms.widgets import Select
 
+from django import forms
+from django.utils import translation
+from django.db import DatabaseError
+from django.utils.html import format_html
+
 
 class TooltipSelect(Select):
     """A Select widget that adds title (tooltip) attributes to <option> elements."""
@@ -46,3 +51,53 @@ class FieldWithButton(LayoutObject):
             'field_id': form[self.field].id_for_label,
         })
         return render_to_string(self.template, context.flatten())
+
+
+class InstructionModelChoiceField(forms.ModelChoiceField):
+    def __init__(
+        self,
+        *args,
+        instruction_model=None,
+        instruction_lookup=None,
+        instruction_field="instructions",
+        **kwargs,
+    ):
+        super().__init__(*args, **kwargs)
+
+        self.instruction_model = instruction_model
+        self.instruction_lookup = instruction_lookup or {}
+        self.instruction_field = instruction_field
+        self._instruction_applied = False
+
+    def apply_instruction_label(self):
+        try:
+            instruction = (
+                self.instruction_model.objects
+                .filter(**self.instruction_lookup)
+                .only(
+                    "instructions_en",
+                    "instructions_fr",
+                )
+                .first()
+            )
+        except (LookupError, DatabaseError):
+            return
+
+        if not instruction:
+            return
+
+        language = translation.get_language()[:2]
+
+        help_text = (
+            instruction.instructions_fr
+            if language == "fr" and instruction.instructions_fr
+            else instruction.instructions_en
+        )
+
+        icon = format_html(
+            '<span class="bi bi-question-circle me-1" '
+            'title="{}" aria-label="{}"></span>',
+            help_text,
+            help_text,
+        )
+        self.label = format_html("{}{}", icon, self.label)
