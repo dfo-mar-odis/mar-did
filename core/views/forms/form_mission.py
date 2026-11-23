@@ -1,5 +1,8 @@
+import logging
+
+from datetime import datetime
+
 from pathlib import Path
-from typing import Generator, Any
 
 from bs4 import BeautifulSoup
 
@@ -25,17 +28,14 @@ from crispy_forms.utils import render_crispy_form
 
 from core import models
 from core.models import MardidUser
-from core.utils import bulk_upload, file_intake
+from core.utils import file_intake, dataset_download
 
-import logging
-
-from core.components import get_alert, AlertDialog
 from core.utils.authentication import redirect_if_not_authenticated
 from core.views.forms import form_multiselect
 from core.views.forms.form_multiselect import remove_from_list, add_to_list
 from custom_widgets.widgets import TooltipSelect, FieldWithButton
 
-logger = logging.getLogger('mardid')
+logger = logging.getLogger(__name__)
 
 class CreateMission(LoginRequiredMixin, TemplateView):
     template_name = 'core/forms/form_mission.html'
@@ -182,7 +182,7 @@ class MissionDatasetsForm(forms.ModelForm):
                 Row(
                     Column(Field('directory', css_class='form-control-sm')),
                 ),
-                css_class="card card-body mb-2 border border-dark bg-light"
+                css_class=""
             )
         )
 
@@ -1015,6 +1015,22 @@ MULTISELECT_CONTEXT_REGISTER = {
     ),
 }
 
+def get_biochem_dataset(request, mission_id):
+
+    mission = models.Missions.objects.get(pk=mission_id)
+    name: list[str] = [mission.name, datetime.now().strftime('%Y%m%d%H%M%S')]
+
+    download_filename = "_".join(name)
+
+    zip_buffer = dataset_download.download_biochem_dataset(mission)
+
+    # Create the HTTP response with the zip file
+    response = HttpResponse(zip_buffer, content_type='application/zip')
+    response['Content-Disposition'] = f'attachment; filename="{download_filename}.zip"'
+    response['HX-Trigger-After-Settle'] = "clear_messages"
+
+    return response
+
 
 urlpatterns = [
     path('mission/view', CreateMission.as_view(), name='new_mission_view'),
@@ -1049,4 +1065,6 @@ urlpatterns = [
     path('mission/bulkload/scan/in/<int:mission_id>', scan_in_directory, name='scan_in_directory'),
     path('mission/bulkload/move/in/<int:mission_id>', move_data_directory, kwargs={'copy': False},  name='move_files'),
     path('mission/bulkload/copy/in/<int:mission_id>', move_data_directory, kwargs={'copy': True}, name='copy_files'),
+
+    path('mission/download/biochem/<int:mission_id>', get_biochem_dataset, name='get_biochem_dataset'),
 ]

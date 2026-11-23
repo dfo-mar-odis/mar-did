@@ -106,7 +106,7 @@ def intake_files(
     created: list[DataFiles] = DataFiles.objects.bulk_create(create_files)
 
     # We only remove files if all files have been successfully indexed and copied and
-    # the user wants files "moved" as opposed to copied, but otherwise left in the initial directory
+    # the user wants files "moved" as opposed to copied. Otherwise, leave them in the initial directory
     if not copy:
         for file in remove_files:
             os.unlink(file)

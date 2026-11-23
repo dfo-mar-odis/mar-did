@@ -10,7 +10,6 @@ from django.urls import reverse_lazy
 
 from core.tests.core_factory_floor import (MardidTestCase, MissionFactory, MissionLegFactory, MissionDatasetFactory,
                                            MissionDataFilesFactory)
-from core.utils.bulk_upload import build_file_structure, get_mission_input_path
 from core import models
 
 
@@ -23,17 +22,6 @@ class TestFormMissionDatasets(MardidTestCase):
         for file_name in files_to_create:
             file_path = selected_path / file_name
             file_path.touch()  # This creates an empty file
-
-    def populate_input_directories(self):
-        # provided a mission the bulk input function should scan the input directories, move files to the
-        # expected output directory and log the new files in the database. This is going to get complicated...
-        build_file_structure(self.mission)
-        mission_input_path = get_mission_input_path(self.mission)
-        ctd_datatype_path = Path(mission_input_path, self.ctd_datatype.location.input_dir)
-        btl_datatype_path = Path(mission_input_path, self.btl_datatype.location.input_dir)
-
-        self.create_files(ctd_datatype_path, files_to_create=self.ctd_files)
-        self.create_files(btl_datatype_path, files_to_create=self.btl_files)
 
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='password')
@@ -67,24 +55,6 @@ class TestFormMissionDatasets(MardidTestCase):
         expected_path = Path(settings.MEDIA_IN)
         if expected_path.exists():
             shutil.rmtree(expected_path)
-
-    def test_anonymous_user_build_bulk_btn(self):
-        # an anonymous user should not be able to access the build input button
-        url = reverse_lazy('core:list_mission_datasets', args=[self.mission.pk])
-        response = self.client.get(url)
-
-        soup = BeautifulSoup(response.content, 'html.parser')
-        bulk_input_btn = soup.find(id="button_id_build_bulk_input")
-        assert bulk_input_btn is None, "Anonymous user should not see the build bulk input button"
-
-    def test_anonymous_user_upload_bulk_btn(self):
-        # an anonymous user should not be able to access the upload input button
-        url = reverse_lazy('core:list_mission_datasets', args=[self.mission.pk])
-        response = self.client.get(url)
-
-        soup = BeautifulSoup(response.content, 'html.parser')
-        bulk_input_btn = soup.find(id="button_id_upload_bulk_input")
-        assert bulk_input_btn is None, "Anonymous user should not see the build bulk input button"
 
     @tag("test_non_superuser_delete_dataset_without_files")
     def test_non_superuser_delete_dataset_without_files(self):
